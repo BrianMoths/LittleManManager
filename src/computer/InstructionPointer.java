@@ -7,12 +7,13 @@ package computer;
 import Renderer.Drawable;
 import java.awt.Graphics;
 import java.awt.Point;
+import littlemangame.littleman.AccessibleLocation;
 
 /**
  *
  * @author brian
  */
-public class InstructionPointer implements Drawable {
+public class InstructionPointer implements Drawable, AccessibleLocation {
 
     static private final int xPosition = 200;
     static private final int yPosition = 100;
@@ -29,6 +30,7 @@ public class InstructionPointer implements Drawable {
         address++;
     }
 
+    @Override
     public Point getAccessLocation() {
         return new Point(xPosition + width / 2 - 2, yPosition + height + 3);
     }

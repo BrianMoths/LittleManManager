@@ -6,7 +6,6 @@ package computer;
 
 import Renderer.Drawable;
 import java.awt.Graphics;
-import littleman.OutputPanel;
 
 /**
  *

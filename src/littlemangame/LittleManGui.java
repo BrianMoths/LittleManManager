@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package littleman;
+package littlemangame;
 
+import computer.OutputPanel;
 import java.awt.Component;
 import java.awt.Graphics;
 
@@ -30,7 +31,7 @@ public class LittleManGui extends javax.swing.JFrame implements GameGui.GameGui 
     private void initComponents() {
 
         canvasPanel = new javax.swing.JPanel();
-        outputPanel1 = new littleman.OutputPanel();
+        outputPanel1 = new computer.OutputPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -102,7 +103,7 @@ public class LittleManGui extends javax.swing.JFrame implements GameGui.GameGui 
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel canvasPanel;
-    private littleman.OutputPanel outputPanel1;
+    private computer.OutputPanel outputPanel1;
     // End of variables declaration//GEN-END:variables
 
     @Override

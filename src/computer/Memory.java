@@ -9,12 +9,13 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
+import littlemangame.littleman.MultiplyAccessibleLocation;
 
 /**
  *
  * @author brian
  */
-public class Memory implements Drawable {
+public class Memory implements Drawable, MultiplyAccessibleLocation<Integer> {
 
     static private final int xPosition = 600;
     static private final int yPosition = 20;
@@ -50,7 +51,13 @@ public class Memory implements Drawable {
         return memory.get(address);
     }
 
-    public Point getMemoryLocation(int word) {
+    /**
+     *
+     * @param word
+     * @return
+     */
+    @Override
+    public Point getAccessLocation(Integer word) {
         final int x = xPosition - 10;
         final int y = yPosition + word * height / numWords;
         return new Point(x, y);

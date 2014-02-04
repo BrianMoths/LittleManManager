@@ -2,21 +2,18 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package instructions;
+package littlemangame.instructions;
 
-import littleman.LittleMan;
-import littleman.LittleManAction;
+import littlemangame.littleman.LittleMan;
 
 /**
  *
  * @author brian
  */
-public class SimpleActionInstruction implements Instruction {
+public class NoOpInstruction implements Instruction {
 
-    private final LittleManAction littleManAction;
-
-    public SimpleActionInstruction(LittleManAction littleManAction) {
-        this.littleManAction = littleManAction;
+    static public NoOpInstruction decodeInstruction(int word) {
+        return new NoOpInstruction();
     }
 
     @Override
@@ -26,7 +23,7 @@ public class SimpleActionInstruction implements Instruction {
 
     @Override
     public boolean doInstruction(LittleMan lIttleMan) {
-        return lIttleMan.doAction(littleManAction);
+        return true;
     }
 
     @Override

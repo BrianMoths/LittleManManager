@@ -56,7 +56,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="littleman.OutputPanel" name="outputPanel1">
+        <Component class="computer.OutputPanel" name="outputPanel1">
         </Component>
       </SubComponents>
     </Container>

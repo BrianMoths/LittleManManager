@@ -2,11 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package littleman;
+package littlemangame;
 
 import ListenerInputHandler.AbstractInputHandlerClient;
 import RealTimeGame.AbstractRealTimeGame;
 import computer.Computer;
+import littlemangame.littleman.LittleMan;
 
 /**
  *

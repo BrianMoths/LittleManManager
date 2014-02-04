@@ -2,12 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package littleman;
+package littlemangame.littleman;
 
 import Renderer.Drawable;
 import computer.Computer;
-import instructions.Instruction;
-import instructions.InstructionSet;
+import littlemangame.instructions.Instruction;
+import littlemangame.instructions.InstructionSet;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -179,7 +179,7 @@ public class LittleMan implements Drawable {
         };
     }
 
-    private int x = 20, y = 0;
+    private final LittleManPosition littleManPosition;
     private final Computer computer;
     private int rememberedWord;
     private boolean isRememberingWord = false;
@@ -188,6 +188,7 @@ public class LittleMan implements Drawable {
 
     public LittleMan(Computer computer) {
         this.computer = computer;
+        littleManPosition = new LittleManPosition(pathY, stepSize, new Point(200, pathY));
     }
 
     private void incrementInstructionPointer() {
@@ -240,81 +241,20 @@ public class LittleMan implements Drawable {
 
     //<editor-fold defaultstate="collapsed" desc="movement">
     public boolean goToOutputPanel() {
-        return goToPoint(computer.outputPanel.getAccessLocation());
+        return littleManPosition.goTo(computer.outputPanel);
     }
 
     public boolean goToRegister() {
-        return goToPoint(computer.register.getAccessLocation());
+        return littleManPosition.goTo(computer.register);
     }
 
     public boolean goToInstructionPointer() {
-        return goToPoint(computer.instructionPointer.getAccessLocation());
+        return littleManPosition.goTo(computer.instructionPointer);
     }
 
     public boolean goToMemoryLocation(int address) {
-        return goToPoint(computer.memory.getMemoryLocation(address));
+        return littleManPosition.goTo(computer.memory, address);
     }
-
-    public boolean goToPoint(Point point) {
-        if (isAtX(point.x)) {
-            return stepInDirectionOfY(point.y);
-        } else {
-            goToX(point.x);
-            return false;
-        }
-    }
-
-    public boolean goToX(int xDestination) {
-        if (x != xDestination) {
-            if (!isOnPath()) {
-                goToPath();
-                return false;
-            } else {
-                return stepInDirectionOfX(xDestination);
-            }
-        } else {
-            return true;
-        }
-    }
-
-    public boolean goToPath() {
-        return stepInDirectionOfY(pathY);
-    }
-
-    private boolean stepInDirectionOfX(int xDestination) {
-        if (x < xDestination) {
-            x += Math.min(stepSize, xDestination - x);
-        } else if (x > xDestination) {
-            x -= Math.min(x - xDestination, stepSize);
-        }
-        return x == xDestination;
-    }
-
-    private boolean stepInDirectionOfY(int yDestination) {
-        if (y < yDestination) {
-            y += Math.min(stepSize, yDestination - y);
-        } else if (y > yDestination) {
-            y -= Math.min(y - yDestination, stepSize);
-        }
-        return y == yDestination;
-    }
-
-    private boolean isOnPath() {
-        return isAtY(pathY);
-    }
-
-    private boolean isAtX(int x) {
-        return this.x == x;
-    }
-
-    private boolean isAtY(int y) {
-        return this.y == y;
-    }
-
-    private boolean isAtPoint(Point point) {
-        return isAtX(point.x) && isAtY(point.y);
-    }
-    //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="short term memory">
     private void rememberWord(int word) {
@@ -334,10 +274,10 @@ public class LittleMan implements Drawable {
     @Override
     public void draw(Graphics graphics) {
         graphics.setColor(Color.BLACK);
-        graphics.fillOval(x, y, 10, 10);
+        graphics.fillOval(getX(), getY(), 10, 10);
         if (isRememberingWord) {
-            graphics.drawRect(x - 5, y - 22, 22, 20);
-            graphics.drawString(String.format("%02d", rememberedWord), x - 2, y - 5);
+            graphics.drawRect(getX() - 5, getY() - 22, 22, 20);
+            graphics.drawString(String.format("%02d", rememberedWord), getX() - 2, getY() - 5);
         }
     }
 
@@ -356,6 +296,14 @@ public class LittleMan implements Drawable {
 
     public boolean isOperandNeeded() {
         return instruction != null && instruction.isOperandNeeded();
+    }
+
+    private int getX() {
+        return littleManPosition.getX();
+    }
+
+    private int getY() {
+        return littleManPosition.getY();
     }
 
 }

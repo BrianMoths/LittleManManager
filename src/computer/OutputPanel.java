@@ -2,17 +2,18 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package littleman;
+package computer;
 
 import Renderer.Drawable;
 import java.awt.Graphics;
 import java.awt.Point;
+import littlemangame.littleman.AccessibleLocation;
 
 /**
  *
  * @author brian
  */
-public class OutputPanel extends javax.swing.JPanel implements Drawable {
+public class OutputPanel extends javax.swing.JPanel implements Drawable, AccessibleLocation {
 
     /**
      * Creates new form OutputPanel
@@ -38,6 +39,7 @@ public class OutputPanel extends javax.swing.JPanel implements Drawable {
         jTextArea1.setText("");
     }
 
+    @Override
     public Point getAccessLocation() {
         final int x = getX() + getWidth() + 4;
         final int y = getY() + getHeight() / 2;
