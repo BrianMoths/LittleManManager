@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package littlemangame.littleman;
+package littlemangame.littleman.location;
 
 import java.awt.Point;
 
@@ -10,14 +10,14 @@ import java.awt.Point;
  *
  * @author brian
  */
-class LittleManPosition {
+public class LittleManPosition {
 
     final int pathY;
     final int stepSize;
     int x;
     int y;
 
-    LittleManPosition(int pathY, int stepSize, Point initialPoint) {
+    public LittleManPosition(int pathY, int stepSize, Point initialPoint) {
         this.pathY = pathY;
         this.stepSize = stepSize;
         x = initialPoint.x;
@@ -92,19 +92,19 @@ class LittleManPosition {
         return isAtX(point.x) && isAtY(point.y);
     }
 
-    int getPathY() {
+    public int getPathY() {
         return pathY;
     }
 
-    int getStepSize() {
+    public int getStepSize() {
         return stepSize;
     }
 
-    int getX() {
+    public int getX() {
         return x;
     }
 
-    int getY() {
+    public int getY() {
         return y;
     }
 

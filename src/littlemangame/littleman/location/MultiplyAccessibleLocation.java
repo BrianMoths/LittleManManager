@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package littlemangame.littleman;
+package littlemangame.littleman.location;
 
 import java.awt.Point;
 
@@ -10,8 +10,8 @@ import java.awt.Point;
  *
  * @author brian
  */
-public interface AccessibleLocation {
+public interface MultiplyAccessibleLocation<T> {
 
-    public Point getAccessLocation();
+    public Point getAccessLocation(T t);
 
 }

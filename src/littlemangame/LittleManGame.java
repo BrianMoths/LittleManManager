@@ -8,6 +8,7 @@ import ListenerInputHandler.AbstractInputHandlerClient;
 import RealTimeGame.AbstractRealTimeGame;
 import computer.Computer;
 import littlemangame.littleman.LittleMan;
+import littlemangame.littleman.LittleManCommander;
 
 /**
  *
@@ -27,25 +28,25 @@ public class LittleManGame extends AbstractRealTimeGame<LittleManGui> {
         return new LittleManGui();
     }
 
-    final LittleMan littleMan;
+    final LittleManCommander littleManCommander;
     final Computer computer;
 
     public LittleManGame() {
         super(new AbstractInputHandlerClient(), makeGamePanel());
         computer = new Computer(getGameGui().getOutputPanel());
-        littleMan = new LittleMan(computer);
+        littleManCommander = new LittleManCommander(computer);
         init();
     }
 
     private void init() {
-        renderer.addDrawable(littleMan);
+        renderer.addDrawable(littleManCommander);
         renderer.addDrawable(computer);
     }
 
     @Override
     protected void doLogic() {
-        if (!littleMan.isHalted()) {
-            littleMan.doAction(LittleMan.doCycle);
+        if (!littleManCommander.isHalted()) {
+            littleManCommander.doAction(LittleManCommander.doCycle);
         }
     }
 

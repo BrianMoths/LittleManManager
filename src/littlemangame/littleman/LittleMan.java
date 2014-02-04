@@ -6,11 +6,12 @@ package littlemangame.littleman;
 
 import Renderer.Drawable;
 import computer.Computer;
-import littlemangame.instructions.Instruction;
-import littlemangame.instructions.InstructionSet;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
+import littlemangame.instructions.Instruction;
+import littlemangame.instructions.InstructionSet;
+import littlemangame.littleman.location.LittleManPosition;
 
 /**
  *
@@ -18,167 +19,8 @@ import java.awt.Point;
  */
 public class LittleMan implements Drawable {
 
-    static private final LittleManAction goToRegister = new LittleManAction() {
-        @Override
-        public boolean doAction(LittleMan littleMan) {
-            return littleMan.goToRegister();
-        }
-
-    };
-    static private final LittleManAction goToOutputPanel = new LittleManAction() {
-        @Override
-        public boolean doAction(LittleMan littleMan) {
-            return littleMan.goToOutputPanel();
-        }
-
-    };
-    static private final LittleManAction printUnsignedToOutputPanelAfar = new LittleManAction() {
-        @Override
-        public boolean doAction(LittleMan littleMan) {
-            littleMan.printUnsignedToOutputPanel();
-            return true;
-        }
-
-    };
-    static private final LittleManAction setRegisterToRememberedWordAfar = new LittleManAction() {
-        @Override
-        public boolean doAction(LittleMan littleMan) {
-            littleMan.setRegisterToRememberedWord();
-            return true;
-        }
-
-    };
-    static private final LittleManAction rememberRegisterAfar = new LittleManAction() {
-        @Override
-        public boolean doAction(LittleMan littleMan) {
-            littleMan.rememberRegister();
-            return true;
-        }
-
-    };
-    static private final LittleManAction goToInstructionPointer = new LittleManAction() {
-        @Override
-        public boolean doAction(LittleMan littleMan) {
-            return littleMan.goToInstructionPointer();
-        }
-
-    };
-    static private final LittleManAction incrementInstructionPointerAfar = new LittleManAction() {
-        @Override
-        public boolean doAction(LittleMan littleMan) {
-            littleMan.incrementInstructionPointer();
-            return true;
-        }
-
-    };
-    static private final LittleManAction rememberInstructionPointerAfar = new LittleManAction() {
-        @Override
-        public boolean doAction(LittleMan littleMan) {
-            littleMan.rememberInstructionPointer();
-            return true;
-        }
-
-    };
-    static private final LittleManAction rememberMemoryAtRememberedAddressAfar = new LittleManAction() {
-        @Override
-        public boolean doAction(LittleMan littleMan) {
-            littleMan.rememberMemory(littleMan.getRememberedWord());
-            return true;
-        }
-
-    };
-    static private final LittleManAction goToRememberedMemoryLocation = new LittleManAction() {
-        @Override
-        public boolean doAction(LittleMan littleMan) {
-            return littleMan.goToMemoryLocation(littleMan.getRememberedWord());
-        }
-
-    };
-    static public final LittleManAction decodeRememberedInstruction = new LittleManAction() {
-        @Override
-        public boolean doAction(LittleMan littleMan) {
-            littleMan.decodeRememberedInstruction();
-            return true;
-        }
-
-    };
-    static public final LittleManAction fetchOperand = new LittleManAction() {
-        @Override
-        public boolean doAction(LittleMan littleMan) {
-            if (littleMan.isOperandNeeded()) {
-                return littleMan.doAction(fetchDataFromInstructionPointer);
-            } else {
-                return true;
-            }
-        }
-
-    };
-    static public final LittleManAction doInstruction = new LittleManAction() {
-        @Override
-        public boolean doAction(LittleMan littleMan) {
-            return littleMan.doInstruction();
-        }
-
-    };
-    static public final LittleManAction clearMemory = new LittleManAction() {
-        @Override
-        public boolean doAction(LittleMan littleMan) {
-            littleMan.clearMemory();
-            return true;
-        }
-
-    };
-    static public final LittleManAction registerRememberedOperandToInstruction = new LittleManAction() {
-        @Override
-        public boolean doAction(LittleMan littleMan) {
-            littleMan.registerRemeberedOperandToInstruction();
-            return true;
-        }
-
-    };
-    static public final LittleManAction fetchInstructionAddress = new LittleManActionSequence(goToInstructionPointer, rememberInstructionPointerAfar);
-    static public final LittleManAction fetchInstructionFromRememberedAddress = new LittleManActionSequence(goToRememberedMemoryLocation, rememberMemoryAtRememberedAddressAfar);
-    static public final LittleManAction incrementInstructionPointer = new LittleManActionSequence(goToInstructionPointer, incrementInstructionPointerAfar);
-    static public final LittleManAction fetchDataFromInstructionPointer = new LittleManActionSequence(fetchInstructionAddress, fetchInstructionFromRememberedAddress, incrementInstructionPointer);
-    static public final LittleManAction fetchInstruction = new LittleManActionSequence(fetchDataFromInstructionPointer, decodeRememberedInstruction, clearMemory);
-    static public final LittleManAction getOperandIfNecessary = new LittleManActionSequence(fetchOperand, registerRememberedOperandToInstruction, clearMemory);
-    static public final LittleManAction doCycle = new LittleManActionSequence(fetchInstruction, fetchOperand, doInstruction, clearMemory);
-    static public final LittleManAction printUnsigned = new LittleManActionSequence(goToRegister, rememberRegisterAfar, goToOutputPanel, printUnsignedToOutputPanelAfar);
     static private final int pathY = 200;
     static private final int stepSize = 4;
-
-    static private LittleManAction setInstructionPointerAfar(final int address) {
-        return new LittleManAction() {
-            @Override
-            public boolean doAction(LittleMan littleMan) {
-                littleMan.setInstructionPointer(address);
-                return true;
-            }
-
-        };
-    }
-
-    static private LittleManAction goToMemoryLocationAction(final int n) {
-        return new LittleManAction() {
-            @Override
-            public boolean doAction(LittleMan littleMan) {
-                return littleMan.goToMemoryLocation(n);
-            }
-
-        };
-    }
-
-    static private LittleManAction rememberMemoryAfar(final int n) {
-        return new LittleManAction() {
-            @Override
-            public boolean doAction(LittleMan littleMan) {
-                littleMan.rememberMemory(n);
-                return true;
-            }
-
-        };
-    }
-
     private final LittleManPosition littleManPosition;
     private final Computer computer;
     private int rememberedWord;
@@ -191,78 +33,109 @@ public class LittleMan implements Drawable {
         littleManPosition = new LittleManPosition(pathY, stepSize, new Point(200, pathY));
     }
 
-    private void incrementInstructionPointer() {
+    //<editor-fold defaultstate="collapsed" desc="movement">
+    boolean goToOutputPanel() {
+        return littleManPosition.goTo(computer.outputPanel);
+    }
+
+    boolean goToRegister() {
+        return littleManPosition.goTo(computer.register);
+    }
+
+    boolean goToInstructionPointer() {
+        return littleManPosition.goTo(computer.instructionPointer);
+    }
+
+    boolean goToRememberedMemoryLocation() {
+        return goToMemoryLocation(rememberedWord);
+    }
+
+    boolean goToOperandMemoryLocation() {
+        return goToMemoryLocation(instruction.getOperand());
+    }
+
+    private boolean goToMemoryLocation(int address) {
+        return littleManPosition.goTo(computer.memory, address);
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="interact with register">
+    void setRegisterToRememberedWord() {
+        computer.register.setWord(getRememberedWord());
+        clearMemory();
+    }
+
+    void memorizeRegister() {
+        memorizeWord(computer.register.getWord());
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="interact with instruction pointer">
+    void incrementInstructionPointer() {
         computer.instructionPointer.increment();
     }
 
-    private void setInstructionPointer(int n) {
-        computer.instructionPointer.setInstructionPointer(n);
+    void setInstructionPointerToRememberedWord() {
+        computer.instructionPointer.setInstructionPointer(getRememberedWord());
+        clearMemory();
     }
 
-    private void rememberInstructionPointer() {
-        rememberWord(computer.instructionPointer.getInstructionPointer());
+    void rememberInstructionPointer() {
+        memorizeWord(computer.instructionPointer.getInstructionPointer());
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="interact with memory">
+    void setMemoryAtOperandToRememberedWord() {
+        computer.memory.setMemory(instruction.getOperand(), getRememberedWord());
     }
 
-    private void printUnsignedToOutputPanel() {
-        computer.outputPanel.append(String.format("%02d", rememberedWord));
+    void memorizeMemoryAtRememberedAddress() {
+        memorizeMemory(getRememberedWord());
     }
 
-    private void setRegisterToRememberedWord() {
-        computer.register.setWord(rememberedWord);
+    void memorizeMemoryAtOperandAddress() {
+        memorizeMemory(instruction.getOperand());
     }
 
-    private void rememberRegister() {
-        rememberWord(computer.register.getWord());
+    private void memorizeMemory(int address) {
+        memorizeWord(getMemory(address));
     }
+    //</editor-fold>
 
-    private void setMemoryToRememberedWord(int address) {
-        computer.memory.setMemory(address, rememberedWord);
+    //<editor-fold defaultstate="collapsed" desc="interact with output panel">
+    void printUnsignedToOutputPanel() {
+        computer.outputPanel.append(String.format("%02d", getRememberedWord()));
     }
-
-    private void rememberMemory(int address) {
-        rememberWord(computer.memory.getMemory(address));
-    }
+    //</editor-fold>
 
     public boolean doAction(LittleManAction littleManAction) {
         return littleManAction.doAction(this);
     }
+    //<editor-fold defaultstate="collapsed" desc="deal with instructions">
 
-    public boolean doInstruction() {
+    void decodeRememberedInstruction() {
+        instruction = InstructionSet.decodeInstruction(getRememberedWord());
+        clearMemory();
+    }
+
+    void registerRemeberedOperandToInstruction() {
+        instruction.acceptOperand(getRememberedWord());
+        clearMemory();
+    }
+
+    boolean doInstruction() {
         return instruction.doInstruction(this);
     }
-
-    private void decodeRememberedInstruction() {
-        instruction = InstructionSet.decodeInstruction(rememberedWord);
-    }
-
-    private void registerRemeberedOperandToInstruction() {
-        instruction.acceptOperands(rememberedWord);
-    }
-
-    //<editor-fold defaultstate="collapsed" desc="movement">
-    public boolean goToOutputPanel() {
-        return littleManPosition.goTo(computer.outputPanel);
-    }
-
-    public boolean goToRegister() {
-        return littleManPosition.goTo(computer.register);
-    }
-
-    public boolean goToInstructionPointer() {
-        return littleManPosition.goTo(computer.instructionPointer);
-    }
-
-    public boolean goToMemoryLocation(int address) {
-        return littleManPosition.goTo(computer.memory, address);
-    }
+    //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="short term memory">
-    private void rememberWord(int word) {
+    private void memorizeWord(int word) {
         this.rememberedWord = word;
         isRememberingWord = true;
     }
 
-    private void clearMemory() {
+    void clearMemory() {
         isRememberingWord = false;
     }
 
@@ -277,7 +150,7 @@ public class LittleMan implements Drawable {
         graphics.fillOval(getX(), getY(), 10, 10);
         if (isRememberingWord) {
             graphics.drawRect(getX() - 5, getY() - 22, 22, 20);
-            graphics.drawString(String.format("%02d", rememberedWord), getX() - 2, getY() - 5);
+            graphics.drawString(String.format("%02d", getRememberedWord()), getX() - 2, getY() - 5);
         }
     }
 
@@ -294,7 +167,7 @@ public class LittleMan implements Drawable {
         return rememberedWord;
     }
 
-    public boolean isOperandNeeded() {
+    boolean isOperandNeeded() {
         return instruction != null && instruction.isOperandNeeded();
     }
 
@@ -304,6 +177,10 @@ public class LittleMan implements Drawable {
 
     private int getY() {
         return littleManPosition.getY();
+    }
+
+    private int getMemory(int address) {
+        return computer.memory.getMemory(address);
     }
 
 }

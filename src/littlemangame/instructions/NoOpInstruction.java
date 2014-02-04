@@ -10,24 +10,11 @@ import littlemangame.littleman.LittleMan;
  *
  * @author brian
  */
-public class NoOpInstruction implements Instruction {
-
-    static public NoOpInstruction decodeInstruction(int word) {
-        return new NoOpInstruction();
-    }
-
-    @Override
-    public boolean isOperandNeeded() {
-        return false;
-    }
+public class NoOpInstruction extends NoOperandInstruction {
 
     @Override
     public boolean doInstruction(LittleMan lIttleMan) {
         return true;
-    }
-
-    @Override
-    public void acceptOperands(int... operands) {
     }
 
 }

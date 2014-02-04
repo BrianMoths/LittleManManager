@@ -5,6 +5,7 @@
 package littlemangame.instructions;
 
 import littlemangame.littleman.LittleMan;
+import littlemangame.littleman.LittleManCommander;
 
 /**
  *
@@ -16,6 +17,8 @@ public interface Instruction {
 
     public boolean doInstruction(LittleMan lIttleMan);
 
-    public void acceptOperands(int... operands);
+    public void acceptOperand(int operands);
+
+    public int getOperand();
 
 }

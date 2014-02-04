@@ -5,6 +5,7 @@
 package littlemangame.instructions;
 
 import littlemangame.littleman.LittleMan;
+import littlemangame.littleman.LittleManCommander;
 
 /**
  *
@@ -15,35 +16,17 @@ public class InstructionSet {
     static public final Instruction HALT, PRINT_UNSIGNED;
 
     static {
-        HALT = new Instruction() {
-            @Override
-            public boolean isOperandNeeded() {
-                return false;
-            }
-
+        HALT = new NoOperandInstruction() {
             @Override
             public boolean doInstruction(LittleMan littleMan) {
                 return littleMan.halt();
             }
 
-            @Override
-            public void acceptOperands(int... operands) {
-            }
-
         };
-        PRINT_UNSIGNED = new Instruction() {
-            @Override
-            public boolean isOperandNeeded() {
-                return false;
-            }
-
+        PRINT_UNSIGNED = new NoOperandInstruction() {
             @Override
             public boolean doInstruction(LittleMan littleMan) {
-                return littleMan.doAction(LittleMan.printUnsigned);
-            }
-
-            @Override
-            public void acceptOperands(int... operands) {
+                return littleMan.doAction(LittleManCommander.printUnsigned);
             }
 
         };

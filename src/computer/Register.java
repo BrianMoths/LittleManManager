@@ -7,7 +7,7 @@ package computer;
 import Renderer.Drawable;
 import java.awt.Graphics;
 import java.awt.Point;
-import littlemangame.littleman.AccessibleLocation;
+import littlemangame.littleman.location.AccessibleLocation;
 
 /**
  *
