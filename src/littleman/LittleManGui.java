@@ -5,6 +5,7 @@
 package littleman;
 
 import java.awt.Component;
+import java.awt.Graphics;
 
 /**
  *
@@ -29,6 +30,7 @@ public class LittleManGui extends javax.swing.JFrame implements GameGui.GameGui 
     private void initComponents() {
 
         canvasPanel = new javax.swing.JPanel();
+        outputPanel1 = new littleman.OutputPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -36,11 +38,17 @@ public class LittleManGui extends javax.swing.JFrame implements GameGui.GameGui 
         canvasPanel.setLayout(canvasPanelLayout);
         canvasPanelLayout.setHorizontalGroup(
             canvasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 774, Short.MAX_VALUE)
+            .addGroup(canvasPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(outputPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(601, Short.MAX_VALUE))
         );
         canvasPanelLayout.setVerticalGroup(
             canvasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 558, Short.MAX_VALUE)
+            .addGroup(canvasPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(outputPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(375, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -94,6 +102,7 @@ public class LittleManGui extends javax.swing.JFrame implements GameGui.GameGui 
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel canvasPanel;
+    private littleman.OutputPanel outputPanel1;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -104,6 +113,15 @@ public class LittleManGui extends javax.swing.JFrame implements GameGui.GameGui 
     @Override
     public Component getInputProducerComponent() {
         return this;
+    }
+
+    public OutputPanel getOutputPanel() {
+        return outputPanel1;
+    }
+
+    @Override
+    public void draw(Graphics graphics) {
+        outputPanel1.draw(graphics);
     }
 
 }

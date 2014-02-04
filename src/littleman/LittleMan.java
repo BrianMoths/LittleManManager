@@ -25,17 +25,41 @@ public class LittleMan implements Drawable {
         }
 
     };
-    static public final LittleManAction goToInstructionPointer = new LittleManAction() {
+    static private final LittleManAction goToOutputPanel = new LittleManAction() {
         @Override
         public boolean doAction(LittleMan littleMan) {
-            return littleMan.goToInstructionPointer();
+            return littleMan.goToOutputPanel();
         }
 
     };
-    static public final LittleManAction fetchInstructionFromRememberedAddress = new LittleManAction() {
+    static private final LittleManAction printUnsignedToOutputPanelAfar = new LittleManAction() {
         @Override
         public boolean doAction(LittleMan littleMan) {
-            return littleMan.goToMemoryLocation(littleMan.getRememberedWord());
+            littleMan.printUnsignedToOutputPanel();
+            return true;
+        }
+
+    };
+    static private final LittleManAction setRegisterToRememberedWordAfar = new LittleManAction() {
+        @Override
+        public boolean doAction(LittleMan littleMan) {
+            littleMan.setRegisterToRememberedWord();
+            return true;
+        }
+
+    };
+    static private final LittleManAction rememberRegisterAfar = new LittleManAction() {
+        @Override
+        public boolean doAction(LittleMan littleMan) {
+            littleMan.rememberRegister();
+            return true;
+        }
+
+    };
+    static private final LittleManAction goToInstructionPointer = new LittleManAction() {
+        @Override
+        public boolean doAction(LittleMan littleMan) {
+            return littleMan.goToInstructionPointer();
         }
 
     };
@@ -55,6 +79,21 @@ public class LittleMan implements Drawable {
         }
 
     };
+    static private final LittleManAction rememberMemoryAtRememberedAddressAfar = new LittleManAction() {
+        @Override
+        public boolean doAction(LittleMan littleMan) {
+            littleMan.rememberMemory(littleMan.getRememberedWord());
+            return true;
+        }
+
+    };
+    static private final LittleManAction goToRememberedMemoryLocation = new LittleManAction() {
+        @Override
+        public boolean doAction(LittleMan littleMan) {
+            return littleMan.goToMemoryLocation(littleMan.getRememberedWord());
+        }
+
+    };
     static public final LittleManAction decodeRememberedInstruction = new LittleManAction() {
         @Override
         public boolean doAction(LittleMan littleMan) {
@@ -66,7 +105,11 @@ public class LittleMan implements Drawable {
     static public final LittleManAction fetchOperand = new LittleManAction() {
         @Override
         public boolean doAction(LittleMan littleMan) {
-            return littleMan.fetchOperand();
+            if (littleMan.isOperandNeeded()) {
+                return littleMan.doAction(fetchDataFromInstructionPointer);
+            } else {
+                return true;
+            }
         }
 
     };
@@ -94,11 +137,13 @@ public class LittleMan implements Drawable {
 
     };
     static public final LittleManAction fetchInstructionAddress = new LittleManActionSequence(goToInstructionPointer, rememberInstructionPointerAfar);
+    static public final LittleManAction fetchInstructionFromRememberedAddress = new LittleManActionSequence(goToRememberedMemoryLocation, rememberMemoryAtRememberedAddressAfar);
     static public final LittleManAction incrementInstructionPointer = new LittleManActionSequence(goToInstructionPointer, incrementInstructionPointerAfar);
     static public final LittleManAction fetchDataFromInstructionPointer = new LittleManActionSequence(fetchInstructionAddress, fetchInstructionFromRememberedAddress, incrementInstructionPointer);
     static public final LittleManAction fetchInstruction = new LittleManActionSequence(fetchDataFromInstructionPointer, decodeRememberedInstruction, clearMemory);
-    static public final LittleManAction getOperandIfNecessary = new LittleManActionSequence(fetchOperand, registerRememberedOperandToInstruction);
-    static public final LittleManAction doCycle = new LittleManActionSequence(fetchInstruction, fetchOperand, doInstruction);
+    static public final LittleManAction getOperandIfNecessary = new LittleManActionSequence(fetchOperand, registerRememberedOperandToInstruction, clearMemory);
+    static public final LittleManAction doCycle = new LittleManActionSequence(fetchInstruction, fetchOperand, doInstruction, clearMemory);
+    static public final LittleManAction printUnsigned = new LittleManActionSequence(goToRegister, rememberRegisterAfar, goToOutputPanel, printUnsignedToOutputPanelAfar);
     static private final int pathY = 200;
     static private final int stepSize = 4;
 
@@ -123,6 +168,17 @@ public class LittleMan implements Drawable {
         };
     }
 
+    static private LittleManAction rememberMemoryAfar(final int n) {
+        return new LittleManAction() {
+            @Override
+            public boolean doAction(LittleMan littleMan) {
+                littleMan.rememberMemory(n);
+                return true;
+            }
+
+        };
+    }
+
     private int x = 20, y = 0;
     private final Computer computer;
     private int rememberedWord;
@@ -134,16 +190,6 @@ public class LittleMan implements Drawable {
         this.computer = computer;
     }
 
-    public boolean fetchInstructionAddress() {
-        if (!isAtPoint(computer.instructionPointer.getAccessLocation())) {
-            goToInstructionPointer();
-            return false;
-        } else {
-            rememberWord(computer.instructionPointer.getInstructionPointer());
-            return true;
-        }
-    }
-
     private void incrementInstructionPointer() {
         computer.instructionPointer.increment();
     }
@@ -153,15 +199,27 @@ public class LittleMan implements Drawable {
     }
 
     private void rememberInstructionPointer() {
-        rememberedWord = computer.instructionPointer.getInstructionPointer();
+        rememberWord(computer.instructionPointer.getInstructionPointer());
     }
 
-    public boolean fetchOperand() {
-        if (instruction.isOperandNeeded()) {
-            return doAction(fetchDataFromInstructionPointer);
-        } else {
-            return true;
-        }
+    private void printUnsignedToOutputPanel() {
+        computer.outputPanel.append(String.format("%02d", rememberedWord));
+    }
+
+    private void setRegisterToRememberedWord() {
+        computer.register.setWord(rememberedWord);
+    }
+
+    private void rememberRegister() {
+        rememberWord(computer.register.getWord());
+    }
+
+    private void setMemoryToRememberedWord(int address) {
+        computer.memory.setMemory(address, rememberedWord);
+    }
+
+    private void rememberMemory(int address) {
+        rememberWord(computer.memory.getMemory(address));
     }
 
     public boolean doAction(LittleManAction littleManAction) {
@@ -181,6 +239,10 @@ public class LittleMan implements Drawable {
     }
 
     //<editor-fold defaultstate="collapsed" desc="movement">
+    public boolean goToOutputPanel() {
+        return goToPoint(computer.outputPanel.getAccessLocation());
+    }
+
     public boolean goToRegister() {
         return goToPoint(computer.register.getAccessLocation());
     }
@@ -195,10 +257,10 @@ public class LittleMan implements Drawable {
 
     public boolean goToPoint(Point point) {
         if (isAtX(point.x)) {
-            stepInDirectionOfY(point.y);
-            return false;
+            return stepInDirectionOfY(point.y);
         } else {
-            return goToX(point.x);
+            goToX(point.x);
+            return false;
         }
     }
 
@@ -290,6 +352,10 @@ public class LittleMan implements Drawable {
 
     public int getRememberedWord() {
         return rememberedWord;
+    }
+
+    public boolean isOperandNeeded() {
+        return instruction != null && instruction.isOperandNeeded();
     }
 
 }

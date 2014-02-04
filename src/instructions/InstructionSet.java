@@ -12,7 +12,7 @@ import littleman.LittleMan;
  */
 public class InstructionSet {
 
-    static public final Instruction HALT;
+    static public final Instruction HALT, PRINT_UNSIGNED;
 
     static {
         HALT = new Instruction() {
@@ -31,6 +31,22 @@ public class InstructionSet {
             }
 
         };
+        PRINT_UNSIGNED = new Instruction() {
+            @Override
+            public boolean isOperandNeeded() {
+                return false;
+            }
+
+            @Override
+            public boolean doInstruction(LittleMan littleMan) {
+                return littleMan.doAction(LittleMan.printUnsigned);
+            }
+
+            @Override
+            public void acceptOperands(int... operands) {
+            }
+
+        };
 
 
 
@@ -39,6 +55,8 @@ public class InstructionSet {
     static public Instruction decodeInstruction(int word) {
         if (word == 0) {
             return HALT;
+        } else if (word == 20) {
+            return PRINT_UNSIGNED;
         } else {
             return new NoOpInstruction();
         }

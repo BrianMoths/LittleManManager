@@ -6,6 +6,7 @@ package computer;
 
 import Renderer.Drawable;
 import java.awt.Graphics;
+import littleman.OutputPanel;
 
 /**
  *
@@ -16,15 +17,18 @@ public class Computer implements Drawable {
     public final Register register;
     public final Memory memory;
     public final InstructionPointer instructionPointer;
+    public final OutputPanel outputPanel;
 
-    public Computer() {
+    public Computer(OutputPanel outputPanel) {
         register = new Register();
         memory = new Memory();
         instructionPointer = new InstructionPointer();
+        this.outputPanel = outputPanel;
     }
 
     @Override
     public void draw(Graphics graphics) {
+        outputPanel.draw(graphics);
         register.draw(graphics);
         memory.draw(graphics);
         instructionPointer.draw(graphics);

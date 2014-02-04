@@ -24,7 +24,10 @@ public class Memory implements Drawable {
     private List<Integer> memory = new ArrayList<>(numWords);
 
     {
-        for (int i = 0; i < numWords; i++) {
+        int i = 0;
+        memory.add(20);
+        i++;
+        for (; i < numWords; i++) {
             memory.add(0);
         }
     }

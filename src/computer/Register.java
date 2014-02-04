@@ -30,4 +30,12 @@ public class Register implements Drawable {
         graphics.drawString(String.format("%02d", word), xPosition + 3, yPosition + height - 3);
     }
 
+    public int getWord() {
+        return word;
+    }
+
+    public void setWord(int word) {
+        this.word = word;
+    }
+
 }

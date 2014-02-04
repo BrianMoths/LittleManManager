@@ -4,16 +4,15 @@
  */
 package littleman;
 
-import computer.Computer;
-import GameGui.GameGui;
 import ListenerInputHandler.AbstractInputHandlerClient;
 import RealTimeGame.AbstractRealTimeGame;
+import computer.Computer;
 
 /**
  *
  * @author brian
  */
-public class LittleManGame extends AbstractRealTimeGame {
+public class LittleManGame extends AbstractRealTimeGame<LittleManGui> {
 
     /**
      * @param args the command line arguments
@@ -23,7 +22,7 @@ public class LittleManGame extends AbstractRealTimeGame {
         littleMan.startGameLoopThread();
     }
 
-    private static GameGui makeGamePanel() {
+    private static LittleManGui makeGamePanel() {
         return new LittleManGui();
     }
 
@@ -32,7 +31,7 @@ public class LittleManGame extends AbstractRealTimeGame {
 
     public LittleManGame() {
         super(new AbstractInputHandlerClient(), makeGamePanel());
-        computer = new Computer();
+        computer = new Computer(getGameGui().getOutputPanel());
         littleMan = new LittleMan(computer);
         init();
     }
