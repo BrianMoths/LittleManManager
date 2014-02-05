@@ -34,6 +34,10 @@ public class LittleMan implements Drawable {
     }
 
     //<editor-fold defaultstate="collapsed" desc="movement">
+    boolean goToInstructionLocation(LocationForInstruction locationForInstruciton) {
+        return locationForInstruciton.goToLocation(this);
+    }
+
     boolean goToOutputPanel() {
         return littleManPosition.goTo(computer.outputPanel);
     }
@@ -80,7 +84,7 @@ public class LittleMan implements Drawable {
         clearMemory();
     }
 
-    void rememberInstructionPointer() {
+    void memorizeInstructionPointer() {
         memorizeWord(computer.instructionPointer.getInstructionPointer());
     }
     //</editor-fold>
@@ -159,6 +163,7 @@ public class LittleMan implements Drawable {
         return false;
     }
 
+    //<editor-fold defaultstate="collapsed" desc="getters">
     public boolean isHalted() {
         return isHalted;
     }
@@ -182,5 +187,6 @@ public class LittleMan implements Drawable {
     private int getMemory(int address) {
         return computer.memory.getMemory(address);
     }
+    //</editor-fold>
 
 }
