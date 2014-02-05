@@ -8,6 +8,7 @@ import Renderer.Drawable;
 import java.awt.Graphics;
 import java.awt.Point;
 import littlemangame.littleman.location.AccessibleLocation;
+import littlemangame.word.Word;
 
 /**
  *
@@ -20,14 +21,14 @@ public class InstructionPointer implements Drawable, AccessibleLocation {
     static private final int width = 22;
     static private final int height = 20;
     static private final int numDigits = 2;
-    private int address;
+    private Word address;
 
     public InstructionPointer() {
-        address = 00;
+        address = Word.ZERO_WORD;
     }
 
     public void increment() {
-        address++;
+        address = address.incrementedWord();
     }
 
     @Override
@@ -35,18 +36,18 @@ public class InstructionPointer implements Drawable, AccessibleLocation {
         return new Point(xPosition + width / 2 - 2, yPosition + height + 3);
     }
 
-    public void setInstructionPointer(int address) {
+    public void setInstructionPointer(Word address) {
         this.address = address;
     }
 
-    public int getInstructionPointer() {
+    public Word getInstructionPointer() {
         return address;
     }
 
     @Override
     public void draw(Graphics graphics) {
         graphics.drawRect(xPosition, yPosition, width, height);
-        graphics.drawString(String.format("%02d", address), xPosition + 3, yPosition + height - 3);
+        graphics.drawString(address.toString(), xPosition + 3, yPosition + height - 3);
     }
 
 }

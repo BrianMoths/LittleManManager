@@ -8,6 +8,7 @@ import Renderer.Drawable;
 import java.awt.Graphics;
 import java.awt.Point;
 import littlemangame.littleman.location.AccessibleLocation;
+import littlemangame.word.Word;
 
 /**
  *
@@ -19,7 +20,7 @@ public class Register implements Drawable, AccessibleLocation {
     static private final int yPosition = 300;
     static private final int width = 22;
     static private final int height = 20;
-    private int word;
+    private Word word = Word.ZERO_WORD;
 
     @Override
     public Point getAccessLocation() {
@@ -29,14 +30,14 @@ public class Register implements Drawable, AccessibleLocation {
     @Override
     public void draw(Graphics graphics) {
         graphics.drawRect(xPosition, yPosition, width, height);
-        graphics.drawString(String.format("%02d", word), xPosition + 3, yPosition + height - 3);
+        graphics.drawString(word.toString(), xPosition + 3, yPosition + height - 3);
     }
 
-    public int getWord() {
+    public Word getWord() {
         return word;
     }
 
-    public void setWord(int word) {
+    public void setWord(Word word) {
         this.word = word;
     }
 

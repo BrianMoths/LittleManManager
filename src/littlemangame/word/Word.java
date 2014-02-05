@@ -15,6 +15,7 @@ public class Word implements Comparable<Word> {
     static private final int MAX_SIGNED = MIN_SIGNED - 1;
     static private final int MAX_WORD = NUM_WORDS - 1;
     static private final int MIN_WORD = 0;
+    static public final Word ZERO_WORD = new Word(0);
 
     static public Word valueOfLastDigitsOfInteger(int value) {
         return new Word(value);
@@ -36,6 +37,10 @@ public class Word implements Comparable<Word> {
             value += NUM_WORDS;
         }
         this.value = value;
+    }
+
+    public Word incrementedWord() {
+        return new Word(getValue() + 1);
     }
 
     public int getValue() {

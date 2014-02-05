@@ -6,6 +6,7 @@ package littlemangame.instructions;
 
 import littlemangame.littleman.LittleMan;
 import littlemangame.littleman.LittleManCommander;
+import littlemangame.word.Word;
 
 /**
  *
@@ -35,10 +36,10 @@ public class InstructionSet {
 
     }
 
-    static public Instruction decodeInstruction(int word) {
-        if (word == 0) {
+    static public Instruction decodeInstruction(Word word) {
+        if (Word.ZERO_WORD.equals(word)) {
             return HALT;
-        } else if (word == 20) {
+        } else if (Word.valueOfLastDigitsOfInteger(20).equals(word)) {
             return PRINT_UNSIGNED;
         } else {
             return new NoOpInstruction();

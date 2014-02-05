@@ -12,6 +12,7 @@ import java.awt.Point;
 import littlemangame.instructions.Instruction;
 import littlemangame.instructions.InstructionSet;
 import littlemangame.littleman.location.LittleManPosition;
+import littlemangame.word.Word;
 
 /**
  *
@@ -23,7 +24,7 @@ public class LittleMan implements Drawable {
     static private final int stepSize = 4;
     private final LittleManPosition littleManPosition;
     private final Computer computer;
-    private int rememberedWord;
+    private Word rememberedWord;
     private boolean isRememberingWord = false;
     private Instruction instruction;
     private boolean isHalted = false;
@@ -58,7 +59,7 @@ public class LittleMan implements Drawable {
         return goToMemoryLocation(instruction.getOperand());
     }
 
-    private boolean goToMemoryLocation(int address) {
+    private boolean goToMemoryLocation(Word address) {
         return littleManPosition.goTo(computer.memory, address);
     }
     //</editor-fold>
@@ -102,14 +103,14 @@ public class LittleMan implements Drawable {
         memorizeMemory(instruction.getOperand());
     }
 
-    private void memorizeMemory(int address) {
+    private void memorizeMemory(Word address) {
         memorizeWord(getMemory(address));
     }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="interact with output panel">
     void printUnsignedToOutputPanel() {
-        computer.outputPanel.append(String.format("%02d", getRememberedWord()));
+        computer.outputPanel.append(getRememberedWord().toString());
     }
     //</editor-fold>
 
@@ -134,7 +135,7 @@ public class LittleMan implements Drawable {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="short term memory">
-    private void memorizeWord(int word) {
+    private void memorizeWord(Word word) {
         this.rememberedWord = word;
         isRememberingWord = true;
     }
@@ -154,7 +155,7 @@ public class LittleMan implements Drawable {
         graphics.fillOval(getX(), getY(), 10, 10);
         if (isRememberingWord) {
             graphics.drawRect(getX() - 5, getY() - 22, 22, 20);
-            graphics.drawString(String.format("%02d", getRememberedWord()), getX() - 2, getY() - 5);
+            graphics.drawString(getRememberedWord().toString(), getX() - 2, getY() - 5);
         }
     }
 
@@ -168,7 +169,7 @@ public class LittleMan implements Drawable {
         return isHalted;
     }
 
-    public int getRememberedWord() {
+    public Word getRememberedWord() {
         return rememberedWord;
     }
 
@@ -184,7 +185,7 @@ public class LittleMan implements Drawable {
         return littleManPosition.getY();
     }
 
-    private int getMemory(int address) {
+    private Word getMemory(Word address) {
         return computer.memory.getMemory(address);
     }
     //</editor-fold>

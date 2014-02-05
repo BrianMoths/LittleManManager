@@ -10,26 +10,27 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 import littlemangame.littleman.location.MultiplyAccessibleLocation;
+import littlemangame.word.Word;
 
 /**
  *
  * @author brian
  */
-public class Memory implements Drawable, MultiplyAccessibleLocation<Integer> {
+public class Memory implements Drawable, MultiplyAccessibleLocation<Word> {
 
     static private final int xPosition = 600;
     static private final int yPosition = 20;
     static private final int width = 50;
     static private final int height = 400;
     private int numWords = 100;
-    private List<Integer> memory = new ArrayList<>(numWords);
+    private List<Word> memory = new ArrayList<>(numWords);
 
     {
         int i = 0;
-        memory.add(20);
+        memory.add(Word.valueOfLastDigitsOfInteger(20));
         i++;
         for (; i < numWords; i++) {
-            memory.add(0);
+            memory.add(Word.ZERO_WORD);
         }
     }
 
@@ -43,12 +44,12 @@ public class Memory implements Drawable, MultiplyAccessibleLocation<Integer> {
         }
     }
 
-    public void setMemory(int address, int wordToBeStored) {
-        memory.set(address, wordToBeStored);
+    public void setMemory(Word address, Word wordToBeStored) {
+        memory.set(address.getValue(), wordToBeStored);
     }
 
-    public int getMemory(int address) {
-        return memory.get(address);
+    public Word getMemory(Word address) {
+        return memory.get(address.getValue());
     }
 
     /**
@@ -57,9 +58,9 @@ public class Memory implements Drawable, MultiplyAccessibleLocation<Integer> {
      * @return
      */
     @Override
-    public Point getAccessLocation(Integer word) {
+    public Point getAccessLocation(Word word) {
         final int x = xPosition - 10;
-        final int y = yPosition + word * height / numWords;
+        final int y = yPosition + word.getValue() * height / numWords;
         return new Point(x, y);
     }
 

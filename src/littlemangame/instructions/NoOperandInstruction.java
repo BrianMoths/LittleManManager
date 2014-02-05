@@ -4,6 +4,8 @@
  */
 package littlemangame.instructions;
 
+import littlemangame.word.Word;
+
 /**
  *
  * @author brian
@@ -16,11 +18,11 @@ public abstract class NoOperandInstruction implements Instruction {
     }
 
     @Override
-    public void acceptOperand(int operands) {
+    public void acceptOperand(Word operands) {
     }
 
     @Override
-    public int getOperand() {
+    public Word getOperand() {
         throw new AssertionError("getOperand called on an instruction with no Operand");
     }
 
