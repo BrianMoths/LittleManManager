@@ -27,7 +27,13 @@ public class Memory implements Drawable, MultiplyAccessibleLocation<Word> {
 
     {
         int i = 0;
+        memory.add(Word.valueOfLastDigitsOfInteger(30));
+        i++;
+        memory.add(Word.valueOfLastDigitsOfInteger(42));
+        i++;
         memory.add(Word.valueOfLastDigitsOfInteger(20));
+        i++;
+        memory.add(Word.valueOfLastDigitsOfInteger(9));
         i++;
         for (; i < numWords; i++) {
             memory.add(Word.ZERO_WORD);

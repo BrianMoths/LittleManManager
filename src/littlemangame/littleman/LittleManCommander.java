@@ -101,7 +101,7 @@ public class LittleManCommander implements Drawable {
     });
     //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="interact with outputPanel">
-    public static final LittleManAction printUnsignedToOutputPanel = new LocalAction(LocationForInstruction.OUTPUT_PANEL, new LittleManAction() {
+    public static final LittleManAction printRememberedWordToOutputPanel = new LocalAction(LocationForInstruction.OUTPUT_PANEL, new LittleManAction() {
         @Override
         public boolean doAction(LittleMan littleMan) {
             littleMan.printUnsignedToOutputPanel();
@@ -110,6 +110,20 @@ public class LittleManCommander implements Drawable {
 
     });
     //</editor-fold>
+    public static final LittleManAction halt = new LittleManAction() {
+        @Override
+        public boolean doAction(LittleMan littleMan) {
+            return littleMan.halt();
+        }
+
+    };
+    public static final LittleManAction NoOperation = new LittleManAction() {
+        @Override
+        public boolean doAction(LittleMan littleMan) {
+            return true;
+        }
+
+    };
     //</editor-fold>
     static private final LittleManAction decodeRememberedInstruction = new LittleManAction() {
         @Override
@@ -123,6 +137,14 @@ public class LittleManCommander implements Drawable {
         @Override
         public boolean doAction(LittleMan littleMan) {
             littleMan.registerRemeberedOperandToInstruction();
+            return true;
+        }
+
+    };
+    static public final LittleManAction memorizeOperand = new LittleManAction() {
+        @Override
+        public boolean doAction(LittleMan littleMan) {
+            littleMan.memorizeOperand();
             return true;
         }
 
@@ -158,7 +180,6 @@ public class LittleManCommander implements Drawable {
     static private final LittleManAction fetchInstruction = new LittleManActionSequence(memorizeDataPointedByInstructionPointer, decodeRememberedInstruction, clearMemory);
     static private final LittleManAction fetchOperandIfNecessary = new LittleManActionSequence(memorizeOperandIfNecessary, registerRememberedOperandToInstruction, clearMemory);
     static public final LittleManAction doCycle = new LittleManActionSequence(fetchInstruction, fetchOperandIfNecessary, doInstruction, clearMemory);
-    static public final LittleManAction printUnsigned = new LittleManActionSequence(memorizeRegister, printUnsignedToOutputPanel);
 
     static private LittleManAction goToInstructionLocation(final LocationForInstruction locationForInstruction) {
         return new LittleManAction() {

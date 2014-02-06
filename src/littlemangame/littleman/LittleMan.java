@@ -10,7 +10,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import littlemangame.instructions.Instruction;
-import littlemangame.instructions.InstructionSet;
+import littlemangame.instructions.InstructionFromSet;
 import littlemangame.littleman.location.LittleManPosition;
 import littlemangame.word.Word;
 
@@ -120,7 +120,7 @@ public class LittleMan implements Drawable {
     //<editor-fold defaultstate="collapsed" desc="deal with instructions">
 
     void decodeRememberedInstruction() {
-        instruction = InstructionSet.decodeInstruction(getRememberedWord());
+        instruction = InstructionFromSet.decodeInstruction(getRememberedWord());
         clearMemory();
     }
 
@@ -129,8 +129,12 @@ public class LittleMan implements Drawable {
         clearMemory();
     }
 
+    void memorizeOperand() {
+        memorizeWord(instruction.getOperand());
+    }
+
     boolean doInstruction() {
-        return instruction.doInstruction(this);
+        return doAction(instruction.getAction());
     }
     //</editor-fold>
 
