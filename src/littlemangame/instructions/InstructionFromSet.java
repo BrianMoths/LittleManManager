@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import static littlemangame.instructions.InstructionFromSet.NO_OPERATION;
 import littlemangame.littleman.LittleManAction;
-import littlemangame.littleman.LittleManCommander;
+import static littlemangame.littleman.LittleManCommander.*;
 import littlemangame.word.Word;
 
 /**
@@ -17,10 +17,12 @@ import littlemangame.word.Word;
  */
 public enum InstructionFromSet {
 
-    NO_OPERATION(Word.ZERO_WORD, false, LittleManCommander.NoOperation),
-    HALT(Word.valueOfLastDigitsOfInteger(9), false, LittleManCommander.halt),
-    PRINT_UNSIGNED(Word.valueOfLastDigitsOfInteger(20), false, LittleManCommander.memorizeRegister, LittleManCommander.printRememberedWordToOutputPanel),
-    LOAD_DIRECT(Word.valueOfLastDigitsOfInteger(30), true, LittleManCommander.memorizeOperand, LittleManCommander.setRegisterToRememberedWord);
+    NO_OPERATION(Word.ZERO_WORD, false, NoOperation),
+    HALT(Word.valueOfLastDigitsOfInteger(9), false, halt),
+    PRINT_UNSIGNED(Word.valueOfLastDigitsOfInteger(20), false, memorizeRegister, printRememberedWordToOutputPanel),
+    LOAD_DIRECT(Word.valueOfLastDigitsOfInteger(30), true, memorizeOperand, setRegisterToRememberedWord),
+    LOAD_INDIRECT(Word.valueOfLastDigitsOfInteger(31), true, memorizeMemoryAtOperandAddress, setRegisterToRememberedWord),
+    STORE(Word.valueOfLastDigitsOfInteger(33), true, memorizeRegister, setMemoryAtOperandToRememberedWord);
     static private final Map<Word, InstructionFromSet> instructionMap = new HashMap<>();
 
     static {
