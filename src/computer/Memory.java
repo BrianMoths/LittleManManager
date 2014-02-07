@@ -5,6 +5,7 @@
 package computer;
 
 import Renderer.Drawable;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
@@ -42,12 +43,15 @@ public class Memory implements Drawable, MultiplyAccessibleLocation<Word> {
 
     @Override
     public void draw(Graphics graphics) {
+        final Color color = graphics.getColor();
+        graphics.setColor(Color.blue);
         graphics.drawRect(xPosition, yPosition, width, height);
         final int step = height / numWords;
         final int maxYPos = yPosition + height;
         for (int yPos = 20; yPos <= maxYPos; yPos += step) {
             graphics.drawLine(xPosition, yPos, xPosition + width, yPos);
         }
+        graphics.setColor(color);
     }
 
     public void setMemory(Word address, Word wordToBeStored) {

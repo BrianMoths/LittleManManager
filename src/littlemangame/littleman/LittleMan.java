@@ -24,16 +24,14 @@ public class LittleMan implements Drawable {
     static private final int stepSize = 4;
     private final LittleManPosition littleManPosition;
     private final Computer computer;
-    private Word rememberedAddress;
-    private boolean isRememberingAddress;
-    private Word rememberedData;
-    private boolean isRememberingData = false;
+    private final LittleManMemory littleManMemory;
     private Instruction instruction;
     private boolean isHalted = false;
 
     public LittleMan(Computer computer) {
         this.computer = computer;
         littleManPosition = new LittleManPosition(pathY, stepSize, new Point(200, pathY));
+        littleManMemory = new LittleManMemory();
     }
 
     //<editor-fold defaultstate="collapsed" desc="movement">
@@ -57,9 +55,6 @@ public class LittleMan implements Drawable {
         return goToMemoryLocation(getRememberedAddress());
     }
 
-//    boolean goToOperandMemoryLocation() {
-//        return goToMemoryLocation(instruction.getDataOperand());
-//    }
     private boolean goToMemoryLocation(Word address) {
         return littleManPosition.goTo(computer.memory, address);
     }
@@ -96,24 +91,21 @@ public class LittleMan implements Drawable {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="interact with memory">
-//    void setMemoryAtOperandToRememberedWord() {
-//        computer.memory.setMemory(instruction.getDataOperand(), getRememberedData());
-//    }
     void setMemoryAtRememberedAddressToRememberedData() {
         computer.memory.setMemory(getRememberedAddress(), getRememberedData());
+        clearAddressMemory();
     }
 
     void memorizeDataAtRememberedAddress() {
         memorizeDataFromAddress(getRememberedAddress());
+        clearAddressMemory();
     }
 
     void memorizeAddressAtRememberedAddress() {
         memorizeAddress(getMemory(getRememberedAddress()));
+        clearAddressMemory();
     }
 
-//    void memorizeMemoryAtOperandAddress() {
-//        memorizeData(instruction.getDataOperand());
-//    }
     private void memorizeDataFromAddress(Word address) {
         memorizeData(getMemory(address));
     }
@@ -128,65 +120,66 @@ public class LittleMan implements Drawable {
     public boolean doAction(LittleManAction littleManAction) {
         return littleManAction.doAction(this);
     }
-    //<editor-fold defaultstate="collapsed" desc="deal with instructions">
 
+    //<editor-fold defaultstate="collapsed" desc="deal with instructions">
     void decodeRememberedInstruction() {
         instruction = InstructionFromSet.decodeInstruction(getRememberedData());
         clearDataMemory();
     }
 
-//    void registerRemeberedOperandToInstruction() {
-//        instruction.acceptDataOperand(getRememberedData());
-//        clearDataMemory();
-//    }
-//    void memorizeOperand() {
-//        memorizeData(instruction.getDataOperand());
-//    }
     boolean doInstruction() {
         return doAction(instruction.getAction());
     }
-    //</editor-fold>
+//</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="short term memory (move into own class)">
-    private void memorizeData(Word data) {
-        this.rememberedData = data;
-        isRememberingData = true;
+    //<editor-fold defaultstate="collapsed" desc="short term memory">
+    void memorizeData(Word data) {
+        littleManMemory.memorizeData(data);
     }
 
-    private void memorizeAddress(Word address) {
-        rememberedAddress = address;
-        isRememberingAddress = true;
+    void memorizeAddress(Word address) {
+        littleManMemory.memorizeAddress(address);
     }
 
     void clearDataMemory() {
-        isRememberingData = false;
+        littleManMemory.clearDataMemory();
     }
 
     void clearAddressMemory() {
-        isRememberingAddress = false;
+        littleManMemory.clearAddressMemory();
     }
 
     void clearMemory() {
-        clearAddressMemory();
-        clearDataMemory();
+        littleManMemory.clearMemory();
     }
 
-    boolean isThinkingOfData() {
-        return isRememberingData;
+    boolean isRememberingData() {
+        return littleManMemory.isRememberingData();
     }
 
-    boolean isThinkingOfAddress() {
-        return isRememberingAddress;
+    boolean isRememberingAddress() {
+        return littleManMemory.isRememberingAddress();
     }
+
 //</editor-fold>
-
+//</editor-fold>
     @Override
     public void draw(Graphics graphics) {
         graphics.setColor(Color.BLACK);
         graphics.fillOval(getX(), getY(), 10, 10);
-        if (isRememberingData) {
-            graphics.drawRect(getX() - 5, getY() - 22, 22, 20);
-            graphics.drawString(getRememberedData().toString(), getX() - 2, getY() - 5);
+        if (isRememberingData()) {
+            final Color color = graphics.getColor();
+            graphics.setColor(Color.red);
+            graphics.drawRect(getX() - 15, getY() - 22, 22, 20);
+            graphics.drawString(getRememberedData().toString(), getX() - 12, getY() - 5);
+            graphics.setColor(color);
+        }
+        if (isRememberingAddress()) {
+            final Color color = graphics.getColor();
+            graphics.setColor(Color.blue);
+            graphics.drawRect(getX() + 15, getY() - 22, 22, 20);
+            graphics.drawString(getRememberedAddress().toString(), getX() + 18, getY() - 5);
+            graphics.setColor(color);
         }
     }
 
@@ -201,11 +194,11 @@ public class LittleMan implements Drawable {
     }
 
     Word getRememberedData() {
-        return rememberedData;
+        return littleManMemory.getRememberedData();
     }
 
     Word getRememberedAddress() {
-        return rememberedAddress;
+        return littleManMemory.getRememberedAddress();
     }
 
     boolean isDataOperandNeeded() {
