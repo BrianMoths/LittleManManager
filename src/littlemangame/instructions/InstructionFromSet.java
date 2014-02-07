@@ -6,7 +6,7 @@ package littlemangame.instructions;
 
 import java.util.HashMap;
 import java.util.Map;
-import static littlemangame.instructions.InstructionFromSet.NO_OPERATION;
+import static littlemangame.instructions.InstructionOperandTypes.*;
 import littlemangame.littleman.LittleManAction;
 import static littlemangame.littleman.LittleManCommander.*;
 import littlemangame.word.Word;
@@ -17,12 +17,16 @@ import littlemangame.word.Word;
  */
 public enum InstructionFromSet {
 
-    NO_OPERATION(Word.ZERO_WORD, false, NoOperation),
-    HALT(Word.valueOfLastDigitsOfInteger(9), false, halt),
-    PRINT_UNSIGNED(Word.valueOfLastDigitsOfInteger(20), false, memorizeRegister, printRememberedWordToOutputPanel),
-    LOAD_DIRECT(Word.valueOfLastDigitsOfInteger(30), true, memorizeOperand, setRegisterToRememberedWord),
-    LOAD_INDIRECT(Word.valueOfLastDigitsOfInteger(31), true, memorizeMemoryAtOperandAddress, setRegisterToRememberedWord),
-    STORE(Word.valueOfLastDigitsOfInteger(33), true, memorizeRegister, setMemoryAtOperandToRememberedWord);
+    NO_OPERATION(Word.ZERO_WORD, NEITHER, NoOperation),
+    HALT(Word.valueOfLastDigitsOfInteger(9), NEITHER, halt),
+    UNCONDITIONAL_JUMP(Word.valueOfLastDigitsOfInteger(10), DATA_ONLY, setInstructionPointerToRememberedData),
+    PRINT_UNSIGNED(Word.valueOfLastDigitsOfInteger(20), NEITHER, memorizeAddressAtRegister, printRememberedWordToOutputPanel),
+    LOAD_DIRECT(Word.valueOfLastDigitsOfInteger(30), DATA_ONLY, setRegisterToRememberedData),
+    LOAD_INDIRECT_IMMEDIATE(Word.valueOfLastDigitsOfInteger(31), ADDRESS_ONLY, memorizeDataAtRememberedAddress, setRegisterToRememberedData),
+    LOAD_INDIRECT_REGISTER(Word.valueOfLastDigitsOfInteger(32), NEITHER, memorizeAddressAtRegister, memorizeDataAtRememberedAddress, setRegisterToRememberedData),
+    STORE_IMMEDIATE_DATA(Word.valueOfLastDigitsOfInteger(34), DATA_ONLY, memorizeAddressAtRegister, setMemoryAtRememberedAddressToRememberedData),
+    STORE_IMMEDIATE_ADDRESS(Word.valueOfLastDigitsOfInteger(35), ADDRESS_ONLY, memorizeDataAtRegister, setMemoryAtRememberedAddressToRememberedData),
+    STORE_IMMEDIATE_IMMEDIATE(Word.valueOfLastDigitsOfInteger(36), BOTH, setMemoryAtRememberedAddressToRememberedData);
     static private final Map<Word, InstructionFromSet> instructionMap = new HashMap<>();
 
     static {
@@ -43,27 +47,14 @@ public enum InstructionFromSet {
     private final Instruction instruction;
     private final Word opcode;
 
-    private InstructionFromSet(Word opcode, Instruction instruction) {
+    private InstructionFromSet(Word opcode, InstructionOperandTypes instructionOperandTypes, LittleManAction littleManAction) {
         this.opcode = opcode;
-        this.instruction = instruction;
+        this.instruction = instructionOperandTypes.makeInstruction(littleManAction);
     }
 
-    private InstructionFromSet(Word opcode, boolean hasOperand, LittleManAction littleManAction) {
+    private InstructionFromSet(Word opcode, InstructionOperandTypes instructionOperandTypes, LittleManAction... littleManAction) {
         this.opcode = opcode;
-        if (hasOperand) {
-            this.instruction = new InstructionWithOperand(littleManAction);
-        } else {
-            this.instruction = new NoOperandInstruction(littleManAction);
-        }
-    }
-
-    private InstructionFromSet(Word opcode, boolean hasOperand, LittleManAction... littleManAction) {
-        this.opcode = opcode;
-        if (hasOperand) {
-            this.instruction = new InstructionWithOperand(littleManAction);
-        } else {
-            this.instruction = new NoOperandInstruction(littleManAction);
-        }
+        this.instruction = instructionOperandTypes.makeInstruction(littleManAction);
     }
 
     public Word getOpcode() {

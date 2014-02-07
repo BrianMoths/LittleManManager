@@ -31,7 +31,7 @@ public class LittleManCommander implements Drawable {
 
     //<editor-fold defaultstate="collapsed" desc="basic instructions">
     //<editor-fold defaultstate="collapsed" desc="interact with register">
-    public static final LittleManAction setRegisterToRememberedWord = new LocalAction(LocationForInstruction.REGISTER, new LittleManAction() {
+    public static final LittleManAction setRegisterToRememberedData = new LocalAction(LocationForInstruction.REGISTER, new LittleManAction() {
         @Override
         public boolean doAction(LittleMan littleMan) {
             littleMan.setRegisterToRememberedWord();
@@ -39,10 +39,18 @@ public class LittleManCommander implements Drawable {
         }
 
     });
-    public static final LittleManAction memorizeRegister = new LocalAction(LocationForInstruction.REGISTER, new LittleManAction() {
+    public static final LittleManAction memorizeDataAtRegister = new LocalAction(LocationForInstruction.REGISTER, new LittleManAction() {
         @Override
         public boolean doAction(LittleMan littleMan) {
-            littleMan.memorizeRegister();
+            littleMan.memorizeDataAtRegister();
+            return true;
+        }
+
+    });
+    public static final LittleManAction memorizeAddressAtRegister = new LocalAction(LocationForInstruction.REGISTER, new LittleManAction() {
+        @Override
+        public boolean doAction(LittleMan littleMan) {
+            littleMan.memorizeDataAtRegister();
             return true;
         }
 
@@ -57,10 +65,10 @@ public class LittleManCommander implements Drawable {
         }
 
     });
-    public static final LittleManAction setInstructionPointerToRememberedWord = new LocalAction(LocationForInstruction.INSTRUCTION_POINTER, new LittleManAction() {
+    public static final LittleManAction setInstructionPointerToRememberedData = new LocalAction(LocationForInstruction.INSTRUCTION_POINTER, new LittleManAction() {
         @Override
         public boolean doAction(LittleMan littleMan) {
-            littleMan.setInstructionPointerToRememberedWord();
+            littleMan.setInstructionPointerToRememberedData();
             return true;
         }
 
@@ -75,30 +83,46 @@ public class LittleManCommander implements Drawable {
     });
     //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="interact with memory">
-    public static final LittleManAction setMemoryAtOperandToRememberedWord = new LocalAction(LocationForInstruction.OPERAND_MEMORY, new LittleManAction() {
+//    public static final LittleManAction setMemoryAtOperandToRememberedWord = new LocalAction(LocationForInstruction.OPERAND_MEMORY, new LittleManAction() {
+//        @Override
+//        public boolean doAction(LittleMan littleMan) {
+//            littleMan.setMemoryAtOperandToRememberedWord();
+//            return true;
+//        }
+//
+//    });
+    public static final LittleManAction setMemoryAtRememberedAddressToRememberedData = new LocalAction(LocationForInstruction.REMEMBERED_MEMORY, new LittleManAction() {
         @Override
         public boolean doAction(LittleMan littleMan) {
-            littleMan.setMemoryAtOperandToRememberedWord();
+            littleMan.setMemoryAtRememberedAddressToRememberedData();
             return true;
         }
 
     });
-    public static final LittleManAction memorizeMemoryAtRememberedAddress = new LocalAction(LocationForInstruction.REMEMBERED_MEMORY, new LittleManAction() {
+    public static final LittleManAction memorizeDataAtRememberedAddress = new LocalAction(LocationForInstruction.REMEMBERED_MEMORY, new LittleManAction() {
         @Override
         public boolean doAction(LittleMan littleMan) {
-            littleMan.memorizeMemoryAtRememberedAddress();
+            littleMan.memorizeDataAtRememberedAddress();
             return true;
         }
 
     });
-    public static final LittleManAction memorizeMemoryAtOperandAddress = new LocalAction(LocationForInstruction.OPERAND_MEMORY, new LittleManAction() {
+    private static final LittleManAction memorizeAddressAtRememberedAddress = new LocalAction(LocationForInstruction.REMEMBERED_MEMORY, new LittleManAction() {
         @Override
         public boolean doAction(LittleMan littleMan) {
-            littleMan.memorizeMemoryAtOperandAddress();
+            littleMan.memorizeAddressAtRememberedAddress();
             return true;
         }
 
     });
+//    public static final LittleManAction memorizeMemoryAtOperandAddress = new LocalAction(LocationForInstruction.OPERAND_MEMORY, new LittleManAction() {
+//        @Override
+//        public boolean doAction(LittleMan littleMan) {
+//            littleMan.memorizeMemoryAtOperandAddress();
+//            return true;
+//        }
+//
+//    });
     //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="interact with outputPanel">
     public static final LittleManAction printRememberedWordToOutputPanel = new LocalAction(LocationForInstruction.OUTPUT_PANEL, new LittleManAction() {
@@ -133,22 +157,22 @@ public class LittleManCommander implements Drawable {
         }
 
     };
-    static private final LittleManAction registerRememberedOperandToInstruction = new LittleManAction() {
-        @Override
-        public boolean doAction(LittleMan littleMan) {
-            littleMan.registerRemeberedOperandToInstruction();
-            return true;
-        }
-
-    };
-    static public final LittleManAction memorizeOperand = new LittleManAction() {
-        @Override
-        public boolean doAction(LittleMan littleMan) {
-            littleMan.memorizeOperand();
-            return true;
-        }
-
-    };
+//    static private final LittleManAction registerRememberedOperandToInstruction = new LittleManAction() {
+//        @Override
+//        public boolean doAction(LittleMan littleMan) {
+//            littleMan.registerRemeberedOperandToInstruction();
+//            return true;
+//        }
+//
+//    };
+//    static public final LittleManAction memorizeOperand = new LittleManAction() {
+//        @Override
+//        public boolean doAction(LittleMan littleMan) {
+//            littleMan.memorizeOperand();
+//            return true;
+//        }
+//
+//    };
     static private final LittleManAction doInstruction = new LittleManAction() {
         @Override
         public boolean doAction(LittleMan littleMan) {
@@ -160,15 +184,15 @@ public class LittleManCommander implements Drawable {
     static private final LittleManAction clearMemory = new LittleManAction() {
         @Override
         public boolean doAction(LittleMan littleMan) {
-            littleMan.clearMemory();
+            littleMan.clearDataMemory();
             return true;
         }
 
     };
-    static private final LittleManAction memorizeOperandIfNecessary = new LittleManAction() {
+    static private final LittleManAction fetchDataOperandIfNecessary = new LittleManAction() {
         @Override
         public boolean doAction(LittleMan littleMan) {
-            if (littleMan.isOperandNeeded()) {
+            if (littleMan.isDataOperandNeeded()) {
                 return littleMan.doAction(memorizeDataPointedByInstructionPointer);
             } else {
                 return true;
@@ -176,10 +200,21 @@ public class LittleManCommander implements Drawable {
         }
 
     };
-    static private final LittleManAction memorizeDataPointedByInstructionPointer = new LittleManActionSequence(memorizeInstructionPointer, memorizeMemoryAtRememberedAddress, incrementInstructionPointer);
+    static private final LittleManAction fetchAddressOperandIfNecessary = new LittleManAction() {
+        @Override
+        public boolean doAction(LittleMan littleMan) {
+            if (littleMan.isAddressOperandNeeded()) {
+                return littleMan.doAction(memorizeAddressPointedByInstructionPointer);
+            } else {
+                return true;
+            }
+        }
+
+    };
+    static private final LittleManAction memorizeDataPointedByInstructionPointer = new LittleManActionSequence(memorizeInstructionPointer, memorizeDataAtRememberedAddress, incrementInstructionPointer);
+    static private final LittleManAction memorizeAddressPointedByInstructionPointer = new LittleManActionSequence(memorizeInstructionPointer, memorizeAddressAtRememberedAddress, incrementInstructionPointer);
     static private final LittleManAction fetchInstruction = new LittleManActionSequence(memorizeDataPointedByInstructionPointer, decodeRememberedInstruction, clearMemory);
-    static private final LittleManAction fetchOperandIfNecessary = new LittleManActionSequence(memorizeOperandIfNecessary, registerRememberedOperandToInstruction, clearMemory);
-    static public final LittleManAction doCycle = new LittleManActionSequence(fetchInstruction, fetchOperandIfNecessary, doInstruction, clearMemory);
+    static public final LittleManAction doCycle = new LittleManActionSequence(fetchInstruction, fetchDataOperandIfNecessary, fetchAddressOperandIfNecessary, doInstruction, clearMemory);
 
     static private LittleManAction goToInstructionLocation(final LocationForInstruction locationForInstruction) {
         return new LittleManAction() {

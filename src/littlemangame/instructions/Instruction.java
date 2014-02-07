@@ -5,7 +5,6 @@
 package littlemangame.instructions;
 
 import littlemangame.littleman.LittleManAction;
-import littlemangame.word.Word;
 
 /**
  *
@@ -13,12 +12,14 @@ import littlemangame.word.Word;
  */
 public interface Instruction {
 
-    public boolean isOperandNeeded();
-
     public LittleManAction getAction();
 
-    public void acceptOperand(Word operand);
+    public boolean isDataOperandNeeded();
 
-    public Word getOperand();
+//    public void acceptDataOperand(Word operand);
+//    public Word getDataOperand();
+    public boolean isAddressOperandNeeded();
 
+//    public void acceptAddressOperand(Word operand);
+//    public Word getAddressOperand();
 }

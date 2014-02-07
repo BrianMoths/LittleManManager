@@ -10,15 +10,15 @@ import littlemangame.littleman.LittleManAction;
  *
  * @author brian
  */
-public class NoOperandInstruction extends ParselessInstruction {
+public class InstructionWithOnlyDataOperand extends ParselessInstruction {
 
-    static private final InstructionOperandTypes INSTRUCTION_OPERAND_TYPES = InstructionOperandTypes.NEITHER;
+    static private final InstructionOperandTypes INSTRUCTION_OPERAND_TYPES = InstructionOperandTypes.DATA_ONLY;
 
-    public NoOperandInstruction(LittleManAction littleManAction) {
+    public InstructionWithOnlyDataOperand(LittleManAction littleManAction) {
         super(INSTRUCTION_OPERAND_TYPES, littleManAction);
     }
 
-    public NoOperandInstruction(LittleManAction... littleManActions) {
+    public InstructionWithOnlyDataOperand(LittleManAction... littleManActions) {
         super(INSTRUCTION_OPERAND_TYPES, littleManActions);
     }
 
