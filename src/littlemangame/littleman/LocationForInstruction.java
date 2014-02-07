@@ -31,13 +31,6 @@ enum LocationForInstruction {
         }
 
     }),
-    //    OPERAND_MEMORY(new LittleManMover() {
-    //        @Override
-    //        public boolean goToLocation(LittleMan littleMan) {
-    //            return littleMan.goToOperandMemoryLocation();
-    //        }
-    //
-    //    }),
     OUTPUT_PANEL(new LittleManMover() {
         @Override
         public boolean goToLocation(LittleMan littleMan) {

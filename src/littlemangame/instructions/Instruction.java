@@ -16,10 +16,6 @@ public interface Instruction {
 
     public boolean isDataOperandNeeded();
 
-//    public void acceptDataOperand(Word operand);
-//    public Word getDataOperand();
     public boolean isAddressOperandNeeded();
 
-//    public void acceptAddressOperand(Word operand);
-//    public Word getAddressOperand();
 }
