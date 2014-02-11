@@ -11,10 +11,11 @@ package littlemangame.word;
 public class Word implements Comparable<Word> {
 
     static private final int NUM_WORDS = 100;
-    static private final int MIN_SIGNED = NUM_WORDS / 2;
-    static private final int MAX_SIGNED = MIN_SIGNED - 1;
-    static private final int MAX_WORD = NUM_WORDS - 1;
-    static private final int MIN_WORD = 0;
+    static private final int NUM_DIGITS = 2;
+    static private final int BASE = 10;
+    static private final Word MIN_SIGNED = new Word(NUM_WORDS / 2);
+    static private final Word MAX_SIGNED = MIN_SIGNED.decrementedWord();
+    static private final Word MAX_WORD = new Word(NUM_WORDS - 1);
     static public final Word ZERO_WORD = new Word(0);
 
     static public Word valueOfLastDigitsOfInteger(int value) {
@@ -39,8 +40,114 @@ public class Word implements Comparable<Word> {
         this.value = value;
     }
 
+    public Word(Word word) {
+        value = word.getValue();
+    }
+
+    //<editor-fold defaultstate="collapsed" desc="arithmetic and logic">
     public Word incrementedWord() {
         return new Word(getValue() + 1);
+    }
+
+    public Word decrementedWord() {
+        return new Word(getValue() - 1);
+    }
+
+    public Word plus(Word summand) {
+        return new Word(getValue() + summand.getValue());
+    }
+
+    public Word minus(Word subtrahend) {
+        return new Word(getValue() - subtrahend.getValue());
+    }
+
+    public Word getComplement() {
+        return MAX_WORD.minus(this);
+    }
+
+    public Word getOpposite() {
+        return getComplement().incrementedWord();
+    }
+
+    public Word leftShift() {
+        return new Word(getValue() * 10);
+    }
+
+    public Word leftShift(Word word) {
+        Word shiftedWord = new Word(this);
+        while (word.compareTo(ZERO_WORD) > 0 && !shiftedWord.equals(ZERO_WORD)) {
+            word = word.decrementedWord();
+            shiftedWord = shiftedWord.leftShift();
+        }
+        return shiftedWord;
+    }
+
+    public Word rightShiftUnsigned() {
+        return new Word(getValue() / 10);
+    }
+
+    public Word rightShiftUnsigned(Word word) {
+        Word shiftedWord = new Word(this);
+        while (word.compareTo(ZERO_WORD) > 0 && !shiftedWord.equals(ZERO_WORD)) {
+            word = word.decrementedWord();
+            shiftedWord = shiftedWord.rightShiftUnsigned();
+        }
+        return shiftedWord;
+    }
+
+    public Word rightShiftSigned() {
+        Word returnValue = rightShiftUnsigned();
+        if (isNegative()) {
+            returnValue = returnValue.plus(new Word(90));
+        }
+        return returnValue;
+    }
+
+    public Word rightShiftSigned(Word word) {
+        Word shiftedWord = new Word(this);
+        while (word.compareTo(ZERO_WORD) > 0 && !shiftedWord.equals(ZERO_WORD) && !shiftedWord.equals(MAX_WORD)) {
+            word = word.decrementedWord();
+            shiftedWord = shiftedWord.rightShiftSigned();
+        }
+        return shiftedWord;
+    }
+
+    public Word digitwiseMax(Word word) {
+        Word returnWord = ZERO_WORD;
+        for (int i = 0; i < NUM_DIGITS; i++) {
+            returnWord = returnWord.plus(maskExceptDigit(i).unsignedMax(maskExceptDigit(i)));
+        }
+        return returnWord;
+    }
+
+    public Word digitwiseMin(Word word) {
+        Word returnWord = ZERO_WORD;
+        for (int i = 0; i < NUM_DIGITS; i++) {
+            returnWord = returnWord.plus(maskExceptDigit(i).unsignedMin(maskExceptDigit(i)));
+        }
+        return returnWord;
+    }
+
+    private Word maskExceptDigit(int i) {
+        Word digitWord = new Word(i);
+        return rightShiftUnsigned(digitWord).maskExceptZerothDigit().leftShift(digitWord);
+    }
+
+    private Word maskExceptZerothDigit() {
+        return new Word(getValue() % BASE);
+    }
+
+    public Word unsignedMax(Word word) {
+        return compareTo(word) > -1 ? this : word;
+    }
+
+    public Word unsignedMin(Word word) {
+        return compareTo(word) > -1 ? word : this;
+    }
+
+    //</editor-fold>
+    public boolean isNegative() {
+        return compareToSigned(ZERO_WORD) == -1;
     }
 
     public int getValue() {
@@ -48,7 +155,7 @@ public class Word implements Comparable<Word> {
     }
 
     public int getSignedValue() {
-        if (value <= MAX_SIGNED) {
+        if (compareTo(MAX_SIGNED) <= 0) {
             return value;
         } else {
             return value - NUM_WORDS;
