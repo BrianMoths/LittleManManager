@@ -13,6 +13,7 @@ import littlemangame.instructions.Instruction;
 import littlemangame.instructions.InstructionFromSet;
 import littlemangame.littleman.location.LittleManPosition;
 import littlemangame.word.Word;
+import littlemangame.word.WordContainer;
 
 /**
  *
@@ -66,6 +67,10 @@ public class LittleMan implements Drawable {
         clearDataMemory();
     }
 
+    void setRegisterToResultOfOperation(WordOperation wordOperation) {
+        doWordOperationOnDesitination(wordOperation, computer.register);
+    }
+
     void memorizeDataAtRegister() {
         memorizeData(computer.register.getWord());
     }
@@ -85,6 +90,10 @@ public class LittleMan implements Drawable {
         clearDataMemory();
     }
 
+    void setInstructionPointerToResultOfOperation(WordOperation wordOperation) {
+        doWordOperationOnDesitination(wordOperation, computer.instructionPointer);
+    }
+
     void memorizeInstructionPointer() {
         memorizeAddress(computer.instructionPointer.getInstructionPointer());
     }
@@ -96,18 +105,22 @@ public class LittleMan implements Drawable {
         clearAddressMemory();
     }
 
+    void setMemoryAtRememberedAddressToResultOfOperation(WordOperation wordOperation) {
+        doWordOperationOnDesitination(wordOperation, getMemoryAtRememberedAddress());
+    }
+
     void memorizeDataAtRememberedAddress() {
         memorizeDataFromAddress(getRememberedAddress());
         clearAddressMemory();
     }
 
     void memorizeAddressAtRememberedAddress() {
-        memorizeAddress(getMemory(getRememberedAddress()));
+        memorizeAddress(getMemoryAtRememberedAddress().getWord());
         clearAddressMemory();
     }
 
     private void memorizeDataFromAddress(Word address) {
-        memorizeData(getMemory(address));
+        memorizeData(getMemory(address).getWord());
     }
     //</editor-fold>
 
@@ -217,9 +230,17 @@ public class LittleMan implements Drawable {
         return littleManPosition.getY();
     }
 
-    private Word getMemory(Word address) {
+    private WordContainer getMemory(Word address) {
         return computer.memory.getMemory(address);
     }
     //</editor-fold>
+
+    private void doWordOperationOnDesitination(WordOperation wordOperation, WordContainer destination) {
+        wordOperation.operate(littleManMemory.getRememberedData(), destination);
+    }
+
+    private WordContainer getMemoryAtRememberedAddress() {
+        return getMemory(getRememberedAddress());
+    }
 
 }

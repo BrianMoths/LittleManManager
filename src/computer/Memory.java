@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import littlemangame.littleman.location.MultiplyAccessibleLocation;
 import littlemangame.word.Word;
+import littlemangame.word.WordContainer;
 
 /**
  *
@@ -24,20 +25,20 @@ public class Memory implements Drawable, MultiplyAccessibleLocation<Word> {
     static private final int width = 50;
     static private final int height = 400;
     private int numWords = 100;
-    private List<Word> memory = new ArrayList<>(numWords);
+    private List<WordContainer> memory = new ArrayList<>(numWords);
 
     {
         int i = 0;
-        memory.add(Word.valueOfLastDigitsOfInteger(30));
+        memory.add(new WordContainer(Word.valueOfLastDigitsOfInteger(30)));
         i++;
-        memory.add(Word.valueOfLastDigitsOfInteger(42));
+        memory.add(new WordContainer(Word.valueOfLastDigitsOfInteger(42)));
         i++;
-        memory.add(Word.valueOfLastDigitsOfInteger(20));
+        memory.add(new WordContainer(Word.valueOfLastDigitsOfInteger(20)));
         i++;
-        memory.add(Word.valueOfLastDigitsOfInteger(9));
+        memory.add(new WordContainer(Word.valueOfLastDigitsOfInteger(9)));
         i++;
         for (; i < numWords; i++) {
-            memory.add(Word.ZERO_WORD);
+            memory.add(new WordContainer(Word.ZERO_WORD));
         }
     }
 
@@ -55,10 +56,10 @@ public class Memory implements Drawable, MultiplyAccessibleLocation<Word> {
     }
 
     public void setMemory(Word address, Word wordToBeStored) {
-        memory.set(address.getValue(), wordToBeStored);
+        memory.get(address.getValue()).setWord(wordToBeStored);
     }
 
-    public Word getMemory(Word address) {
+    public WordContainer getMemory(Word address) {
         return memory.get(address.getValue());
     }
 

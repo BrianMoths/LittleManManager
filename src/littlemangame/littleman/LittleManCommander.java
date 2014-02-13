@@ -194,6 +194,32 @@ public class LittleManCommander implements Drawable {
         };
     }
 
+    static public LittleManAction doOperationOnOperands(WordOperation wordOperation, SourceOperand sourceOperand, DestinationOperand destinationOperand) {
+        return new LittleManActionSequence(memorizeSourceOperand(sourceOperand), doOperationOnDestination(wordOperation, destinationOperand));
+    }
+
+    static private LittleManAction memorizeSourceOperand(final SourceOperand sourceOperand) {
+        return new LocalAction(sourceOperand.getLocation(), new LittleManAction() {
+            @Override
+            public boolean doAction(LittleMan littleMan) {
+                sourceOperand.memorizeWord(littleMan);
+                return true;
+            }
+
+        });
+    }
+
+    static private LittleManAction doOperationOnDestination(final WordOperation wordOperation, final DestinationOperand destinationOperand) {
+        return new LocalAction(destinationOperand.getLocation(), new LittleManAction() {
+            @Override
+            public boolean doAction(LittleMan littleMan) {
+                destinationOperand.receiveOperation(littleMan, wordOperation);
+                return true;
+            }
+
+        });
+    }
+
     private final LittleMan littleMan;
 
     public LittleManCommander(Computer computer) {

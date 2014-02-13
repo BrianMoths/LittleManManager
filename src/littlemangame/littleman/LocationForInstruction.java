@@ -37,6 +37,13 @@ enum LocationForInstruction {
             return littleMan.goToOutputPanel();
         }
 
+    }),
+    CURRENT_LOCATION(new LittleManMover() {
+        @Override
+        public boolean goToLocation(LittleMan littleMan) {
+            return true;
+        }
+
     });
     private final LittleManMover littleManMover;
 
