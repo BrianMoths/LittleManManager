@@ -2,11 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package littlemangame.littleman;
+package littlemangame.littlemancommands;
 
+import littlemangame.littlemancommands.littleman.littlemanutilities.LittleManAction;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import littlemangame.littlemancommands.littleman.LittleMan;
 
 /**
  *

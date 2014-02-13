@@ -7,7 +7,7 @@ package computer;
 import Renderer.Drawable;
 import java.awt.Graphics;
 import java.awt.Point;
-import littlemangame.littleman.location.AccessibleLocation;
+import littlemangame.littlemancommands.littleman.littlemanutilities.location.AccessibleLocation;
 import littlemangame.word.Word;
 import littlemangame.word.WordContainer;
 

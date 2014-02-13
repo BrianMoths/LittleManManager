@@ -2,8 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package littlemangame.littleman;
+package littlemangame.littlemancommands.littleman;
 
+import littlemangame.littlemancommands.LittleManMemory;
+import littlemangame.littlemancommands.littleman.littlemanutilities.LittleManAction;
+import littlemangame.word.WordOperation;
 import Renderer.Drawable;
 import computer.Computer;
 import java.awt.Color;
@@ -11,7 +14,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import littlemangame.instructions.Instruction;
 import littlemangame.instructions.InstructionFromSet;
-import littlemangame.littleman.location.LittleManPosition;
+import littlemangame.littlemancommands.littleman.littlemanutilities.location.LittleManPosition;
 import littlemangame.word.Word;
 import littlemangame.word.WordContainer;
 

@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package littlemangame.littleman;
+package littlemangame.littlemancommands;
 
 import littlemangame.word.Word;
 
@@ -20,34 +20,34 @@ public class LittleManMemory {
     public LittleManMemory() {
     }
 
-    void memorizeData(Word data) {
+    public void memorizeData(Word data) {
         this.rememberedData = data;
         isRememberingData = true;
     }
 
-    void memorizeAddress(Word address) {
+    public void memorizeAddress(Word address) {
         rememberedAddress = address;
         isRememberingAddress = true;
     }
 
-    void clearDataMemory() {
+    public void clearDataMemory() {
         isRememberingData = false;
     }
 
-    void clearAddressMemory() {
+    public void clearAddressMemory() {
         isRememberingAddress = false;
     }
 
-    void clearMemory() {
+    public void clearMemory() {
         clearAddressMemory();
         clearDataMemory();
     }
 
-    boolean isRememberingData() {
+    public boolean isRememberingData() {
         return isRememberingData;
     }
 
-    boolean isRememberingAddress() {
+    public boolean isRememberingAddress() {
         return isRememberingAddress;
 
     }

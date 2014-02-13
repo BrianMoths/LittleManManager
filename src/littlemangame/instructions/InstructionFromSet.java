@@ -7,14 +7,14 @@ package littlemangame.instructions;
 import java.util.HashMap;
 import java.util.Map;
 import static littlemangame.instructions.InstructionOperandTypes.*;
-import littlemangame.littleman.DestinationOperand;
-import littlemangame.littleman.LittleManAction;
-import littlemangame.littleman.LittleManCommander;
-import static littlemangame.littleman.LittleManCommander.*;
-import littlemangame.littleman.SourceOperand;
-import static littlemangame.littleman.SourceOperand.*;
-import littlemangame.littleman.WordOperation;
-import static littlemangame.littleman.WordOperation.*;
+import littlemangame.littlemancommands.littleman.DestinationOperand;
+import littlemangame.littlemancommands.littleman.littlemanutilities.LittleManAction;
+import littlemangame.littlemancommands.littleman.LittleManCommander;
+import static littlemangame.littlemancommands.littleman.LittleManCommander.*;
+import littlemangame.littlemancommands.littleman.SourceOperand;
+import static littlemangame.littlemancommands.littleman.SourceOperand.*;
+import littlemangame.word.WordOperation;
+import static littlemangame.word.WordOperation.*;
 import littlemangame.word.Word;
 
 /**

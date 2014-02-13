@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package littlemangame.littleman;
+package littlemangame.word;
 
 import littlemangame.word.Word;
 import littlemangame.word.WordContainer;
@@ -33,7 +33,7 @@ public enum WordOperation {
         this.wordOperator = wordOperator;
     }
 
-    void operate(Word source, WordContainer destination) {
+    public void operate(Word source, WordContainer destination) {
         wordOperator.operate(source, destination);
     }
 

@@ -10,7 +10,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
-import littlemangame.littleman.location.MultiplyAccessibleLocation;
+import littlemangame.littlemancommands.littleman.littlemanutilities.location.MultiplyAccessibleLocation;
 import littlemangame.word.Word;
 import littlemangame.word.WordContainer;
 
