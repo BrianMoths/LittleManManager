@@ -6,6 +6,8 @@ package littlemangame.littlemancommands.littleman.littlemanutilities.littlemanda
 
 import java.awt.Graphics;
 import java.awt.Point;
+import littlemangame.instructions.Instruction;
+import littlemangame.instructions.InstructionFromSet;
 import littlemangame.littlemancommands.littleman.PositionGetterAdapter;
 import littlemangame.littlemancommands.littleman.PositionGetterAdapter.PositionGetter;
 import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.Computer;
@@ -49,8 +51,16 @@ public class LittleManData {
         unaryWordOperation.operate(littleManWordContainer.getWordContainer(this));
     }
 
+    public void printUnsigedToOutputPanel() {
+        computer.outputPanel.append(useRememberedData().toStringUnsigned());
+    }
+
+    public Instruction decodeRememberedInstruction() {
+        return InstructionFromSet.decodeInstruction(useRememberedData());
+    }
+
     //<editor-fold defaultstate="collapsed" desc="containers">
-    public WordContainer getInstructionPointer() {
+    WordContainer getInstructionPointer() {
         return computer.instructionPointer;
     }
 
@@ -99,7 +109,7 @@ public class LittleManData {
         return littleManMemory.useRememberedAddress();
     }
 
-    public Word getRememberedAddress() {
+    Word getRememberedAddress() {
         return littleManMemory.getRememberedAddress();
     }
     //</editor-fold>

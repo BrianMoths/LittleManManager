@@ -7,7 +7,7 @@ package littlemangame;
 import ListenerInputHandler.AbstractInputHandlerClient;
 import RealTimeGame.AbstractRealTimeGame;
 import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.Computer;
-import littlemangame.littlemancommands.littleman.LittleManCommander;
+import littlemangame.littlemancommands.LittleManCommander;
 
 /**
  *

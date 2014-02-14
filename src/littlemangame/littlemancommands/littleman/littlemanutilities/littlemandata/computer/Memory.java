@@ -10,7 +10,6 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
-import littlemangame.littlemancommands.littleman.littlemanutilities.location.locationutilities.MultiplyAccessibleLocation;
 import littlemangame.word.Word;
 import littlemangame.word.WordContainer;
 
@@ -18,7 +17,7 @@ import littlemangame.word.WordContainer;
  *
  * @author brian
  */
-public class Memory implements Drawable, MultiplyAccessibleLocation<Word> {
+public class Memory implements Drawable {
 
     static private final int xPosition = 600;
     static private final int yPosition = 20;
@@ -68,7 +67,6 @@ public class Memory implements Drawable, MultiplyAccessibleLocation<Word> {
      * @param word
      * @return
      */
-    @Override
     public Point getAccessLocation(Word word) {
         final int x = xPosition - 10;
         final int y = yPosition + word.getValue() * height / numWords;

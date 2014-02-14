@@ -2,13 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package littlemangame.littlemancommands.littleman;
+package littlemangame.littlemancommands;
 
 import littlemangame.littlemancommands.littleman.littlemanutilities.location.ComputerLocation;
 import Renderer.Drawable;
 import java.awt.Graphics;
 import littlemangame.littlemancommands.LittleManActionSequence;
-import littlemangame.littlemancommands.littleman.littlemanutilities.LittleManAction;
+import littlemangame.littlemancommands.LittleManAction;
+import littlemangame.littlemancommands.littleman.LittleMan;
 import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.Computer;
 import littlemangame.word.BinaryWordOperation;
 
@@ -192,7 +193,7 @@ public class LittleManCommander implements Drawable {
         return new LittleManAction() {
             @Override
             public boolean doAction(LittleMan littleMan) {
-                return littleMan.goToInstructionLocation(locationForInstruction);
+                return littleMan.goToComputerLocation(locationForInstruction);
             }
 
         };

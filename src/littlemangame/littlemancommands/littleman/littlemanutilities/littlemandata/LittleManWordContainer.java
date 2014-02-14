@@ -43,9 +43,6 @@ public enum LittleManWordContainer {
         this.wordContainerGetter = wordContainerGetter;
     }
 
-//    boolean goToLocation(LittleManData littleManData) {
-//        return locationForInstruction.goToLocation(littleManData);
-//    }
     public ComputerLocation getLocation() {
         return locationForInstruction;
     }

@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package littlemangame.littlemancommands.littleman;
+package littlemangame.littlemancommands;
 
+import littlemangame.littlemancommands.littleman.LittleMan;
 import littlemangame.littlemancommands.littleman.littlemanutilities.location.ComputerLocation;
 
 /**
