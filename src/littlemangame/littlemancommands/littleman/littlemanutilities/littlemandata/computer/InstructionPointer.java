@@ -7,7 +7,6 @@ package littlemangame.littlemancommands.littleman.littlemanutilities.littlemanda
 import Renderer.Drawable;
 import java.awt.Graphics;
 import java.awt.Point;
-import littlemangame.littlemancommands.littleman.littlemanutilities.location.AccessibleLocation;
 import littlemangame.word.Word;
 import littlemangame.word.WordContainer;
 
@@ -15,7 +14,7 @@ import littlemangame.word.WordContainer;
  *
  * @author brian
  */
-public class InstructionPointer extends WordContainer implements Drawable, AccessibleLocation {
+public class InstructionPointer extends WordContainer implements Drawable {
 
     static private final int xPosition = 200;
     static private final int yPosition = 100;
@@ -26,7 +25,6 @@ public class InstructionPointer extends WordContainer implements Drawable, Acces
         super(Word.ZERO_WORD);
     }
 
-    @Override
     public Point getAccessLocation() {
         return new Point(xPosition + width / 2 - 2, yPosition + height + 3);
     }

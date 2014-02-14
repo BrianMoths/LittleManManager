@@ -4,19 +4,22 @@
  */
 package littlemangame.littlemancommands.littleman;
 
+import littlemangame.littlemancommands.littleman.littlemanutilities.location.ComputerLocation;
+import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.LittleManWordContainer;
 import Renderer.Drawable;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import littlemangame.instructions.Instruction;
 import littlemangame.instructions.InstructionFromSet;
-import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.LittleManMemory;
 import littlemangame.littlemancommands.littleman.littlemanutilities.LittleManAction;
+import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.LittleManData;
+import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.LittleManMemory;
 import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.Computer;
 import littlemangame.littlemancommands.littleman.littlemanutilities.location.LittleManPosition;
+import littlemangame.word.BinaryWordOperation;
 import littlemangame.word.Word;
 import littlemangame.word.WordContainer;
-import littlemangame.word.BinaryWordOperation;
 
 /**
  *
@@ -27,61 +30,39 @@ public class LittleMan implements Drawable {
     static private final int pathY = 200;
     static private final int stepSize = 4;
     private final LittleManPosition littleManPosition;
-    private final Computer computer;
-    private final LittleManMemory littleManMemory;
+//    private final Computer computer;
+//    private final LittleManMemory littleManMemory;
+    private final LittleManData littleManData;
     private Instruction instruction;
     private boolean isHalted = false;
 
     public LittleMan(Computer computer) {
-        this.computer = computer;
-        littleManPosition = new LittleManPosition(pathY, stepSize, new Point(200, pathY));
-        littleManMemory = new LittleManMemory();
+        PositionGetterAdapter positionGetterAdapter = new PositionGetterAdapter();
+        littleManData = new LittleManData(computer, positionGetterAdapter);
+        littleManPosition = new LittleManPosition(pathY, stepSize, new Point(200, pathY), positionGetterAdapter);
     }
 
-    //<editor-fold defaultstate="collapsed" desc="movement">
-    public boolean goToInstructionLocation(LocationForInstruction locationForInstruciton) {
-        return locationForInstruciton.goToLocation(this);
+    public boolean goToInstructionLocation(ComputerLocation locationForInstruciton) {
+        return littleManPosition.goTo(locationForInstruciton);
     }
 
-    boolean goToOutputPanel() {
-        return littleManPosition.goTo(computer.outputPanel);
-    }
-
-    boolean goToRegister() {
-        return littleManPosition.goTo(computer.register);
-    }
-
-    boolean goToInstructionPointer() {
-        return littleManPosition.goTo(computer.instructionPointer);
-    }
-
-    boolean goToRememberedMemoryLocation() {
-        return goToMemoryLocation(getRememberedAddress());
-    }
-
-    private boolean goToMemoryLocation(Word address) {
-        return littleManPosition.goTo(computer.memory, address);
-    }
-    //</editor-fold>
-
-    //<editor-fold defaultstate="collapsed" desc="LittleManWordContainers">
-    public void memorizeDataAtWordContainer(LittleManWordContainer littleManWordContainer) {
-        littleManWordContainer.memorizeData(this);
-    }
-
-    public void memorizeAddressAtWordContainer(LittleManWordContainer littleManWordContainer) {
-        littleManWordContainer.memorizeAddress(this);
-    }
-
-    public void doOperationOnWordContainer(LittleManWordContainer littleManWordContainer, BinaryWordOperation wordOperation) {
-        littleManWordContainer.doBinaryOperation(this, wordOperation);
-    }
-
-    public boolean goToLittleManWordContainer(LittleManWordContainer littleManWordContainer) {
-        return littleManWordContainer.goToLocation(this);
-    }
-    //</editor-fold>
-
+//    //<editor-fold defaultstate="collapsed" desc="LittleManWordContainers">
+//    public void memorizeDataAtWordContainer(LittleManWordContainer littleManWordContainer) {
+//        littleManWordContainer.memorizeData(this);
+//    }
+//
+//    public void memorizeAddressAtWordContainer(LittleManWordContainer littleManWordContainer) {
+//        littleManWordContainer.memorizeAddress(this);
+//    }
+//
+//    public void doOperationOnWordContainer(LittleManWordContainer littleManWordContainer, BinaryWordOperation wordOperation) {
+//        littleManWordContainer.doBinaryOperation(this, wordOperation);
+//    }
+//
+//    public boolean goToLittleManWordContainer(LittleManWordContainer littleManWordContainer) {
+//        return littleManWordContainer.goToLocation(this);
+//    }
+//    //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="interact with register">
     void setRegisterToRememberedWord() {
         computer.register.setWord(useRememberedData());
@@ -211,7 +192,7 @@ public class LittleMan implements Drawable {
     public void draw(Graphics graphics) {
         graphics.setColor(Color.BLACK);
         graphics.fillOval(getX(), getY(), 10, 10);
-        littleManMemory.draw(graphics, getX(), getY());
+        littleManData.draw(graphics, getX(), getY());
     }
 
     public boolean halt() {

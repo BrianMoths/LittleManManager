@@ -4,6 +4,7 @@
  */
 package littlemangame.littlemancommands.littleman;
 
+import littlemangame.littlemancommands.littleman.littlemanutilities.location.ComputerLocation;
 import littlemangame.word.BinaryWordOperation;
 
 /**
@@ -12,31 +13,31 @@ import littlemangame.word.BinaryWordOperation;
  */
 public enum DestinationOperand {
 
-    REGISTER(LocationForInstruction.REGISTER, new OperationReceiver() {
+    REGISTER(ComputerLocation.REGISTER, new OperationReceiver() {
         @Override
         public void receiveOperation(LittleMan littleMan, BinaryWordOperation wordOperation) {
             littleMan.setRegisterToResultOfOperation(wordOperation);
         }
 
     }),
-    INSTRUCTION_POINTER(LocationForInstruction.INSTRUCTION_POINTER, new OperationReceiver() {
+    INSTRUCTION_POINTER(ComputerLocation.INSTRUCTION_POINTER, new OperationReceiver() {
         @Override
         public void receiveOperation(LittleMan littleMan, BinaryWordOperation wordOperation) {
             littleMan.setInstructionPointerToResultOfOperation(wordOperation);
         }
 
     }),
-    MEMORY(LocationForInstruction.REMEMBERED_MEMORY, new OperationReceiver() {
+    MEMORY(ComputerLocation.REMEMBERED_MEMORY, new OperationReceiver() {
         @Override
         public void receiveOperation(LittleMan littleMan, BinaryWordOperation wordOperation) {
             littleMan.setMemoryAtRememberedAddressToResultOfOperation(wordOperation);
         }
 
     });
-    private final LocationForInstruction destinationOperandLocation;
+    private final ComputerLocation destinationOperandLocation;
     private final OperationReceiver operationReceiver;
 
-    private DestinationOperand(LocationForInstruction destinationOperandLocation, OperationReceiver operationReceiver) {
+    private DestinationOperand(ComputerLocation destinationOperandLocation, OperationReceiver operationReceiver) {
         this.destinationOperandLocation = destinationOperandLocation;
         this.operationReceiver = operationReceiver;
     }
@@ -45,7 +46,7 @@ public enum DestinationOperand {
         operationReceiver.receiveOperation(littleMan, wordOperation);
     }
 
-    LocationForInstruction getLocation() {
+    ComputerLocation getLocation() {
         return destinationOperandLocation;
     }
 

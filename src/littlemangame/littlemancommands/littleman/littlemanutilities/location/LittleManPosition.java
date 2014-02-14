@@ -5,6 +5,7 @@
 package littlemangame.littlemancommands.littleman.littlemanutilities.location;
 
 import java.awt.Point;
+import littlemangame.littlemancommands.littleman.PositionGetterAdapter;
 
 /**
  *
@@ -12,27 +13,32 @@ import java.awt.Point;
  */
 public class LittleManPosition {
 
-    final int pathY;
-    final int stepSize;
-    int x;
-    int y;
+    private final int pathY;
+    private final int stepSize;
+    private final PositionGetterAdapter positionGetterAdapter;
+    private int x;
+    private int y;
 
-    public LittleManPosition(int pathY, int stepSize, Point initialPoint) {
+    public LittleManPosition(int pathY, int stepSize, Point initialPoint, PositionGetterAdapter positionGetterAdapter) {
         this.pathY = pathY;
         this.stepSize = stepSize;
         x = initialPoint.x;
         y = initialPoint.y;
+        this.positionGetterAdapter = positionGetterAdapter;
     }
 
-    public boolean goTo(AccessibleLocation accessibleLocation) {
-        return goToPoint(accessibleLocation.getAccessLocation());
+//    public boolean goTo(AccessibleLocation accessibleLocation) {
+//        return goToPoint(accessibleLocation.getAccessLocation());
+//    }
+//
+//    public <T> boolean goTo(MultiplyAccessibleLocation<T> multiplyAccessibleLocation, T t) {
+//        return goToPoint(multiplyAccessibleLocation.getAccessLocation(t));
+//    }
+    public boolean goTo(ComputerLocation computerLocation) {
+        return computerLocation.goTo(this);
     }
 
-    public <T> boolean goTo(MultiplyAccessibleLocation<T> multiplyAccessibleLocation, T t) {
-        return goToPoint(multiplyAccessibleLocation.getAccessLocation(t));
-    }
-
-    private boolean goToPoint(Point point) {
+    boolean goToPoint(Point point) {
         if (isAtX(point.x)) {
             return stepInDirectionOfY(point.y);
         } else {
@@ -92,11 +98,11 @@ public class LittleManPosition {
         return isAtX(point.x) && isAtY(point.y);
     }
 
-    public int getPathY() {
+    private int getPathY() {
         return pathY;
     }
 
-    public int getStepSize() {
+    private int getStepSize() {
         return stepSize;
     }
 
@@ -106,6 +112,10 @@ public class LittleManPosition {
 
     public int getY() {
         return y;
+    }
+
+    PositionGetterAdapter getPositionGetterAdapter() {
+        return positionGetterAdapter;
     }
 
 }

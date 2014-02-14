@@ -4,36 +4,38 @@
  */
 package littlemangame.littlemancommands.littleman;
 
+import littlemangame.littlemancommands.littleman.littlemanutilities.location.ComputerLocation;
+
 /**
  *
  * @author brian
  */
 public enum SourceOperand {
 
-    IMMEDIATE(LocationForInstruction.CURRENT_LOCATION, new WordMemorizer() {
+    IMMEDIATE(ComputerLocation.CURRENT_LOCATION, new WordMemorizer() {
         @Override
         public void memorizeWord(LittleMan littleMan) {
         }
 
     }),
-    REGISTER(LocationForInstruction.REGISTER, new WordMemorizer() {
+    REGISTER(ComputerLocation.REGISTER, new WordMemorizer() {
         @Override
         public void memorizeWord(LittleMan littleMan) {
             littleMan.memorizeDataAtRegister();
         }
 
     }),
-    MEMORY(LocationForInstruction.REMEMBERED_MEMORY, new WordMemorizer() {
+    MEMORY(ComputerLocation.REMEMBERED_MEMORY, new WordMemorizer() {
         @Override
         public void memorizeWord(LittleMan littleMan) {
             littleMan.memorizeDataAtRememberedAddress();
         }
 
     });
-    private final LocationForInstruction sourceOperandLocation;
+    private final ComputerLocation sourceOperandLocation;
     private final WordMemorizer wordMemorizer;
 
-    private SourceOperand(LocationForInstruction sourceOperandLocation, WordMemorizer wordMemorizer) {
+    private SourceOperand(ComputerLocation sourceOperandLocation, WordMemorizer wordMemorizer) {
         this.sourceOperandLocation = sourceOperandLocation;
         this.wordMemorizer = wordMemorizer;
     }
@@ -42,7 +44,7 @@ public enum SourceOperand {
         wordMemorizer.memorizeWord(littleMan);
     }
 
-    LocationForInstruction getLocation() {
+    ComputerLocation getLocation() {
         return sourceOperandLocation;
     }
 

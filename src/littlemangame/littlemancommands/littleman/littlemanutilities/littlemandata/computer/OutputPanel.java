@@ -7,13 +7,12 @@ package littlemangame.littlemancommands.littleman.littlemanutilities.littlemanda
 import Renderer.Drawable;
 import java.awt.Graphics;
 import java.awt.Point;
-import littlemangame.littlemancommands.littleman.littlemanutilities.location.AccessibleLocation;
 
 /**
  *
  * @author brian
  */
-public class OutputPanel extends javax.swing.JPanel implements Drawable, AccessibleLocation {
+public class OutputPanel extends javax.swing.JPanel implements Drawable {
 
     /**
      * Creates new form OutputPanel
@@ -39,7 +38,6 @@ public class OutputPanel extends javax.swing.JPanel implements Drawable, Accessi
         jTextArea1.setText("");
     }
 
-    @Override
     public Point getAccessLocation() {
         final int x = getX() + getWidth() + 4;
         final int y = getY() + getHeight() / 2;

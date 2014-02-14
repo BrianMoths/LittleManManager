@@ -4,7 +4,15 @@
  */
 package littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata;
 
+import java.awt.Graphics;
+import java.awt.Point;
+import littlemangame.littlemancommands.littleman.PositionGetterAdapter;
+import littlemangame.littlemancommands.littleman.PositionGetterAdapter.PositionGetter;
 import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.Computer;
+import littlemangame.word.BinaryWordOperation;
+import littlemangame.word.UnaryWordOperation;
+import littlemangame.word.Word;
+import littlemangame.word.WordContainer;
 
 /**
  *
@@ -12,6 +20,118 @@ import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandat
  */
 public class LittleManData {
 
-    private Computer computer;
-    private LittleManMemory littleManMemory;
+    private final Computer computer;
+    private final LittleManMemory littleManMemory;
+
+    public LittleManData(final Computer computer, PositionGetterAdapter positionGetterAdapter) {
+        this.computer = computer;
+        littleManMemory = new LittleManMemory();
+        positionGetterAdapter.setPositionGetter(makePositionGetter(computer));
+    }
+
+    public void memorizeDataAtContainer(LittleManWordContainer littleManWordContainer) {
+        memorizeData(littleManWordContainer.getWord(this));
+    }
+
+    public void memorizeAddressAtContainer(LittleManWordContainer littleManWordContainer) {
+        memorizeAddress(littleManWordContainer.getWord(this));
+    }
+
+    public void doBinaryOperationOnContainer(LittleManWordContainer littleManWordContainer, BinaryWordOperation binaryWordOperation) {
+        binaryWordOperation.operate(useRememberedData(), littleManWordContainer.getWordContainer(this));
+    }
+
+    public void setContainerToRememberedData(LittleManWordContainer littleManWordContainer) {
+        doBinaryOperationOnContainer(littleManWordContainer, BinaryWordOperation.SET);
+    }
+
+    public void doUnaryOperationOnContainer(LittleManWordContainer littleManWordContainer, UnaryWordOperation unaryWordOperation) {
+        unaryWordOperation.operate(littleManWordContainer.getWordContainer(this));
+    }
+
+    //<editor-fold defaultstate="collapsed" desc="containers">
+    public WordContainer getInstructionPointer() {
+        return computer.instructionPointer;
+    }
+
+    WordContainer getRegister() {
+        return computer.register;
+    }
+
+    WordContainer getRememberedMemory() {
+        return computer.memory.getMemory(useRememberedAddress());
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="short term memory">
+    void memorizeData(Word data) {
+        littleManMemory.memorizeData(data);
+    }
+
+    void memorizeAddress(Word address) {
+        littleManMemory.memorizeAddress(address);
+    }
+
+//    void clearDataMemory() {
+//        littleManMemory.clearDataMemory();
+//    }
+//
+//    void clearAddressMemory() {
+//        littleManMemory.clearAddressMemory();
+//    }
+//
+//    void clearMemory() {
+//        littleManMemory.clearMemory();
+//    }
+//
+//    boolean isRememberingData() {
+//        return littleManMemory.isRememberingData();
+//    }
+//
+//    boolean isRememberingAddress() {
+//        return littleManMemory.isRememberingAddress();
+//    }
+    Word useRememberedData() {
+        return littleManMemory.useRememberedData();
+    }
+
+    Word useRememberedAddress() {
+        return littleManMemory.useRememberedAddress();
+    }
+
+    public Word getRememberedAddress() {
+        return littleManMemory.getRememberedAddress();
+    }
+    //</editor-fold>
+
+    public void draw(Graphics graphics, int x, int y) {
+        computer.draw(graphics);
+        littleManMemory.draw(graphics, x, y);
+    }
+
+    private PositionGetter makePositionGetter(final Computer computer) {
+        return new PositionGetter() {
+            @Override
+            public Point getRegisterPosition() {
+                return computer.register.getAccessLocation();
+            }
+
+            @Override
+            public Point getRememberedMemoryPosition() {
+                return computer.memory.getAccessLocation(getRememberedAddress());
+            }
+
+            @Override
+            public Point getInstructionPointerPosition() {
+                return computer.instructionPointer.getAccessLocation();
+            }
+
+            @Override
+            public Point getOutputPanelPosition() {
+                return computer.outputPanel.getAccessLocation();
+            }
+
+        };
+    }
+
 }
