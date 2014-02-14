@@ -16,6 +16,13 @@ public enum UnaryWordOperation {
             destination.setWord(destination.getWord().getOpposite());
         }
 
+    }),
+    INCREMENT(new UnaryWordOperator() {
+        @Override
+        public void operate(WordContainer destination) {
+            destination.increment();
+        }
+
     });
     private final UnaryWordOperator unaryWordOperator;
 

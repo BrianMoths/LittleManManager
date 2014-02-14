@@ -66,7 +66,11 @@ public class LittleMan implements Drawable {
         littleManData.printUnsigedToOutputPanel();
     }
 
-    private boolean doAction(LittleManAction littleManAction) {
+    public void clearMemory() {
+        littleManData.clearMemory();
+    }
+
+    public boolean doAction(LittleManAction littleManAction) {
         return littleManAction.doAction(this);
     }
 
@@ -93,11 +97,11 @@ public class LittleMan implements Drawable {
         return isHalted;
     }
 
-    boolean isDataOperandNeeded() {
+    public boolean isDataOperandNeeded() {
         return instruction != null && instruction.isDataOperandNeeded();
     }
 
-    boolean isAddressOperandNeeded() {
+    public boolean isAddressOperandNeeded() {
         return instruction != null && instruction.isAddressOperandNeeded();
     }
 

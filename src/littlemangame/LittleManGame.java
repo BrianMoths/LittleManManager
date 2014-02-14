@@ -44,7 +44,7 @@ public class LittleManGame extends AbstractRealTimeGame<LittleManGui> {
     @Override
     protected void doLogic() {
         if (!littleManCommander.isHalted()) {
-            littleManCommander.doAction(LittleManCommander.doCycle);
+            littleManCommander.doCycle();
         }
     }
 

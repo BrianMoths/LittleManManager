@@ -86,9 +86,9 @@ public class LittleManData {
 //        littleManMemory.clearAddressMemory();
 //    }
 //
-//    void clearMemory() {
-//        littleManMemory.clearMemory();
-//    }
+    public void clearMemory() {
+        littleManMemory.clearMemory();
+    }
 //
 //    boolean isRememberingData() {
 //        return littleManMemory.isRememberingData();
@@ -97,6 +97,7 @@ public class LittleManData {
 //    boolean isRememberingAddress() {
 //        return littleManMemory.isRememberingAddress();
 //    }
+
     Word useRememberedData() {
         return littleManMemory.useRememberedData();
     }
