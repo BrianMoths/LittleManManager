@@ -10,9 +10,9 @@ import java.awt.Graphics;
 import java.awt.Point;
 import littlemangame.instructions.Instruction;
 import littlemangame.instructions.InstructionFromSet;
-import littlemangame.littlemancommands.LittleManMemory;
+import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.LittleManMemory;
 import littlemangame.littlemancommands.littleman.littlemanutilities.LittleManAction;
-import littlemangame.littlemancommands.littleman.littlemanutilities.computer.Computer;
+import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.Computer;
 import littlemangame.littlemancommands.littleman.littlemanutilities.location.LittleManPosition;
 import littlemangame.word.Word;
 import littlemangame.word.WordContainer;
@@ -204,9 +204,9 @@ public class LittleMan implements Drawable {
     private Word getRememberedAddress() {
         return littleManMemory.getRememberedAddress();
     }
+//</editor-fold>
+//</editor-fold>
 
-//</editor-fold>
-//</editor-fold>
     @Override
     public void draw(Graphics graphics) {
         graphics.setColor(Color.BLACK);

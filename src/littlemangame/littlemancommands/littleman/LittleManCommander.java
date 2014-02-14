@@ -8,7 +8,7 @@ import Renderer.Drawable;
 import java.awt.Graphics;
 import littlemangame.littlemancommands.LittleManActionSequence;
 import littlemangame.littlemancommands.littleman.littlemanutilities.LittleManAction;
-import littlemangame.littlemancommands.littleman.littlemanutilities.computer.Computer;
+import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.Computer;
 import littlemangame.word.BinaryWordOperation;
 
 /**

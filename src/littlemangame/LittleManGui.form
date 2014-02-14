@@ -40,8 +40,8 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="outputPanel2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="601" max="32767" attributes="0"/>
+                  <Component id="outputPanel" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="488" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -49,14 +49,14 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="outputPanel2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="375" max="32767" attributes="0"/>
+                  <Component id="outputPanel" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="221" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="littlemangame.littlemancommands.littleman.littlemanutilities.computer.OutputPanel" name="outputPanel2">
+        <Component class="littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.OutputPanel" name="outputPanel">
         </Component>
       </SubComponents>
     </Container>
