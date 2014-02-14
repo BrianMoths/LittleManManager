@@ -6,7 +6,7 @@ package littlemangame;
 
 import ListenerInputHandler.AbstractInputHandlerClient;
 import RealTimeGame.AbstractRealTimeGame;
-import computer.Computer;
+import littlemangame.littlemancommands.littleman.littlemanutilities.computer.Computer;
 import littlemangame.littlemancommands.littleman.LittleManCommander;
 
 /**

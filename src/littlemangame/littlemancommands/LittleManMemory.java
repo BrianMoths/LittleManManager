@@ -4,6 +4,8 @@
  */
 package littlemangame.littlemancommands;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import littlemangame.word.Word;
 
 /**
@@ -52,12 +54,37 @@ public class LittleManMemory {
 
     }
 
+    public Word useRememberedAddress() {
+        final Word word = rememberedAddress;
+        clearAddressMemory();
+        return word;
+    }
+
     public Word getRememberedAddress() {
         return rememberedAddress;
     }
 
-    public Word getRememberedData() {
-        return rememberedData;
+    public Word useRememberedData() {
+        final Word word = rememberedData;
+        clearDataMemory();
+        return word;
+    }
+
+    public void draw(Graphics graphics, int x, int y) {
+        if (isRememberingData()) {
+            final Color color = graphics.getColor();
+            graphics.setColor(Color.red);
+            graphics.drawRect(x - 15, y - 22, 22, 20);
+            graphics.drawString(rememberedData.toString(), x - 12, y - 5);
+            graphics.setColor(color);
+        }
+        if (isRememberingAddress()) {
+            final Color color = graphics.getColor();
+            graphics.setColor(Color.blue);
+            graphics.drawRect(x + 15, y - 22, 22, 20);
+            graphics.drawString(rememberedAddress.toString(), x + 18, y - 5);
+            graphics.setColor(color);
+        }
     }
 
 }

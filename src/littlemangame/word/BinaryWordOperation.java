@@ -4,40 +4,37 @@
  */
 package littlemangame.word;
 
-import littlemangame.word.Word;
-import littlemangame.word.WordContainer;
-
 /**
  *
  * @author brian
  */
-public enum WordOperation {
+public enum BinaryWordOperation {
 
-    ADD(new WordOperator() {
+    ADD(new BinaryWordOperator() {
         @Override
         public void operate(Word source, WordContainer destination) {
             destination.incrementBy(source);
         }
 
     }),
-    SET(new WordOperator() {
+    SET(new BinaryWordOperator() {
         @Override
         public void operate(Word source, WordContainer destination) {
             destination.setWord(source);
         }
 
     });
-    private final WordOperator wordOperator;
+    private final BinaryWordOperator binaryWordOperator;
 
-    private WordOperation(WordOperator wordOperator) {
-        this.wordOperator = wordOperator;
+    private BinaryWordOperation(BinaryWordOperator binaryWordOperator) {
+        this.binaryWordOperator = binaryWordOperator;
     }
 
     public void operate(Word source, WordContainer destination) {
-        wordOperator.operate(source, destination);
+        binaryWordOperator.operate(source, destination);
     }
 
-    private static interface WordOperator {
+    private static interface BinaryWordOperator {
 
         void operate(Word source, WordContainer destination);
 

@@ -8,7 +8,7 @@ package littlemangame.littlemancommands.littleman;
  *
  * @author brian
  */
-enum LocationForInstruction {
+public enum LocationForInstruction {
 
     INSTRUCTION_POINTER(new LittleManMover() {
         @Override
@@ -51,7 +51,7 @@ enum LocationForInstruction {
         this.littleManMover = littleManMover;
     }
 
-    public boolean goToLocation(LittleMan littleMan) {
+    boolean goToLocation(LittleMan littleMan) {
         return littleManMover.goToLocation(littleMan);
     }
 

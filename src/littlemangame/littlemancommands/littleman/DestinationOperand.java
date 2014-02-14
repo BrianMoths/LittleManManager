@@ -4,7 +4,7 @@
  */
 package littlemangame.littlemancommands.littleman;
 
-import littlemangame.word.WordOperation;
+import littlemangame.word.BinaryWordOperation;
 
 /**
  *
@@ -14,21 +14,21 @@ public enum DestinationOperand {
 
     REGISTER(LocationForInstruction.REGISTER, new OperationReceiver() {
         @Override
-        public void receiveOperation(LittleMan littleMan, WordOperation wordOperation) {
+        public void receiveOperation(LittleMan littleMan, BinaryWordOperation wordOperation) {
             littleMan.setRegisterToResultOfOperation(wordOperation);
         }
 
     }),
     INSTRUCTION_POINTER(LocationForInstruction.INSTRUCTION_POINTER, new OperationReceiver() {
         @Override
-        public void receiveOperation(LittleMan littleMan, WordOperation wordOperation) {
+        public void receiveOperation(LittleMan littleMan, BinaryWordOperation wordOperation) {
             littleMan.setInstructionPointerToResultOfOperation(wordOperation);
         }
 
     }),
     MEMORY(LocationForInstruction.REMEMBERED_MEMORY, new OperationReceiver() {
         @Override
-        public void receiveOperation(LittleMan littleMan, WordOperation wordOperation) {
+        public void receiveOperation(LittleMan littleMan, BinaryWordOperation wordOperation) {
             littleMan.setMemoryAtRememberedAddressToResultOfOperation(wordOperation);
         }
 
@@ -41,7 +41,7 @@ public enum DestinationOperand {
         this.operationReceiver = operationReceiver;
     }
 
-    void receiveOperation(LittleMan littleMan, WordOperation wordOperation) {
+    void receiveOperation(LittleMan littleMan, BinaryWordOperation wordOperation) {
         operationReceiver.receiveOperation(littleMan, wordOperation);
     }
 
@@ -51,7 +51,7 @@ public enum DestinationOperand {
 
     private static interface OperationReceiver {
 
-        void receiveOperation(LittleMan littleMan, WordOperation wordOperation);
+        void receiveOperation(LittleMan littleMan, BinaryWordOperation wordOperation);
 
     }
 

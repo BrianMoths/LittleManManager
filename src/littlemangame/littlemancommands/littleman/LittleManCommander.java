@@ -4,12 +4,12 @@
  */
 package littlemangame.littlemancommands.littleman;
 
+import Renderer.Drawable;
+import java.awt.Graphics;
 import littlemangame.littlemancommands.LittleManActionSequence;
 import littlemangame.littlemancommands.littleman.littlemanutilities.LittleManAction;
-import littlemangame.word.WordOperation;
-import Renderer.Drawable;
-import computer.Computer;
-import java.awt.Graphics;
+import littlemangame.littlemancommands.littleman.littlemanutilities.computer.Computer;
+import littlemangame.word.BinaryWordOperation;
 
 /**
  *
@@ -79,7 +79,7 @@ public class LittleManCommander implements Drawable {
     public static final LittleManAction memorizeInstructionPointer = new LocalAction(LocationForInstruction.INSTRUCTION_POINTER, new LittleManAction() {
         @Override
         public boolean doAction(LittleMan littleMan) {
-            littleMan.memorizeInstructionPointer();
+            littleMan.memorizeAddressAtInstructionPointer();
             return true;
         }
 
@@ -197,7 +197,7 @@ public class LittleManCommander implements Drawable {
         };
     }
 
-    static public LittleManAction doOperationOnOperands(WordOperation wordOperation, SourceOperand sourceOperand, DestinationOperand destinationOperand) {
+    static public LittleManAction doOperationOnOperands(BinaryWordOperation wordOperation, SourceOperand sourceOperand, DestinationOperand destinationOperand) {
         return new LittleManActionSequence(memorizeSourceOperand(sourceOperand), doOperationOnDestination(wordOperation, destinationOperand));
     }
 
@@ -212,7 +212,7 @@ public class LittleManCommander implements Drawable {
         });
     }
 
-    static private LittleManAction doOperationOnDestination(final WordOperation wordOperation, final DestinationOperand destinationOperand) {
+    static private LittleManAction doOperationOnDestination(final BinaryWordOperation wordOperation, final DestinationOperand destinationOperand) {
         return new LocalAction(destinationOperand.getLocation(), new LittleManAction() {
             @Override
             public boolean doAction(LittleMan littleMan) {

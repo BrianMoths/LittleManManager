@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package computer;
+package littlemangame.littlemancommands.littleman.littlemanutilities.computer;
 
 import Renderer.Drawable;
 import java.awt.Graphics;

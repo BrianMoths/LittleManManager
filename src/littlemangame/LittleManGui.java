@@ -4,9 +4,9 @@
  */
 package littlemangame;
 
-import computer.OutputPanel;
 import java.awt.Component;
 import java.awt.Graphics;
+import littlemangame.littlemancommands.littleman.littlemanutilities.computer.OutputPanel;
 
 /**
  *
@@ -31,7 +31,7 @@ public class LittleManGui extends javax.swing.JFrame implements GameGui.GameGui 
     private void initComponents() {
 
         canvasPanel = new javax.swing.JPanel();
-        outputPanel1 = new computer.OutputPanel();
+        outputPanel2 = new littlemangame.littlemancommands.littleman.littlemanutilities.computer.OutputPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -41,14 +41,14 @@ public class LittleManGui extends javax.swing.JFrame implements GameGui.GameGui 
             canvasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(canvasPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(outputPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(outputPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(601, Short.MAX_VALUE))
         );
         canvasPanelLayout.setVerticalGroup(
             canvasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(canvasPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(outputPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(outputPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(375, Short.MAX_VALUE))
         );
 
@@ -103,7 +103,7 @@ public class LittleManGui extends javax.swing.JFrame implements GameGui.GameGui 
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel canvasPanel;
-    private computer.OutputPanel outputPanel1;
+    private littlemangame.littlemancommands.littleman.littlemanutilities.computer.OutputPanel outputPanel2;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -117,12 +117,12 @@ public class LittleManGui extends javax.swing.JFrame implements GameGui.GameGui 
     }
 
     public OutputPanel getOutputPanel() {
-        return outputPanel1;
+        return outputPanel2;
     }
 
     @Override
     public void draw(Graphics graphics) {
-        outputPanel1.draw(graphics);
+        outputPanel2.draw(graphics);
     }
 
 }

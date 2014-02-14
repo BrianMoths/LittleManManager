@@ -13,8 +13,8 @@ import littlemangame.littlemancommands.littleman.LittleManCommander;
 import static littlemangame.littlemancommands.littleman.LittleManCommander.*;
 import littlemangame.littlemancommands.littleman.SourceOperand;
 import static littlemangame.littlemancommands.littleman.SourceOperand.*;
-import littlemangame.word.WordOperation;
-import static littlemangame.word.WordOperation.*;
+import littlemangame.word.BinaryWordOperation;
+import static littlemangame.word.BinaryWordOperation.*;
 import littlemangame.word.Word;
 
 /**
@@ -63,7 +63,7 @@ public enum InstructionFromSet {
         this.instruction = instructionOperandTypes.makeInstruction(littleManAction);
     }
 
-    private InstructionFromSet(Word opcode, InstructionOperandTypes instructionOperandTypes, WordOperation wordOperation, SourceOperand sourceOperand, DestinationOperand destinationOperand) {
+    private InstructionFromSet(Word opcode, InstructionOperandTypes instructionOperandTypes, BinaryWordOperation wordOperation, SourceOperand sourceOperand, DestinationOperand destinationOperand) {
         this.opcode = opcode;
         this.instruction = instructionOperandTypes.makeInstruction(LittleManCommander.doOperationOnOperands(wordOperation, sourceOperand, destinationOperand));
     }
