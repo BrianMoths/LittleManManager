@@ -10,6 +10,8 @@ import java.awt.Graphics;
 import java.awt.Point;
 import littlemangame.instructions.Instruction;
 import littlemangame.littlemancommands.LittleManAction;
+import littlemangame.littlemancommands.LittleManCommandGiver;
+import littlemangame.littlemancommands.LittleManCommandGiver.LittleManCommandDoer;
 import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.LittleManData;
 import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.LittleManWordContainer;
 import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.Computer;
@@ -31,8 +33,9 @@ public class LittleMan implements Drawable {
     private Instruction instruction;
     private boolean isHalted = false;
 
-    public LittleMan(Computer computer) {
-        PositionGetterAdapter positionGetterAdapter = new PositionGetterAdapter();
+    public LittleMan(Computer computer, LittleManCommandGiver littleManCommandGiver) {
+        littleManCommandGiver.setLittleManCommandDoer(makeLittleManCommandDoer());
+        final PositionGetterAdapter positionGetterAdapter = new PositionGetterAdapter();
         littleManData = new LittleManData(computer, positionGetterAdapter);
         littleManPosition = new LittleManPosition(pathY, stepSize, new Point(200, pathY), positionGetterAdapter);
     }
@@ -54,10 +57,6 @@ public class LittleMan implements Drawable {
         littleManData.doBinaryOperationOnContainer(littleManWordContainer, binaryWordOperation);
     }
 
-    public void setContainerToRememberedData(LittleManWordContainer littleManWordContainer) {
-        littleManData.setContainerToRememberedData(littleManWordContainer);
-    }
-
     public void doUnaryOperationOnContainer(LittleManWordContainer littleManWordContainer, UnaryWordOperation unaryWordOperation) {
         littleManData.doUnaryOperationOnContainer(littleManWordContainer, unaryWordOperation);
     }
@@ -67,17 +66,13 @@ public class LittleMan implements Drawable {
         littleManData.printUnsigedToOutputPanel();
     }
 
-    public boolean doAction(LittleManAction littleManAction) {
+    private boolean doAction(LittleManAction littleManAction) {
         return littleManAction.doAction(this);
     }
 
     //<editor-fold defaultstate="collapsed" desc="deal with instructions">
-    void decodeRememberedInstruction() {
+    public void decodeRememberedInstruction() {
         instruction = littleManData.decodeRememberedInstruction();
-    }
-
-    boolean doInstruction() {
-        return doAction(instruction.getAction());
     }
 //</editor-fold>
 
@@ -114,5 +109,15 @@ public class LittleMan implements Drawable {
         return littleManPosition.getY();
     }
     //</editor-fold>
+
+    private LittleManCommandDoer makeLittleManCommandDoer() {
+        return new LittleManCommandDoer() {
+            @Override
+            public boolean doLittleManCommand(LittleManAction littleManAction) {
+                return doAction(littleManAction);
+            }
+
+        };
+    }
 
 }

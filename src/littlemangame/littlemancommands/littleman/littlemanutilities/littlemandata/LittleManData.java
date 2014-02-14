@@ -43,10 +43,6 @@ public class LittleManData {
         binaryWordOperation.operate(useRememberedData(), littleManWordContainer.getWordContainer(this));
     }
 
-    public void setContainerToRememberedData(LittleManWordContainer littleManWordContainer) {
-        doBinaryOperationOnContainer(littleManWordContainer, BinaryWordOperation.SET);
-    }
-
     public void doUnaryOperationOnContainer(LittleManWordContainer littleManWordContainer, UnaryWordOperation unaryWordOperation) {
         unaryWordOperation.operate(littleManWordContainer.getWordContainer(this));
     }

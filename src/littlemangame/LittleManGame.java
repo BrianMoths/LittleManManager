@@ -39,7 +39,6 @@ public class LittleManGame extends AbstractRealTimeGame<LittleManGui> {
 
     private void init() {
         renderer.addDrawable(littleManCommander);
-        renderer.addDrawable(computer);
     }
 
     @Override

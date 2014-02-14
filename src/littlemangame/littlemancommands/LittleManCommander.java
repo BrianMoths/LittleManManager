@@ -4,13 +4,11 @@
  */
 package littlemangame.littlemancommands;
 
-import littlemangame.littlemancommands.littleman.littlemanutilities.location.ComputerLocation;
 import Renderer.Drawable;
 import java.awt.Graphics;
-import littlemangame.littlemancommands.LittleManActionSequence;
-import littlemangame.littlemancommands.LittleManAction;
 import littlemangame.littlemancommands.littleman.LittleMan;
 import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.Computer;
+import littlemangame.littlemancommands.littleman.littlemanutilities.location.ComputerLocation;
 import littlemangame.word.BinaryWordOperation;
 
 /**
@@ -226,17 +224,19 @@ public class LittleManCommander implements Drawable {
     }
 
     private final LittleMan littleMan;
+    private final LittleManCommandGiver littleManCommandGiver;
 
     public LittleManCommander(Computer computer) {
-        littleMan = new LittleMan(computer);
+        littleManCommandGiver = new LittleManCommandGiver();
+        littleMan = new LittleMan(computer, littleManCommandGiver);
     }
 
     public void doCycle() {
         doAction(doCycle);
     }
 
-    public void doAction(LittleManAction littleManAction) {
-        littleMan.doAction(littleManAction);
+    private boolean doAction(LittleManAction littleManAction) {
+        return littleManCommandGiver.doLittleManCommand(littleManAction);
     }
 
     @Override
