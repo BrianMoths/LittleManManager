@@ -6,8 +6,8 @@ package littlemangame.littlemancommands.littleman.littlemanutilities.littlemanda
 
 import java.awt.Graphics;
 import java.awt.Point;
-import littlemangame.instructions.interfaceandimplementations.Instruction;
 import littlemangame.instructions.InstructionFromSet;
+import littlemangame.instructions.interfaceandimplementations.Instruction;
 import littlemangame.littlemancommands.littleman.PositionGetterAdapter;
 import littlemangame.littlemancommands.littleman.PositionGetterAdapter.PositionGetter;
 import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.Computer;
@@ -53,6 +53,10 @@ public class LittleManData {
 
     public Instruction decodeRememberedInstruction() {
         return InstructionFromSet.decodeInstruction(useRememberedData());
+    }
+
+    public boolean test(LittleManTest littleManTest) {
+        return littleManTest.test(this);
     }
 
     //<editor-fold defaultstate="collapsed" desc="containers">

@@ -11,6 +11,7 @@ import java.awt.Point;
 import littlemangame.instructions.interfaceandimplementations.Instruction;
 import littlemangame.littlemancommands.LittleManAction;
 import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.LittleManData;
+import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.LittleManTest;
 import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.LittleManWordContainer;
 import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.Computer;
 import littlemangame.littlemancommands.littleman.littlemanutilities.location.ComputerLocation;
@@ -61,6 +62,10 @@ public class LittleMan implements Drawable {
 
     public void printUnsignedToOutputPanel() {
         littleManData.printUnsigedToOutputPanel();
+    }
+
+    public boolean test(LittleManTest littleManTest) {
+        return littleManData.test(littleManTest);
     }
 
     public void clearMemory() {
