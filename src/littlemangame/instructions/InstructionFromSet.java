@@ -31,10 +31,10 @@ public enum InstructionFromSet {
     PRINT_UNSIGNED(20, NEITHER, memorizeDataAtContainerAction(LittleManWordContainer.REGISTER), printUnsignedToOutputPanelAction),
     LOAD_DIRECT(30, DATA_ONLY, SET, IMMEDIATE, DestinationOperand.REGISTER),
     LOAD_INDIRECT_IMMEDIATE(31, ADDRESS_ONLY, SET, MEMORY, DestinationOperand.REGISTER),
-    LOAD_INDIRECT_REGISTER(32, NEITHER, memorizeAddressAtContainerAction(LittleManWordContainer.REGISTER), memorizeDataAtContainerAction(LittleManWordContainer.REMEMBERED_MEMORY), doBinaryOperationOnContainerAction(LittleManWordContainer.REGISTER, SET)),
-    STORE_IMMEDIATE_DATA(34, DATA_ONLY, memorizeAddressAtContainerAction(LittleManWordContainer.REGISTER), doBinaryOperationOnContainerAction(LittleManWordContainer.REMEMBERED_MEMORY, SET)),
-    STORE_IMMEDIATE_ADDRESS(35, ADDRESS_ONLY, memorizeDataAtContainerAction(LittleManWordContainer.REGISTER), doBinaryOperationOnContainerAction(LittleManWordContainer.REMEMBERED_MEMORY, SET)),
-    STORE_IMMEDIATE_IMMEDIATE(36, BOTH, doBinaryOperationOnContainerAction(LittleManWordContainer.REMEMBERED_MEMORY, SET));
+    LOAD_INDIRECT_REGISTER(32, NEITHER, SET, REGISTER_INDIRECT, DestinationOperand.REGISTER),
+    STORE_IMMEDIATE_DATA(34, DATA_ONLY, SET, REGISTER_INDIRECT, DestinationOperand.MEMORY),
+    STORE_IMMEDIATE_ADDRESS(35, ADDRESS_ONLY, SET, REGISTER, DestinationOperand.MEMORY),
+    STORE_IMMEDIATE_IMMEDIATE(36, BOTH, SET, IMMEDIATE, DestinationOperand.MEMORY);
     static private final Map<Word, InstructionFromSet> instructionMap = new HashMap<>();
 
     static {
