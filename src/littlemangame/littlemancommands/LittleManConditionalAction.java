@@ -43,6 +43,7 @@ public final class LittleManConditionalAction extends LittleManAction {
     public LittleManConditionalAction(LittleManTest littleManTest, LittleManAction littleManConditionalAction) {
         this.littleManTest = littleManTest;
         this.littleManConditionalAction = littleManConditionalAction;
+        this.conditionalActionStep = ConditionalActionStep.GO_TO_TEST;
     }
 
     public LittleManConditionalAction(LittleManTest littleManTest, LittleManAction... littleManConditionalAction) {

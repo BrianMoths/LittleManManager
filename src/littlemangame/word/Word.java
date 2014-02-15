@@ -179,10 +179,7 @@ public class Word implements Comparable<Word> {
             return false;
         }
         final Word other = (Word) obj;
-        if (this.value != other.value) {
-            return false;
-        }
-        return true;
+        return this.value == other.value;
     }
 
     @Override

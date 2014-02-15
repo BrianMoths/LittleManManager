@@ -10,6 +10,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
+import littlemangame.instructions.InstructionFromSet;
 import littlemangame.word.Word;
 import littlemangame.word.WordContainer;
 
@@ -27,18 +28,82 @@ public class Memory implements Drawable {
     private List<WordContainer> memory = new ArrayList<>(numWords);
 
     {
+        final Word input = Word.valueOfLastDigitsOfInteger(90);
+        final Word newValue = Word.valueOfLastDigitsOfInteger(91);
+        final Word oldValue = Word.valueOfLastDigitsOfInteger(92);
+        final Word temp = Word.valueOfLastDigitsOfInteger(93);
+        final Word printOld = Word.valueOfLastDigitsOfInteger(70);
+        final Word printNew = Word.valueOfLastDigitsOfInteger(80);
         int i = 0;
-        memory.add(new WordContainer(Word.valueOfLastDigitsOfInteger(30)));
+        memory.add(new WordContainer(InstructionFromSet.LOAD_MEMORY.getOpcode()));
         i++;
-        memory.add(new WordContainer(Word.valueOfLastDigitsOfInteger(42)));
+        memory.add(new WordContainer(input));
         i++;
-        memory.add(new WordContainer(Word.valueOfLastDigitsOfInteger(20)));
+        memory.add(new WordContainer(InstructionFromSet.JUMP_IF_ZERO.getOpcode()));
         i++;
-        memory.add(new WordContainer(Word.valueOfLastDigitsOfInteger(9)));
+        memory.add(new WordContainer(printOld));
+        i++;
+        final Word loop = Word.valueOfLastDigitsOfInteger(i);
+        //move newValue to temp
+        memory.add(new WordContainer(InstructionFromSet.LOAD_MEMORY.getOpcode()));
+        i++;
+        memory.add(new WordContainer(newValue));
+        i++;
+        memory.add(new WordContainer(InstructionFromSet.STORE_REGISTER_MEMORY.getOpcode()));
+        i++;
+        memory.add(new WordContainer(temp));
+        i++;
+        //add oldValue to newValue
+        memory.add(new WordContainer(InstructionFromSet.LOAD_MEMORY.getOpcode()));
+        i++;
+        memory.add(new WordContainer(oldValue));
+        i++;
+        memory.add(new WordContainer(InstructionFromSet.ADD_REGISTER_MEMORY.getOpcode()));
+        i++;
+        memory.add(new WordContainer(newValue));
+        //move temp to oldValue
+        memory.add(new WordContainer(InstructionFromSet.LOAD_MEMORY.getOpcode()));
+        i++;
+        memory.add(new WordContainer(temp));
+        i++;
+        memory.add(new WordContainer(InstructionFromSet.STORE_REGISTER_MEMORY.getOpcode()));
+        i++;
+        memory.add(new WordContainer(oldValue));
+        i++;
+        //decrement input
+        memory.add(new WordContainer(InstructionFromSet.DECREMENT_MEMORY.getOpcode()));
+        i++;
+        memory.add(new WordContainer(input));
+        i++;
+        //decrement input
+        memory.add(new WordContainer(InstructionFromSet.LOAD_MEMORY.getOpcode()));
+        i++;
+        memory.add(new WordContainer(input));
+        i++;
+        //jump to return if zero
+        memory.add(new WordContainer(InstructionFromSet.JUMP_IF_ZERO.getOpcode()));
+        i++;
+        memory.add(new WordContainer(printNew));
+        i++;
+        //jump to loop
+        memory.add(new WordContainer(InstructionFromSet.UNCONDITIONAL_JUMP.getOpcode()));
+        i++;
+        memory.add(new WordContainer(loop));
         i++;
         for (; i < numWords; i++) {
             memory.add(new WordContainer(Word.ZERO_WORD));
         }
+        memory.set(70, new WordContainer(InstructionFromSet.LOAD_MEMORY.getOpcode()));
+        memory.set(71, new WordContainer(oldValue));
+        memory.set(72, new WordContainer(InstructionFromSet.PRINT_UNSIGNED.getOpcode()));
+        memory.set(73, new WordContainer(InstructionFromSet.HALT.getOpcode()));
+        memory.set(80, new WordContainer(InstructionFromSet.LOAD_MEMORY.getOpcode()));
+        memory.set(81, new WordContainer(newValue));
+        memory.set(82, new WordContainer(InstructionFromSet.PRINT_UNSIGNED.getOpcode()));
+        memory.set(83, new WordContainer(InstructionFromSet.HALT.getOpcode()));
+
+        setMemory(input, Word.valueOfLastDigitsOfInteger(8));
+        setMemory(newValue, Word.valueOfLastDigitsOfInteger(1));
     }
 
     @Override
@@ -65,6 +130,7 @@ public class Memory implements Drawable {
     /**
      *
      * @param word
+     *
      * @return
      */
     public Point getAccessLocation(Word word) {
