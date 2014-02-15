@@ -5,6 +5,7 @@
  */
 package littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata;
 
+import littlemangame.littlemancommands.littleman.littlemanutilities.location.ComputerLocation;
 import littlemangame.word.Word;
 
 /**
@@ -13,7 +14,7 @@ import littlemangame.word.Word;
  */
 public enum LittleManTest {
 
-    ZERO(new LittleManRegisterTester() {
+    ZERO(ComputerLocation.REGISTER, new LittleManRegisterTester() {
 
         @Override
         boolean testWord(Word word) {
@@ -21,7 +22,7 @@ public enum LittleManTest {
         }
 
     }),
-    NOT_ZERO(new LittleManRegisterTester() {
+    NOT_ZERO(ComputerLocation.REGISTER, new LittleManRegisterTester() {
 
         @Override
         boolean testWord(Word word) {
@@ -29,7 +30,7 @@ public enum LittleManTest {
         }
 
     }),
-    GREATER_THAN_ZERO(new LittleManRegisterTester() {
+    GREATER_THAN_ZERO(ComputerLocation.REGISTER, new LittleManRegisterTester() {
 
         @Override
         boolean testWord(Word word) {
@@ -37,7 +38,7 @@ public enum LittleManTest {
         }
 
     }),
-    GREATER_OR_EQUAL_TO_ZERO(new LittleManRegisterTester() {
+    GREATER_OR_EQUAL_TO_ZERO(ComputerLocation.REGISTER, new LittleManRegisterTester() {
 
         @Override
         boolean testWord(Word word) {
@@ -45,7 +46,7 @@ public enum LittleManTest {
         }
 
     }),
-    LESS_THAN_ZERO(new LittleManRegisterTester() {
+    LESS_THAN_ZERO(ComputerLocation.REGISTER, new LittleManRegisterTester() {
 
         @Override
         boolean testWord(Word word) {
@@ -53,7 +54,7 @@ public enum LittleManTest {
         }
 
     }),
-    LESS_OR_EQUAL_ZERO(new LittleManRegisterTester() {
+    LESS_OR_EQUAL_ZERO(ComputerLocation.REGISTER, new LittleManRegisterTester() {
 
         @Override
         boolean testWord(Word word) {
@@ -62,10 +63,16 @@ public enum LittleManTest {
 
     });
 
+    private final ComputerLocation computerLocation;
     private final LittleManTester littleManTester;
 
-    private LittleManTest(LittleManTester littleManTester) {
+    private LittleManTest(ComputerLocation computerLocation, LittleManTester littleManTester) {
+        this.computerLocation = computerLocation;
         this.littleManTester = littleManTester;
+    }
+
+    public ComputerLocation getComputerLocation() {
+        return computerLocation;
     }
 
     boolean test(LittleManData littleManData) {

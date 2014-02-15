@@ -32,14 +32,12 @@ public final class LittleManActionSequence extends LittleManAction {
     @Override
     public boolean doAction(LittleMan littleMan) {
         boolean isComplete = littleManActions.get(currentAction).doAction(littleMan);
-        boolean isActionSequenceComplete = false;
         if (isComplete) {
             incrementAction();
-            if (currentAction == 0) {
-                isActionSequenceComplete = true;
-            }
+            return currentAction == 0;
+        } else {
+            return false;
         }
-        return isActionSequenceComplete;
     }
 
     private void incrementAction() {
