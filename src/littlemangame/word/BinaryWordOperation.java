@@ -10,6 +10,13 @@ package littlemangame.word;
  */
 public enum BinaryWordOperation {
 
+    SET(new BinaryWordOperator() {
+        @Override
+        public void operate(Word source, WordContainer destination) {
+            destination.setWord(source);
+        }
+
+    }),
     ADD(new BinaryWordOperator() {
         @Override
         public void operate(Word source, WordContainer destination) {
@@ -17,10 +24,27 @@ public enum BinaryWordOperation {
         }
 
     }),
-    SET(new BinaryWordOperator() {
+    SUBTRACT(new BinaryWordOperator() {
+
         @Override
         public void operate(Word source, WordContainer destination) {
-            destination.setWord(source);
+            destination.decrementBy(source);
+        }
+
+    }),
+    DIGITWISE_MAX(new BinaryWordOperator() {
+
+        @Override
+        public void operate(Word source, WordContainer destination) {
+            destination.digitwiseMax(source);
+        }
+
+    }),
+    DIGITWISE_MIN(new BinaryWordOperator() {
+
+        @Override
+        public void operate(Word source, WordContainer destination) {
+            destination.digitwiseMin(source);
         }
 
     });

@@ -10,6 +10,29 @@ package littlemangame.word;
  */
 public enum UnaryWordOperation {
 
+    INCREMENT(new UnaryWordOperator() {
+        @Override
+        public void operate(WordContainer destination) {
+            destination.increment();
+        }
+
+    }),
+    DECREMENT(new UnaryWordOperator() {
+
+        @Override
+        public void operate(WordContainer destination) {
+            destination.decrement();
+        }
+
+    }),
+    COMPLEMENT(new UnaryWordOperator() {
+
+        @Override
+        public void operate(WordContainer destination) {
+            destination.complement();
+        }
+
+    }),
     NEGATE(new UnaryWordOperator() {
         @Override
         public void operate(WordContainer destination) {
@@ -17,10 +40,27 @@ public enum UnaryWordOperation {
         }
 
     }),
-    INCREMENT(new UnaryWordOperator() {
+    LEFT_SHIFT(new UnaryWordOperator() {
+
         @Override
         public void operate(WordContainer destination) {
-            destination.increment();
+            destination.leftShift();
+        }
+
+    }),
+    RIGHT_SHIFT_UNSIGNED(new UnaryWordOperator() {
+
+        @Override
+        public void operate(WordContainer destination) {
+            destination.rightShiftUnsigned();
+        }
+
+    }),
+    RIGHT_SHIFT_SIGNED(new UnaryWordOperator() {
+
+        @Override
+        public void operate(WordContainer destination) {
+            destination.rightShiftSigned();
         }
 
     });
