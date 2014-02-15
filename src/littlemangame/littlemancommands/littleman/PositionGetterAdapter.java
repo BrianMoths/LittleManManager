@@ -26,6 +26,9 @@ public class PositionGetterAdapter {
 
     private PositionGetter positionGetter;
 
+    PositionGetterAdapter() {
+    }
+
     public void setPositionGetter(PositionGetter positionGetter) {
         this.positionGetter = positionGetter;
     }

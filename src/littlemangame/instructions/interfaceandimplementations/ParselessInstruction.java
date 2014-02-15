@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package littlemangame.instructions;
+package littlemangame.instructions.interfaceandimplementations;
 
 import littlemangame.littlemancommands.LittleManAction;
 import littlemangame.littlemancommands.LittleManActionSequence;
@@ -11,17 +11,17 @@ import littlemangame.littlemancommands.LittleManActionSequence;
  *
  * @author brian
  */
-class ParselessInstruction implements Instruction {
+public class ParselessInstruction implements Instruction {
 
     private final InstructionOperandTypes instructionOperandTypes;
     private final LittleManAction littleManAction;
 
-    ParselessInstruction(InstructionOperandTypes instructionOperandTypes, LittleManAction littleManAction) {
+    public ParselessInstruction(InstructionOperandTypes instructionOperandTypes, LittleManAction littleManAction) {
         this.instructionOperandTypes = instructionOperandTypes;
         this.littleManAction = littleManAction;
     }
 
-    ParselessInstruction(InstructionOperandTypes instructionOperandTypes, LittleManAction... littleManActions) {
+    public ParselessInstruction(InstructionOperandTypes instructionOperandTypes, LittleManAction... littleManActions) {
         this(instructionOperandTypes, new LittleManActionSequence(littleManActions));
     }
 

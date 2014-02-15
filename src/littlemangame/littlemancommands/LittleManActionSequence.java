@@ -13,7 +13,7 @@ import littlemangame.littlemancommands.littleman.LittleMan;
  *
  * @author brian
  */
-public class LittleManActionSequence implements LittleManAction {
+public final class LittleManActionSequence extends LittleManAction {
 
     private final List<LittleManAction> littleManActions;
     private final int numActions;

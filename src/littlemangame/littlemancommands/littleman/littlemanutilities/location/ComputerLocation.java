@@ -35,7 +35,7 @@ public enum ComputerLocation {
     OUTPUT_PANEL(new PositionGetter() {
         @Override
         public boolean goTo(LittleManPosition littleManPosition) {
-            return littleManPosition.goToPoint(littleManPosition.getPositionGetterAdapter().getRememberedMemoryPosition());
+            return littleManPosition.goToPoint(littleManPosition.getPositionGetterAdapter().getOutputPanelPosition());
 
         }
 

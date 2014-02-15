@@ -8,10 +8,8 @@ import Renderer.Drawable;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
-import littlemangame.instructions.Instruction;
+import littlemangame.instructions.interfaceandimplementations.Instruction;
 import littlemangame.littlemancommands.LittleManAction;
-import littlemangame.littlemancommands.LittleManCommandGiver;
-import littlemangame.littlemancommands.LittleManCommandGiver.LittleManCommandDoer;
 import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.LittleManData;
 import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.LittleManWordContainer;
 import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.Computer;
@@ -33,8 +31,7 @@ public class LittleMan implements Drawable {
     private Instruction instruction;
     private boolean isHalted = false;
 
-    public LittleMan(Computer computer, LittleManCommandGiver littleManCommandGiver) {
-        littleManCommandGiver.setLittleManCommandDoer(makeLittleManCommandDoer());
+    public LittleMan(Computer computer) {
         final PositionGetterAdapter positionGetterAdapter = new PositionGetterAdapter();
         littleManData = new LittleManData(computer, positionGetterAdapter);
         littleManPosition = new LittleManPosition(pathY, stepSize, new Point(200, pathY), positionGetterAdapter);
@@ -78,6 +75,10 @@ public class LittleMan implements Drawable {
     public void decodeRememberedInstruction() {
         instruction = littleManData.decodeRememberedInstruction();
     }
+
+    public boolean doInstruction() {
+        return instruction.getAction().doAction(this);
+    }
 //</editor-fold>
 
     @Override
@@ -113,15 +114,5 @@ public class LittleMan implements Drawable {
         return littleManPosition.getY();
     }
     //</editor-fold>
-
-    private LittleManCommandDoer makeLittleManCommandDoer() {
-        return new LittleManCommandDoer() {
-            @Override
-            public boolean doLittleManCommand(LittleManAction littleManAction) {
-                return doAction(littleManAction);
-            }
-
-        };
-    }
 
 }

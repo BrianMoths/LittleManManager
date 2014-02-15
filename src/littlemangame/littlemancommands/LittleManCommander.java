@@ -19,7 +19,7 @@ import littlemangame.word.UnaryWordOperation;
  */
 public class LittleManCommander implements Drawable {
 
-    private static class LocalAction implements LittleManAction {
+    private static class LocalAction extends LittleManAction {
 
         LittleManAction littleManAction;
 
@@ -80,12 +80,34 @@ public class LittleManCommander implements Drawable {
         }
 
     };
-    static private final LittleManAction memorizeDataPointedByInstructionPointer = new LittleManActionSequence(memorizeAddressAtContainer(LittleManWordContainer.INSTRUCTION_POINTER), memorizeDataAtContainer(LittleManWordContainer.REMEMBERED_MEMORY), doUnaryOperationOnContainer(LittleManWordContainer.INSTRUCTION_POINTER, UnaryWordOperation.INCREMENT));
-    static private final LittleManAction memorizeAddressPointedByInstructionPointer = new LittleManActionSequence(memorizeAddressAtContainer(LittleManWordContainer.INSTRUCTION_POINTER), memorizeAddressAtContainer(LittleManWordContainer.REMEMBERED_MEMORY), doUnaryOperationOnContainer(LittleManWordContainer.INSTRUCTION_POINTER, UnaryWordOperation.INCREMENT));
+    static private final LittleManAction memorizeDataPointedByInstructionPointer = new LittleManActionSequence(memorizeAddressAtContainerAction(LittleManWordContainer.INSTRUCTION_POINTER), memorizeDataAtContainerAction(LittleManWordContainer.REMEMBERED_MEMORY), doUnaryOperationOnContainerAction(LittleManWordContainer.INSTRUCTION_POINTER, UnaryWordOperation.INCREMENT));
+    static private final LittleManAction memorizeAddressPointedByInstructionPointer = new LittleManActionSequence(memorizeAddressAtContainerAction(LittleManWordContainer.INSTRUCTION_POINTER), memorizeAddressAtContainerAction(LittleManWordContainer.REMEMBERED_MEMORY), doUnaryOperationOnContainerAction(LittleManWordContainer.INSTRUCTION_POINTER, UnaryWordOperation.INCREMENT));
     static private final LittleManAction fetchInstruction = new LittleManActionSequence(memorizeDataPointedByInstructionPointer, decodeRememberedInstruction, clearMemory);
     static public final LittleManAction doCycle = new LittleManActionSequence(fetchInstruction, fetchDataOperandIfNecessary, fetchAddressOperandIfNecessary, doInstruction, clearMemory);
+    public static final LittleManAction haltAction = new LittleManAction() {
+        @Override
+        public boolean doAction(LittleMan littleMan) {
+            return false;
+        }
 
-    public static LittleManAction memorizeDataAtContainer(final LittleManWordContainer littleManWordContainer) {
+    };
+    public static final LittleManAction nullAction = new LittleManAction() {
+        @Override
+        public boolean doAction(LittleMan littleMan) {
+            return true;
+        }
+
+    };
+    public static final LittleManAction printUnsignedToOutputPanelAction = new LocalAction(ComputerLocation.OUTPUT_PANEL, new LittleManAction() {
+        @Override
+        public boolean doAction(LittleMan littleMan) {
+            littleMan.printUnsignedToOutputPanel();
+            return true;
+        }
+
+    });
+
+    public static LittleManAction memorizeDataAtContainerAction(final LittleManWordContainer littleManWordContainer) {
         return new LocalAction(littleManWordContainer.getLocation(), new LittleManAction() {
             @Override
             public boolean doAction(LittleMan littleMan) {
@@ -96,7 +118,7 @@ public class LittleManCommander implements Drawable {
         });
     }
 
-    public static LittleManAction memorizeAddressAtContainer(final LittleManWordContainer littleManWordContainer) {
+    public static LittleManAction memorizeAddressAtContainerAction(final LittleManWordContainer littleManWordContainer) {
         return new LocalAction(littleManWordContainer.getLocation(), new LittleManAction() {
             @Override
             public boolean doAction(LittleMan littleMan) {
@@ -107,7 +129,7 @@ public class LittleManCommander implements Drawable {
         });
     }
 
-    public static LittleManAction doBinaryOperationOnContainer(final LittleManWordContainer littleManWordContainer, final BinaryWordOperation binaryWordOperation) {
+    public static LittleManAction doBinaryOperationOnContainerAction(final LittleManWordContainer littleManWordContainer, final BinaryWordOperation binaryWordOperation) {
         return new LocalAction(littleManWordContainer.getLocation(), new LittleManAction() {
             @Override
             public boolean doAction(LittleMan littleMan) {
@@ -118,7 +140,7 @@ public class LittleManCommander implements Drawable {
         });
     }
 
-    public static LittleManAction doUnaryOperationOnContainer(final LittleManWordContainer littleManWordContainer, final UnaryWordOperation unaryWordOperation) {
+    public static LittleManAction doUnaryOperationOnContainerAction(final LittleManWordContainer littleManWordContainer, final UnaryWordOperation unaryWordOperation) {
         return new LocalAction(littleManWordContainer.getLocation(), new LittleManAction() {
             @Override
             public boolean doAction(LittleMan littleMan) {
@@ -139,46 +161,18 @@ public class LittleManCommander implements Drawable {
         };
     }
 
-    public static LittleManAction doOperationOnOperands(BinaryWordOperation wordOperation, SourceOperand sourceOperand, DestinationOperand destinationOperand) {
-        return new LittleManActionSequence(memorizeSourceOperand(sourceOperand), doOperationOnDestination(wordOperation, destinationOperand));
-    }
-
-    static private LittleManAction memorizeSourceOperand(final SourceOperand sourceOperand) {
-        return new LocalAction(sourceOperand.getLocation(), new LittleManAction() {
-            @Override
-            public boolean doAction(LittleMan littleMan) {
-                sourceOperand.memorizeWord(littleMan);
-                return true;
-            }
-
-        });
-    }
-
-    static private LittleManAction doOperationOnDestination(final BinaryWordOperation wordOperation, final DestinationOperand destinationOperand) {
-        return new LocalAction(destinationOperand.getLocation(), new LittleManAction() {
-            @Override
-            public boolean doAction(LittleMan littleMan) {
-                destinationOperand.receiveOperation(littleMan, wordOperation);
-                return true;
-            }
-
-        });
-    }
-
     private final LittleMan littleMan;
-    private final LittleManCommandGiver littleManCommandGiver;
 
     public LittleManCommander(Computer computer) {
-        littleManCommandGiver = new LittleManCommandGiver();
-        littleMan = new LittleMan(computer, littleManCommandGiver);
+        littleMan = new LittleMan(computer);
     }
 
-    public void doCycle() {
-        doAction(doCycle);
+    public boolean doCycle() {
+        return doAction(doCycle);
     }
 
     private boolean doAction(LittleManAction littleManAction) {
-        return littleManCommandGiver.doLittleManCommand(littleManAction);
+        return littleManAction.doAction(littleMan);
     }
 
     @Override
@@ -188,6 +182,30 @@ public class LittleManCommander implements Drawable {
 
     public boolean isHalted() {
         return littleMan.isHalted();
+    }
+
+    public boolean memorizeDataAtContainer(final LittleManWordContainer littleManWordContainer) {
+        return memorizeDataAtContainerAction(littleManWordContainer).doAction(littleMan);
+    }
+
+    public boolean memorizeAddressAtContainer(final LittleManWordContainer littleManWordContainer) {
+        return memorizeAddressAtContainerAction(littleManWordContainer).doAction(littleMan);
+    }
+
+    public boolean doBinaryOperationOnContainer(final LittleManWordContainer littleManWordContainer, BinaryWordOperation binaryWordOperation) {
+        return doBinaryOperationOnContainerAction(littleManWordContainer, binaryWordOperation).doAction(littleMan);
+    }
+
+    public boolean doUnaryOperationOnContainer(final LittleManWordContainer littleManWordContainer, UnaryWordOperation unaryWordOperation) {
+        return doUnaryOperationOnContainerAction(littleManWordContainer, unaryWordOperation).doAction(littleMan);
+    }
+
+    public boolean printUnsignedToOutputPanel() {
+        return printUnsignedToOutputPanelAction.doAction(littleMan);
+    }
+
+    public boolean halt() {
+        return littleMan.halt();
     }
 
 }

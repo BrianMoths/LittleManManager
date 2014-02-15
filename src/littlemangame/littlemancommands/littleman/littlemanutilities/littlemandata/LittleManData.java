@@ -6,7 +6,7 @@ package littlemangame.littlemancommands.littleman.littlemanutilities.littlemanda
 
 import java.awt.Graphics;
 import java.awt.Point;
-import littlemangame.instructions.Instruction;
+import littlemangame.instructions.interfaceandimplementations.Instruction;
 import littlemangame.instructions.InstructionFromSet;
 import littlemangame.littlemancommands.littleman.PositionGetterAdapter;
 import littlemangame.littlemancommands.littleman.PositionGetterAdapter.PositionGetter;

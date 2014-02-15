@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package littlemangame.instructions;
+package littlemangame.instructions.interfaceandimplementations;
 
 import littlemangame.littlemancommands.LittleManAction;
 

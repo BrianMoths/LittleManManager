@@ -10,8 +10,11 @@ import littlemangame.littlemancommands.littleman.LittleMan;
  *
  * @author brian
  */
-public interface LittleManAction {
+public abstract class LittleManAction {
 
-    public boolean doAction(LittleMan littleMan);
+    LittleManAction() {
+    }
+
+    public abstract boolean doAction(LittleMan littleMan);
 
 }
