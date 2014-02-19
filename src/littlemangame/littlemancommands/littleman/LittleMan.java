@@ -64,6 +64,10 @@ public class LittleMan implements Drawable {
         littleManData.printUnsigedToOutputPanel();
     }
 
+    public boolean getDataFromInputPanel() {
+        return littleManData.memorizeDataFromInputPanel();
+    }
+
     public boolean test(LittleManTest littleManTest) {
         return littleManData.test(littleManTest);
     }

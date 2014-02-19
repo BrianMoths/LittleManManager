@@ -40,6 +40,14 @@ public enum ComputerLocation {
         }
 
     }),
+    INPUT_PANEL(new PositionGetter() {
+
+        @Override
+        public boolean goTo(LittleManPosition littleManPosition) {
+            return littleManPosition.goToPoint(littleManPosition.getPositionGetterAdapter().getInputPanelPosition());
+        }
+
+    }),
     CURRENT_LOCATION(new PositionGetter() {
         @Override
         public boolean goTo(LittleManPosition littleManPosition) {
@@ -55,7 +63,6 @@ public enum ComputerLocation {
 
     boolean goTo(LittleManPosition littleManPosition) {
         return positionGetter.goTo(littleManPosition);
-
 
     }
 

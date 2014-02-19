@@ -51,6 +51,18 @@ public class LittleManData {
         computer.outputPanel.append(useRememberedData().toStringUnsigned());
     }
 
+    public boolean memorizeDataFromInputPanel() {
+        if (!computer.inputPanel.isPanelEnabled()) {
+            computer.inputPanel.enablePanel();
+        }
+        if (computer.inputPanel.isValueSelected()) {
+            memorizeData(computer.inputPanel.getLastSelectedWord());
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public Instruction decodeRememberedInstruction() {
         return InstructionFromSet.decodeInstruction(useRememberedData());
     }
@@ -140,6 +152,11 @@ public class LittleManData {
             @Override
             public Point getOutputPanelPosition() {
                 return computer.outputPanel.getAccessLocation();
+            }
+
+            @Override
+            public Point getInputPanelPosition() {
+                return computer.inputPanel.getAccessLocation();
             }
 
         };

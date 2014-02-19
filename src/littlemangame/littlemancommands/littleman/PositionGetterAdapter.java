@@ -22,6 +22,8 @@ public class PositionGetterAdapter {
 
         public Point getOutputPanelPosition();
 
+        public Point getInputPanelPosition();
+
     }
 
     private PositionGetter positionGetter;
@@ -47,6 +49,10 @@ public class PositionGetterAdapter {
 
     public Point getOutputPanelPosition() {
         return positionGetter.getOutputPanelPosition();
+    }
+
+    public Point getInputPanelPosition() {
+        return positionGetter.getInputPanelPosition();
     }
 
 }

@@ -5,6 +5,7 @@
  */
 package littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer;
 
+import java.awt.Point;
 import littlemangame.word.Word;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
@@ -37,6 +38,7 @@ public class InputPanel extends javax.swing.JPanel {
         initComponents();
         isValueSelected = false;
         initWordModel();
+        disablePanel();
     }
 
     private void initWordModel() {
@@ -56,6 +58,10 @@ public class InputPanel extends javax.swing.JPanel {
         submitButton.setEnabled(true);
     }
 
+    public boolean isPanelEnabled() {
+        return wordSelector.isEnabled();
+    }
+
     public Word getLastSelectedWord() {
         disablePanel();
         return value;
@@ -63,6 +69,12 @@ public class InputPanel extends javax.swing.JPanel {
 
     public boolean isValueSelected() {
         return isValueSelected;
+    }
+
+    public Point getAccessLocation() {
+        final int x = getX() + getWidth() + 4;
+        final int y = getY() + getHeight() / 2;
+        return new Point(x, y);
     }
 
     /**

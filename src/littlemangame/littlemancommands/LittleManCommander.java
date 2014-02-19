@@ -106,6 +106,14 @@ public class LittleManCommander implements Drawable {
         }
 
     });
+    public static final LittleManAction getDataFromInputPanel = new LocalAction(ComputerLocation.INPUT_PANEL, new LittleManAction() {
+
+        @Override
+        public boolean doAction(LittleMan littleMan) {
+            return littleMan.getDataFromInputPanel();
+        }
+
+    });
 
     public static LittleManAction memorizeDataAtContainerAction(final LittleManWordContainer littleManWordContainer) {
         return new LocalAction(littleManWordContainer.getLocation(), new LittleManAction() {

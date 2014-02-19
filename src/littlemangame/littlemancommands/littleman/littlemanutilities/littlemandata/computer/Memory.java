@@ -35,6 +35,14 @@ public class Memory implements Drawable {
         final Word printOld = Word.valueOfLastDigitsOfInteger(70);
         final Word printNew = Word.valueOfLastDigitsOfInteger(80);
         int i = 0;
+        //get input
+        memory.add(new WordContainer(InstructionFromSet.INPUT.getOpcode()));
+        i++;
+        memory.add(new WordContainer(InstructionFromSet.STORE_REGISTER_MEMORY.getOpcode()));
+        i++;
+        memory.add(new WordContainer(input));
+        i++;
+        //load input and jump if zero
         memory.add(new WordContainer(InstructionFromSet.LOAD_MEMORY.getOpcode()));
         i++;
         memory.add(new WordContainer(input));
