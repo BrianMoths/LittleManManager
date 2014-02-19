@@ -6,8 +6,8 @@ package littlemangame;
 
 import ListenerInputHandler.AbstractInputHandlerClient;
 import RealTimeGame.AbstractRealTimeGame;
-import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.Computer;
 import littlemangame.littlemancommands.LittleManCommander;
+import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.Computer;
 
 /**
  *
@@ -32,13 +32,13 @@ public class LittleManGame extends AbstractRealTimeGame<LittleManGui> {
 
     public LittleManGame() {
         super(new AbstractInputHandlerClient(), makeGamePanel());
-        computer = new Computer(getGameGui().getOutputPanel());
+        computer = new Computer(getGameGui().getOutputPanel(), getGameGui().getInputPanel());
         littleManCommander = new LittleManCommander(computer);
         init();
     }
 
     private void init() {
-        renderer.addDrawable(littleManCommander);
+        getGameGui().getGameCanvas().getRenderer().addDrawable(littleManCommander);
     }
 
     @Override

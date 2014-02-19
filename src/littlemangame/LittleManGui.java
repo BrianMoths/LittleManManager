@@ -4,20 +4,22 @@
  */
 package littlemangame;
 
-import java.awt.Component;
-import java.awt.Graphics;
+import GameGui.BaseGameGui;
+import GameGui.GameCanvas;
+import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.InputPanel;
 import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.OutputPanel;
 
 /**
  *
  * @author brian
  */
-public class LittleManGui extends javax.swing.JFrame implements GameGui.GameGui {
+public class LittleManGui extends BaseGameGui {
 
     /**
      * Creates new form LittleManGui
      */
     public LittleManGui() {
+        super();
         initComponents();
     }
 
@@ -30,99 +32,61 @@ public class LittleManGui extends javax.swing.JFrame implements GameGui.GameGui 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        canvasPanel = new javax.swing.JPanel();
+        gameCanvas = new GameGui.GameCanvas();
+        inputPanel = new littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.InputPanel();
         outputPanel = new littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.OutputPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout canvasPanelLayout = new javax.swing.GroupLayout(canvasPanel);
-        canvasPanel.setLayout(canvasPanelLayout);
-        canvasPanelLayout.setHorizontalGroup(
-            canvasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(canvasPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout gameCanvasLayout = new javax.swing.GroupLayout(gameCanvas);
+        gameCanvas.setLayout(gameCanvasLayout);
+        gameCanvasLayout.setHorizontalGroup(
+            gameCanvasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(gameCanvasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(outputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(488, Short.MAX_VALUE))
+                .addGroup(gameCanvasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(outputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(490, Short.MAX_VALUE))
         );
-        canvasPanelLayout.setVerticalGroup(
-            canvasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(canvasPanelLayout.createSequentialGroup()
+        gameCanvasLayout.setVerticalGroup(
+            gameCanvasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, gameCanvasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(outputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(221, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(inputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(138, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(canvasPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(gameCanvas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(canvasPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(gameCanvas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LittleManGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LittleManGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LittleManGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LittleManGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LittleManGui().setVisible(true);
-            }
-
-        });
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel canvasPanel;
+    private GameGui.GameCanvas gameCanvas;
+    private littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.InputPanel inputPanel;
     private littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.OutputPanel outputPanel;
     // End of variables declaration//GEN-END:variables
-
-    @Override
-    public Component getCanvasComponent() {
-        return canvasPanel;
-    }
-
-    @Override
-    public Component getInputProducerComponent() {
-        return this;
-    }
-
     public OutputPanel getOutputPanel() {
         return outputPanel;
     }
 
-    @Override
-    public void draw(Graphics graphics) {
-        outputPanel.draw(graphics);
+    public InputPanel getInputPanel() {
+        return inputPanel;
+    }
+
+    public GameCanvas getGameCanvas() {
+        return gameCanvas;
     }
 
 }

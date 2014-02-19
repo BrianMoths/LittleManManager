@@ -31,7 +31,7 @@ public class Memory implements Drawable {
         final Word input = Word.valueOfLastDigitsOfInteger(90);
         final Word newValue = Word.valueOfLastDigitsOfInteger(91);
         final Word oldValue = Word.valueOfLastDigitsOfInteger(92);
-        final Word temp = Word.valueOfLastDigitsOfInteger(93);
+        final Word newCopy = Word.valueOfLastDigitsOfInteger(93);
         final Word printOld = Word.valueOfLastDigitsOfInteger(70);
         final Word printNew = Word.valueOfLastDigitsOfInteger(80);
         int i = 0;
@@ -44,15 +44,6 @@ public class Memory implements Drawable {
         memory.add(new WordContainer(printOld));
         i++;
         final Word loop = Word.valueOfLastDigitsOfInteger(i);
-        //move newValue to temp
-        memory.add(new WordContainer(InstructionFromSet.LOAD_MEMORY.getOpcode()));
-        i++;
-        memory.add(new WordContainer(newValue));
-        i++;
-        memory.add(new WordContainer(InstructionFromSet.STORE_REGISTER_MEMORY.getOpcode()));
-        i++;
-        memory.add(new WordContainer(temp));
-        i++;
         //add oldValue to newValue
         memory.add(new WordContainer(InstructionFromSet.LOAD_MEMORY.getOpcode()));
         i++;
@@ -61,21 +52,30 @@ public class Memory implements Drawable {
         memory.add(new WordContainer(InstructionFromSet.ADD_REGISTER_MEMORY.getOpcode()));
         i++;
         memory.add(new WordContainer(newValue));
-        //move temp to oldValue
+        //move newCopy to oldValue
         memory.add(new WordContainer(InstructionFromSet.LOAD_MEMORY.getOpcode()));
         i++;
-        memory.add(new WordContainer(temp));
+        memory.add(new WordContainer(newCopy));
         i++;
         memory.add(new WordContainer(InstructionFromSet.STORE_REGISTER_MEMORY.getOpcode()));
         i++;
         memory.add(new WordContainer(oldValue));
+        i++;
+        //move newValue to newCopy
+        memory.add(new WordContainer(InstructionFromSet.LOAD_MEMORY.getOpcode()));
+        i++;
+        memory.add(new WordContainer(newValue));
+        i++;
+        memory.add(new WordContainer(InstructionFromSet.STORE_REGISTER_MEMORY.getOpcode()));
+        i++;
+        memory.add(new WordContainer(newCopy));
         i++;
         //decrement input
         memory.add(new WordContainer(InstructionFromSet.DECREMENT_MEMORY.getOpcode()));
         i++;
         memory.add(new WordContainer(input));
         i++;
-        //decrement input
+        //load input
         memory.add(new WordContainer(InstructionFromSet.LOAD_MEMORY.getOpcode()));
         i++;
         memory.add(new WordContainer(input));
@@ -103,7 +103,7 @@ public class Memory implements Drawable {
         memory.set(83, new WordContainer(InstructionFromSet.HALT.getOpcode()));
 
         setMemory(input, Word.valueOfLastDigitsOfInteger(8));
-        setMemory(newValue, Word.valueOfLastDigitsOfInteger(1));
+        setMemory(oldValue, Word.valueOfLastDigitsOfInteger(1));
     }
 
     @Override

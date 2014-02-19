@@ -4,26 +4,19 @@
  */
 package littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer;
 
-import Renderer.Drawable;
-import java.awt.Graphics;
 import java.awt.Point;
 
 /**
  *
  * @author brian
  */
-public class OutputPanel extends javax.swing.JPanel implements Drawable {
+public class OutputPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form OutputPanel
      */
     public OutputPanel() {
         initComponents();
-    }
-
-    @Override
-    public void draw(Graphics graphics) {
-        paint(graphics);
     }
 
     public void append(String str) {
