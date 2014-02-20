@@ -29,11 +29,13 @@ public class LittleManGame extends AbstractRealTimeGame<LittleManGui> {
 
     final LittleManCommander littleManCommander;
     final Computer computer;
+    final SpeedController speedController;
 
     public LittleManGame() {
         super(new AbstractInputHandlerClient(), makeGamePanel());
         computer = new Computer(getGameGui().getOutputPanel(), getGameGui().getInputPanel());
         littleManCommander = new LittleManCommander(computer);
+        speedController = getGameGui().getSpeedController();
         init();
     }
 
@@ -43,7 +45,8 @@ public class LittleManGame extends AbstractRealTimeGame<LittleManGui> {
 
     @Override
     protected void doLogic() {
-        for (int i = 0; i < 1000; i++) {
+        speedController.flushBuffer();
+        for (int i = 0; i < speedController.getCurrentSpeed(); i++) {
             if (!littleManCommander.isHalted()) {
                 littleManCommander.doCycle();
             }

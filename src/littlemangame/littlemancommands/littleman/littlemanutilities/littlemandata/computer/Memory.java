@@ -20,12 +20,12 @@ import littlemangame.word.WordContainer;
  */
 public class Memory implements Drawable {
 
-    static private final int xPosition = 600;
+    static private final int xPosition = 400;
     static private final int yPosition = 20;
     static private final int width = 50;
     static private final int height = 400;
-    private int numWords = 100;
-    private List<WordContainer> memory = new ArrayList<>(numWords);
+    private final int numWords = 100;
+    private final List<WordContainer> memory = new ArrayList<>(numWords);
 
     {
         final Word input = Word.valueOfLastDigitsOfInteger(90);
@@ -38,15 +38,12 @@ public class Memory implements Drawable {
         //get input
         memory.add(new WordContainer(InstructionFromSet.INPUT.getOpcode()));
         i++;
+        //save input
         memory.add(new WordContainer(InstructionFromSet.STORE_REGISTER_MEMORY.getOpcode()));
         i++;
         memory.add(new WordContainer(input));
         i++;
-        //load input and jump if zero
-        memory.add(new WordContainer(InstructionFromSet.LOAD_MEMORY.getOpcode()));
-        i++;
-        memory.add(new WordContainer(input));
-        i++;
+        //jump if zero
         memory.add(new WordContainer(InstructionFromSet.JUMP_IF_ZERO.getOpcode()));
         i++;
         memory.add(new WordContainer(printOld));
