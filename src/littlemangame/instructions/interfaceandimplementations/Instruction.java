@@ -4,7 +4,7 @@
  */
 package littlemangame.instructions.interfaceandimplementations;
 
-import littlemangame.littlemancommands.LittleManAction;
+import littlemangame.littlemancommands.LittleManCommands.LittleManAction;
 
 /**
  *

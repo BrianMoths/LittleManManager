@@ -9,7 +9,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import littlemangame.instructions.interfaceandimplementations.Instruction;
-import littlemangame.littlemancommands.LittleManAction;
+import littlemangame.littlemancommands.LittleManCommands.LittleManAction;
 import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.LittleManData;
 import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.LittleManTest;
 import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.LittleManWordContainer;

@@ -4,9 +4,9 @@
  */
 package littlemangame.instructions;
 
-import littlemangame.littlemancommands.LittleManAction;
+import littlemangame.littlemancommands.LittleManCommands.LittleManAction;
 import littlemangame.littlemancommands.LittleManCommander;
-import littlemangame.littlemancommands.LittleManCommands;
+import littlemangame.littlemancommands.LittleManCommands.LittleManCommands;
 import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.LittleManWordContainer;
 
 /**
