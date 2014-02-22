@@ -18,7 +18,7 @@ import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandat
 public class LittleManCommander implements Drawable {
 
     private final LittleMan littleMan;
-    private final LittleManAction doCycleCommand;
+    private LittleManAction doCycleCommand;
 
     public LittleManCommander(Computer computer) {
         littleMan = new LittleMan(computer);
@@ -31,6 +31,7 @@ public class LittleManCommander implements Drawable {
 
     public void reset() {
         littleMan.reset();
+        doCycleCommand = LittleManCommands.getDoCycle();
     }
 
     private boolean doAction(LittleManAction littleManAction) {

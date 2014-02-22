@@ -47,6 +47,7 @@ public class SpeedController {
         isRunning = true;
         bufferedIsRunning = true;
         this.speedControllerGui = speedControllerGui;
+        syncGuiEnabledState();
         hookIntoGui();
     }
 
@@ -60,22 +61,33 @@ public class SpeedController {
 
     private void pause() {
         bufferedIsRunning = false;
+        syncGuiEnabledState();
     }
 
     private void resume() {
         bufferedIsRunning = true;
+        syncGuiEnabledState();
     }
 
     private void increaseSpeed() {
         if (bufferedSpeed < maxSpeed) {
             bufferedSpeed++;
         }
+        syncGuiEnabledState();
     }
 
     private void decreaseSpeed() {
         if (bufferedSpeed > minSpeed) {
             bufferedSpeed--;
         }
+        syncGuiEnabledState();
+    }
+
+    private void syncGuiEnabledState() {
+        speedControllerGui.setEnabledFasterButton(bufferedSpeed < maxSpeed);
+        speedControllerGui.setEnabledSlowerButton(bufferedSpeed > minSpeed);
+        speedControllerGui.setEnabledPauseButton(bufferedIsRunning);
+        speedControllerGui.setEnabledResumeButton(!bufferedIsRunning);
     }
 
     public void disable() {
@@ -83,12 +95,20 @@ public class SpeedController {
         speedControllerGui.disableButtons();
     }
 
+    public void enable() {
+        speedControllerGui.enableButtons();
+        resume();
+    }
+
     private void setBufferedSpeed(int bufferedSpeed) {
         this.bufferedSpeed = bufferedSpeed;
+        syncGuiEnabledState();
+
     }
 
     private void setBufferedIsRunning(boolean bufferedIsRunning) {
         this.bufferedIsRunning = bufferedIsRunning;
+        syncGuiEnabledState();
     }
 
     public void flushBuffer() {

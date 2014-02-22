@@ -62,6 +62,22 @@ public class SpeedControllerGui extends javax.swing.JPanel {
         setEnabledButtons(true);
     }
 
+    public void setEnabledFasterButton(boolean isEnabled) {
+        fasterButton.setEnabled(isEnabled);
+    }
+
+    public void setEnabledSlowerButton(boolean isEnabled) {
+        slowerButton.setEnabled(isEnabled);
+    }
+
+    public void setEnabledPauseButton(boolean isEnabled) {
+        pauseButton.setEnabled(isEnabled);
+    }
+
+    public void setEnabledResumeButton(boolean isEnabled) {
+        resumeButton.setEnabled(isEnabled);
+    }
+
     /**
      * This method is called from within the constructor to
      * initialize the form.

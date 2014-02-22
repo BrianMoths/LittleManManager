@@ -32,9 +32,7 @@ public class NotebookDeveloper {
     public void doFrame() {
         speedController.flushBuffer();
         for (int i = 0; i < speedController.getCurrentSpeed(); i++) {
-//            if (!littleManCommander.isHalted()) {
             littleManCommander.doCycle();
-//            }
         }
     }
 
@@ -44,11 +42,18 @@ public class NotebookDeveloper {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 speedController.disable();
-                littleManCommander.reset();
             }
 
         });
-        littleManCommander.reset();
+        notebookDeveloperGui.setExecuteAction(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                littleManCommander.reset();
+                speedController.enable();
+            }
+
+        });
     }
 
 }
