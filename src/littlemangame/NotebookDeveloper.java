@@ -21,6 +21,7 @@ public class NotebookDeveloper {
     private final LittleManCommander littleManCommander;
     private final NotebookDeveloperGui notebookDeveloperGui;
     private final Memory memory;
+    private boolean isExecuting;
 
     public NotebookDeveloper(NotebookDeveloperGui notebookDeveloperGui) {
         this.notebookDeveloperGui = notebookDeveloperGui;
@@ -29,7 +30,7 @@ public class NotebookDeveloper {
         littleManCommander = new LittleManCommander(computer);
         notebookDeveloperGui.getGameCanvas().getRenderer().addDrawable(littleManCommander);
         hookIntoNotebookDeveloperGui();
-        speedController.disable();
+        stopExecution();
         memory = new Memory();
     }
 
@@ -40,12 +41,33 @@ public class NotebookDeveloper {
         }
     }
 
+    private void syncGui() {
+        notebookDeveloperGui.setEnabledAbort(isExecuting);
+        notebookDeveloperGui.setEnabledEditMemory(!isExecuting);
+        notebookDeveloperGui.setEnabledExecute(!isExecuting);
+        notebookDeveloperGui.setEnabledSubmit(!isExecuting);
+    }
+
+    private void stopExecution() {
+        isExecuting = false;
+        speedController.disable();
+        syncGui();
+    }
+
+    private void execute() {
+        isExecuting = true;
+        littleManCommander.reset();
+        littleManCommander.loadCopyOfMemory(memory);
+        speedController.enable();
+        syncGui();
+    }
+
     private void hookIntoNotebookDeveloperGui() {
         notebookDeveloperGui.setAbortAction(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent ae) {
-                speedController.disable();
+                stopExecution();
             }
 
         });
@@ -53,9 +75,7 @@ public class NotebookDeveloper {
 
             @Override
             public void actionPerformed(ActionEvent ae) {
-                littleManCommander.reset();
-                littleManCommander.loadCopyOfMemory(memory);
-                speedController.enable();
+                execute();
             }
 
         });

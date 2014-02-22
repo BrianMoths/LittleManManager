@@ -43,6 +43,22 @@ public class NotebookDeveloperGui extends javax.swing.JPanel {
         submitButton.addActionListener(l);
     }
 
+    public void setEnabledAbort(boolean isEnabled) {
+        abortButton.setEnabled(isEnabled);
+    }
+
+    public void setEnabledEditMemory(boolean isEnabled) {
+        editMemoryButton.setEnabled(isEnabled);
+    }
+
+    public void setEnabledExecute(boolean isEnabled) {
+        executeButton.setEnabled(isEnabled);
+    }
+
+    public void setEnabledSubmit(boolean isEnabled) {
+        submitButton.setEnabled(isEnabled);
+    }
+
     public InputPanel getInputPanel() {
         return inputPanel;
     }
