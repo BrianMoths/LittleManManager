@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package littlemangame;
+package littlemangame.notebookdeveloper.gui;
 
 import GameGui.GameCanvas;
 import java.awt.event.ActionListener;
@@ -85,7 +85,7 @@ public class NotebookDeveloperGui extends javax.swing.JPanel {
         gameCanvas = new GameGui.GameCanvas();
         inputPanel = new littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.InputPanel();
         outputPanel = new littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.OutputPanel();
-        speedControllerGui = new littlemangame.SpeedControllerGui();
+        speedControllerGui = new littlemangame.notebookdeveloper.gui.SpeedControllerGui();
         executeButton = new javax.swing.JButton();
         abortButton = new javax.swing.JButton();
         editMemoryButton = new javax.swing.JButton();
@@ -180,7 +180,7 @@ public class NotebookDeveloperGui extends javax.swing.JPanel {
     private littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.InputPanel inputPanel;
     private javax.swing.JPanel jPanel1;
     private littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.OutputPanel outputPanel;
-    private littlemangame.SpeedControllerGui speedControllerGui;
+    private littlemangame.notebookdeveloper.gui.SpeedControllerGui speedControllerGui;
     private javax.swing.JButton submitButton;
     // End of variables declaration//GEN-END:variables
 }

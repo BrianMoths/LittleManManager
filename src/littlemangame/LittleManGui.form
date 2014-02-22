@@ -36,7 +36,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="littlemangame.NotebookDeveloperGui" name="notebookDeveloperGui">
+    <Component class="littlemangame.notebookdeveloper.gui.NotebookDeveloperGui" name="notebookDeveloperGui">
     </Component>
   </SubComponents>
 </Form>

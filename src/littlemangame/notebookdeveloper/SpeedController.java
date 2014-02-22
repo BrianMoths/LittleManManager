@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package littlemangame;
+package littlemangame.notebookdeveloper;
 
+import littlemangame.notebookdeveloper.gui.SpeedControllerGui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;

@@ -115,7 +115,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="littlemangame.SpeedControllerGui" name="speedControllerGui">
+        <Component class="littlemangame.notebookdeveloper.gui.SpeedControllerGui" name="speedControllerGui">
         </Component>
         <Component class="javax.swing.JButton" name="executeButton">
           <Properties>

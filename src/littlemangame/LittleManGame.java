@@ -4,6 +4,7 @@
  */
 package littlemangame;
 
+import littlemangame.notebookdeveloper.NotebookDeveloper;
 import ListenerInputHandler.AbstractInputHandlerClient;
 import RealTimeGame.AbstractRealTimeGame;
 

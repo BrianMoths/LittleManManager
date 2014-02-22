@@ -4,6 +4,7 @@
  */
 package littlemangame;
 
+import littlemangame.notebookdeveloper.gui.NotebookDeveloperGui;
 import GameGui.BaseGameGui;
 
 /**
@@ -33,7 +34,7 @@ public class LittleManGui extends BaseGameGui {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        notebookDeveloperGui = new littlemangame.NotebookDeveloperGui();
+        notebookDeveloperGui = new littlemangame.notebookdeveloper.gui.NotebookDeveloperGui();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,7 +55,7 @@ public class LittleManGui extends BaseGameGui {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private littlemangame.NotebookDeveloperGui notebookDeveloperGui;
+    private littlemangame.notebookdeveloper.gui.NotebookDeveloperGui notebookDeveloperGui;
     // End of variables declaration                       public NotebookDeveloperGui getNotebookDeveloperGui() {//GEN-END:variables
 
 }
