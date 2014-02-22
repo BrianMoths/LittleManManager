@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import littlemangame.littlemancommands.LittleManCommander;
 import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.Computer;
+import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.Memory;
 
 /**
  *
@@ -19,6 +20,7 @@ public class NotebookDeveloper {
     private final SpeedController speedController;
     private final LittleManCommander littleManCommander;
     private final NotebookDeveloperGui notebookDeveloperGui;
+    private final Memory memory;
 
     public NotebookDeveloper(NotebookDeveloperGui notebookDeveloperGui) {
         this.notebookDeveloperGui = notebookDeveloperGui;
@@ -27,6 +29,8 @@ public class NotebookDeveloper {
         littleManCommander = new LittleManCommander(computer);
         notebookDeveloperGui.getGameCanvas().getRenderer().addDrawable(littleManCommander);
         hookIntoNotebookDeveloperGui();
+        speedController.disable();
+        memory = new Memory();
     }
 
     public void doFrame() {
@@ -50,6 +54,7 @@ public class NotebookDeveloper {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 littleManCommander.reset();
+                littleManCommander.loadCopyOfMemory(memory);
                 speedController.enable();
             }
 

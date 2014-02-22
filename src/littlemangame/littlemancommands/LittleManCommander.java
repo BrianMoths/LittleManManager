@@ -10,6 +10,7 @@ import littlemangame.littlemancommands.LittleManCommands.LittleManAction;
 import littlemangame.littlemancommands.LittleManCommands.LittleManCommands;
 import littlemangame.littlemancommands.littleman.LittleMan;
 import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.Computer;
+import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.Memory;
 
 /**
  *
@@ -41,6 +42,10 @@ public class LittleManCommander implements Drawable {
     @Override
     public void draw(Graphics graphics) {
         littleMan.draw(graphics);
+    }
+
+    public void loadCopyOfMemory(Memory memory) {
+        littleMan.loadCopyOfMemory(memory);
     }
 
 }

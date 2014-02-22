@@ -4,6 +4,8 @@
  */
 package littlemangame.word;
 
+import java.util.Iterator;
+
 /**
  *
  * @author brian
@@ -28,6 +30,32 @@ public class Word implements Comparable<Word> {
 
     static private String getDoubleDigitString(int number) {
         return String.format("%02d", number);
+    }
+
+    static public Iterator<Word> getIterator() {
+        return new Iterator<Word>() {
+
+            private Word word = MAX_WORD;
+            private boolean hasNext = true;
+
+            @Override
+            public boolean hasNext() {
+                return hasNext;
+            }
+
+            @Override
+            public Word next() {
+                word = word.incrementedWord();
+                hasNext = !word.equals(Word.MAX_WORD);
+                return word;
+            }
+
+            @Override
+            public void remove() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+        };
     }
 
     private final int value;
@@ -210,4 +238,5 @@ public class Word implements Comparable<Word> {
         return getDoubleDigitString(getSignedValue());
     }
     //</editor-fold>
+
 }

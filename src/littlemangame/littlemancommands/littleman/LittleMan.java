@@ -14,6 +14,7 @@ import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandat
 import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.LittleManTest;
 import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.LittleManWordContainer;
 import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.Computer;
+import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.Memory;
 import littlemangame.littlemancommands.littleman.littlemanutilities.location.ComputerLocation;
 import littlemangame.littlemancommands.littleman.littlemanutilities.location.LittleManPosition;
 import littlemangame.word.BinaryWordOperation;
@@ -73,6 +74,10 @@ public class LittleMan implements Drawable {
 
     public void clearMemory() {
         littleManData.clearMemory();
+    }
+
+    public void loadCopyOfMemory(Memory memory) {
+        littleManData.loadCopyOfMemory(memory);
     }
 
     public void reset() {

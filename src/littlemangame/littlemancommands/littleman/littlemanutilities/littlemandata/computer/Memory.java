@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import littlemangame.instructions.InstructionFromSet;
 import littlemangame.word.Word;
@@ -24,7 +25,7 @@ public class Memory implements Drawable {
     static private final int yPosition = 20;
     static private final int width = 50;
     static private final int height = 400;
-    private final int numWords = 100;
+    static private final int numWords = 100;
     private final List<WordContainer> memory = new ArrayList<>(numWords);
 
     {
@@ -142,6 +143,14 @@ public class Memory implements Drawable {
         final int x = xPosition - 10;
         final int y = yPosition + word.getValue() * height / numWords;
         return new Point(x, y);
+    }
+
+    void loadCopyOfMemory(Memory memory) {
+        Iterator<Word> wordIterator = Word.getIterator();
+        while (wordIterator.hasNext()) {
+            Word word = wordIterator.next();
+            setMemory(word, memory.getMemory(word).getWord());
+        }
     }
 
 }

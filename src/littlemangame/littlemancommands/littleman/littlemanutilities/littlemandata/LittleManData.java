@@ -11,6 +11,7 @@ import littlemangame.instructions.interfaceandimplementations.Instruction;
 import littlemangame.littlemancommands.littleman.PositionGetterAdapter;
 import littlemangame.littlemancommands.littleman.PositionGetterAdapter.PositionGetter;
 import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.Computer;
+import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.Memory;
 import littlemangame.word.BinaryWordOperation;
 import littlemangame.word.UnaryWordOperation;
 import littlemangame.word.Word;
@@ -165,6 +166,10 @@ public class LittleManData {
             }
 
         };
+    }
+
+    public void loadCopyOfMemory(Memory memory) {
+        computer.loadCopyOfMemory(memory);
     }
 
 }

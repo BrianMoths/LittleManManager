@@ -40,4 +40,8 @@ public class Computer implements Drawable {
         outputPanel.clear();
     }
 
+    public void loadCopyOfMemory(Memory memory) {
+        this.memory.loadCopyOfMemory(memory);
+    }
+
 }
