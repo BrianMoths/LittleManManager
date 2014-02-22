@@ -17,4 +17,8 @@ public abstract class LittleManAction {
 
     public abstract boolean doAction(LittleMan littleMan);
 
+    public LittleManAction getResetCopy() {
+        return this;
+    }
+
 }

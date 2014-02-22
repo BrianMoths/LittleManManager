@@ -19,21 +19,6 @@ import littlemangame.word.UnaryWordOperation;
  */
 public class LittleManCommander implements Drawable {
 
-    private static class LocalAction extends LittleManAction {
-
-        LittleManAction littleManAction;
-
-        LocalAction(ComputerLocation computerLocation, LittleManAction littleManAction) {
-            this.littleManAction = new LittleManActionSequence(goToComputerLocation(computerLocation), littleManAction);
-        }
-
-        @Override
-        public boolean doAction(LittleMan littleMan) {
-            return littleManAction.doAction(littleMan);
-        }
-
-    }
-
     static private final LittleManAction decodeRememberedInstruction = new LittleManAction() {
         @Override
         public boolean doAction(LittleMan littleMan) {
@@ -49,7 +34,6 @@ public class LittleManCommander implements Drawable {
         }
 
     };
-    //</editor-fold>
     static private final LittleManAction clearMemory = new LittleManAction() {
         @Override
         public boolean doAction(LittleMan littleMan) {
@@ -83,7 +67,7 @@ public class LittleManCommander implements Drawable {
     static private final LittleManAction memorizeDataPointedByInstructionPointer = new LittleManActionSequence(memorizeAddressAtContainerAction(LittleManWordContainer.INSTRUCTION_POINTER), memorizeDataAtContainerAction(LittleManWordContainer.REMEMBERED_MEMORY), doUnaryOperationOnContainerAction(LittleManWordContainer.INSTRUCTION_POINTER, UnaryWordOperation.INCREMENT));
     static private final LittleManAction memorizeAddressPointedByInstructionPointer = new LittleManActionSequence(memorizeAddressAtContainerAction(LittleManWordContainer.INSTRUCTION_POINTER), memorizeAddressAtContainerAction(LittleManWordContainer.REMEMBERED_MEMORY), doUnaryOperationOnContainerAction(LittleManWordContainer.INSTRUCTION_POINTER, UnaryWordOperation.INCREMENT));
     static private final LittleManAction fetchInstruction = new LittleManActionSequence(memorizeDataPointedByInstructionPointer, decodeRememberedInstruction, clearMemory);
-    static public final LittleManAction doCycle = new LittleManActionSequence(fetchInstruction, fetchDataOperandIfNecessary, fetchAddressOperandIfNecessary, doInstruction, clearMemory);
+    private static final LittleManAction doCycle = new LittleManActionSequence(fetchInstruction, fetchDataOperandIfNecessary, fetchAddressOperandIfNecessary, doInstruction, clearMemory);
     public static final LittleManAction haltAction = new LittleManAction() {
         @Override
         public boolean doAction(LittleMan littleMan) {
@@ -98,7 +82,7 @@ public class LittleManCommander implements Drawable {
         }
 
     };
-    public static final LittleManAction printUnsignedToOutputPanelAction = new LocalAction(ComputerLocation.OUTPUT_PANEL, new LittleManAction() {
+    private static final LittleManAction printUnsignedToOutputPanelAction = new LocalAction(ComputerLocation.OUTPUT_PANEL, new LittleManAction() {
         @Override
         public boolean doAction(LittleMan littleMan) {
             littleMan.printUnsignedToOutputPanel();
@@ -106,7 +90,7 @@ public class LittleManCommander implements Drawable {
         }
 
     });
-    public static final LittleManAction getDataFromInputPanel = new LocalAction(ComputerLocation.INPUT_PANEL, new LittleManAction() {
+    private static final LittleManAction getDataFromInputPanelAction = new LocalAction(ComputerLocation.INPUT_PANEL, new LittleManAction() {
 
         @Override
         public boolean doAction(LittleMan littleMan) {
@@ -159,7 +143,7 @@ public class LittleManCommander implements Drawable {
         });
     }
 
-    private static LittleManAction goToComputerLocation(final ComputerLocation computerLocation) {
+    static LittleManAction goToComputerLocation(final ComputerLocation computerLocation) {
         return new LittleManAction() {
             @Override
             public boolean doAction(LittleMan littleMan) {
@@ -169,14 +153,41 @@ public class LittleManCommander implements Drawable {
         };
     }
 
+    /**
+     * @return the doCycle
+     */
+    public static LittleManAction getDoCycle() {
+        return doCycle.getResetCopy();
+    }
+
+    /**
+     * @return the printUnsignedToOutputPanelAction
+     */
+    public static LittleManAction getPrintUnsignedToOutputPanelAction() {
+        return printUnsignedToOutputPanelAction;
+    }
+
+    /**
+     * @return the getDataFromInputPanel
+     */
+    public static LittleManAction getGetDataFromInputPanelAction() {
+        return getDataFromInputPanelAction;
+    }
+
     private final LittleMan littleMan;
+    private final LittleManAction doCycleCommand;
 
     public LittleManCommander(Computer computer) {
         littleMan = new LittleMan(computer);
+        doCycleCommand = getDoCycle();
     }
 
     public boolean doCycle() {
-        return doAction(doCycle);
+        return doAction(doCycleCommand);
+    }
+
+    public void reset() {
+        littleMan.reset();
     }
 
     private boolean doAction(LittleManAction littleManAction) {
@@ -186,10 +197,6 @@ public class LittleManCommander implements Drawable {
     @Override
     public void draw(Graphics graphics) {
         littleMan.draw(graphics);
-    }
-
-    public boolean isHalted() {
-        return littleMan.isHalted();
     }
 
     public boolean memorizeDataAtContainer(final LittleManWordContainer littleManWordContainer) {
@@ -209,11 +216,7 @@ public class LittleManCommander implements Drawable {
     }
 
     public boolean printUnsignedToOutputPanel() {
-        return printUnsignedToOutputPanelAction.doAction(littleMan);
-    }
-
-    public boolean halt() {
-        return littleMan.halt();
+        return getPrintUnsignedToOutputPanelAction().doAction(littleMan);
     }
 
 }

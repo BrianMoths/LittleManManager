@@ -30,7 +30,6 @@ public class LittleMan implements Drawable {
     private final LittleManPosition littleManPosition;
     private final LittleManData littleManData;
     private Instruction instruction;
-    private boolean isHalted = false;
 
     public LittleMan(Computer computer) {
         final PositionGetterAdapter positionGetterAdapter = new PositionGetterAdapter();
@@ -76,6 +75,10 @@ public class LittleMan implements Drawable {
         littleManData.clearMemory();
     }
 
+    public void reset() {
+        littleManData.reset();
+    }
+
     public boolean doAction(LittleManAction littleManAction) {
         return littleManAction.doAction(this);
     }
@@ -97,16 +100,7 @@ public class LittleMan implements Drawable {
         littleManData.draw(graphics, getX(), getY());
     }
 
-    public boolean halt() {
-        isHalted = true;
-        return false;
-    }
-
     //<editor-fold defaultstate="collapsed" desc="getters">
-    public boolean isHalted() {
-        return isHalted;
-    }
-
     public boolean isDataOperandNeeded() {
         return instruction != null && instruction.isDataOperandNeeded();
     }

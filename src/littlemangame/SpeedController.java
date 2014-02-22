@@ -78,6 +78,11 @@ public class SpeedController {
         }
     }
 
+    public void disable() {
+        pause();
+        speedControllerGui.disableButtons();
+    }
+
     private void setBufferedSpeed(int bufferedSpeed) {
         this.bufferedSpeed = bufferedSpeed;
     }

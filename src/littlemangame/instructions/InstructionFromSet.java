@@ -30,7 +30,6 @@ import static littlemangame.instructions.interfaceandimplementations.Instruction
 import static littlemangame.littlemancommands.LittleManCommander.haltAction;
 import static littlemangame.littlemancommands.LittleManCommander.memorizeDataAtContainerAction;
 import static littlemangame.littlemancommands.LittleManCommander.nullAction;
-import static littlemangame.littlemancommands.LittleManCommander.printUnsignedToOutputPanelAction;
 import static littlemangame.word.BinaryWordOperation.SET;
 
 /**
@@ -51,8 +50,8 @@ public enum InstructionFromSet {
     JUMP_IF_LESS_THAN_OR_EQUAL_ZERO(15, DATA_ONLY, LittleManTest.LESS_OR_EQUAL_ZERO, SET, IMMEDIATE, DestinationOperand.INSTRUCTION_POINTER),
     JUMP_IF_LESS_THAN_ZERO(16, DATA_ONLY, LittleManTest.LESS_THAN_ZERO, SET, IMMEDIATE, DestinationOperand.INSTRUCTION_POINTER),
     //Input/Output
-    PRINT_UNSIGNED(20, NEITHER, memorizeDataAtContainerAction(LittleManWordContainer.REGISTER), printUnsignedToOutputPanelAction),
-    INPUT(25, NEITHER, LittleManCommander.getDataFromInputPanel, LittleManCommander.doBinaryOperationOnContainerAction(LittleManWordContainer.REGISTER, SET)),
+    PRINT_UNSIGNED(20, NEITHER, memorizeDataAtContainerAction(LittleManWordContainer.REGISTER), LittleManCommander.getPrintUnsignedToOutputPanelAction()),
+    INPUT(25, NEITHER, LittleManCommander.getGetDataFromInputPanelAction(), LittleManCommander.doBinaryOperationOnContainerAction(LittleManWordContainer.REGISTER, SET)),
     //data movement
     LOAD_IMMEDIATE(30, DATA_ONLY, SET, IMMEDIATE, DestinationOperand.REGISTER),
     LOAD_MEMORY(31, ADDRESS_ONLY, SET, MEMORY, DestinationOperand.REGISTER),
@@ -155,7 +154,7 @@ public enum InstructionFromSet {
     }
 
     public Instruction getInstruction() {
-        return instruction;
+        return instruction.getResetCopy();
     }
 
     static private LittleManAction getLittleManAction(UnaryWordOperation unaryWordOperation, DestinationOperand destinationOperand) {

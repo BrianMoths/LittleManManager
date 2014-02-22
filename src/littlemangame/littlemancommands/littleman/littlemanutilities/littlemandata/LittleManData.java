@@ -71,6 +71,11 @@ public class LittleManData {
         return littleManTest.test(this);
     }
 
+    public void reset() {
+        clearMemory();
+        computer.reset();
+    }
+
     //<editor-fold defaultstate="collapsed" desc="containers">
     WordContainer getInstructionPointer() {
         return computer.instructionPointer;

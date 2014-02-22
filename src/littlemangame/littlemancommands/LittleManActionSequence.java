@@ -45,4 +45,13 @@ public final class LittleManActionSequence extends LittleManAction {
         currentAction %= numActions;
     }
 
+    @Override
+    public LittleManAction getResetCopy() {
+        List<LittleManAction> littleManActionsCopy = new ArrayList<>(numActions);
+        for (LittleManAction littleManAction : littleManActions) {
+            littleManActionsCopy.add(littleManAction.getResetCopy());
+        }
+        return new LittleManActionSequence(littleManActionsCopy);
+    }
+
 }

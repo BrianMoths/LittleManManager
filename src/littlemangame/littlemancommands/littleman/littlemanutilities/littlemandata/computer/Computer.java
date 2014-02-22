@@ -6,6 +6,7 @@ package littlemangame.littlemancommands.littleman.littlemanutilities.littlemanda
 
 import Renderer.Drawable;
 import java.awt.Graphics;
+import littlemangame.word.Word;
 
 /**
  *
@@ -32,6 +33,11 @@ public class Computer implements Drawable {
         register.draw(graphics);
         memory.draw(graphics);
         instructionPointer.draw(graphics);
+    }
+
+    public void reset() {
+        instructionPointer.setInstructionPointer(Word.ZERO_WORD);
+        outputPanel.clear();
     }
 
 }

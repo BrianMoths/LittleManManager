@@ -40,4 +40,9 @@ public class ParselessInstruction implements Instruction {
         return instructionOperandTypes.isAddressOperandNeeded();
     }
 
+    @Override
+    public Instruction getResetCopy() {
+        return new ParselessInstruction(instructionOperandTypes, littleManAction.getResetCopy());
+    }
+
 }

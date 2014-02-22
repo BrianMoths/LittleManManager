@@ -98,4 +98,9 @@ public final class LittleManConditionalAction extends LittleManAction {
         conditionalActionStep = ConditionalActionStep.GO_TO_TEST;
     }
 
+    @Override
+    public LittleManAction getResetCopy() {
+        return new LittleManConditionalAction(littleManTest, littleManConditionalAction.getResetCopy());
+    }
+
 }

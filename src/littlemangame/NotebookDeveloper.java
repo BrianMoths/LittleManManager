@@ -5,6 +5,8 @@
  */
 package littlemangame;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import littlemangame.littlemancommands.LittleManCommander;
 import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.Computer;
 
@@ -24,15 +26,29 @@ public class NotebookDeveloper {
         final Computer computer = new Computer(notebookDeveloperGui.getOutputPanel(), notebookDeveloperGui.getInputPanel());
         littleManCommander = new LittleManCommander(computer);
         notebookDeveloperGui.getGameCanvas().getRenderer().addDrawable(littleManCommander);
+        hookIntoNotebookDeveloperGui();
     }
 
     public void doFrame() {
         speedController.flushBuffer();
         for (int i = 0; i < speedController.getCurrentSpeed(); i++) {
-            if (!littleManCommander.isHalted()) {
-                littleManCommander.doCycle();
-            }
+//            if (!littleManCommander.isHalted()) {
+            littleManCommander.doCycle();
+//            }
         }
+    }
+
+    private void hookIntoNotebookDeveloperGui() {
+        notebookDeveloperGui.setAbortAction(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                speedController.disable();
+                littleManCommander.reset();
+            }
+
+        });
+        littleManCommander.reset();
     }
 
 }

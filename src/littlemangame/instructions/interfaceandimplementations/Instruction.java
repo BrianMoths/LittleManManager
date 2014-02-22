@@ -18,4 +18,6 @@ public interface Instruction {
 
     public boolean isAddressOperandNeeded();
 
+    public Instruction getResetCopy();
+
 }
