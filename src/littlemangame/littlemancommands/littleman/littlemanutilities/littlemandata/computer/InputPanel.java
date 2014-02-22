@@ -7,26 +7,12 @@ package littlemangame.littlemancommands.littleman.littlemanutilities.littlemanda
 
 import java.awt.Point;
 import littlemangame.word.Word;
-import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 /**
  *
  * @author brian
  */
 public class InputPanel extends javax.swing.JPanel {
-
-    private final static String[] STRINGS = makeWordStrings();
-
-    static private String[] makeWordStrings() {
-        final int numStrings = 100;
-        String[] strings = new String[numStrings];
-        Word word = Word.ZERO_WORD;
-        for (int i = 0; i < numStrings; i++) {
-            strings[i] = word.toString();
-            word = word.incrementedWord();
-        }
-        return strings;
-    }
 
     private boolean isValueSelected;
     private Word value;
@@ -36,18 +22,11 @@ public class InputPanel extends javax.swing.JPanel {
      */
     public InputPanel() {
         initComponents();
-        isValueSelected = false;
-        initWordModel();
+        wordSelector.setEditable(false);
         disablePanel();
     }
 
-    private void initWordModel() {
-        wordSelector.setModel(new javax.swing.DefaultComboBoxModel(STRINGS));
-        wordSelector.setEditable(false);
-        AutoCompleteDecorator.decorate(wordSelector);
-    }
-
-    public void disablePanel() {
+    public final void disablePanel() {
         wordSelector.setEnabled(false);
         submitButton.setEnabled(false);
         isValueSelected = false;
@@ -87,11 +66,8 @@ public class InputPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        wordSelector = new javax.swing.JComboBox();
         submitButton = new javax.swing.JButton();
-
-        wordSelector.setEditable(true);
-        wordSelector.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Apple", "Peach", "Cherry", "Plum" }));
+        wordSelector = new littlemangame.notebookdeveloper.gui.WordSelector();
 
         submitButton.setText("Submit");
         submitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -104,34 +80,32 @@ public class InputPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(wordSelector, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(submitButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(submitButton, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+                    .addComponent(wordSelector, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(6, 6, 6)
                 .addComponent(wordSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
-        value = Word.valueOfLastDigitsOfInteger(Integer.parseInt((String) wordSelector.getSelectedItem()));
+        value = wordSelector.getLastSelectedWord();
         isValueSelected = true;
     }//GEN-LAST:event_submitButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton submitButton;
-    private javax.swing.JComboBox wordSelector;
+    private littlemangame.notebookdeveloper.gui.WordSelector wordSelector;
     // End of variables declaration//GEN-END:variables
 
 }

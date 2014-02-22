@@ -12,12 +12,12 @@ import java.util.Iterator;
  */
 public class Word implements Comparable<Word> {
 
-    static private final int NUM_WORDS = 100;
-    static private final int NUM_DIGITS = 2;
-    static private final int BASE = 10;
-    static private final Word MIN_SIGNED = new Word(NUM_WORDS / 2);
-    static private final Word MAX_SIGNED = MIN_SIGNED.decrementedWord();
-    static private final Word MAX_WORD = new Word(NUM_WORDS - 1);
+    static public final int NUM_WORDS = 100;
+    static public final int NUM_DIGITS = 2;
+    static public final int BASE = 10;
+    static public final Word MIN_SIGNED = new Word(NUM_WORDS / 2);
+    static public final Word MAX_SIGNED = MIN_SIGNED.decrementedWord();
+    static public final Word MAX_WORD = new Word(NUM_WORDS - 1);
     static public final Word ZERO_WORD = new Word(0);
 
     static public Word valueOfLastDigitsOfInteger(int value) {
