@@ -36,7 +36,7 @@ public class LittleManGui extends BaseGameGui {
         gameCanvas = new GameGui.GameCanvas();
         inputPanel = new littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.InputPanel();
         outputPanel = new littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.OutputPanel();
-        speedControllerGui1 = new littlemangame.SpeedControllerGui();
+        speedControllerGui = new littlemangame.SpeedControllerGui();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,14 +72,14 @@ public class LittleManGui extends BaseGameGui {
                         .addComponent(gameCanvas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(114, 114, 114)
-                        .addComponent(speedControllerGui1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(speedControllerGui, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(speedControllerGui1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(speedControllerGui, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(gameCanvas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -106,7 +106,7 @@ public class LittleManGui extends BaseGameGui {
     private littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.InputPanel inputPanel;
     private javax.swing.JPanel jPanel1;
     private littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.OutputPanel outputPanel;
-    private littlemangame.SpeedControllerGui speedControllerGui1;
+    private littlemangame.SpeedControllerGui speedControllerGui;
     // End of variables declaration//GEN-END:variables
     public OutputPanel getOutputPanel() {
         return outputPanel;
@@ -120,8 +120,8 @@ public class LittleManGui extends BaseGameGui {
         return gameCanvas;
     }
 
-    public SpeedController getSpeedController() {
-        return speedControllerGui1.getSpeedController();
+    public SpeedControllerGui getSpeedControllerGui() {
+        return speedControllerGui;
     }
 
 }

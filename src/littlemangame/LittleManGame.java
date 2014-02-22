@@ -35,7 +35,7 @@ public class LittleManGame extends AbstractRealTimeGame<LittleManGui> {
         super(new AbstractInputHandlerClient(), makeGamePanel());
         computer = new Computer(getGameGui().getOutputPanel(), getGameGui().getInputPanel());
         littleManCommander = new LittleManCommander(computer);
-        speedController = getGameGui().getSpeedController();
+        speedController = new SpeedController(getGameGui().getSpeedControllerGui());
         init();
     }
 

@@ -5,6 +5,8 @@
  */
 package littlemangame;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,12 +39,15 @@ public class SpeedController {
     private int bufferedSpeed;
     private boolean isRunning;
     private boolean bufferedIsRunning;
+    private final SpeedControllerGui speedControllerGui;
 
-    public SpeedController() {
+    public SpeedController(SpeedControllerGui speedControllerGui) {
         speed = 1;
         bufferedSpeed = 1;
         isRunning = true;
         bufferedIsRunning = true;
+        this.speedControllerGui = speedControllerGui;
+        hookIntoGui();
     }
 
     public int getCurrentSpeed() {
@@ -53,41 +58,77 @@ public class SpeedController {
         }
     }
 
-    public void pause() {
+    private void pause() {
         bufferedIsRunning = false;
     }
 
-    public void resume() {
+    private void resume() {
         bufferedIsRunning = true;
     }
 
-    public void increaseSpeed() {
+    private void increaseSpeed() {
         if (bufferedSpeed < maxSpeed) {
             bufferedSpeed++;
         }
     }
 
-    public void decreaseSpeed() {
+    private void decreaseSpeed() {
         if (bufferedSpeed > minSpeed) {
             bufferedSpeed--;
         }
     }
 
-    public void setBufferedSpeed(int bufferedSpeed) {
+    private void setBufferedSpeed(int bufferedSpeed) {
         this.bufferedSpeed = bufferedSpeed;
     }
 
-    public void setBufferedIsRunning(boolean bufferedIsRunning) {
+    private void setBufferedIsRunning(boolean bufferedIsRunning) {
         this.bufferedIsRunning = bufferedIsRunning;
     }
 
     public void flushBuffer() {
         isRunning = bufferedIsRunning;
         speed = bufferedSpeed;
+        speedControllerGui.setText(getSpeedString());
     }
 
-    String getSpeedString() {
+    private String getSpeedString() {
         return Integer.toString(speeds.get(speed)) + "x";
+    }
+
+    private void hookIntoGui() {
+        speedControllerGui.setFasterAction(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                increaseSpeed();
+            }
+
+        });
+        speedControllerGui.setPauseAction(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                pause();
+            }
+
+        });
+        speedControllerGui.setResumeAction(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                resume();
+            }
+
+        });
+        speedControllerGui.setSlowerAction(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                decreaseSpeed();
+            }
+
+        });
     }
 
 }

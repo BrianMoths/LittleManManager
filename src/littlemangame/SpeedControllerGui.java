@@ -6,6 +6,7 @@
 package littlemangame;
 
 import java.awt.Graphics;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -13,24 +14,37 @@ import java.awt.Graphics;
  */
 public class SpeedControllerGui extends javax.swing.JPanel {
 
-    private final SpeedController speedController;
-
+//    private final SpeedController speedController;
     /**
      * Creates new form SpeedControllerGui
      */
     public SpeedControllerGui() {
         initComponents();
-        speedController = new SpeedController();
-    }
-
-    public SpeedController getSpeedController() {
-        return speedController;
     }
 
     @Override
     public void paint(Graphics g) {
-        jLabel1.setText(speedController.getSpeedString());
         super.paint(g); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void setResumeAction(ActionListener l) {
+        resumeButton.addActionListener(l);
+    }
+
+    public void setFasterAction(ActionListener l) {
+        fasterButton.addActionListener(l);
+    }
+
+    public void setSlowerAction(ActionListener l) {
+        slowerButton.addActionListener(l);
+    }
+
+    public void setPauseAction(ActionListener l) {
+        pauseButton.addActionListener(l);
+    }
+
+    public void setText(String text) {
+        jLabel1.setText(text);
     }
 
     /**
@@ -44,40 +58,20 @@ public class SpeedControllerGui extends javax.swing.JPanel {
     private void initComponents() {
 
         pauseButton = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        slowerButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        fasterButton = new javax.swing.JButton();
         resumeButton = new javax.swing.JButton();
 
         pauseButton.setText("Pause");
-        pauseButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pauseButtonActionPerformed(evt);
-            }
-        });
 
-        jButton1.setText("Slower");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        slowerButton.setText("Slower");
 
         jLabel1.setText("1x");
 
-        jButton2.setText("Faster");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
+        fasterButton.setText("Faster");
 
         resumeButton.setText("Resume");
-        resumeButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                resumeButtonActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -87,13 +81,13 @@ public class SpeedControllerGui extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pauseButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(slowerButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(resumeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(fasterButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -105,35 +99,18 @@ public class SpeedControllerGui extends javax.swing.JPanel {
                     .addComponent(resumeButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
+                    .addComponent(slowerButton)
+                    .addComponent(fasterButton)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void pauseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pauseButtonActionPerformed
-        speedController.pause();
-    }//GEN-LAST:event_pauseButtonActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        speedController.decreaseSpeed();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        speedController.increaseSpeed();
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void resumeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resumeButtonActionPerformed
-        speedController.resume();
-    }//GEN-LAST:event_resumeButtonActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton fasterButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton pauseButton;
     private javax.swing.JButton resumeButton;
+    private javax.swing.JButton slowerButton;
     // End of variables declaration//GEN-END:variables
 
 }
