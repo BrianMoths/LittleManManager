@@ -17,7 +17,7 @@ final class LocalAction extends LittleManAction {
     LittleManAction littleManAction;
 
     LocalAction(ComputerLocation computerLocation, LittleManAction littleManAction) {
-        this.littleManAction = new LittleManActionSequence(LittleManCommander.goToComputerLocation(computerLocation), littleManAction);
+        this.littleManAction = new LittleManActionSequence(LittleManCommands.goToComputerLocation(computerLocation), littleManAction);
     }
 
     private LocalAction(LocalAction localAction) {

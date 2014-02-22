@@ -11,10 +11,9 @@ import littlemangame.instructions.interfaceandimplementations.InstructionOperand
 import littlemangame.instructions.interfaceandimplementations.ParselessInstruction;
 import littlemangame.littlemancommands.LittleManAction;
 import littlemangame.littlemancommands.LittleManActionSequence;
-import littlemangame.littlemancommands.LittleManCommander;
+import littlemangame.littlemancommands.LittleManCommands;
 import littlemangame.littlemancommands.LittleManConditionalAction;
 import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.LittleManTest;
-import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.LittleManWordContainer;
 import littlemangame.word.BinaryWordOperation;
 import littlemangame.word.UnaryWordOperation;
 import littlemangame.word.Word;
@@ -27,9 +26,6 @@ import static littlemangame.instructions.interfaceandimplementations.Instruction
 import static littlemangame.instructions.interfaceandimplementations.InstructionOperandTypes.BOTH;
 import static littlemangame.instructions.interfaceandimplementations.InstructionOperandTypes.DATA_ONLY;
 import static littlemangame.instructions.interfaceandimplementations.InstructionOperandTypes.NEITHER;
-import static littlemangame.littlemancommands.LittleManCommander.haltAction;
-import static littlemangame.littlemancommands.LittleManCommander.memorizeDataAtContainerAction;
-import static littlemangame.littlemancommands.LittleManCommander.nullAction;
 import static littlemangame.word.BinaryWordOperation.SET;
 
 /**
@@ -39,8 +35,8 @@ import static littlemangame.word.BinaryWordOperation.SET;
 public enum InstructionFromSet {
 
     //system, miscellaneous
-    NO_OPERATION(0, NEITHER, nullAction),
-    HALT(9, NEITHER, haltAction),
+    NO_OPERATION(0, NEITHER, LittleManCommands.nullAction),
+    HALT(9, NEITHER, LittleManCommands.haltAction),
     //control
     UNCONDITIONAL_JUMP(10, DATA_ONLY, SET, IMMEDIATE, DestinationOperand.INSTRUCTION_POINTER),
     JUMP_IF_ZERO(11, DATA_ONLY, LittleManTest.ZERO, SET, IMMEDIATE, DestinationOperand.INSTRUCTION_POINTER),
@@ -50,8 +46,8 @@ public enum InstructionFromSet {
     JUMP_IF_LESS_THAN_OR_EQUAL_ZERO(15, DATA_ONLY, LittleManTest.LESS_OR_EQUAL_ZERO, SET, IMMEDIATE, DestinationOperand.INSTRUCTION_POINTER),
     JUMP_IF_LESS_THAN_ZERO(16, DATA_ONLY, LittleManTest.LESS_THAN_ZERO, SET, IMMEDIATE, DestinationOperand.INSTRUCTION_POINTER),
     //Input/Output
-    PRINT_UNSIGNED(20, NEITHER, memorizeDataAtContainerAction(LittleManWordContainer.REGISTER), LittleManCommander.getPrintUnsignedToOutputPanelAction()),
-    INPUT(25, NEITHER, LittleManCommander.getGetDataFromInputPanelAction(), LittleManCommander.doBinaryOperationOnContainerAction(LittleManWordContainer.REGISTER, SET)),
+    PRINT_UNSIGNED(20, NEITHER, LittleManCommands.memorizeDataAtContainerAction(littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.LittleManWordContainer.REGISTER), LittleManCommands.getPrintUnsignedToOutputPanelAction()),
+    INPUT(25, NEITHER, LittleManCommands.getGetDataFromInputPanelAction(), LittleManCommands.doBinaryOperationOnContainerAction(littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.LittleManWordContainer.REGISTER, SET)),
     //data movement
     LOAD_IMMEDIATE(30, DATA_ONLY, SET, IMMEDIATE, DestinationOperand.REGISTER),
     LOAD_MEMORY(31, ADDRESS_ONLY, SET, MEMORY, DestinationOperand.REGISTER),
@@ -158,11 +154,11 @@ public enum InstructionFromSet {
     }
 
     static private LittleManAction getLittleManAction(UnaryWordOperation unaryWordOperation, DestinationOperand destinationOperand) {
-        return new LittleManActionSequence(destinationOperand.getPreparationAction(), LittleManCommander.doUnaryOperationOnContainerAction(destinationOperand.getDestinationContainer(), unaryWordOperation));
+        return new LittleManActionSequence(destinationOperand.getPreparationAction(), LittleManCommands.doUnaryOperationOnContainerAction(destinationOperand.getDestinationContainer(), unaryWordOperation));
     }
 
     static private LittleManAction getLittleManAction(BinaryWordOperation binaryWordOperation, SourceOperand sourceOperand, DestinationOperand destinationOperand) {
-        return new LittleManActionSequence(sourceOperand.getOperandMemorizer(), destinationOperand.getPreparationAction(), LittleManCommander.doBinaryOperationOnContainerAction(destinationOperand.getDestinationContainer(), binaryWordOperation));
+        return new LittleManActionSequence(sourceOperand.getOperandMemorizer(), destinationOperand.getPreparationAction(), LittleManCommands.doBinaryOperationOnContainerAction(destinationOperand.getDestinationContainer(), binaryWordOperation));
     }
 
 }

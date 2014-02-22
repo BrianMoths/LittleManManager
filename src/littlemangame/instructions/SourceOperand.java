@@ -6,6 +6,7 @@ package littlemangame.instructions;
 
 import littlemangame.littlemancommands.LittleManAction;
 import littlemangame.littlemancommands.LittleManActionSequence;
+import littlemangame.littlemancommands.LittleManCommands;
 import static littlemangame.littlemancommands.LittleManCommander.*;
 import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.LittleManWordContainer;
 
@@ -15,9 +16,9 @@ import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandat
  */
 public enum SourceOperand {
 
-    IMMEDIATE(nullAction),
+    IMMEDIATE(LittleManCommands.nullAction),
     REGISTER(LittleManWordContainer.REGISTER),
-    REGISTER_INDIRECT(new LittleManActionSequence(memorizeAddressAtContainerAction(LittleManWordContainer.REGISTER), memorizeDataAtContainerAction(LittleManWordContainer.REMEMBERED_MEMORY))),
+    REGISTER_INDIRECT(new LittleManActionSequence(LittleManCommands.memorizeAddressAtContainerAction(littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.LittleManWordContainer.REGISTER), LittleManCommands.memorizeDataAtContainerAction(LittleManWordContainer.REMEMBERED_MEMORY))),
     MEMORY(LittleManWordContainer.REMEMBERED_MEMORY);
     private final LittleManAction operandMemorizer;
 
@@ -26,7 +27,7 @@ public enum SourceOperand {
     }
 
     private SourceOperand(LittleManWordContainer littleManWordContainer) {
-        this.operandMemorizer = memorizeDataAtContainerAction(littleManWordContainer);
+        this.operandMemorizer = LittleManCommands.memorizeDataAtContainerAction(littleManWordContainer);
     }
 
     LittleManAction getOperandMemorizer() {
