@@ -6,8 +6,6 @@ package littlemangame;
 
 import ListenerInputHandler.AbstractInputHandlerClient;
 import RealTimeGame.AbstractRealTimeGame;
-import littlemangame.littlemancommands.LittleManCommander;
-import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.Computer;
 
 /**
  *
@@ -27,30 +25,20 @@ public class LittleManGame extends AbstractRealTimeGame<LittleManGui> {
         return new LittleManGui();
     }
 
-    final LittleManCommander littleManCommander;
-    final Computer computer;
-    final SpeedController speedController;
+    private final NotebookDeveloper notebookDeveloper;
 
     public LittleManGame() {
         super(new AbstractInputHandlerClient(), makeGamePanel());
-        computer = new Computer(getGameGui().getOutputPanel(), getGameGui().getInputPanel());
-        littleManCommander = new LittleManCommander(computer);
-        speedController = new SpeedController(getGameGui().getSpeedControllerGui());
+        notebookDeveloper = new NotebookDeveloper(getGameGui().getNotebookDeveloperGui());
         init();
     }
 
     private void init() {
-        getGameGui().getGameCanvas().getRenderer().addDrawable(littleManCommander);
     }
 
     @Override
     protected void doLogic() {
-        speedController.flushBuffer();
-        for (int i = 0; i < speedController.getCurrentSpeed(); i++) {
-            if (!littleManCommander.isHalted()) {
-                littleManCommander.doCycle();
-            }
-        }
+        notebookDeveloper.doFrame();
     }
 
 }
