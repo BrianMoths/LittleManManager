@@ -17,10 +17,10 @@ public class Computer implements Drawable {
     public final Register register;
     public final Memory memory;
     public final InstructionPointer instructionPointer;
-    public final OutputPanel outputPanel;
+    public final ComputerOutputter outputPanel;
     public final InputPanel inputPanel;
 
-    public Computer(OutputPanel outputPanel, InputPanel inputPanel) {
+    public Computer(ComputerOutputter outputPanel, InputPanel inputPanel) {
         register = new Register();
         memory = new Memory();
         instructionPointer = new InstructionPointer();

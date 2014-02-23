@@ -27,16 +27,12 @@ public class LittleManCommander implements Drawable {
     }
 
     public boolean doCycle() {
-        return doAction(doCycleCommand);
+        return doCycleCommand.doAction(littleMan);
     }
 
     public void reset() {
         littleMan.reset();
         doCycleCommand = LittleManCommands.getDoCycle();
-    }
-
-    private boolean doAction(LittleManAction littleManAction) {
-        return littleManAction.doAction(littleMan);
     }
 
     @Override

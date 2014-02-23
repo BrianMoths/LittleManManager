@@ -12,7 +12,7 @@ import littlemangame.word.Word;
  *
  * @author brian
  */
-public class InputPanel extends javax.swing.JPanel {
+public class InputPanel extends javax.swing.JPanel implements ComputerInputter {
 
     private boolean isValueSelected;
     private Word value;
@@ -26,30 +26,36 @@ public class InputPanel extends javax.swing.JPanel {
         disablePanel();
     }
 
+    @Override
     public final void disablePanel() {
         wordSelector.setEnabled(false);
         submitButton.setEnabled(false);
         isValueSelected = false;
     }
 
+    @Override
     public void enablePanel() {
         wordSelector.setEnabled(true);
         submitButton.setEnabled(true);
     }
 
+    @Override
     public boolean isPanelEnabled() {
         return wordSelector.isEnabled();
     }
 
+    @Override
     public Word getLastSelectedWord() {
         disablePanel();
         return value;
     }
 
+    @Override
     public boolean isValueSelected() {
         return isValueSelected;
     }
 
+    @Override
     public Point getAccessLocation() {
         final int x = getX() + getWidth() + 4;
         final int y = getY() + getHeight() / 2;

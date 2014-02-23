@@ -5,12 +5,13 @@
 package littlemangame.computer;
 
 import java.awt.Point;
+import littlemangame.word.Word;
 
 /**
  *
  * @author brian
  */
-public class OutputPanel extends javax.swing.JPanel {
+public class OutputPanel extends javax.swing.JPanel implements ComputerOutputter {
 
     /**
      * Creates new form OutputPanel
@@ -19,23 +20,26 @@ public class OutputPanel extends javax.swing.JPanel {
         initComponents();
     }
 
-    public void append(String str) {
+    private void append(String str) {
         jTextArea1.append(str);
     }
 
-    public void newLine() {
+    private void newLine() {
         append("\n");
     }
 
-    public void println(String string) {
-        append(string);
+    @Override
+    public void printlnUnsigned(Word word) {
+        append(word.toStringUnsigned());
         newLine();
     }
 
+    @Override
     public void clear() {
         jTextArea1.setText("");
     }
 
+    @Override
     public Point getAccessLocation() {
         final int x = getX() + getWidth() + 4;
         final int y = getY() + getHeight() / 2;
