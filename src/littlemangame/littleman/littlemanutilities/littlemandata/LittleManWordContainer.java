@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates and open the template in
  * the editor.
  */
-package littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata;
+package littlemangame.littleman.littlemanutilities.littlemandata;
 
-import littlemangame.littlemancommands.littleman.littlemanutilities.location.ComputerLocation;
+import littlemangame.littleman.littlemanutilities.location.ComputerLocation;
 import littlemangame.word.Word;
 import littlemangame.word.WordContainer;
 

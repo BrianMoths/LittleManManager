@@ -2,16 +2,16 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata;
+package littlemangame.littleman.littlemanutilities.littlemandata;
 
 import java.awt.Graphics;
 import java.awt.Point;
+import littlemangame.computer.Computer;
+import littlemangame.computer.Memory;
 import littlemangame.instructions.InstructionFromSet;
 import littlemangame.instructions.interfaceandimplementations.Instruction;
-import littlemangame.littlemancommands.littleman.PositionGetterAdapter;
-import littlemangame.littlemancommands.littleman.PositionGetterAdapter.PositionGetter;
-import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.Computer;
-import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.Memory;
+import littlemangame.littleman.PositionGetterAdapter;
+import littlemangame.littleman.PositionGetterAdapter.PositionGetter;
 import littlemangame.word.BinaryWordOperation;
 import littlemangame.word.UnaryWordOperation;
 import littlemangame.word.Word;

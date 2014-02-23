@@ -2,10 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package littlemangame.littlemancommands.littleman.littlemanutilities.location;
+package littlemangame.littleman.littlemanutilities.location;
 
 import java.awt.Point;
-import littlemangame.littlemancommands.littleman.PositionGetterAdapter;
+import littlemangame.littleman.PositionGetterAdapter;
 
 /**
  *

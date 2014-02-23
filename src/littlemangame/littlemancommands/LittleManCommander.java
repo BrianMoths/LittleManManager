@@ -8,9 +8,9 @@ import Renderer.Drawable;
 import java.awt.Graphics;
 import littlemangame.littlemancommands.LittleManCommands.LittleManAction;
 import littlemangame.littlemancommands.LittleManCommands.LittleManCommands;
-import littlemangame.littlemancommands.littleman.LittleMan;
-import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.Computer;
-import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.Memory;
+import littlemangame.littleman.LittleMan;
+import littlemangame.computer.Computer;
+import littlemangame.computer.Memory;
 
 /**
  *

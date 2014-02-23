@@ -2,21 +2,21 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package littlemangame.littlemancommands.littleman;
+package littlemangame.littleman;
 
 import Renderer.Drawable;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
+import littlemangame.computer.Computer;
+import littlemangame.computer.Memory;
 import littlemangame.instructions.interfaceandimplementations.Instruction;
+import littlemangame.littleman.littlemanutilities.littlemandata.LittleManData;
+import littlemangame.littleman.littlemanutilities.littlemandata.LittleManTest;
+import littlemangame.littleman.littlemanutilities.littlemandata.LittleManWordContainer;
+import littlemangame.littleman.littlemanutilities.location.ComputerLocation;
+import littlemangame.littleman.littlemanutilities.location.LittleManPosition;
 import littlemangame.littlemancommands.LittleManCommands.LittleManAction;
-import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.LittleManData;
-import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.LittleManTest;
-import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.LittleManWordContainer;
-import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.Computer;
-import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.Memory;
-import littlemangame.littlemancommands.littleman.littlemanutilities.location.ComputerLocation;
-import littlemangame.littlemancommands.littleman.littlemanutilities.location.LittleManPosition;
 import littlemangame.word.BinaryWordOperation;
 import littlemangame.word.UnaryWordOperation;
 

@@ -5,8 +5,8 @@
  */
 package littlemangame.littlemancommands.LittleManCommands;
 
-import littlemangame.littlemancommands.littleman.LittleMan;
-import littlemangame.littlemancommands.littleman.littlemanutilities.location.ComputerLocation;
+import littlemangame.littleman.LittleMan;
+import littlemangame.littleman.littlemanutilities.location.ComputerLocation;
 
 /**
  *

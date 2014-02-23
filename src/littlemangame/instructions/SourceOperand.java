@@ -8,7 +8,8 @@ import littlemangame.littlemancommands.LittleManCommands.LittleManAction;
 import littlemangame.littlemancommands.LittleManCommands.LittleManActionSequence;
 import littlemangame.littlemancommands.LittleManCommands.LittleManCommands;
 import static littlemangame.littlemancommands.LittleManCommander.*;
-import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.LittleManWordContainer;
+
+import littlemangame.littleman.littlemanutilities.littlemandata.LittleManWordContainer;
 
 /**
  *
@@ -18,7 +19,7 @@ public enum SourceOperand {
 
     IMMEDIATE(LittleManCommands.nullAction),
     REGISTER(LittleManWordContainer.REGISTER),
-    REGISTER_INDIRECT(new LittleManActionSequence(LittleManCommands.memorizeAddressAtContainerAction(littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.LittleManWordContainer.REGISTER), LittleManCommands.memorizeDataAtContainerAction(LittleManWordContainer.REMEMBERED_MEMORY))),
+    REGISTER_INDIRECT(new LittleManActionSequence(LittleManCommands.memorizeAddressAtContainerAction(littlemangame.littleman.littlemanutilities.littlemandata.LittleManWordContainer.REGISTER), LittleManCommands.memorizeDataAtContainerAction(LittleManWordContainer.REMEMBERED_MEMORY))),
     MEMORY(LittleManWordContainer.REMEMBERED_MEMORY);
     private final LittleManAction operandMemorizer;
 

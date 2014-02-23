@@ -7,9 +7,9 @@ package littlemangame.notebookdeveloper;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import littlemangame.computer.Computer;
+import littlemangame.computer.Memory;
 import littlemangame.littlemancommands.LittleManCommander;
-import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.Computer;
-import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.Memory;
 import littlemangame.notebookdeveloper.gui.MemoryEditor;
 import littlemangame.notebookdeveloper.gui.NotebookDeveloperGui;
 

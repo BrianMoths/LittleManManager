@@ -6,8 +6,8 @@
 package littlemangame.littlemancommands.LittleManCommands;
 
 import java.util.EnumMap;
-import littlemangame.littlemancommands.littleman.LittleMan;
-import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.LittleManTest;
+import littlemangame.littleman.LittleMan;
+import littlemangame.littleman.littlemanutilities.littlemandata.LittleManTest;
 
 /**
  *

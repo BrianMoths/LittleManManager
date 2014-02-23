@@ -7,7 +7,7 @@ package littlemangame.littlemancommands.LittleManCommands;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import littlemangame.littlemancommands.littleman.LittleMan;
+import littlemangame.littleman.LittleMan;
 
 /**
  *

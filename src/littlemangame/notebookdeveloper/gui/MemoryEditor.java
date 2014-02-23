@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.Memory;
+import littlemangame.computer.Memory;
 import littlemangame.word.Word;
 
 /**

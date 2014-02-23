@@ -5,9 +5,9 @@
  */
 package littlemangame.littlemancommands.LittleManCommands;
 
-import littlemangame.littlemancommands.littleman.LittleMan;
-import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.LittleManWordContainer;
-import littlemangame.littlemancommands.littleman.littlemanutilities.location.ComputerLocation;
+import littlemangame.littleman.LittleMan;
+import littlemangame.littleman.littlemanutilities.littlemandata.LittleManWordContainer;
+import littlemangame.littleman.littlemanutilities.location.ComputerLocation;
 import littlemangame.word.BinaryWordOperation;
 import littlemangame.word.UnaryWordOperation;
 

@@ -4,7 +4,7 @@
  */
 package littlemangame.littlemancommands.LittleManCommands;
 
-import littlemangame.littlemancommands.littleman.LittleMan;
+import littlemangame.littleman.LittleMan;
 
 /**
  *

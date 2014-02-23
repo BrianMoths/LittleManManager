@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata;
+package littlemangame.littleman.littlemanutilities.littlemandata;
 
 import java.awt.Color;
 import java.awt.Graphics;
