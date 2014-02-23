@@ -24,13 +24,26 @@ public class NotebookDeveloper {
     private final NotebookDeveloperGui notebookDeveloperGui;
     private final Memory memory;
     private boolean isExecuting;
-    private MemoryEditor memoryEditor;
+    private boolean isEditing;
+    private final MemoryEditor memoryEditor;
 
     public NotebookDeveloper(NotebookDeveloperGui notebookDeveloperGui) {
         this.notebookDeveloperGui = notebookDeveloperGui;
         speedController = new SpeedController(notebookDeveloperGui.getSpeedControllerGui());
         final Computer computer = new Computer(notebookDeveloperGui.getOutputPanel(), notebookDeveloperGui.getInputPanel());
         littleManCommander = new LittleManCommander(computer);
+        memoryEditor = new MemoryEditor();
+        memoryEditor.setSaveAction(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                memoryEditor.setVisible(false);
+                isEditing = false;
+                memory.setMemory(memoryEditor.getMemory());
+                syncGui();
+            }
+
+        });
         notebookDeveloperGui.getGameCanvas().getRenderer().addDrawable(littleManCommander);
         hookIntoNotebookDeveloperGui();
         stopExecution();
@@ -46,9 +59,9 @@ public class NotebookDeveloper {
 
     private void syncGui() {
         notebookDeveloperGui.setEnabledAbort(isExecuting);
-        notebookDeveloperGui.setEnabledEditMemory(!isExecuting);
-        notebookDeveloperGui.setEnabledExecute(!isExecuting);
-        notebookDeveloperGui.setEnabledSubmit(!isExecuting);
+        notebookDeveloperGui.setEnabledEditMemory(!isExecuting && !isEditing);
+        notebookDeveloperGui.setEnabledExecute(!isExecuting && !isEditing);
+        notebookDeveloperGui.setEnabledSubmit(!isExecuting && !isEditing);
     }
 
     private void stopExecution() {
@@ -66,8 +79,10 @@ public class NotebookDeveloper {
     }
 
     private void openMemoryEditer() {
-        memoryEditor = new MemoryEditor();
+        memoryEditor.setMemory(memory);
         memoryEditor.setVisible(true);
+        isEditing = true;
+        syncGui();
     }
 
     private void hookIntoNotebookDeveloperGui() {

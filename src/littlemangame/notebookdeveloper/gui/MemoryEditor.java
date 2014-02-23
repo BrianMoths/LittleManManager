@@ -48,9 +48,18 @@ public class MemoryEditor extends javax.swing.JFrame {
         Iterator<Word> wordIterator = Word.getIterator();
         while (wordIterator.hasNext()) {
             final Word word = wordIterator.next();
-            memory.setMemory(word, memorySlotChoosers.get(word.getValue()).getSelectedWord());
+            memory.setMemoryAtAddress(word, memorySlotChoosers.get(word.getValue()).getSelectedWord());
         }
         return memory;
+    }
+
+    public void setMemory(Memory memory) {
+        Iterator<Word> wordIterator = Word.getIterator();
+        while (wordIterator.hasNext()) {
+            final Word word = wordIterator.next();
+            MemorySlotChooser memorySlotChooser = memorySlotChoosers.get(word.getValue());
+            memorySlotChooser.setSelectedWord(memory.getMemory(word).getWord());
+        }
     }
 
     public void setSaveAction(ActionListener actionListener) {

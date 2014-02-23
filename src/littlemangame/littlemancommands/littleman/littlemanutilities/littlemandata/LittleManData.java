@@ -49,7 +49,7 @@ public class LittleManData {
     }
 
     public void printUnsigedToOutputPanel() {
-        computer.outputPanel.append(useRememberedData().toStringUnsigned());
+        computer.outputPanel.println(useRememberedData().toStringUnsigned());
     }
 
     public boolean memorizeDataFromInputPanel() {

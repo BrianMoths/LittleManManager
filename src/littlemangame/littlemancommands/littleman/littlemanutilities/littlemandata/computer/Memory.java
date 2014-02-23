@@ -108,8 +108,8 @@ public class Memory implements Drawable {
         memory.set(82, new WordContainer(InstructionFromSet.PRINT_UNSIGNED.getOpcode()));
         memory.set(83, new WordContainer(InstructionFromSet.HALT.getOpcode()));
 
-        setMemory(input, Word.valueOfLastDigitsOfInteger(8));
-        setMemory(oldValue, Word.valueOfLastDigitsOfInteger(1));
+        setMemoryAtAddress(input, Word.valueOfLastDigitsOfInteger(8));
+        setMemoryAtAddress(oldValue, Word.valueOfLastDigitsOfInteger(1));
     }
 
     @Override
@@ -125,8 +125,16 @@ public class Memory implements Drawable {
         graphics.setColor(color);
     }
 
-    public void setMemory(Word address, Word wordToBeStored) {
+    public void setMemoryAtAddress(Word address, Word wordToBeStored) {
         memory.get(address.getValue()).setWord(wordToBeStored);
+    }
+
+    public void setMemory(Memory memory) {
+        Iterator<Word> wordIterator = Word.getIterator();
+        while (wordIterator.hasNext()) {
+            final Word word = wordIterator.next();
+            setMemoryAtAddress(word, memory.getMemory(word).getWord());
+        }
     }
 
     public WordContainer getMemory(Word address) {
@@ -149,7 +157,7 @@ public class Memory implements Drawable {
         Iterator<Word> wordIterator = Word.getIterator();
         while (wordIterator.hasNext()) {
             Word word = wordIterator.next();
-            setMemory(word, memory.getMemory(word).getWord());
+            setMemoryAtAddress(word, memory.getMemory(word).getWord());
         }
     }
 

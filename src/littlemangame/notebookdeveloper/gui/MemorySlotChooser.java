@@ -37,6 +37,10 @@ public class MemorySlotChooser extends javax.swing.JPanel {
         return wordSelector.getLastSelectedWord();
     }
 
+    public void setSelectedWord(Word word) {
+        wordSelector.setSelectedWord(word);
+    }
+
     /**
      * This method is called from within the constructor to
      * initialize the form.

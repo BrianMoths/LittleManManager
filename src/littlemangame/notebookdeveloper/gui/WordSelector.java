@@ -47,4 +47,8 @@ public class WordSelector extends JComboBox<Word> {
         return getItemAt(getSelectedIndex());
     }
 
+    public void setSelectedWord(Word word) {
+        setSelectedIndex(word.getValue());
+    }
+
 }

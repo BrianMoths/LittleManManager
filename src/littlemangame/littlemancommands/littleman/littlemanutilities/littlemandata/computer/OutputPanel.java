@@ -27,6 +27,11 @@ public class OutputPanel extends javax.swing.JPanel {
         append("\n");
     }
 
+    public void println(String string) {
+        append(string);
+        newLine();
+    }
+
     public void clear() {
         jTextArea1.setText("");
     }
