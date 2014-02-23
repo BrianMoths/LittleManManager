@@ -5,12 +5,13 @@
  */
 package littlemangame.notebookdeveloper;
 
-import littlemangame.notebookdeveloper.gui.NotebookDeveloperGui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import littlemangame.littlemancommands.LittleManCommander;
 import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.Computer;
 import littlemangame.littlemancommands.littleman.littlemanutilities.littlemandata.computer.Memory;
+import littlemangame.notebookdeveloper.gui.MemoryEditor;
+import littlemangame.notebookdeveloper.gui.NotebookDeveloperGui;
 
 /**
  *
@@ -23,6 +24,7 @@ public class NotebookDeveloper {
     private final NotebookDeveloperGui notebookDeveloperGui;
     private final Memory memory;
     private boolean isExecuting;
+    private MemoryEditor memoryEditor;
 
     public NotebookDeveloper(NotebookDeveloperGui notebookDeveloperGui) {
         this.notebookDeveloperGui = notebookDeveloperGui;
@@ -63,6 +65,11 @@ public class NotebookDeveloper {
         syncGui();
     }
 
+    private void openMemoryEditer() {
+        memoryEditor = new MemoryEditor();
+        memoryEditor.setVisible(true);
+    }
+
     private void hookIntoNotebookDeveloperGui() {
         notebookDeveloperGui.setAbortAction(new ActionListener() {
 
@@ -77,6 +84,14 @@ public class NotebookDeveloper {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 execute();
+            }
+
+        });
+        notebookDeveloperGui.setEditMemoryAction(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                openMemoryEditer();
             }
 
         });
