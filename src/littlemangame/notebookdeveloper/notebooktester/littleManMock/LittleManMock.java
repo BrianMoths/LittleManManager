@@ -15,13 +15,22 @@ import littlemangame.littleman.littlemanutilities.location.ComputerLocation;
  */
 public class LittleManMock extends LittleMan {
 
-    public LittleManMock(Computer computer) {
+    private final HaltListener haltListener;
+
+    public LittleManMock(Computer computer, HaltListener haltListener) {
         super(computer);
+        this.haltListener = haltListener;
     }
 
     @Override
     public boolean goToComputerLocation(ComputerLocation computerLocation) {
         return true;
+    }
+
+    @Override
+    public void halt() {
+        super.halt();
+        haltListener.acceptHalt();
     }
 
 }

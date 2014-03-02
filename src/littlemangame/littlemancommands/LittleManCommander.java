@@ -6,11 +6,11 @@ package littlemangame.littlemancommands;
 
 import Renderer.Drawable;
 import java.awt.Graphics;
-import littlemangame.littlemancommands.LittleManCommands.LittleManAction;
-import littlemangame.littlemancommands.LittleManCommands.LittleManCommands;
-import littlemangame.littleman.LittleMan;
 import littlemangame.computer.Computer;
 import littlemangame.computer.Memory;
+import littlemangame.littleman.LittleMan;
+import littlemangame.littlemancommands.LittleManCommands.LittleManAction;
+import littlemangame.littlemancommands.LittleManCommands.LittleManCommands;
 
 /**
  *
@@ -42,6 +42,10 @@ public class LittleManCommander implements Drawable {
 
     public void loadCopyOfMemory(Memory memory) {
         littleMan.loadCopyOfMemory(memory);
+    }
+
+    public boolean isHalted() {
+        return littleMan.isHalted();
     }
 
 }

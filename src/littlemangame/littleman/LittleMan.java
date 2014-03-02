@@ -31,11 +31,13 @@ public class LittleMan implements Drawable {
     private final LittleManPosition littleManPosition;
     private final LittleManData littleManData;
     private Instruction instruction;
+    private boolean isHalted;
 
     public LittleMan(Computer computer) {
         final PositionGetterAdapter positionGetterAdapter = new PositionGetterAdapter();
         littleManData = new LittleManData(computer, positionGetterAdapter);
         littleManPosition = new LittleManPosition(pathY, stepSize, new Point(200, pathY), positionGetterAdapter);
+        isHalted = false;
     }
 
     public boolean goToComputerLocation(ComputerLocation computerLocation) {
@@ -80,8 +82,13 @@ public class LittleMan implements Drawable {
         littleManData.loadCopyOfMemory(memory);
     }
 
+    public void halt() {
+        isHalted = true;
+    }
+
     public void reset() {
         littleManData.reset();
+        isHalted = false;
     }
 
     public boolean doAction(LittleManAction littleManAction) {
@@ -112,6 +119,10 @@ public class LittleMan implements Drawable {
 
     public boolean isAddressOperandNeeded() {
         return instruction != null && instruction.isAddressOperandNeeded();
+    }
+
+    public boolean isHalted() {
+        return isHalted;
     }
 
     private int getX() {
