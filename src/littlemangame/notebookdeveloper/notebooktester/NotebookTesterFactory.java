@@ -5,14 +5,12 @@
  */
 package littlemangame.notebookdeveloper.notebooktester;
 
-import littlemangame.computer.Memory;
-
 /**
  *
  * @author brian
  */
-public interface NotebookTester {
+public interface NotebookTesterFactory {
 
-    public boolean isNotebookCorrect(Memory memory);
+    RepeatingNotebookTester produceNotebookTester();
 
 }
