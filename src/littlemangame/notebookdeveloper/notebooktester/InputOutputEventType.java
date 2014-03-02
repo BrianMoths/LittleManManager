@@ -9,8 +9,9 @@ package littlemangame.notebookdeveloper.notebooktester;
  *
  * @author brian
  */
-public interface NotebookTesterFactory {
+public enum InputOutputEventType {
 
-    NotebookTester produceNotebookTester();
-
+    INPUT,
+    OUTPUT,
+    HALT;
 }

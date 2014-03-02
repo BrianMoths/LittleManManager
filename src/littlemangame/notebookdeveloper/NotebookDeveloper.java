@@ -23,9 +23,11 @@ public class NotebookDeveloper {
     private final LittleManCommander littleManCommander;
     private final NotebookDeveloperGui notebookDeveloperGui;
     private final Memory memory;
+    private final MemoryEditor memoryEditor;
+    private NotebookDevelopmentProblem notebookDevelopmentProblem;
+    private boolean isProblemSolved;
     private boolean isExecuting;
     private boolean isEditing;
-    private final MemoryEditor memoryEditor;
 
     public NotebookDeveloper(NotebookDeveloperGui notebookDeveloperGui) {
         this.notebookDeveloperGui = notebookDeveloperGui;
@@ -48,6 +50,7 @@ public class NotebookDeveloper {
         hookIntoNotebookDeveloperGui();
         stopExecution();
         memory = new Memory();
+        isProblemSolved = true;
     }
 
     public void doFrame() {
@@ -110,6 +113,26 @@ public class NotebookDeveloper {
             }
 
         });
+        notebookDeveloperGui.setSubmitAction(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                notebookDevelopmentProblem.testNotebook(memory);
+                isProblemSolved = notebookDevelopmentProblem.wasLastTestCorrect();
+                showMessage(notebookDevelopmentProblem.getMessageFromLastTest());
+            }
+
+        }
+        );
+    }
+
+    private void showMessage(String message) {
+
+    }
+
+    public void setNotebookDevelopmentProblem(NotebookDevelopmentProblem notebookDevelopmentProblem) {
+        this.notebookDevelopmentProblem = notebookDevelopmentProblem;
+        isProblemSolved = false;
     }
 
 }

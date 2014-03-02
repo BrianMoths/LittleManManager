@@ -22,7 +22,12 @@ public class LittleManCommander implements Drawable {
     private LittleManAction doCycleCommand;
 
     public LittleManCommander(Computer computer) {
-        littleMan = new LittleMan(computer);
+        this(new LittleMan(computer));
+        doCycleCommand = LittleManCommands.getDoCycle();
+    }
+
+    protected LittleManCommander(LittleMan littleMan) {
+        this.littleMan = littleMan;
         doCycleCommand = LittleManCommands.getDoCycle();
     }
 

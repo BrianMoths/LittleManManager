@@ -5,6 +5,7 @@
  */
 package littlemangame.notebookdeveloper;
 
+import littlemangame.computer.Memory;
 import littlemangame.notebookdeveloper.notebooktester.RepeatingNotebookTester;
 
 /**
@@ -13,12 +14,25 @@ import littlemangame.notebookdeveloper.notebooktester.RepeatingNotebookTester;
  */
 public class NotebookDevelopmentProblem {
 
-    private final NotebookDeveloper notebookDeveloper;
     private final RepeatingNotebookTester notebookTester;
+    private boolean wasLastTestCorrect;
+    private String messageFromLastTest;
 
-    public NotebookDevelopmentProblem(NotebookDeveloper notebookDeveloper, RepeatingNotebookTester notebookTester) {
-        this.notebookDeveloper = notebookDeveloper;
+    public NotebookDevelopmentProblem(RepeatingNotebookTester notebookTester) {
         this.notebookTester = notebookTester;
+    }
+
+    public void testNotebook(Memory memory) {
+        wasLastTestCorrect = notebookTester.isNotebookCorrect(memory);
+        messageFromLastTest = wasLastTestCorrect ? "test passed!" : "test failed."; //improve these later.
+    }
+
+    public boolean wasLastTestCorrect() {
+        return wasLastTestCorrect;
+    }
+
+    public String getMessageFromLastTest() {
+        return messageFromLastTest;
     }
 
 }

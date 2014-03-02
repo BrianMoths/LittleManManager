@@ -14,10 +14,11 @@ import littlemangame.computer.Memory;
 public class RepeatingNotebookTester implements NotebookTester {
 
     private final NotebookTesterFactory notebookTesterFactory;
-    private final int numTests = 100;
+    private final int numTests;
 
-    public RepeatingNotebookTester(NotebookTesterFactory notebookTesterFactory) {
+    public RepeatingNotebookTester(NotebookTesterFactory notebookTesterFactory, int numTests) {
         this.notebookTesterFactory = notebookTesterFactory;
+        this.numTests = numTests;
     }
 
     @Override
@@ -28,14 +29,6 @@ public class RepeatingNotebookTester implements NotebookTester {
         }
         return isCorrect;
 
-//        LittleManMock littleManMock = new LittleManMock(new Computer(new ComputerOutputterMock(null), new ComputerInputterMock(null)), new HaltListener() {
-//
-//            @Override
-//            public void acceptHalt() {
-//                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//            }
-//
-//        });
     }
 
 }
