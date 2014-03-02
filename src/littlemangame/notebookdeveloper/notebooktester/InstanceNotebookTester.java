@@ -24,11 +24,14 @@ import littlemangame.word.Word;
  */
 public class InstanceNotebookTester implements NotebookTester { //I should break this into two classes, one for the queues, one for testing.
 
+    static private final String SUCCESS_STRING = "Test successful!";
+
     private final Queue<InputOutputEventType> inputOutputEventTypes;
     private final Queue<Word> inputWords;
     private final Queue<Word> outputWords;
     private boolean isCorrectSoFar;
     private boolean isHalted;
+    private StringBuilder errorStringBuilder;
 
     public InstanceNotebookTester() {
         inputOutputEventTypes = new ArrayDeque<>();
@@ -41,6 +44,7 @@ public class InstanceNotebookTester implements NotebookTester { //I should break
         LittleManMock littleManMock = new LittleManMock(makeComputerMock(), makeHaltListener());
         LittleManCommanderMock littleManCommanderMock = new LittleManCommanderMock(littleManMock);
         littleManCommanderMock.loadCopyOfMemory(memory);
+        errorStringBuilder = new StringBuilder();
         isCorrectSoFar = true;
         isHalted = false;
         while (isCorrectSoFar && !isHalted) {
@@ -57,10 +61,17 @@ public class InstanceNotebookTester implements NotebookTester { //I should break
         return new OutputEventListener() {
 
             @Override
-            public void acceptOutput(Word outputtedWord) {
-                final InputOutputEventType inputOutputEventType = inputOutputEventTypes.poll();
-                final Word outputWord = outputWords.poll();
-                isCorrectSoFar &= inputOutputEventType == InputOutputEventType.OUTPUT && outputWord.equals(outputtedWord);
+            public void acceptOutput(Word actualOutputWord) {
+                final InputOutputEventType expectedInputOutputEventType = inputOutputEventTypes.poll();
+                final InputOutputEventType actualInputOutputEventType = InputOutputEventType.OUTPUT;
+                final Word expectedOutputWord = outputWords.peek();
+                if (expectedInputOutputEventType != actualInputOutputEventType || expectedOutputWord != actualOutputWord) {
+                    errorStringBuilder.append(makeErrorLineStringBuilder(expectedInputOutputEventType, actualInputOutputEventType));
+                    isCorrectSoFar = false;
+                } else {
+                    errorStringBuilder.append(getActualActionStringBuilder(actualInputOutputEventType));
+                }
+                outputWords.poll();
             }
 
         };
@@ -71,16 +82,26 @@ public class InstanceNotebookTester implements NotebookTester { //I should break
 
             @Override
             public Word getInputWord() {
-                InputOutputEventType inputOutputEventType = inputOutputEventTypes.poll();
-                Word inputWord = inputWords.poll();
-                if (inputWord == null) {
+                final InputOutputEventType expectedInputOutputEventType = inputOutputEventTypes.poll();
+                final InputOutputEventType actualInputOutputEventType = InputOutputEventType.INPUT;
+                final Word inputWord;
+                if (expectedInputOutputEventType != actualInputOutputEventType) {
+                    errorStringBuilder.append(makeErrorLineStringBuilder(expectedInputOutputEventType, actualInputOutputEventType));
+                    isCorrectSoFar = false;
                     inputWord = Word.ZERO_WORD;
+                } else {
+                    errorStringBuilder.append(getActualActionStringBuilder(actualInputOutputEventType));
+                    Word nextInputWord = inputWords.poll();
+                    inputWord = nextInputWord == null ? Word.ZERO_WORD : nextInputWord;
                 }
-                isCorrectSoFar &= inputOutputEventType == InputOutputEventType.INPUT;
                 return inputWord;
             }
 
         };
+    }
+
+    private StringBuilder getActualActionStringBuilder(final InputOutputEventType actualInputOutputEventType) {
+        return new StringBuilder(actualInputOutputEventType.getActualActionString(this)).append(".\n");
     }
 
     private HaltListener makeHaltListener() {
@@ -88,11 +109,25 @@ public class InstanceNotebookTester implements NotebookTester { //I should break
 
             @Override
             public void acceptHalt() {
-                isCorrectSoFar &= inputOutputEventTypes.poll() == InputOutputEventType.HALT;
+                InputOutputEventType expectedEventType = inputOutputEventTypes.poll();
+                InputOutputEventType actualEventType = InputOutputEventType.HALT;
+                if (expectedEventType != actualEventType && isCorrectSoFar) {
+                    errorStringBuilder.append(makeErrorLineStringBuilder(expectedEventType, actualEventType));
+                    isCorrectSoFar = false;
+                } //if it halts correctly, then the log will not be displayed. Otherwise this needs fix.
                 isHalted = true;
             }
 
         };
+    }
+
+    private StringBuilder makeErrorLineStringBuilder(InputOutputEventType expectedEventType, InputOutputEventType actualEventType) {
+        StringBuilder errorLineStringBuilder = new StringBuilder();
+        errorLineStringBuilder.append(actualEventType.getActualActionString(this))
+                .append(", but ")
+                .append(expectedEventType.getExpectedActionString(this))
+                .append(".\n");
+        return errorLineStringBuilder;
     }
 
     public void addInputEvent(Word inputWord) {
@@ -107,6 +142,19 @@ public class InstanceNotebookTester implements NotebookTester { //I should break
 
     public void addHaltEvent() {
         inputOutputEventTypes.add(InputOutputEventType.HALT);
+    }
+
+    @Override
+    public String getMessageFromTest() {
+        if (isCorrectSoFar) {
+            return SUCCESS_STRING;
+        } else {
+            return errorStringBuilder.toString();
+        }
+    }
+
+    Word peekAtOutput() {
+        return outputWords.peek();
     }
 
 }

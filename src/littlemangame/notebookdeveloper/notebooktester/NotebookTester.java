@@ -15,4 +15,6 @@ public interface NotebookTester {
 
     public boolean isNotebookCorrect(Memory memory);
 
+    public String getMessageFromTest();
+
 }

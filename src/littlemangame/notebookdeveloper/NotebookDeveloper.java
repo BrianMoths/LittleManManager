@@ -130,7 +130,7 @@ public class NotebookDeveloper {
     }
 
     private void showMessage(String message) {
-        System.out.println(message);
+        notebookDeveloperGui.printMessage(message);
     }
 
     public void setNotebookDevelopmentProblem(NotebookDevelopmentProblem notebookDevelopmentProblem) {

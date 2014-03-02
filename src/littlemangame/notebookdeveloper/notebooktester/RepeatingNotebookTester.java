@@ -15,6 +15,7 @@ public class RepeatingNotebookTester implements NotebookTester {
 
     private final NotebookTesterFactory notebookTesterFactory;
     private final int numTests;
+    private String messageFromTest;
 
     public RepeatingNotebookTester(NotebookTesterFactory notebookTesterFactory, int numTests) {
         this.notebookTesterFactory = notebookTesterFactory;
@@ -25,10 +26,17 @@ public class RepeatingNotebookTester implements NotebookTester {
     public boolean isNotebookCorrect(Memory memory) {
         boolean isCorrect = true;
         for (int i = 0; i < numTests; i++) {
-            isCorrect &= notebookTesterFactory.produceNotebookTester().isNotebookCorrect(memory);
+            final NotebookTester notebookTester = notebookTesterFactory.produceNotebookTester();
+            isCorrect &= notebookTester.isNotebookCorrect(memory);
+            messageFromTest = notebookTester.getMessageFromTest();
         }
         return isCorrect;
 
+    }
+
+    @Override
+    public String getMessageFromTest() {
+        return messageFromTest;
     }
 
 }

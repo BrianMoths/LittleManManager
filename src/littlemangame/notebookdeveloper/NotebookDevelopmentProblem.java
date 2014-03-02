@@ -24,7 +24,7 @@ public class NotebookDevelopmentProblem {
 
     public void testNotebook(Memory memory) {
         wasLastTestCorrect = notebookTester.isNotebookCorrect(memory);
-        messageFromLastTest = wasLastTestCorrect ? "test passed!" : "test failed."; //improve these later.
+        messageFromLastTest = notebookTester.getMessageFromTest(); //improve these later.
     }
 
     public boolean wasLastTestCorrect() {
