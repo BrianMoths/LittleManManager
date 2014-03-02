@@ -40,6 +40,7 @@ public class InstanceNotebookTester implements NotebookTester { //I should break
     public boolean isNotebookCorrect(Memory memory) {
         LittleManMock littleManMock = new LittleManMock(makeComputerMock(), makeHaltListener());
         LittleManCommanderMock littleManCommanderMock = new LittleManCommanderMock(littleManMock);
+        littleManCommanderMock.loadCopyOfMemory(memory);
         isCorrectSoFar = true;
         isHalted = false;
         while (isCorrectSoFar && !isHalted) {

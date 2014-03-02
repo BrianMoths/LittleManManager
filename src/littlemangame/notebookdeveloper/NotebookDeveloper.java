@@ -12,6 +12,7 @@ import littlemangame.computer.Memory;
 import littlemangame.littlemancommands.LittleManCommander;
 import littlemangame.notebookdeveloper.gui.MemoryEditor;
 import littlemangame.notebookdeveloper.gui.NotebookDeveloperGui;
+import littlemangame.notebookdevelopmentproblems.HaltProblem;
 
 /**
  *
@@ -51,6 +52,8 @@ public class NotebookDeveloper {
         stopExecution();
         memory = new Memory();
         isProblemSolved = true;
+        notebookDevelopmentProblem = HaltProblem.getNotebookDevelopmentProblem();
+        isProblemSolved = false;
     }
 
     public void doFrame() {
@@ -127,7 +130,7 @@ public class NotebookDeveloper {
     }
 
     private void showMessage(String message) {
-
+        System.out.println(message);
     }
 
     public void setNotebookDevelopmentProblem(NotebookDevelopmentProblem notebookDevelopmentProblem) {

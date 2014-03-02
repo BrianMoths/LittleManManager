@@ -23,7 +23,6 @@ public class LittleManCommander implements Drawable {
 
     public LittleManCommander(Computer computer) {
         this(new LittleMan(computer));
-        doCycleCommand = LittleManCommands.getDoCycle();
     }
 
     protected LittleManCommander(LittleMan littleMan) {

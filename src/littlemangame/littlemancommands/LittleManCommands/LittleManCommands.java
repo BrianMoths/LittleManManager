@@ -21,6 +21,7 @@ public class LittleManCommands {
     public static final LittleManAction haltAction = new LittleManAction() {
         @Override
         public boolean doAction(LittleMan littleMan) {
+            littleMan.halt();
             return false;
         }
 

@@ -17,15 +17,15 @@ import littlemangame.notebookdeveloper.notebooktester.RepeatingNotebookTester;
  */
 public class HaltProblem implements NotebookTesterFactory {
 
+    public static NotebookDevelopmentProblem getNotebookDevelopmentProblem() {
+        return new NotebookDevelopmentProblem(new RepeatingNotebookTester(new HaltProblem(), 1));
+    }
+
     @Override
     public NotebookTester produceNotebookTester() {
         InstanceNotebookTester instanceNotebookTester = new InstanceNotebookTester();
         instanceNotebookTester.addHaltEvent();
         return instanceNotebookTester;
-    }
-
-    public NotebookDevelopmentProblem getNotebookDevelopmentProblem() {
-        return new NotebookDevelopmentProblem(new RepeatingNotebookTester(this, 1));
     }
 
 }
