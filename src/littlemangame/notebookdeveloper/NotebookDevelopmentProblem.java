@@ -6,7 +6,7 @@
 package littlemangame.notebookdeveloper;
 
 import littlemangame.computer.Memory;
-import littlemangame.notebookdeveloper.notebooktester.RepeatingNotebookTester;
+import littlemangame.notebookdeveloper.notebooktester.NotebookTester;
 
 /**
  *
@@ -14,17 +14,17 @@ import littlemangame.notebookdeveloper.notebooktester.RepeatingNotebookTester;
  */
 public class NotebookDevelopmentProblem {
 
-    private final RepeatingNotebookTester notebookTester;
+    private final NotebookTester notebookTester;
     private boolean wasLastTestCorrect;
-    private String messageFromLastTest;
+    private final String problemDescription;
 
-    public NotebookDevelopmentProblem(RepeatingNotebookTester notebookTester) {
+    public NotebookDevelopmentProblem(NotebookTester notebookTester, String problemDescription) {
         this.notebookTester = notebookTester;
+        this.problemDescription = problemDescription;
     }
 
     public void testNotebook(Memory memory) {
         wasLastTestCorrect = notebookTester.isNotebookCorrect(memory);
-        messageFromLastTest = notebookTester.getMessageFromTest(); //improve these later.
     }
 
     public boolean wasLastTestCorrect() {
@@ -32,7 +32,11 @@ public class NotebookDevelopmentProblem {
     }
 
     public String getMessageFromLastTest() {
-        return messageFromLastTest;
+        return notebookTester.getMessageFromTest();
+    }
+
+    public String getProblemDescription() {
+        return problemDescription;
     }
 
 }

@@ -8,26 +8,25 @@ package littlemangame.notebookdevelopmentproblems;
 import littlemangame.notebookdeveloper.NotebookDevelopmentProblem;
 import littlemangame.notebookdeveloper.notebooktester.InstanceNotebookTester;
 import littlemangame.notebookdeveloper.notebooktester.NotebookTester;
-import littlemangame.notebookdeveloper.notebooktester.NotebookTesterFactory;
-import littlemangame.notebookdeveloper.notebooktester.RepeatingNotebookTester;
 import littlemangame.word.Word;
 
 /**
  *
  * @author brian
  */
-public class Output42 implements NotebookTesterFactory {
+public class Output42 extends NotebookDevelopmentProblem {
 
-    public static NotebookDevelopmentProblem getNotebookDevelopmentProblem() {
-        return new NotebookDevelopmentProblem(new RepeatingNotebookTester(new HaltProblem(), 1));
-    }
+    private static final String problemDescription = "The little man must output the word \"42\". Then the little man must halt.";
 
-    @Override
-    public NotebookTester produceNotebookTester() {
+    public static NotebookTester produceNotebookTester() {
         InstanceNotebookTester instanceNotebookTester = new InstanceNotebookTester();
         instanceNotebookTester.addOutputEvent(Word.valueOfLastDigitsOfInteger(42));
         instanceNotebookTester.addHaltEvent();
         return instanceNotebookTester;
+    }
+
+    public Output42() {
+        super(produceNotebookTester(), problemDescription);
     }
 
 }

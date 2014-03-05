@@ -20,11 +20,14 @@ public class NotebookDeveloperGui extends javax.swing.JPanel {
         return speedControllerGui;
     }
 
+    private final ProblemDescriptionWindow problemDescriptionWindow;
+
     /**
      * Creates new form NotebookDeveloperGui
      */
     public NotebookDeveloperGui() {
         initComponents();
+        problemDescriptionWindow = new ProblemDescriptionWindow();
     }
 
     public void setAbortAction(ActionListener l) {
@@ -37,6 +40,14 @@ public class NotebookDeveloperGui extends javax.swing.JPanel {
 
     public void setExecuteAction(ActionListener l) {
         executeButton.addActionListener(l);
+    }
+
+    public void setObjectiveString(String problemDescription) {
+        problemDescriptionWindow.setProblemDescription(problemDescription);
+    }
+
+    public void setUpdateObjectiveStringAction(ActionListener l) {
+        problemDescriptionWindow.setUpdateStringActionListener(l);
     }
 
     public void setSubmitAction(ActionListener l) {
@@ -96,6 +107,7 @@ public class NotebookDeveloperGui extends javax.swing.JPanel {
         outputPanel = new littlemangame.computer.OutputPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        objectiveBtn = new javax.swing.JButton();
 
         executeButton.setText("Test");
 
@@ -132,6 +144,13 @@ public class NotebookDeveloperGui extends javax.swing.JPanel {
         jTextArea1.setRows(3);
         jScrollPane1.setViewportView(jTextArea1);
 
+        objectiveBtn.setText("Objective");
+        objectiveBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                objectiveBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -152,7 +171,9 @@ public class NotebookDeveloperGui extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(speedControllerGui, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(submitButton, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+                                    .addComponent(objectiveBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jScrollPane1)))
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -175,9 +196,12 @@ public class NotebookDeveloperGui extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(abortButton)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(submitButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(objectiveBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(submitButton)))
                 .addContainerGap(44, Short.MAX_VALUE))
         );
 
@@ -195,6 +219,10 @@ public class NotebookDeveloperGui extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void objectiveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_objectiveBtnActionPerformed
+        problemDescriptionWindow.showProblemDescription();
+    }//GEN-LAST:event_objectiveBtnActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton abortButton;
     private javax.swing.JButton editMemoryButton;
@@ -204,6 +232,7 @@ public class NotebookDeveloperGui extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JButton objectiveBtn;
     private littlemangame.computer.OutputPanel outputPanel;
     private littlemangame.notebookdeveloper.gui.SpeedControllerGui speedControllerGui;
     private javax.swing.JButton submitButton;

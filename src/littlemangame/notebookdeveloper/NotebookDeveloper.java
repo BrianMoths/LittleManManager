@@ -52,7 +52,7 @@ public class NotebookDeveloper {
         stopExecution();
         memory = new Memory();
         isProblemSolved = true;
-        notebookDevelopmentProblem = HaltProblem.getNotebookDevelopmentProblem();
+        notebookDevelopmentProblem = new HaltProblem();
         isProblemSolved = false;
     }
 
@@ -125,8 +125,15 @@ public class NotebookDeveloper {
                 showMessage(notebookDevelopmentProblem.getMessageFromLastTest());
             }
 
-        }
-        );
+        });
+        notebookDeveloperGui.setUpdateObjectiveStringAction(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                notebookDeveloperGui.setObjectiveString(notebookDevelopmentProblem.getProblemDescription());
+            }
+
+        });
     }
 
     private void showMessage(String message) {

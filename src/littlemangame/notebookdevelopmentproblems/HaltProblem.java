@@ -8,24 +8,23 @@ package littlemangame.notebookdevelopmentproblems;
 import littlemangame.notebookdeveloper.NotebookDevelopmentProblem;
 import littlemangame.notebookdeveloper.notebooktester.InstanceNotebookTester;
 import littlemangame.notebookdeveloper.notebooktester.NotebookTester;
-import littlemangame.notebookdeveloper.notebooktester.NotebookTesterFactory;
-import littlemangame.notebookdeveloper.notebooktester.RepeatingNotebookTester;
 
 /**
  *
  * @author brian
  */
-public class HaltProblem implements NotebookTesterFactory {
+public class HaltProblem extends NotebookDevelopmentProblem {
 
-    public static NotebookDevelopmentProblem getNotebookDevelopmentProblem() {
-        return new NotebookDevelopmentProblem(new RepeatingNotebookTester(new HaltProblem(), 1));
-    }
+    private static final String problemDescription = "The little man must halt. The little man must not output anything or ask for any input.";
 
-    @Override
-    public NotebookTester produceNotebookTester() {
+    static public NotebookTester produceNotebookTester() {
         InstanceNotebookTester instanceNotebookTester = new InstanceNotebookTester();
         instanceNotebookTester.addHaltEvent();
         return instanceNotebookTester;
+    }
+
+    public HaltProblem() {
+        super(produceNotebookTester(), problemDescription);
     }
 
 }

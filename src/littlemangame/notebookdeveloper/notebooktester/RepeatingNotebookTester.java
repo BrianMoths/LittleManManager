@@ -25,10 +25,12 @@ public class RepeatingNotebookTester implements NotebookTester {
     @Override
     public boolean isNotebookCorrect(Memory memory) {
         boolean isCorrect = true;
-        for (int i = 0; i < numTests; i++) {
+        int numTestsSoFar = 0;
+        while (isCorrect && numTestsSoFar < numTests) {
             final NotebookTester notebookTester = notebookTesterFactory.produceNotebookTester();
             isCorrect &= notebookTester.isNotebookCorrect(memory);
             messageFromTest = notebookTester.getMessageFromTest();
+            numTestsSoFar++;
         }
         return isCorrect;
 

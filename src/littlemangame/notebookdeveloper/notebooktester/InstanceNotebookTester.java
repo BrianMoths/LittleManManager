@@ -80,12 +80,13 @@ public class InstanceNotebookTester implements NotebookTester { //I should break
     private InputProducerMock makeInputProducerMock() {
         return new InputProducerMock() {
 
+            private final InputOutputEventType actualInputOutputEventType = InputOutputEventType.INPUT;
+
             @Override
             public Word getInputWord() {
                 final InputOutputEventType expectedInputOutputEventType = inputOutputEventTypes.poll();
-                final InputOutputEventType actualInputOutputEventType = InputOutputEventType.INPUT;
                 final Word inputWord;
-                if (expectedInputOutputEventType != actualInputOutputEventType) {
+                if (isInputTypeWrong(expectedInputOutputEventType)) {
                     errorStringBuilder.append(makeErrorLineStringBuilder(expectedInputOutputEventType, actualInputOutputEventType));
                     isCorrectSoFar = false;
                     inputWord = Word.ZERO_WORD;
@@ -95,6 +96,10 @@ public class InstanceNotebookTester implements NotebookTester { //I should break
                     inputWord = nextInputWord == null ? Word.ZERO_WORD : nextInputWord;
                 }
                 return inputWord;
+            }
+
+            private boolean isInputTypeWrong(final InputOutputEventType expectedInputOutputEventType) {
+                return expectedInputOutputEventType != actualInputOutputEventType;
             }
 
         };
