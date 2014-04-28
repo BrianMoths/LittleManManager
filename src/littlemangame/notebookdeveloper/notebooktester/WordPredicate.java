@@ -13,7 +13,7 @@ import littlemangame.word.Word;
  */
 public abstract class WordPredicate {
 
-    static WordPredicate alwaysTruePredicate = new WordPredicate() {
+    static public WordPredicate alwaysTruePredicate = new WordPredicate() {
 
         @Override
         public boolean isCorrect(Word word) {

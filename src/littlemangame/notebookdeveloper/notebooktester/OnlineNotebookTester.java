@@ -101,6 +101,10 @@ public class OnlineNotebookTester implements NotebookTester { //I should break t
         expectedProgramBehaviorOriginal.addOutputEvent(outputWord);
     }
 
+    public void addOutputEvent(WordPredicate wordPredicate) {
+        expectedProgramBehaviorOriginal.addOutputEvent(wordPredicate);
+    }
+
     public void addHaltEvent() {
         expectedProgramBehaviorOriginal.addHaltEvent();
     }

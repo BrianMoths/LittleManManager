@@ -51,8 +51,12 @@ public class ExpectedProgramBehavior {
     }
 
     public void addOutputEvent(Word outputWord) {
+        addOutputEvent(WordPredicate.makeEqualsWordPredicate(outputWord));
+    }
+
+    public void addOutputEvent(WordPredicate wordPredicate) {
         inputOutputEventTypes.add(InputOutputEventType.OUTPUT);
-        outputWordPredicates.add(WordPredicate.makeEqualsWordPredicate(outputWord));
+        outputWordPredicates.add(wordPredicate);
     }
 
     public void addHaltEvent() {
