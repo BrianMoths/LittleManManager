@@ -55,7 +55,7 @@ public class Memory implements Drawable {
         i++;
         memory.add(new WordContainer(oldValue));
         i++;
-        memory.add(new WordContainer(InstructionFromSet.ADD_REGISTER_MEMORY.getOpcode()));
+        memory.add(new WordContainer(InstructionFromSet.ADD_REGISTER_TO_MEMORY.getOpcode()));
         i++;
         memory.add(new WordContainer(newValue));
         //move newCopy to oldValue

@@ -6,7 +6,7 @@
 package littlemangame.notebookdevelopmentproblems;
 
 import littlemangame.notebookdeveloper.NotebookDevelopmentProblem;
-import littlemangame.notebookdeveloper.notebooktester.InstanceNotebookTester;
+import littlemangame.notebookdeveloper.notebooktester.OnlineNotebookTester;
 import littlemangame.notebookdeveloper.notebooktester.NotebookTester;
 import littlemangame.word.Word;
 
@@ -19,7 +19,7 @@ public class Output42 extends NotebookDevelopmentProblem {
     private static final String problemDescription = "The little man must output the word \"42\". Then the little man must halt.";
 
     public static NotebookTester produceNotebookTester() {
-        InstanceNotebookTester instanceNotebookTester = new InstanceNotebookTester();
+        OnlineNotebookTester instanceNotebookTester = new OnlineNotebookTester();
         instanceNotebookTester.addOutputEvent(Word.valueOfLastDigitsOfInteger(42));
         instanceNotebookTester.addHaltEvent();
         return instanceNotebookTester;

@@ -11,73 +11,65 @@ package littlemangame.notebookdeveloper.notebooktester;
  */
 public enum InputOutputEventType {
 
-    INPUT(new ActualAndExcpectedActionPerformedProducer() {
+    INPUT(new ActualAndExpectedActionPerformedProducer() {
 
         @Override
-        public String produceActualActionPerformed(InstanceNotebookTester instanceNotebookTester) {
-            return "asked for input";
-        }
-
-        @Override
-        public String produceExpectedActionPerformed(InstanceNotebookTester instanceNotebookTester) {
+        public String getBareInfinitive() {
             return "ask for input";
         }
 
-    }),
-    OUTPUT(new ActualAndExcpectedActionPerformedProducer() {
-
         @Override
-        public String produceActualActionPerformed(InstanceNotebookTester instanceNotebookTester) {
-            return "output " + instanceNotebookTester.peekAtOutput().toString();
-        }
-
-        @Override
-        public String produceExpectedActionPerformed(InstanceNotebookTester instanceNotebookTester) {
-            return "output " + instanceNotebookTester.peekAtOutput().toString();
+        public String getPastTense() {
+            return "asked for input";
         }
 
     }),
-    HALT(new ActualAndExcpectedActionPerformedProducer() {
+    OUTPUT(new ActualAndExpectedActionPerformedProducer() {
 
         @Override
-        public String produceActualActionPerformed(InstanceNotebookTester instanceNotebookTester) {
-            return "halted";
+        public String getBareInfinitive() {//this and expected can't both be right? 
+            return "output ";
         }
 
         @Override
-        public String produceExpectedActionPerformed(InstanceNotebookTester instanceNotebookTester) {
+        public String getPastTense() {
+            return "output ";
+        }
+
+    }),
+    HALT(new ActualAndExpectedActionPerformedProducer() {
+
+        @Override
+        public String getBareInfinitive() {
             return "halt";
+        }
+
+        @Override
+        public String getPastTense() {
+            return "halted";
         }
 
     });
 
-    private final ActualAndExcpectedActionPerformedProducer actualAndExcpectedActionPerformedProducer;
+    private final ActualAndExpectedActionPerformedProducer actualAndExcpectedActionPerformedProducer;
 
-    private InputOutputEventType(ActualAndExcpectedActionPerformedProducer actualAndExcpectedActionPerformedProducer) {
+    private InputOutputEventType(ActualAndExpectedActionPerformedProducer actualAndExcpectedActionPerformedProducer) {
         this.actualAndExcpectedActionPerformedProducer = actualAndExcpectedActionPerformedProducer;
     }
 
-    String getActualActionString(InstanceNotebookTester instanceNotebookTester) {
-        return "The little man " + produceActualActionPerformed(instanceNotebookTester);
+    public String getBareInfinitive() {
+        return actualAndExcpectedActionPerformedProducer.getBareInfinitive();
     }
 
-    String getExpectedActionString(InstanceNotebookTester instanceNotebookTester) {
-        return "I expected him to " + produceExpectedActionPerformed(instanceNotebookTester);
+    public String getPastTense() {
+        return actualAndExcpectedActionPerformedProducer.getPastTense();
     }
 
-    private String produceActualActionPerformed(InstanceNotebookTester instanceNotebookTester) {
-        return actualAndExcpectedActionPerformedProducer.produceActualActionPerformed(instanceNotebookTester);
-    }
+    static private interface ActualAndExpectedActionPerformedProducer {
 
-    private String produceExpectedActionPerformed(InstanceNotebookTester instanceNotebookTester) {
-        return actualAndExcpectedActionPerformedProducer.produceExpectedActionPerformed(instanceNotebookTester);
-    }
+        public String getBareInfinitive();
 
-    static private interface ActualAndExcpectedActionPerformedProducer {
-
-        public String produceActualActionPerformed(InstanceNotebookTester instanceNotebookTester);
-
-        public String produceExpectedActionPerformed(InstanceNotebookTester instanceNotebookTester);
+        public String getPastTense();
 
     }
 }

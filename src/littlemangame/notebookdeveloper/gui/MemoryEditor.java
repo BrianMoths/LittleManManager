@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import littlemangame.computer.Memory;
+import littlemangame.instructions.InstructionFromSet;
 import littlemangame.word.Word;
 
 /**
@@ -18,7 +19,7 @@ import littlemangame.word.Word;
  * @author brian
  */
 public class MemoryEditor extends javax.swing.JFrame {
-
+    
     private final List<MemorySlotChooser> memorySlotChoosers;
 
     /**
@@ -28,8 +29,9 @@ public class MemoryEditor extends javax.swing.JFrame {
         initComponents();
         memorySlotChoosers = new ArrayList<>(Word.NUM_WORDS);
         addMemorySlotChoosers();
+        writeDescriptions();
     }
-
+    
     private void addMemorySlotChoosers() {
         Iterator<Word> wordIterator = Word.getIterator();
         scrollPanePanel.setLayout(new GridLayout(Word.NUM_WORDS, 1, 0, 5));
@@ -42,7 +44,14 @@ public class MemoryEditor extends javax.swing.JFrame {
         revalidate();
         repaint();
     }
-
+    
+    private void writeDescriptions() {
+        for (InstructionFromSet instruction : InstructionFromSet.values()) {
+            helpText.append(instruction.getDescription());
+            helpText.append("\n");
+        }
+    }
+    
     public Memory getMemory() {
         Memory memory = new Memory();
         Iterator<Word> wordIterator = Word.getIterator();
@@ -52,7 +61,7 @@ public class MemoryEditor extends javax.swing.JFrame {
         }
         return memory;
     }
-
+    
     public void setMemory(Memory memory) {
         Iterator<Word> wordIterator = Word.getIterator();
         while (wordIterator.hasNext()) {
@@ -61,7 +70,7 @@ public class MemoryEditor extends javax.swing.JFrame {
             memorySlotChooser.setSelectedWord(memory.getMemory(word).getWord());
         }
     }
-
+    
     public void setSaveAction(ActionListener actionListener) {
         saveButton.addActionListener(actionListener);
     }
@@ -80,6 +89,8 @@ public class MemoryEditor extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         scrollPanePanel = new javax.swing.JPanel();
         saveButton = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        helpText = new javax.swing.JTextArea();
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -99,6 +110,13 @@ public class MemoryEditor extends javax.swing.JFrame {
 
         saveButton.setText("Save");
 
+        helpText.setEditable(false);
+        helpText.setColumns(20);
+        helpText.setLineWrap(true);
+        helpText.setRows(5);
+        helpText.setWrapStyleWord(true);
+        jScrollPane2.setViewportView(helpText);
+
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
@@ -106,15 +124,22 @@ public class MemoryEditor extends javax.swing.JFrame {
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(65, Short.MAX_VALUE))
+                    .addGroup(mainPanelLayout.createSequentialGroup()
+                        .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(mainPanelLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -124,7 +149,10 @@ public class MemoryEditor extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,12 +194,14 @@ public class MemoryEditor extends javax.swing.JFrame {
             public void run() {
                 new MemoryEditor().setVisible(true);
             }
-
+            
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea helpText;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JButton saveButton;
     private javax.swing.JPanel scrollPanePanel;

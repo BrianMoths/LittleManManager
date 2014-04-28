@@ -51,7 +51,6 @@ public class NotebookDeveloper {
         hookIntoNotebookDeveloperGui();
         stopExecution();
         memory = new Memory();
-        isProblemSolved = true;
         notebookDevelopmentProblem = new HaltProblem();
         isProblemSolved = false;
     }

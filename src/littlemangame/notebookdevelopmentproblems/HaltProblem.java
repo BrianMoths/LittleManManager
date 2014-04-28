@@ -6,7 +6,7 @@
 package littlemangame.notebookdevelopmentproblems;
 
 import littlemangame.notebookdeveloper.NotebookDevelopmentProblem;
-import littlemangame.notebookdeveloper.notebooktester.InstanceNotebookTester;
+import littlemangame.notebookdeveloper.notebooktester.OnlineNotebookTester;
 import littlemangame.notebookdeveloper.notebooktester.NotebookTester;
 
 /**
@@ -18,7 +18,7 @@ public class HaltProblem extends NotebookDevelopmentProblem {
     private static final String problemDescription = "The little man must halt. The little man must not output anything or ask for any input.";
 
     static public NotebookTester produceNotebookTester() {
-        InstanceNotebookTester instanceNotebookTester = new InstanceNotebookTester();
+        OnlineNotebookTester instanceNotebookTester = new OnlineNotebookTester();
         instanceNotebookTester.addHaltEvent();
         return instanceNotebookTester;
     }
