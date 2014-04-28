@@ -23,25 +23,21 @@ import littlemangame.word.Word;
 public class OnlineNotebookTester implements NotebookTester { //I should break this into two classes, one for the queues, one for testing.
 
     static private final String SUCCESS_STRING = "Test successful!";
-
-//    private final Queue<InputOutputEventType> inputOutputEventTypes;
-//    private final Queue<Word> inputWords;
-//    private final Queue<WordPredicate> outputWords;
-    private final ExpectedProgramBehavior expectedProgramBehavior;
+    private final ExpectedProgramBehavior expectedProgramBehaviorOriginal;
+    private final ExpectedProgramBehavior expectedProgramBehaviorCopy;
     private boolean isCorrectSoFar;
     private boolean isHalted;
     private StringBuilder errorStringBuilder;
 
     public OnlineNotebookTester() {
-//        inputOutputEventTypes = new ArrayDeque<>();
-//        inputWords = new ArrayDeque<>();
-//        outputWords = new ArrayDeque<>();
-        expectedProgramBehavior = new ExpectedProgramBehavior();
+        expectedProgramBehaviorOriginal = new ExpectedProgramBehavior();
+        expectedProgramBehaviorCopy = new ExpectedProgramBehavior();
     }
 
     @Override
     public boolean isNotebookCorrect(Memory memory) {
         LittleManCommanderMock littleManCommanderMock = initialize(memory);
+        expectedProgramBehaviorCopy.copy(expectedProgramBehaviorOriginal);
         while (isCorrectSoFar && !isHalted) {
             littleManCommanderMock.doCycle();
         }
@@ -67,7 +63,7 @@ public class OnlineNotebookTester implements NotebookTester { //I should break t
 
             @Override
             public void acceptOutput(Word actualOutputWord) {
-                isCorrectSoFar = expectedProgramBehavior.testOutputEvent(new OutputEvent(actualOutputWord));
+                isCorrectSoFar = expectedProgramBehaviorCopy.testOutputEvent(new OutputEvent(actualOutputWord));
             }
 
         };
@@ -78,8 +74,8 @@ public class OnlineNotebookTester implements NotebookTester { //I should break t
 
             @Override
             public Word getInputWord() {
-                isCorrectSoFar = expectedProgramBehavior.testInputEvent(new InputEvent());
-                return expectedProgramBehavior.pollInputWord();
+                isCorrectSoFar = expectedProgramBehaviorOriginal.testInputEvent(new InputEvent());
+                return expectedProgramBehaviorCopy.pollInputWord();
             }
 
         };
@@ -90,7 +86,7 @@ public class OnlineNotebookTester implements NotebookTester { //I should break t
 
             @Override
             public void acceptHalt() {
-                isCorrectSoFar = expectedProgramBehavior.testHaltEvent(new HaltEvent());
+                isCorrectSoFar = expectedProgramBehaviorCopy.testHaltEvent(new HaltEvent());
                 isHalted = true;
             }
 
@@ -98,15 +94,15 @@ public class OnlineNotebookTester implements NotebookTester { //I should break t
     }
 
     public void addInputEvent(Word inputWord) {
-        expectedProgramBehavior.addInputEvent(inputWord);
+        expectedProgramBehaviorOriginal.addInputEvent(inputWord);
     }
 
     public void addOutputEvent(Word outputWord) {
-        expectedProgramBehavior.addOutputEvent(outputWord);
+        expectedProgramBehaviorOriginal.addOutputEvent(outputWord);
     }
 
     public void addHaltEvent() {
-        expectedProgramBehavior.addHaltEvent();
+        expectedProgramBehaviorOriginal.addHaltEvent();
     }
 
     @Override
@@ -114,7 +110,7 @@ public class OnlineNotebookTester implements NotebookTester { //I should break t
         if (isCorrectSoFar) {
             return SUCCESS_STRING;
         } else {
-            return expectedProgramBehavior.getErrorString();
+            return expectedProgramBehaviorCopy.getErrorString();
         }
     }
 

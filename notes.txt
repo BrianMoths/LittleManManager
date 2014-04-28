@@ -1,0 +1,29 @@
+This is supposed to be a simple program which gives a simple model of how a cpu 
+works. Many important features of a cpu will not be included in this minimal 
+model. Features not included in this version could be included in a future more 
+sophisticated version.
+
+scope first iteration:
+  what is covered: 
+    basic instruction cycle: fetch decode to operation...
+    instruction pointer
+    von neumann achitecture
+    basic instructions
+    control structures involving jmp
+    
+    
+  what is not covered:
+    binary
+    flag register
+    multiple registers
+    different word sizes: memory address resolution, instruction sizes, register size
+    cache
+    pipeline
+    segmentation
+    indexed addressing
+    string instructions
+    syscalls
+    stack
+    interrupts
+    
+art should look like boxhead.

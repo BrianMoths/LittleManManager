@@ -27,6 +27,24 @@ public class ExpectedProgramBehavior {
         errorStringBuilder = new StringBuilder();
     }
 
+    public ExpectedProgramBehavior(ExpectedProgramBehavior expectedProgramBehavior) {
+        inputOutputEventTypes = new ArrayDeque<>(expectedProgramBehavior.inputOutputEventTypes);
+        inputWords = new ArrayDeque<>(expectedProgramBehavior.inputWords);
+        outputWordPredicates = new ArrayDeque<>(expectedProgramBehavior.outputWordPredicates);
+        errorStringBuilder = new StringBuilder(expectedProgramBehavior.errorStringBuilder);
+    }
+
+    public void copy(ExpectedProgramBehavior expectedProgramBehavior) {
+        inputOutputEventTypes.clear();
+        inputOutputEventTypes.addAll(expectedProgramBehavior.inputOutputEventTypes);
+        inputWords.clear();
+        inputWords.addAll(expectedProgramBehavior.inputWords);
+        outputWordPredicates.clear();
+        outputWordPredicates.addAll(expectedProgramBehavior.outputWordPredicates);
+        errorStringBuilder.setLength(0);
+        errorStringBuilder.append(expectedProgramBehavior.errorStringBuilder);
+    }
+
     public void addInputEvent(Word inputWord) {
         inputOutputEventTypes.add(InputOutputEventType.INPUT);
         inputWords.add(inputWord);
