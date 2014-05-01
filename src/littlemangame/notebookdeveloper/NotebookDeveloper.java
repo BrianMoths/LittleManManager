@@ -7,12 +7,17 @@ package littlemangame.notebookdeveloper;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
 import littlemangame.computer.Computer;
 import littlemangame.computer.Memory;
 import littlemangame.littlemancommands.LittleManCommander;
 import littlemangame.notebookdeveloper.gui.MemoryEditor;
 import littlemangame.notebookdeveloper.gui.NotebookDeveloperGui;
 import littlemangame.notebookdevelopmentproblems.HaltProblem;
+import littlemangame.notebookdevelopmentproblems.Output42;
+import littlemangame.notebookdevelopmentproblems.OutputAnything;
 
 /**
  *
@@ -25,6 +30,8 @@ public class NotebookDeveloper {
     private final NotebookDeveloperGui notebookDeveloperGui;
     private final Memory memory;
     private final MemoryEditor memoryEditor;
+    private List<NotebookDevelopmentProblem> notebookDevelopmentProblems;
+    private ListIterator<NotebookDevelopmentProblem> notebookDevelopmentProblemIterator;
     private NotebookDevelopmentProblem notebookDevelopmentProblem;
     private boolean isProblemSolved;
     private boolean isExecuting;
@@ -32,6 +39,7 @@ public class NotebookDeveloper {
 
     public NotebookDeveloper(NotebookDeveloperGui notebookDeveloperGui) {
         this.notebookDeveloperGui = notebookDeveloperGui;
+        notebookDevelopmentProblems = new ArrayList<>();
         speedController = new SpeedController(notebookDeveloperGui.getSpeedControllerGui());
         final Computer computer = new Computer(notebookDeveloperGui.getOutputPanel(), notebookDeveloperGui.getInputPanel());
         littleManCommander = new LittleManCommander(computer);
@@ -51,7 +59,11 @@ public class NotebookDeveloper {
         hookIntoNotebookDeveloperGui();
         stopExecution();
         memory = new Memory();
-        notebookDevelopmentProblem = new HaltProblem();
+        addProblem(new HaltProblem());
+        addProblem(new OutputAnything());
+        addProblem(new Output42());
+        notebookDevelopmentProblemIterator = notebookDevelopmentProblems.listIterator();
+        notebookDevelopmentProblem = notebookDevelopmentProblemIterator.next();
         isProblemSolved = false;
     }
 
@@ -122,6 +134,14 @@ public class NotebookDeveloper {
                 notebookDevelopmentProblem.testNotebook(memory);
                 isProblemSolved = notebookDevelopmentProblem.wasLastTestCorrect();
                 showMessage(notebookDevelopmentProblem.getMessageFromLastTest());
+                if (isProblemSolved) {
+                    if (notebookDevelopmentProblemIterator.hasNext()) {
+                        notebookDevelopmentProblem = notebookDevelopmentProblemIterator.next();
+                        isProblemSolved = false;
+                    } else {
+                        showMessage("You beat the game!");
+                    }
+                }
             }
 
         });
@@ -138,10 +158,14 @@ public class NotebookDeveloper {
     private void showMessage(String message) {
         notebookDeveloperGui.printMessage(message);
     }
+//
+//    public void setNotebookDevelopmentProblem(NotebookDevelopmentProblem notebookDevelopmentProblem) {
+//        this.notebookDevelopmentProblem = notebookDevelopmentProblem;
+//        isProblemSolved = false;
+//    }
 
-    public void setNotebookDevelopmentProblem(NotebookDevelopmentProblem notebookDevelopmentProblem) {
-        this.notebookDevelopmentProblem = notebookDevelopmentProblem;
-        isProblemSolved = false;
+    final public boolean addProblem(NotebookDevelopmentProblem e) {
+        return notebookDevelopmentProblems.add(e);
     }
 
 }
