@@ -4,12 +4,10 @@
  */
 package littlemangame.instructions;
 
+import littlemangame.littleman.littlemanutilities.littlemandata.LittleManWordContainer;
 import littlemangame.littlemancommands.LittleManCommands.LittleManAction;
 import littlemangame.littlemancommands.LittleManCommands.LittleManActionSequence;
 import littlemangame.littlemancommands.LittleManCommands.LittleManCommands;
-import static littlemangame.littlemancommands.LittleManCommander.*;
-
-import littlemangame.littleman.littlemanutilities.littlemandata.LittleManWordContainer;
 
 /**
  *
