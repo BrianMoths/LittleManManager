@@ -5,6 +5,7 @@
  */
 package littlemangame.notebookdeveloper;
 
+import littlemangame.notebookdeveloper.speedcontroller.SpeedController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;

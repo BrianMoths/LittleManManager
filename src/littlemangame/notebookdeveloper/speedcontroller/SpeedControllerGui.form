@@ -23,13 +23,15 @@
                   <Component id="slowerButton" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" pref="61" max="-2" attributes="0"/>
+              <Component id="speedLabel" min="-2" pref="61" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="resumeButton" max="32767" attributes="0"/>
                   <Component id="fasterButton" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="118" max="32767" attributes="0"/>
+              <Component id="endTestButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -37,17 +39,22 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="pauseButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="resumeButton" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="endTestButton" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="pauseButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="resumeButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="slowerButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="fasterButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="speedLabel" alignment="3" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="slowerButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="fasterButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel1" alignment="3" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -63,7 +70,7 @@
         <Property name="text" type="java.lang.String" value="Slower"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="speedLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="1x"/>
       </Properties>
@@ -76,6 +83,11 @@
     <Component class="javax.swing.JButton" name="resumeButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Resume"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="endTestButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="End Test"/>
       </Properties>
     </Component>
   </SubComponents>

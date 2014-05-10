@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package littlemangame.notebookdeveloper.gui;
+package littlemangame.notebookdeveloper.speedcontroller;
 
 import java.awt.Graphics;
 import java.awt.event.ActionListener;
@@ -43,8 +43,12 @@ public class SpeedControllerGui extends javax.swing.JPanel {
         pauseButton.addActionListener(l);
     }
 
+    public void setEndTestAction(ActionListener l) {
+        endTestButton.addActionListener(l);
+    }
+
     public void setText(String text) {
-        jLabel1.setText(text);
+        speedLabel.setText(text);
     }
 
     private void setEnabledButtons(boolean isEnabled) {
@@ -52,13 +56,16 @@ public class SpeedControllerGui extends javax.swing.JPanel {
         slowerButton.setEnabled(isEnabled);
         fasterButton.setEnabled(isEnabled);
         resumeButton.setEnabled(isEnabled);
+        endTestButton.setEnabled(isEnabled);
     }
 
     public void disableButtons() {
         setEnabledButtons(false);
+        setVisible(false);
     }
 
     public void enableButtons() {
+        setVisible(true);
         setEnabledButtons(true);
     }
 
@@ -78,6 +85,10 @@ public class SpeedControllerGui extends javax.swing.JPanel {
         resumeButton.setEnabled(isEnabled);
     }
 
+    public void setEnabledEndTestButton(boolean isEnabled) {
+        endTestButton.setEnabled(isEnabled);
+    }
+
     /**
      * This method is called from within the constructor to
      * initialize the form.
@@ -90,19 +101,22 @@ public class SpeedControllerGui extends javax.swing.JPanel {
 
         pauseButton = new javax.swing.JButton();
         slowerButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        speedLabel = new javax.swing.JLabel();
         fasterButton = new javax.swing.JButton();
         resumeButton = new javax.swing.JButton();
+        endTestButton = new javax.swing.JButton();
 
         pauseButton.setText("Pause");
 
         slowerButton.setText("Slower");
 
-        jLabel1.setText("1x");
+        speedLabel.setText("1x");
 
         fasterButton.setText("Faster");
 
         resumeButton.setText("Resume");
+
+        endTestButton.setText("End Test");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -114,34 +128,40 @@ public class SpeedControllerGui extends javax.swing.JPanel {
                     .addComponent(pauseButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(slowerButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(speedLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(resumeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(fasterButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
+                .addComponent(endTestButton)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(pauseButton)
-                    .addComponent(resumeButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(slowerButton)
-                    .addComponent(fasterButton)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(endTestButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(pauseButton)
+                            .addComponent(resumeButton))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(slowerButton)
+                            .addComponent(fasterButton)
+                            .addComponent(speedLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton endTestButton;
     private javax.swing.JButton fasterButton;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton pauseButton;
     private javax.swing.JButton resumeButton;
     private javax.swing.JButton slowerButton;
+    private javax.swing.JLabel speedLabel;
     // End of variables declaration//GEN-END:variables
 
 }
