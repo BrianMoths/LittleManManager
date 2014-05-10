@@ -42,12 +42,14 @@ public class SpeedController {
     public SpeedController(SpeedControllerGui speedControllerGui) {
         speed = 1;
         bufferedSpeed = 1;
-        isRunning = true;
-        bufferedIsRunning = true;
+        isRunning = false;
+        bufferedIsRunning = false;
         speedControllerAdapter = new SpeedControllerAdapter(this, speedControllerGui);
+        disable();
     }
 
     public int getCurrentSpeed() {
+        flushBuffer();
         if (isRunning) {
             return speeds.get(speed);
         } else {
@@ -55,7 +57,7 @@ public class SpeedController {
         }
     }
 
-    public void disable() {
+    public final void disable() {
         pause();
         speedControllerAdapter.disableGui();
     }

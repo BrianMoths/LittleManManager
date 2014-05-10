@@ -25,6 +25,15 @@ class SpeedControllerAdapter {
     }
 
     private void hookIntoGui() {
+        speedControllerGui.setSlowerAction(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                speedController.decreaseSpeed();
+                syncSpeedButtons();
+            }
+
+        });
         speedControllerGui.setFasterAction(new ActionListener() {
 
             @Override
@@ -49,15 +58,6 @@ class SpeedControllerAdapter {
             public void actionPerformed(ActionEvent ae) {
                 speedController.resume();
                 syncPauseResumeButtons();
-            }
-
-        });
-        speedControllerGui.setSlowerAction(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                speedController.decreaseSpeed();
-                syncSpeedButtons();
             }
 
         });

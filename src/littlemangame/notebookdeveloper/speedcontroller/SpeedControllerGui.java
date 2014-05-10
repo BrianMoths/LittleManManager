@@ -5,7 +5,6 @@
  */
 package littlemangame.notebookdeveloper.speedcontroller;
 
-import java.awt.Graphics;
 import java.awt.event.ActionListener;
 
 /**
@@ -20,11 +19,6 @@ public class SpeedControllerGui extends javax.swing.JPanel {
      */
     public SpeedControllerGui() {
         initComponents();
-    }
-
-    @Override
-    public void paint(Graphics g) {
-        super.paint(g); //To change body of generated methods, choose Tools | Templates.
     }
 
     public void setResumeAction(ActionListener l) {

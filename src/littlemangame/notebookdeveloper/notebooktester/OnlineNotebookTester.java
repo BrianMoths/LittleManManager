@@ -7,6 +7,9 @@ package littlemangame.notebookdeveloper.notebooktester;
 
 import littlemangame.computer.Computer;
 import littlemangame.computer.Memory;
+import littlemangame.notebookdeveloper.notebooktester.inputoutputevents.HaltEvent;
+import littlemangame.notebookdeveloper.notebooktester.inputoutputevents.InputEvent;
+import littlemangame.notebookdeveloper.notebooktester.inputoutputevents.OutputEvent;
 import littlemangame.notebookdeveloper.notebooktester.littleManMock.ComputerInputterMock;
 import littlemangame.notebookdeveloper.notebooktester.littleManMock.ComputerOutputterMock;
 import littlemangame.notebookdeveloper.notebooktester.littleManMock.HaltListener;
@@ -74,7 +77,7 @@ public class OnlineNotebookTester implements NotebookTester { //I should break t
 
             @Override
             public Word getInputWord() {
-                isCorrectSoFar = expectedProgramBehaviorOriginal.testInputEvent(new InputEvent());
+                isCorrectSoFar = expectedProgramBehaviorCopy.testInputEvent(new InputEvent());
                 return expectedProgramBehaviorCopy.pollInputWord();
             }
 

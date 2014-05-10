@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package littlemangame.notebookdeveloper.notebooktester;
+package littlemangame.notebookdeveloper.notebooktester.inputoutputevents;
 
 /**
  *
  * @author brian
  */
-public class InputEvent extends InputOutputEvent {
+public class HaltEvent extends InputOutputEvent {
 
     @Override
     public InputOutputEventType getEventType() {
-        return InputOutputEventType.INPUT;
+        return InputOutputEventType.HALT;
     }
 
 }

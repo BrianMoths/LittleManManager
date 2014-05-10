@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package littlemangame.notebookdeveloper.notebooktester;
+package littlemangame.notebookdeveloper.notebooktester.inputoutputevents;
 
 import littlemangame.word.Word;
 

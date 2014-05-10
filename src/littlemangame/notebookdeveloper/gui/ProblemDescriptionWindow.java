@@ -5,7 +5,6 @@
  */
 package littlemangame.notebookdeveloper.gui;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
@@ -14,34 +13,23 @@ import java.awt.event.ActionListener;
  */
 public class ProblemDescriptionWindow extends javax.swing.JFrame {
 
-    private ActionListener updateStringActionListener;
-
     /**
      * Creates new form ProblemDescriptionWindow
      */
     public ProblemDescriptionWindow() {
         initComponents();
-        updateStringActionListener = new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-
-            }
-
-        };
     }
 
     public void setProblemDescription(String problemDescription) {
         jTextArea1.setText(problemDescription);
     }
 
-    public void setUpdateStringActionListener(ActionListener updateStringActionListener) {
-        this.updateStringActionListener = updateStringActionListener;
+    public void showProblemDescription() {
+        setVisible(true);
     }
 
-    public void showProblemDescription() {
-        updateStringActionListener.actionPerformed(null);
-        setVisible(true);
+    public void addOkButtonListener(ActionListener l) {
+        okButton.addActionListener(l);
     }
 
     /**
@@ -68,11 +56,6 @@ public class ProblemDescriptionWindow extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTextArea1);
 
         okButton.setText("OK");
-        okButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                okButtonActionPerformed(evt);
-            }
-        });
 
         jLabel1.setText("Objective:");
 
@@ -121,10 +104,6 @@ public class ProblemDescriptionWindow extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
-        setVisible(false);
-    }//GEN-LAST:event_okButtonActionPerformed
 
     /**
      * @param args the command line arguments
