@@ -11,6 +11,7 @@ import littlemangame.computer.Memory;
 import littlemangame.littleman.LittleMan;
 import littlemangame.littlemancommands.LittleManCommands.LittleManAction;
 import littlemangame.littlemancommands.LittleManCommands.LittleManCommands;
+import littlemangame.notebookdeveloper.gui.OfficeView;
 
 /**
  *
@@ -20,6 +21,10 @@ public class LittleManCommander implements Drawable {
 
     private final LittleMan littleMan;
     private LittleManAction doCycleCommand;
+
+    public LittleManCommander(OfficeView officeView) {
+        this(new Computer(officeView.getOutputPanel(), officeView.getInputPanel()));
+    }
 
     public LittleManCommander(Computer computer) {
         this(new LittleMan(computer));
