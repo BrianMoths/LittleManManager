@@ -61,14 +61,17 @@ class SpeedControllerAdapter {
             }
 
         });
-    }
+        speedControllerGui.setEndTestAction(new ActionListener() {
 
-    void disableGui() {
-        speedControllerGui.disableButtons();
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                speedController.disable();
+            }
+
+        });
     }
 
     void enableGui() {
-        speedControllerGui.enableButtons();
         syncPauseResumeButtons();
         syncSpeedButtons();
     }
@@ -87,6 +90,10 @@ class SpeedControllerAdapter {
 
     private String getSpeedString() {
         return Integer.toString(speedController.getBufferedSpeed()) + "x";
+    }
+
+    public void setEndTestActionListener(ActionListener actionListener) {
+        speedControllerGui.setEndTestAction(actionListener);
     }
 
 }

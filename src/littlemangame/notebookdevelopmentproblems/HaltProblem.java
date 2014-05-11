@@ -5,9 +5,8 @@
  */
 package littlemangame.notebookdevelopmentproblems;
 
-import littlemangame.notebookdeveloper.NotebookDevelopmentProblem;
-import littlemangame.notebookdeveloper.notebooktester.OnlineNotebookTester;
 import littlemangame.notebookdeveloper.notebooktester.NotebookTester;
+import littlemangame.notebookdeveloper.notebooktester.OnlineNotebookTester;
 
 /**
  *

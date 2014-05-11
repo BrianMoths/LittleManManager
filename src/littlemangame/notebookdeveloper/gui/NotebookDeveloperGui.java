@@ -16,54 +16,13 @@ import littlemangame.notebookdeveloper.submissioncontrols.SubmissionControlGui;
  */
 public class NotebookDeveloperGui extends javax.swing.JPanel {
 
-//    public SpeedControllerGui getSpeedControllerGui() {
-//        return speedControllerGui;
-//    }
-//    private final ProblemDescriptionWindow problemDescriptionWindow;
     /**
      * Creates new form NotebookDeveloperGui
      */
     public NotebookDeveloperGui() {
         initComponents();
-//        problemDescriptionWindow = new ProblemDescriptionWindow();
     }
 
-//    public void setAbortAction(ActionListener l) {
-//        getSpeedControllerGui().setEndTestAction(l);
-//    }
-//
-//    public void setEditMemoryAction(ActionListener l) {
-//        editMemoryButton.addActionListener(l);
-//    }
-//
-//    public void setExecuteAction(ActionListener l) {
-//        executeButton.addActionListener(l);
-//    }
-//    public void setObjectiveString(String problemDescription) {
-//        problemDescriptionWindow.setProblemDescription(problemDescription);
-//    }
-//    public void setUpdateObjectiveStringAction(ActionListener l) {
-//        problemDescriptionWindow.setUpdateStringActionListener(l);
-//    }
-//    public void setSubmitAction(ActionListener l) {
-//        submitButton.addActionListener(l);
-//    }
-//
-//    public void setEnabledAbort(boolean isEnabled) {
-//        getSpeedControllerGui().setEnabledEndTestButton(isEnabled);
-//    }
-//
-//    public void setEnabledEditMemory(boolean isEnabled) {
-//        editMemoryButton.setEnabled(isEnabled);
-//    }
-//
-//    public void setEnabledExecute(boolean isEnabled) {
-//        executeButton.setEnabled(isEnabled);
-//    }
-//
-//    public void setEnabledSubmit(boolean isEnabled) {
-//        submitButton.setEnabled(isEnabled);
-//    }
     public InputPanel getInputPanel() {
         return inputPanel;
     }
@@ -75,10 +34,6 @@ public class NotebookDeveloperGui extends javax.swing.JPanel {
     public GameCanvas getGameCanvas() {
         return gameCanvas;
     }
-//
-//    public void printMessage(String message) {
-//        consoleTextArea.append(message + "\n");
-//    }
 
     public SubmissionControlGui getSubmissionControlGui() {
         return submissionControlGui1;
@@ -109,7 +64,7 @@ public class NotebookDeveloperGui extends javax.swing.JPanel {
                 .addGroup(gameCanvasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(outputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(inputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(394, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         gameCanvasLayout.setVerticalGroup(
             gameCanvasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,7 +73,7 @@ public class NotebookDeveloperGui extends javax.swing.JPanel {
                 .addComponent(outputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(inputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -127,9 +82,9 @@ public class NotebookDeveloperGui extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(gameCanvas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(submissionControlGui1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(submissionControlGui1, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE))
                 .addContainerGap(51, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -137,7 +92,7 @@ public class NotebookDeveloperGui extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(gameCanvas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(97, 97, 97)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(submissionControlGui1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(45, Short.MAX_VALUE))
         );

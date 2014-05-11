@@ -1,11 +1,13 @@
 This is supposed to be a simple program which gives a simple model of how a cpu 
-works. Many important features of a cpu will not be included in this minimal 
+works. This game is inspired by the little man architecture. The game is supposed to be a implementation of an architecture similar to the little man architecture in an office setting. The player is given specifications what the little man must do (a program), and the player must produce a sequence of instructions that get the little man to do that action. 
+
+Many important features of a cpu will not be included in this minimal 
 model. Features not included in this version could be included in a future more 
 sophisticated version.
 
 scope first iteration:
   what is covered: 
-    basic instruction cycle: fetch decode to operation...
+    basic instruction cycle: fetch, decode, do operation...
     instruction pointer
     von neumann achitecture
     basic instructions
@@ -26,4 +28,4 @@ scope first iteration:
     stack
     interrupts
     
-art should look like boxhead.
+art should look like boxhead?

@@ -73,6 +73,14 @@ public class SubmissionControllerAdapter {
             }
 
         });
+        speedController.setEndTestActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                submissionControlGui.showSubmissionPanel();
+            }
+
+        });
     }
 
     private void hookIntoMemoryEditor() {
@@ -120,6 +128,10 @@ public class SubmissionControllerAdapter {
 
     public int getCurrentSpeed() {
         return speedController.getCurrentSpeed();
+    }
+
+    public void setEndTestActionListener(ActionListener actionListener) {
+        speedController.setEndTestActionListener(actionListener);
     }
 
 }

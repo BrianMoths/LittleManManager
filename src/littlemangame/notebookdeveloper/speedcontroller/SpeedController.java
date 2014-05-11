@@ -5,6 +5,7 @@
  */
 package littlemangame.notebookdeveloper.speedcontroller;
 
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,7 +60,6 @@ public class SpeedController {
 
     public final void disable() {
         pause();
-        speedControllerAdapter.disableGui();
     }
 
     public void enable() {
@@ -70,6 +70,10 @@ public class SpeedController {
     public void flushBuffer() {
         isRunning = bufferedIsRunning;
         speed = bufferedSpeed;
+    }
+
+    public void setEndTestActionListener(ActionListener actionListener) {
+        speedControllerAdapter.setEndTestActionListener(actionListener);
     }
 
     void pause() {

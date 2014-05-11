@@ -53,16 +53,6 @@ public class SpeedControllerGui extends javax.swing.JPanel {
         endTestButton.setEnabled(isEnabled);
     }
 
-    public void disableButtons() {
-        setEnabledButtons(false);
-        setVisible(false);
-    }
-
-    public void enableButtons() {
-        setVisible(true);
-        setEnabledButtons(true);
-    }
-
     public void setEnabledFasterButton(boolean isEnabled) {
         fasterButton.setEnabled(isEnabled);
     }

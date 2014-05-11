@@ -1,0 +1,4 @@
+add a cancel button for the memory editor.
+refactor the notebookdeveloporgui so there the office view is encapsulated.
+add a tutorial explaining how the little man works
+add an introductory scene giving a story
