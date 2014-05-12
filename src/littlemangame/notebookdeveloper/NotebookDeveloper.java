@@ -7,17 +7,10 @@ package littlemangame.notebookdeveloper;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ListIterator;
 import littlemangame.computer.Memory;
 import littlemangame.littlemancommands.LittleManCommander;
 import littlemangame.notebookdeveloper.gui.NotebookDeveloperGui;
 import littlemangame.notebookdeveloper.submissioncontrols.SubmissionControllerAdapter;
-import littlemangame.notebookdevelopmentproblems.HaltProblem;
-import littlemangame.notebookdevelopmentproblems.NotebookDevelopmentProblem;
-import littlemangame.notebookdevelopmentproblems.Output42;
-import littlemangame.notebookdevelopmentproblems.OutputAnything;
 
 /**
  *
@@ -28,23 +21,15 @@ public class NotebookDeveloper {
     private final SubmissionControllerAdapter submissionControllerAdapter;
     private final LittleManCommander littleManCommander;
     private final Memory memory;
-    private final List<NotebookDevelopmentProblem> notebookDevelopmentProblems;
-    private ListIterator<NotebookDevelopmentProblem> notebookDevelopmentProblemIterator;
-    private NotebookDevelopmentProblem notebookDevelopmentProblem;
-    private boolean isProblemSolved;
+    private final NotebookProblemSet notebookVerifier;
 
     public NotebookDeveloper(NotebookDeveloperGui notebookDeveloperGui) {
-        notebookDevelopmentProblems = new ArrayList<>();
+        notebookVerifier = NotebookProblemSet.makeDefaultNotebookProblemSet();
+        notebookVerifier.beginNextProblem();
         submissionControllerAdapter = new SubmissionControllerAdapter(this, notebookDeveloperGui.getSubmissionControlGui());
         littleManCommander = new LittleManCommander(notebookDeveloperGui.getOfficeView());
         notebookDeveloperGui.registerLittleManCommander(littleManCommander);
         memory = new Memory();
-        addProblem(new HaltProblem());
-        addProblem(new OutputAnything());
-        addProblem(new Output42());
-        notebookDevelopmentProblemIterator = notebookDevelopmentProblems.listIterator();
-        notebookDevelopmentProblem = notebookDevelopmentProblemIterator.next();
-        isProblemSolved = false;
         submissionControllerAdapter.setEndTestActionListener(new ActionListener() {
 
             @Override
@@ -62,13 +47,11 @@ public class NotebookDeveloper {
     }
 
     public void submitMemory() {
-        notebookDevelopmentProblem.testNotebook(memory);
-        isProblemSolved = notebookDevelopmentProblem.wasLastTestCorrect();
-        showMessage(notebookDevelopmentProblem.getMessageFromLastTest());
-        if (isProblemSolved) {
-            if (notebookDevelopmentProblemIterator.hasNext()) {
-                notebookDevelopmentProblem = notebookDevelopmentProblemIterator.next();
-                isProblemSolved = false;
+        final boolean isCorrect = notebookVerifier.verifyNotebook(memory);
+        showMessage(notebookVerifier.getMessageFromLastTest());
+        if (isCorrect) {
+            if (notebookVerifier.hasNextProblem()) {
+                notebookVerifier.beginNextProblem();
             } else {
                 showMessage("You beat the game!");
             }
@@ -79,12 +62,8 @@ public class NotebookDeveloper {
         submissionControllerAdapter.printMessage(message);
     }
 
-    final public boolean addProblem(NotebookDevelopmentProblem e) {
-        return notebookDevelopmentProblems.add(e);
-    }
-
     public String getCurrentProblemDescription() {
-        return notebookDevelopmentProblem.getProblemDescription();
+        return notebookVerifier.getCurrentProblemDescription();
     }
 
     public Memory getMemory() {

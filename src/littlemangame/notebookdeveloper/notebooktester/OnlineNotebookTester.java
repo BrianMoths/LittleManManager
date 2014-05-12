@@ -117,7 +117,11 @@ public class OnlineNotebookTester implements NotebookTester { //I should break t
         if (isCorrectSoFar) {
             return SUCCESS_STRING;
         } else {
-            return expectedProgramBehaviorCopy.getErrorString();
+            final String errorString = expectedProgramBehaviorCopy.getErrorString();
+            if ("".equals(errorString)) {
+                throw new IllegalStateException("message from test is empty; almost certainly getMessageFromTest was called before running any test.");
+            }
+            return errorString;
         }
     }
 

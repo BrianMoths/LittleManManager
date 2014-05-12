@@ -24,7 +24,7 @@ import littlemangame.word.Word;
  * @author brian
  */
 public class MemoryEditor extends javax.swing.JFrame {
-    
+
     private final List<MemorySlotChooser> memorySlotChoosers;
 
     /**
@@ -36,7 +36,7 @@ public class MemoryEditor extends javax.swing.JFrame {
         addMemorySlotChoosers();
         writeDescriptions();
         saveButton.addActionListener(new ActionListener() {
-            
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
@@ -44,7 +44,7 @@ public class MemoryEditor extends javax.swing.JFrame {
 
         });
     }
-    
+
     private void addMemorySlotChoosers() {
         Iterator<Word> wordIterator = Word.getIterator();
         scrollPanePanel.setLayout(new GridLayout(Word.NUM_WORDS, 1, 0, 5));
@@ -57,7 +57,7 @@ public class MemoryEditor extends javax.swing.JFrame {
         revalidate();
         repaint();
     }
-    
+
     private void writeDescriptions() {
 //        for (InstructionFromSet instruction : InstructionFromSet.values()) {
 //            helpText.append(instruction.getDescription());
@@ -68,28 +68,28 @@ public class MemoryEditor extends javax.swing.JFrame {
         treeCellRenderer.setOpenIcon(null);
         treeCellRenderer.setClosedIcon(null);
         instructionDescriptionTree.setCellRenderer(treeCellRenderer);
-        
+
         javax.swing.tree.DefaultMutableTreeNode rootNode = new javax.swing.tree.DefaultMutableTreeNode("rootNode");
         javax.swing.tree.DefaultMutableTreeNode haltNoop = new javax.swing.tree.DefaultMutableTreeNode("<html><b>Halt and no operation</b></html>");
         javax.swing.tree.DefaultMutableTreeNode jumps = new javax.swing.tree.DefaultMutableTreeNode("<html><b>Jumps</b></html>");
-        javax.swing.tree.DefaultMutableTreeNode dataMovement = new javax.swing.tree.DefaultMutableTreeNode("<html><b>Data movement</b></html>");
         javax.swing.tree.DefaultMutableTreeNode inputOutput = new javax.swing.tree.DefaultMutableTreeNode("<html><b>Input/output</b></html>");
+        javax.swing.tree.DefaultMutableTreeNode dataMovement = new javax.swing.tree.DefaultMutableTreeNode("<html><b>Data movement</b></html>");
         javax.swing.tree.DefaultMutableTreeNode digitwiseManipulation = new javax.swing.tree.DefaultMutableTreeNode("<html><b>Digitwise manipulation</b></html>");
         javax.swing.tree.DefaultMutableTreeNode digitShifts = new javax.swing.tree.DefaultMutableTreeNode("<html><b>Digit shifts</b></html>");
         javax.swing.tree.DefaultMutableTreeNode arithmetic = new javax.swing.tree.DefaultMutableTreeNode("<html><b>Arithmetic</b></html>");
         List<DefaultMutableTreeNode> topNodes = new ArrayList<>();
         topNodes.add(haltNoop);
         topNodes.add(jumps);
-        topNodes.add(dataMovement);
         topNodes.add(inputOutput);
+        topNodes.add(dataMovement);
         topNodes.add(digitwiseManipulation);
         topNodes.add(digitShifts);
         topNodes.add(arithmetic);
-        
+
         for (DefaultMutableTreeNode defaultMutableTreeNode : topNodes) {
             rootNode.add(defaultMutableTreeNode);
         }
-        
+
         List<Word> lowerLimitWords = new ArrayList<>();
         lowerLimitWords.add(Word.valueOfLastDigitsOfInteger(10));
         lowerLimitWords.add(Word.valueOfLastDigitsOfInteger(20));
@@ -98,7 +98,7 @@ public class MemoryEditor extends javax.swing.JFrame {
         lowerLimitWords.add(Word.valueOfLastDigitsOfInteger(60));
         lowerLimitWords.add(Word.valueOfLastDigitsOfInteger(70));
         lowerLimitWords.add(Word.valueOfLastDigitsOfInteger(99));
-        
+
         int categoryIndex = 0;
         Word lowerLimitOfNextCategory = lowerLimitWords.get(categoryIndex);
         DefaultMutableTreeNode currentTopNode = topNodes.get(categoryIndex);
@@ -110,17 +110,17 @@ public class MemoryEditor extends javax.swing.JFrame {
             }
             currentTopNode.add(makeNode(instructionFromSet));
         }
-        
+
         instructionDescriptionTree.setModel(new javax.swing.tree.DefaultTreeModel(rootNode));
     }
-    
+
     DefaultMutableTreeNode makeNode(InstructionFromSet instructionFromSet) {
         DefaultMutableTreeNode instructionNode = new DefaultMutableTreeNode(instructionFromSet.getDescription());
         DefaultMutableTreeNode detailsNode = new DefaultMutableTreeNode(instructionFromSet.getDetails());
         instructionNode.add(detailsNode);
         return instructionNode;
     }
-    
+
     public Memory getMemory() {
         Memory memory = new Memory();
         Iterator<Word> wordIterator = Word.getIterator();
@@ -130,7 +130,7 @@ public class MemoryEditor extends javax.swing.JFrame {
         }
         return memory;
     }
-    
+
     public void setMemory(Memory memory) {
         Iterator<Word> wordIterator = Word.getIterator();
         while (wordIterator.hasNext()) {
@@ -139,41 +139,41 @@ public class MemoryEditor extends javax.swing.JFrame {
             memorySlotChooser.setSelectedWord(memory.getMemory(word).getWord());
         }
     }
-    
+
     public void setSaveAction(final ActionListener actionListener) {
         saveButton.addActionListener(actionListener);
         addWindowListener(new WindowListener() {
-            
+
             @Override
             public void windowOpened(WindowEvent e) {
             }
-            
+
             @Override
             public void windowClosing(WindowEvent e) {
                 actionListener.actionPerformed(null);
             }
-            
+
             @Override
             public void windowClosed(WindowEvent e) {
                 actionListener.actionPerformed(null);
             }
-            
+
             @Override
             public void windowIconified(WindowEvent e) {
             }
-            
+
             @Override
             public void windowDeiconified(WindowEvent e) {
             }
-            
+
             @Override
             public void windowActivated(WindowEvent e) {
             }
-            
+
             @Override
             public void windowDeactivated(WindowEvent e) {
             }
-            
+
         });
     }
 
@@ -323,7 +323,7 @@ public class MemoryEditor extends javax.swing.JFrame {
             public void run() {
                 new MemoryEditor().setVisible(true);
             }
-            
+
         });
     }
 
