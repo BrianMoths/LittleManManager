@@ -4,8 +4,8 @@
  */
 package littlemangame;
 
-import littlemangame.notebookdeveloper.gui.NotebookDeveloperGui;
 import GameGui.BaseGameGui;
+import littlemangame.genericGui.NotebookDeveloperGui;
 
 /**
  *
@@ -22,7 +22,7 @@ public class LittleManGui extends BaseGameGui {
     }
 
     public NotebookDeveloperGui getNotebookDeveloperGui() {
-        return notebookDeveloperGui;
+        return baseNotebookDeveloperGui1;
     }
 
     /**
@@ -34,7 +34,7 @@ public class LittleManGui extends BaseGameGui {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        notebookDeveloperGui = new littlemangame.notebookdeveloper.gui.NotebookDeveloperGui();
+        baseNotebookDeveloperGui1 = new littlemangame.notebookdeveloper.gui.BaseNotebookDeveloperGui();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -42,20 +42,17 @@ public class LittleManGui extends BaseGameGui {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(notebookDeveloperGui, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(baseNotebookDeveloperGui1, javax.swing.GroupLayout.DEFAULT_SIZE, 626, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(notebookDeveloperGui, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(baseNotebookDeveloperGui1, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private littlemangame.notebookdeveloper.gui.NotebookDeveloperGui notebookDeveloperGui;
-    // End of variables declaration                       public NotebookDeveloperGui getNotebookDeveloperGui() {//GEN-END:variables
-
+    private littlemangame.notebookdeveloper.gui.BaseNotebookDeveloperGui baseNotebookDeveloperGui1;
+    // End of variables declaration//GEN-END:variables
 }

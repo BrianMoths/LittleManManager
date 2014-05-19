@@ -21,7 +21,7 @@ import littlemangame.notebookdevelopmentproblems.OutputAnything;
  */
 public class NotebookProblemSet {
 
-    static NotebookProblemSet makeDefaultNotebookProblemSet() {
+    public static NotebookProblemSet makeDefaultNotebookProblemSet() {
         List<NotebookDevelopmentProblem> notebookDevelopmentProblems = new ArrayList<>();
         notebookDevelopmentProblems.add(new HaltProblem());
         notebookDevelopmentProblems.add(new OutputAnything());

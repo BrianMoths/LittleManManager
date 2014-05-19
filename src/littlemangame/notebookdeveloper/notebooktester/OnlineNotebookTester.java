@@ -25,7 +25,7 @@ import littlemangame.word.Word;
  */
 public class OnlineNotebookTester implements NotebookTester { //I should break this into two classes, one for the queues, one for testing.
 
-    static private final String SUCCESS_STRING = "Test successful!";
+    static private final String SUCCESS_STRING = "Test successful!\n";
     private final ExpectedProgramBehavior expectedProgramBehaviorOriginal;
     private final ExpectedProgramBehavior expectedProgramBehaviorCopy;
     private boolean isCorrectSoFar;

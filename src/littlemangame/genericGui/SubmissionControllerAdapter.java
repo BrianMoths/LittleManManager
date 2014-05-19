@@ -3,28 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package littlemangame.notebookdeveloper.submissioncontrols;
+package littlemangame.genericGui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import littlemangame.notebookdeveloper.NotebookDeveloper;
+import littlemangame.genericGui.NotebookDeveloper;
 import littlemangame.notebookdeveloper.gui.MemoryEditor;
 import littlemangame.notebookdeveloper.gui.ProblemDescriptionWindow;
 import littlemangame.notebookdeveloper.speedcontroller.SpeedController;
+import littlemangame.notebookdeveloper.submissioncontrols.SubmissionControlGui;
 
 /**
  *
  * @author brian
  */
-public class SubmissionControllerAdapter {
+public class SubmissionControllerAdapter<T extends SubmissionControlGui> {
 
     private final NotebookDeveloper notebookDeveloper;
-    private final SubmissionControlGui submissionControlGui;
+    protected final T submissionControlGui;
     private final MemoryEditor memoryEditor;
     private final SpeedController speedController;
     private final ProblemDescriptionWindow problemDescriptionWindow;
 
-    public SubmissionControllerAdapter(NotebookDeveloper notebookDeveloper, SubmissionControlGui submissionControlGui) {
+    public SubmissionControllerAdapter(NotebookDeveloper notebookDeveloper, T submissionControlGui) {
         this.notebookDeveloper = notebookDeveloper;
         this.submissionControlGui = submissionControlGui;
         speedController = new SpeedController(submissionControlGui.getSpeedControllerGui());

@@ -75,6 +75,10 @@ public class SubmissionControlGui extends javax.swing.JPanel {
         return speedControllerGui;
     }
 
+    final protected JLayeredPane getBaseLayeredPane() {
+        return baseLayeredPane;
+    }
+
     /**
      * This method is called from within the constructor to
      * initialize the form.

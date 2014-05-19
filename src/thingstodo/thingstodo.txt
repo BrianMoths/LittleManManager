@@ -1,4 +1,20 @@
 add a cancel button for the memory editor.
-refactor the notebookdeveloporgui so there the office view is encapsulated.
-add a tutorial explaining how the little man works
+
+add a tutorial explaining how the little man works-
+
+explain notebook.
+explain output panel
+explain input panel
+explain page number sheet
+explain worksheet
+
+explain how little man works
+little man checks page number sheet
+gets instruction from notebook
+increments page number sheets and gets operands if necessary
+carries out instruction
+repeats
+
+explain how to actually write the notebook.
+
 add an introductory scene giving a story

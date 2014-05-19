@@ -3,30 +3,31 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package littlemangame.notebookdeveloper;
+package littlemangame.genericGui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import littlemangame.computer.Memory;
 import littlemangame.littlemancommands.LittleManCommander;
-import littlemangame.notebookdeveloper.gui.NotebookDeveloperGui;
-import littlemangame.notebookdeveloper.submissioncontrols.SubmissionControllerAdapter;
+import littlemangame.notebookdeveloper.NotebookProblemSet;
+import littlemangame.notebookdeveloper.submissioncontrols.SubmissionControlGui;
 
 /**
  *
  * @author brian
+ * @param <T>
  */
-public class NotebookDeveloper {
+public class NotebookDeveloper<T extends SubmissionControlGui> {
 
-    private final SubmissionControllerAdapter submissionControllerAdapter;
+    protected final SubmissionControllerAdapter<T> submissionControllerAdapter;
     private final LittleManCommander littleManCommander;
     private final Memory memory;
     private final NotebookProblemSet notebookVerifier;
 
-    public NotebookDeveloper(NotebookDeveloperGui notebookDeveloperGui) {
+    public NotebookDeveloper(NotebookDeveloperGui<T> notebookDeveloperGui) {
         notebookVerifier = NotebookProblemSet.makeDefaultNotebookProblemSet();
         notebookVerifier.beginNextProblem();
-        submissionControllerAdapter = new SubmissionControllerAdapter(this, notebookDeveloperGui.getSubmissionControlGui());
+        submissionControllerAdapter = new SubmissionControllerAdapter<>(this, notebookDeveloperGui.getSubmissionControlGui());
         littleManCommander = new LittleManCommander(notebookDeveloperGui.getOfficeView());
         notebookDeveloperGui.registerLittleManCommander(littleManCommander);
         memory = new Memory();
