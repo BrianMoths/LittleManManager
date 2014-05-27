@@ -6,6 +6,7 @@ package littlemangame;
 
 import GameGui.BaseGameGui;
 import littlemangame.genericGui.NotebookDeveloperGui;
+import littlemangame.notebookdeveloper.submissioncontrols.SubmissionControlGui;
 
 /**
  *
@@ -21,7 +22,7 @@ public class LittleManGui extends BaseGameGui {
         initComponents();
     }
 
-    public NotebookDeveloperGui getNotebookDeveloperGui() {
+    public NotebookDeveloperGui<SubmissionControlGui> getNotebookDeveloperGui() {
         return baseNotebookDeveloperGui1;
     }
 

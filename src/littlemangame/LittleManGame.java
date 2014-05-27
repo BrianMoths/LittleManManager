@@ -4,9 +4,10 @@
  */
 package littlemangame;
 
-import littlemangame.genericGui.NotebookDeveloper;
 import ListenerInputHandler.AbstractInputHandlerClient;
 import RealTimeGame.AbstractRealTimeGame;
+import littlemangame.genericGui.SubmissionControllerAdapter;
+import littlemangame.notebookdeveloper.submissioncontrols.SubmissionControlGui;
 
 /**
  *
@@ -26,11 +27,11 @@ public class LittleManGame extends AbstractRealTimeGame<LittleManGui> {
         return new LittleManGui();
     }
 
-    private final NotebookDeveloper notebookDeveloper;
+    private final SubmissionControllerAdapter<SubmissionControlGui> submissionControllerAdapter;
 
     public LittleManGame() {
         super(new AbstractInputHandlerClient(), makeGamePanel());
-        notebookDeveloper = new NotebookDeveloper(getGameGui().getNotebookDeveloperGui());
+        submissionControllerAdapter = new SubmissionControllerAdapter<>(getGameGui().getNotebookDeveloperGui());
         init();
     }
 
@@ -39,7 +40,7 @@ public class LittleManGame extends AbstractRealTimeGame<LittleManGui> {
 
     @Override
     protected void doLogic() {
-        notebookDeveloper.doFrame();
+        submissionControllerAdapter.doFrames();
     }
 
 }

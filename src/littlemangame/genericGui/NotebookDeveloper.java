@@ -5,62 +5,51 @@
  */
 package littlemangame.genericGui;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import littlemangame.computer.Memory;
 import littlemangame.littlemancommands.LittleManCommander;
 import littlemangame.notebookdeveloper.NotebookProblemSet;
-import littlemangame.notebookdeveloper.submissioncontrols.SubmissionControlGui;
+import littlemangame.notebookdeveloper.gui.OfficeView;
 
 /**
  *
  * @author brian
- * @param <T>
  */
-public class NotebookDeveloper<T extends SubmissionControlGui> {
+public class NotebookDeveloper {
 
-    protected final SubmissionControllerAdapter<T> submissionControllerAdapter;
     private final LittleManCommander littleManCommander;
     private final Memory memory;
     private final NotebookProblemSet notebookVerifier;
 
-    public NotebookDeveloper(NotebookDeveloperGui<T> notebookDeveloperGui) {
+    public NotebookDeveloper(OfficeView officeView) {
+        littleManCommander = new LittleManCommander(officeView);
+        officeView.registerLittleManCommander(littleManCommander);
+        memory = new Memory();
         notebookVerifier = NotebookProblemSet.makeDefaultNotebookProblemSet();
         notebookVerifier.beginNextProblem();
-        submissionControllerAdapter = new SubmissionControllerAdapter<>(this, notebookDeveloperGui.getSubmissionControlGui());
-        littleManCommander = new LittleManCommander(notebookDeveloperGui.getOfficeView());
-        notebookDeveloperGui.registerLittleManCommander(littleManCommander);
-        memory = new Memory();
-        submissionControllerAdapter.setEndTestActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                littleManCommander.reset();
-            }
-
-        });
     }
 
-    public void doFrame() {
-        for (int i = 0; i < submissionControllerAdapter.getCurrentSpeed(); i++) {
+    public void doFrames(int numFrames) {
+        for (int i = 0; i < numFrames; i++) {
             littleManCommander.doCycle();
         }
     }
 
-    public void submitMemory() {
+    public void endTest() {
+        littleManCommander.reset();
+    }
+
+    public String submitMemory() {
         final boolean isCorrect = notebookVerifier.verifyNotebook(memory);
-        showMessage(notebookVerifier.getMessageFromLastTest());
+        final StringBuilder resultStringBuilder = new StringBuilder();
+        resultStringBuilder.append(notebookVerifier.getMessageFromLastTest());
         if (isCorrect) {
             if (notebookVerifier.hasNextProblem()) {
                 notebookVerifier.beginNextProblem();
             } else {
-                showMessage("You beat the game!");
+                resultStringBuilder.append("You beat the game!");
             }
         }
-    }
-
-    private void showMessage(String message) {
-        submissionControllerAdapter.printMessage(message);
+        return resultStringBuilder.toString();
     }
 
     public String getCurrentProblemDescription() {

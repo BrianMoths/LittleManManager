@@ -7,7 +7,6 @@ package littlemangame.genericGui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import littlemangame.genericGui.NotebookDeveloper;
 import littlemangame.notebookdeveloper.gui.MemoryEditor;
 import littlemangame.notebookdeveloper.gui.ProblemDescriptionWindow;
 import littlemangame.notebookdeveloper.speedcontroller.SpeedController;
@@ -16,6 +15,7 @@ import littlemangame.notebookdeveloper.submissioncontrols.SubmissionControlGui;
 /**
  *
  * @author brian
+ * @param <T>
  */
 public class SubmissionControllerAdapter<T extends SubmissionControlGui> {
 
@@ -35,6 +35,10 @@ public class SubmissionControllerAdapter<T extends SubmissionControlGui> {
         hookIntoGui();
         hookIntoMemoryEditor();
         hookIntoProblemDescriptionWindow();
+    }
+
+    public SubmissionControllerAdapter(NotebookDeveloperGui<? extends T> notebookDeveloperGui) {
+        this(new NotebookDeveloper(notebookDeveloperGui.getOfficeView()), notebookDeveloperGui.getSubmissionControlGui());
     }
 
     private void hookIntoGui() {
@@ -133,6 +137,10 @@ public class SubmissionControllerAdapter<T extends SubmissionControlGui> {
 
     public void setEndTestActionListener(ActionListener actionListener) {
         speedController.setEndTestActionListener(actionListener);
+    }
+
+    public void doFrames() {
+        notebookDeveloper.doFrames(speedController.getCurrentSpeed());
     }
 
 }

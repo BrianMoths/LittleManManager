@@ -11,13 +11,13 @@ import littlemangame.genericGui.NotebookDeveloperGui;
  *
  * @author brian
  */
-public class TutorialGui extends NotebookDeveloperGui {
+public class TutorialGui extends NotebookDeveloperGui<SubmissionControllerTutorialGui> {
 
     /**
      * Creates new form TutorialGui
      */
     public TutorialGui() {
-        super();
+        super(new SubmissionControllerTutorialGui());
         initComponents();
     }
 

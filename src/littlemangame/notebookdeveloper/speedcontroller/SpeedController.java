@@ -108,4 +108,8 @@ public class SpeedController {
         return bufferedSpeed;
     }
 
+    public SpeedControllerAdapter getSpeedControllerAdapter() {
+        return speedControllerAdapter;
+    }
+
 }
