@@ -5,7 +5,7 @@
  */
 package littlemangame.tutorial.gui;
 
-import littlemangame.genericGui.NotebookDeveloper;
+import littlemangame.notebookdeveloper.NotebookDeveloper;
 import littlemangame.genericGui.SubmissionControllerAdapter;
 
 /**

@@ -13,6 +13,7 @@ import littlemangame.notebookdeveloper.submissioncontrols.SubmissionControlGui;
 /**
  *
  * @author brian
+ * @param <T>
  */
 public class NotebookDeveloperGui<T extends SubmissionControlGui> extends javax.swing.JPanel {
 

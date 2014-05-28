@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package littlemangame.genericGui;
+package littlemangame.notebookdeveloper;
 
 import littlemangame.computer.Memory;
 import littlemangame.littlemancommands.LittleManCommander;

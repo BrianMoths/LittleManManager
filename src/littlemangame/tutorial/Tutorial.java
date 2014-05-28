@@ -5,7 +5,7 @@
  */
 package littlemangame.tutorial;
 
-import littlemangame.genericGui.NotebookDeveloper;
+import littlemangame.notebookdeveloper.NotebookDeveloper;
 
 /**
  *

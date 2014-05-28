@@ -5,6 +5,7 @@
  */
 package littlemangame.genericGui;
 
+import littlemangame.notebookdeveloper.NotebookDeveloper;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import littlemangame.notebookdeveloper.gui.MemoryEditor;
@@ -55,7 +56,8 @@ public class SubmissionControllerAdapter<T extends SubmissionControlGui> {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                notebookDeveloper.submitMemory();
+                final String resultString = notebookDeveloper.submitMemory();
+                submissionControlGui.printMessage(resultString);
             }
 
         });
