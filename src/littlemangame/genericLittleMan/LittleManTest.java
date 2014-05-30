@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package littlemangame.littleman.littlemanutilities.littlemandata;
+package littlemangame.genericLittleMan;
 
+import littlemangame.genericLittleMan.GenericLittleManData;
 import littlemangame.littleman.littlemanutilities.location.ComputerLocation;
 import littlemangame.word.Word;
 
@@ -75,26 +76,26 @@ public enum LittleManTest {
         return computerLocation;
     }
 
-    boolean test(LittleManData littleManData) {
+    boolean test(GenericLittleManData<?> littleManData) {
         return littleManTester.test(littleManData);
     }
 
     private static interface LittleManTester {
 
-        boolean test(LittleManData littleManData);
+        boolean test(GenericLittleManData<?> littleManData);
 
     }
 
     private static abstract class LittleManRegisterTester implements LittleManTester {
 
-        Word getRegisterWord(LittleManData littleManData) {
+        Word getRegisterWord(GenericLittleManData<?> littleManData) {
             return littleManData.getRegister().getWord();
         }
 
         abstract boolean testWord(Word word);
 
         @Override
-        public boolean test(LittleManData littleManData) {
+        public boolean test(GenericLittleManData<?> littleManData) {
             return testWord(getRegisterWord(littleManData));
         }
 

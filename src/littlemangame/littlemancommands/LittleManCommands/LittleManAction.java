@@ -4,7 +4,7 @@
  */
 package littlemangame.littlemancommands.LittleManCommands;
 
-import littlemangame.littleman.LittleMan;
+import littlemangame.genericLittleMan.GenericLittleMan;
 
 /**
  *
@@ -15,7 +15,7 @@ public abstract class LittleManAction {
     LittleManAction() {
     }
 
-    public abstract boolean doAction(LittleMan littleMan);
+    public abstract boolean doAction(GenericLittleMan<?> littleMan);
 
     public LittleManAction getResetCopy() {
         return this;

@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates and open the template in
  * the editor.
  */
-package littlemangame.littleman.littlemanutilities.littlemandata;
+package littlemangame.genericLittleMan;
 
+import littlemangame.genericLittleMan.GenericLittleManData;
 import littlemangame.littleman.littlemanutilities.location.ComputerLocation;
 import littlemangame.word.Word;
 import littlemangame.word.WordContainer;
@@ -16,21 +17,21 @@ public enum LittleManWordContainer {
 
     INSTRUCTION_POINTER(ComputerLocation.INSTRUCTION_POINTER, new WordContainerGetter() {
         @Override
-        public WordContainer getWordContainer(LittleManData littleManData) {
+        public WordContainer getWordContainer(GenericLittleManData<?> littleManData) {
             return littleManData.getInstructionPointer();
         }
 
     }),
     REGISTER(ComputerLocation.REGISTER, new WordContainerGetter() {
         @Override
-        public WordContainer getWordContainer(LittleManData littleManData) {
+        public WordContainer getWordContainer(GenericLittleManData<?> littleManData) {
             return littleManData.getRegister();
         }
 
     }),
     REMEMBERED_MEMORY(ComputerLocation.REMEMBERED_MEMORY, new WordContainerGetter() {
         @Override
-        public WordContainer getWordContainer(LittleManData littleManData) {
+        public WordContainer getWordContainer(GenericLittleManData<?> littleManData) {
             return littleManData.getRememberedMemory();
         }
 
@@ -47,17 +48,17 @@ public enum LittleManWordContainer {
         return locationForInstruction;
     }
 
-    Word getWord(LittleManData littleManData) {
+    Word getWord(GenericLittleManData<?> littleManData) {
         return wordContainerGetter.getWordContainer(littleManData).getWord();
     }
 
-    WordContainer getWordContainer(LittleManData littleManData) {
+    WordContainer getWordContainer(GenericLittleManData<?> littleManData) {
         return wordContainerGetter.getWordContainer(littleManData);
     }
 
     private interface WordContainerGetter {
 
-        WordContainer getWordContainer(LittleManData littleManData);
+        WordContainer getWordContainer(GenericLittleManData<?> littleManData);
 
     }
 

@@ -10,7 +10,7 @@ import java.util.Map;
 import littlemangame.instructions.interfaceandimplementations.Instruction;
 import littlemangame.instructions.interfaceandimplementations.InstructionOperandTypes;
 import littlemangame.instructions.interfaceandimplementations.ParselessInstruction;
-import littlemangame.littleman.littlemanutilities.littlemandata.LittleManTest;
+import littlemangame.genericLittleMan.LittleManTest;
 import littlemangame.littlemancommands.LittleManCommands.LittleManAction;
 import littlemangame.littlemancommands.LittleManCommands.LittleManActionSequence;
 import littlemangame.littlemancommands.LittleManCommands.LittleManCommands;
@@ -47,8 +47,8 @@ public enum InstructionFromSet {
     JUMP_IF_LESS_THAN_OR_EQUAL_TO_ZERO(15, DATA_ONLY, LittleManTest.LESS_OR_EQUAL_ZERO, SET, IMMEDIATE, DestinationOperand.INSTRUCTION_POINTER),
     JUMP_IF_LESS_THAN_ZERO(16, DATA_ONLY, LittleManTest.LESS_THAN_ZERO, SET, IMMEDIATE, DestinationOperand.INSTRUCTION_POINTER),
     //Input/Output
-    PRINT_UNSIGNED(20, NEITHER, LittleManCommands.memorizeDataAtContainerAction(littlemangame.littleman.littlemanutilities.littlemandata.LittleManWordContainer.REGISTER), LittleManCommands.getPrintUnsignedToOutputPanelAction()),
-    INPUT(25, NEITHER, LittleManCommands.getGetDataFromInputPanelAction(), LittleManCommands.doBinaryOperationOnContainerAction(littlemangame.littleman.littlemanutilities.littlemandata.LittleManWordContainer.REGISTER, SET)),
+    PRINT_UNSIGNED(20, NEITHER, LittleManCommands.memorizeDataAtContainerAction(littlemangame.genericLittleMan.LittleManWordContainer.REGISTER), LittleManCommands.getPrintUnsignedToOutputPanelAction()),
+    INPUT(25, NEITHER, LittleManCommands.getGetDataFromInputPanelAction(), LittleManCommands.doBinaryOperationOnContainerAction(littlemangame.genericLittleMan.LittleManWordContainer.REGISTER, SET)),
     //data movement
     LOAD_IMMEDIATE(30, DATA_ONLY, SET, IMMEDIATE, DestinationOperand.REGISTER),
     LOAD_MEMORY(31, ADDRESS_ONLY, SET, MEMORY, DestinationOperand.REGISTER),

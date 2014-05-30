@@ -7,7 +7,7 @@ package littlemangame.instructions;
 import littlemangame.littlemancommands.LittleManCommands.LittleManAction;
 import littlemangame.littlemancommands.LittleManCommander;
 import littlemangame.littlemancommands.LittleManCommands.LittleManCommands;
-import littlemangame.littleman.littlemanutilities.littlemandata.LittleManWordContainer;
+import littlemangame.genericLittleMan.LittleManWordContainer;
 
 /**
  *
@@ -16,7 +16,7 @@ import littlemangame.littleman.littlemanutilities.littlemandata.LittleManWordCon
 public enum DestinationOperand {
 
     REGISTER(LittleManWordContainer.REGISTER),
-    REGISER_INDIRECT(LittleManWordContainer.REMEMBERED_MEMORY, LittleManCommands.memorizeAddressAtContainerAction(littlemangame.littleman.littlemanutilities.littlemandata.LittleManWordContainer.REGISTER)),
+    REGISER_INDIRECT(LittleManWordContainer.REMEMBERED_MEMORY, LittleManCommands.memorizeAddressAtContainerAction(littlemangame.genericLittleMan.LittleManWordContainer.REGISTER)),
     INSTRUCTION_POINTER(LittleManWordContainer.INSTRUCTION_POINTER),
     MEMORY(LittleManWordContainer.REMEMBERED_MEMORY);
     private final LittleManWordContainer destinationContainer;

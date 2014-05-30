@@ -7,7 +7,7 @@ package littlemangame.littlemancommands.LittleManCommands;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import littlemangame.littleman.LittleMan;
+import littlemangame.genericLittleMan.GenericLittleMan;
 
 /**
  *
@@ -30,7 +30,7 @@ public final class LittleManActionSequence extends LittleManAction {
     }
 
     @Override
-    public boolean doAction(LittleMan littleMan) {
+    public boolean doAction(GenericLittleMan<?> littleMan) {
         boolean isComplete = littleManActions.get(currentAction).doAction(littleMan);
         if (isComplete) {
             incrementAction();

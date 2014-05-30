@@ -5,7 +5,7 @@
  */
 package littlemangame.littlemancommands.LittleManCommands;
 
-import littlemangame.littleman.LittleMan;
+import littlemangame.genericLittleMan.GenericLittleMan;
 import littlemangame.littleman.littlemanutilities.location.ComputerLocation;
 
 /**
@@ -25,7 +25,7 @@ final class LocalAction extends LittleManAction {
     }
 
     @Override
-    public boolean doAction(LittleMan littleMan) {
+    public boolean doAction(GenericLittleMan<?> littleMan) {
         return littleManAction.doAction(littleMan);
     }
 

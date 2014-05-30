@@ -6,8 +6,8 @@
 package littlemangame.littlemancommands.LittleManCommands;
 
 import java.util.EnumMap;
-import littlemangame.littleman.LittleMan;
-import littlemangame.littleman.littlemanutilities.littlemandata.LittleManTest;
+import littlemangame.genericLittleMan.GenericLittleMan;
+import littlemangame.genericLittleMan.LittleManTest;
 
 /**
  *
@@ -51,7 +51,7 @@ public final class LittleManConditionalAction extends LittleManAction {
     }
 
     @Override
-    public boolean doAction(LittleMan littleMan) {
+    public boolean doAction(GenericLittleMan<?> littleMan) {
         switch (conditionalActionStep) {
             case GO_TO_TEST:
                 goToTest(littleMan);
@@ -65,14 +65,14 @@ public final class LittleManConditionalAction extends LittleManAction {
         }
     }
 
-    private void goToTest(LittleMan littleMan) {
+    private void goToTest(GenericLittleMan<?> littleMan) {
         final boolean isComplete = littleMan.goToComputerLocation(littleManTest.getComputerLocation());
         if (isComplete) {
             incrementConditionalActionStep();
         }
     }
 
-    private boolean doTest(LittleMan littleMan) {
+    private boolean doTest(GenericLittleMan<?> littleMan) {
         if (littleMan.test(littleManTest)) {
             incrementConditionalActionStep();
             return false;
@@ -82,7 +82,7 @@ public final class LittleManConditionalAction extends LittleManAction {
         }
     }
 
-    private boolean doConditionalAction(LittleMan littleMan) {
+    private boolean doConditionalAction(GenericLittleMan<?> littleMan) {
         boolean isComplete2 = littleManConditionalAction.doAction(littleMan);
         if (isComplete2) {
             resetConditionalActionStep();
