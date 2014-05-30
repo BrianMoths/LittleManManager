@@ -19,7 +19,6 @@ public class BaseNotebookDeveloperGui extends NotebookDeveloperGui<SubmissionCon
      */
     public BaseNotebookDeveloperGui() {
         super(new SubmissionControlGui());
-//        initComponents();
     }
 
     /**

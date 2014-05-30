@@ -5,12 +5,10 @@
  */
 package littlemangame.tutorial;
 
-import littlemangame.notebookdeveloper.NotebookDeveloper;
-
 /**
  *
  * @author brian
  */
-public class Tutorial extends NotebookDeveloper {
+public class Tutorial {
 
 }
