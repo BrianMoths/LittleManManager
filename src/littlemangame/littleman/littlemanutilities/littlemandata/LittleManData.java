@@ -14,7 +14,7 @@ import littlemangame.littleman.PositionGetterAdapter;
  */
 public class LittleManData extends GenericLittleManData<Computer> {
 
-    public LittleManData(final Computer computer, PositionGetterAdapter positionGetterAdapter) {
+    public LittleManData(Computer computer, PositionGetterAdapter positionGetterAdapter) {
         super(computer, positionGetterAdapter);
     }
 

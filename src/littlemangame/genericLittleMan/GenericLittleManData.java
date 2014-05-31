@@ -28,7 +28,7 @@ public class GenericLittleManData<T extends GenericComputer<?, ?, ?, ?, ?>> {
     private final T computer;
     private final LittleManMemory littleManMemory;
 
-    public GenericLittleManData(final T computer, PositionGetterAdapter positionGetterAdapter) {
+    public GenericLittleManData(T computer, PositionGetterAdapter positionGetterAdapter) {
         this.computer = computer;
         littleManMemory = new LittleManMemory();
         positionGetterAdapter.setPositionGetter(makePositionGetter(computer));
