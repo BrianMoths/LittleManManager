@@ -6,19 +6,19 @@
 package littlemangame.tutorial;
 
 import java.awt.Graphics;
-import littlemangame.computer.InstructionPointer;
+import littlemangame.computer.Register;
 
 /**
  *
  * @author brian
  */
-public class TutorialInstructionPointer extends InstructionPointer {
+public class TutorialRegister extends Register {
 
     static private final int arrowLength = 30;
     private boolean isArrowShown = true;
     private final IndicatorArrow indicatorArrow;
 
-    public TutorialInstructionPointer() {
+    public TutorialRegister() {
         super();
         indicatorArrow = new IndicatorArrow(xPosition + width / 2 - 2, yPosition - arrowLength - 3, xPosition + width / 2 - 2, yPosition - 3);
     }

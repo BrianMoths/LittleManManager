@@ -17,7 +17,6 @@ public class LittleMan extends GenericLittleMan<LittleManData> {
     public LittleMan(Computer computer) {
         this(computer, new PositionGetterAdapter());
 //                LittleManData littleManData = new LittleManData(computer, positionGetterAdapter);
-
     }
 
     private LittleMan(Computer computer, PositionGetterAdapter positionGetterAdapter) {

@@ -21,10 +21,10 @@ import littlemangame.word.WordContainer;
  */
 public class Memory implements Drawable {
 
-    static private final int xPosition = 400;
-    static private final int yPosition = 20;
-    static private final int width = 50;
-    static private final int height = 400;
+    static protected final int xPosition = 400;
+    static protected final int yPosition = 20;
+    static protected final int width = 50;
+    static protected final int height = 400;
     static private final int numWords = 100;
     private final List<WordContainer> memory = new ArrayList<>(numWords);
 

@@ -5,65 +5,18 @@
  */
 package littlemangame.notebookdeveloper;
 
-import littlemangame.computer.Memory;
+import littlemangame.genericLittleMan.GenericNotebookDeveloper;
 import littlemangame.littlemancommands.LittleManCommander;
-import littlemangame.notebookdeveloper.NotebookProblemSet;
 import littlemangame.notebookdeveloper.gui.OfficeView;
 
 /**
  *
  * @author brian
  */
-public class NotebookDeveloper {
-
-    private final LittleManCommander littleManCommander;
-    private final Memory memory;
-    private final NotebookProblemSet notebookVerifier;
+public class NotebookDeveloper extends GenericNotebookDeveloper<LittleManCommander> {
 
     public NotebookDeveloper(OfficeView officeView) {
-        littleManCommander = new LittleManCommander(officeView);
-        officeView.registerLittleManCommander(littleManCommander);
-        memory = new Memory();
-        notebookVerifier = NotebookProblemSet.makeDefaultNotebookProblemSet();
-        notebookVerifier.beginNextProblem();
-    }
-
-    public void doFrames(int numFrames) {
-        for (int i = 0; i < numFrames; i++) {
-            littleManCommander.doCycle();
-        }
-    }
-
-    public void endTest() {
-        littleManCommander.reset();
-    }
-
-    public String submitMemory() {
-        final boolean isCorrect = notebookVerifier.verifyNotebook(memory);
-        final StringBuilder resultStringBuilder = new StringBuilder();
-        resultStringBuilder.append(notebookVerifier.getMessageFromLastTest());
-        if (isCorrect) {
-            if (notebookVerifier.hasNextProblem()) {
-                notebookVerifier.beginNextProblem();
-            } else {
-                resultStringBuilder.append("You beat the game!");
-            }
-        }
-        return resultStringBuilder.toString();
-    }
-
-    public String getCurrentProblemDescription() {
-        return notebookVerifier.getCurrentProblemDescription();
-    }
-
-    public Memory getMemory() {
-        return new Memory(memory);
-    }
-
-    public void setMemory(Memory memory) {
-        this.memory.loadCopyOfMemory(memory);
-        littleManCommander.reset();
-        littleManCommander.loadCopyOfMemory(memory);
+        super(officeView, new LittleManCommander(officeView));
     }
 
 }

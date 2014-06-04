@@ -5,16 +5,17 @@
  */
 package littlemangame.tutorial.gui;
 
-import littlemangame.notebookdeveloper.NotebookDeveloper;
-import littlemangame.genericGui.SubmissionControllerAdapter;
+import littlemangame.genericGui.GenericSubmissionControllerAdapter;
+import littlemangame.genericLittleMan.GenericNotebookDeveloper;
+import littlemangame.tutorial.TutorialLittleManCommander;
 
 /**
  *
  * @author brian
  */
-public class SubmissionControllerTutorialAdapter extends SubmissionControllerAdapter<SubmissionControllerTutorialGui> {
+public class SubmissionControllerTutorialAdapter extends GenericSubmissionControllerAdapter<SubmissionControllerTutorialGui, GenericNotebookDeveloper<TutorialLittleManCommander>> {
 
-    public SubmissionControllerTutorialAdapter(NotebookDeveloper notebookDeveloper, SubmissionControllerTutorialGui submissionControlGui) {
+    public SubmissionControllerTutorialAdapter(GenericNotebookDeveloper notebookDeveloper, SubmissionControllerTutorialGui submissionControlGui) {
         super(notebookDeveloper, submissionControlGui);
     }
 

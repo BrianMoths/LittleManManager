@@ -5,9 +5,9 @@
  */
 package littlemangame.genericGui;
 
-import littlemangame.notebookdeveloper.NotebookDeveloper;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import littlemangame.genericLittleMan.GenericNotebookDeveloper;
 import littlemangame.notebookdeveloper.gui.MemoryEditor;
 import littlemangame.notebookdeveloper.gui.ProblemDescriptionWindow;
 import littlemangame.notebookdeveloper.speedcontroller.SpeedController;
@@ -17,16 +17,17 @@ import littlemangame.notebookdeveloper.submissioncontrols.SubmissionControlGui;
  *
  * @author brian
  * @param <T>
+ * @param <U>
  */
-public class SubmissionControllerAdapter<T extends SubmissionControlGui> {
+public class GenericSubmissionControllerAdapter<T extends SubmissionControlGui, U extends GenericNotebookDeveloper<?>> {
 
-    private final NotebookDeveloper notebookDeveloper;
+    private final U notebookDeveloper;
     protected final T submissionControlGui;
     private final MemoryEditor memoryEditor;
     private final SpeedController speedController;
     private final ProblemDescriptionWindow problemDescriptionWindow;
 
-    public SubmissionControllerAdapter(NotebookDeveloper notebookDeveloper, T submissionControlGui) {
+    public GenericSubmissionControllerAdapter(U notebookDeveloper, T submissionControlGui) {
         this.notebookDeveloper = notebookDeveloper;
         this.submissionControlGui = submissionControlGui;
         speedController = new SpeedController(submissionControlGui.getSpeedControllerGui());
@@ -38,10 +39,9 @@ public class SubmissionControllerAdapter<T extends SubmissionControlGui> {
         hookIntoProblemDescriptionWindow();
     }
 
-    public SubmissionControllerAdapter(NotebookDeveloperGui<? extends T> notebookDeveloperGui) {
-        this(new NotebookDeveloper(notebookDeveloperGui.getOfficeView()), notebookDeveloperGui.getSubmissionControlGui());
-    }
-
+//    public GenericSubmissionControllerAdapter(NotebookDeveloperGui<? extends T> notebookDeveloperGui) {
+//        this(new GenericNotebookDeveloper(notebookDeveloperGui.getOfficeView()), notebookDeveloperGui.getSubmissionControlGui());
+//    }
     private void hookIntoGui() {
         submissionControlGui.setEditAction(new ActionListener() {
 

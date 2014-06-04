@@ -12,7 +12,6 @@ import java.awt.Point;
 import littlemangame.computer.Memory;
 import littlemangame.instructions.interfaceandimplementations.Instruction;
 import littlemangame.littleman.PositionGetterAdapter;
-import littlemangame.littleman.littlemanutilities.littlemandata.LittleManData;
 import littlemangame.littleman.littlemanutilities.location.ComputerLocation;
 import littlemangame.littleman.littlemanutilities.location.LittleManPosition;
 import littlemangame.littlemancommands.LittleManCommands.LittleManAction;
@@ -24,7 +23,7 @@ import littlemangame.word.UnaryWordOperation;
  * @author brian
  * @param <T>
  */
-public class GenericLittleMan<T extends LittleManData> implements Drawable {
+public class GenericLittleMan<T extends GenericLittleManData<?>> implements Drawable {
 
     static private final int pathY = 200;
     static private final int stepSize = 4;

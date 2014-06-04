@@ -5,27 +5,29 @@
  */
 package littlemangame.tutorial;
 
+import Renderer.Drawable;
 import java.awt.Graphics;
-import littlemangame.computer.InstructionPointer;
+import java.awt.Point;
+import littlemangame.computer.InputPanel;
 
 /**
  *
  * @author brian
  */
-public class TutorialInstructionPointer extends InstructionPointer {
+public class TutorialInputPanel extends InputPanel implements Drawable {
 
     static private final int arrowLength = 30;
     private boolean isArrowShown = true;
     private final IndicatorArrow indicatorArrow;
 
-    public TutorialInstructionPointer() {
+    public TutorialInputPanel() {
         super();
-        indicatorArrow = new IndicatorArrow(xPosition + width / 2 - 2, yPosition - arrowLength - 3, xPosition + width / 2 - 2, yPosition - 3);
+        Point accessPoint = getAccessLocation();
+        indicatorArrow = new IndicatorArrow(accessPoint.x + arrowLength, accessPoint.y, accessPoint.x, accessPoint.y);
     }
 
     @Override
     public void draw(Graphics graphics) {
-        super.draw(graphics); //To change body of generated methods, choose Tools | Templates.
         if (isArrowShown) {
             indicatorArrow.draw(graphics);
         }

@@ -7,13 +7,14 @@ package littlemangame.notebookdeveloper.gui;
 
 import littlemangame.computer.InputPanel;
 import littlemangame.computer.OutputPanel;
-import littlemangame.littlemancommands.LittleManCommander;
+import littlemangame.genericGui.GenericOfficeView;
+import littlemangame.genericLittleMan.GenericLittleManCommander;
 
 /**
  *
  * @author brian
  */
-public class OfficeView extends javax.swing.JPanel {
+public class OfficeView extends javax.swing.JPanel implements GenericOfficeView<InputPanel, OutputPanel> {
 
     /**
      * Creates new form OfficeView
@@ -22,15 +23,18 @@ public class OfficeView extends javax.swing.JPanel {
         initComponents();
     }
 
+    @Override
     public InputPanel getInputPanel() {
         return inputPanel;
     }
 
+    @Override
     public OutputPanel getOutputPanel() {
         return outputPanel;
     }
 
-    public void registerLittleManCommander(LittleManCommander littleManCommander) {
+    @Override
+    public void registerLittleManCommander(GenericLittleManCommander<?> littleManCommander) {
         gameCanvas.getRenderer().addDrawable(littleManCommander);
     }
 

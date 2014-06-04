@@ -16,10 +16,10 @@ import littlemangame.word.WordContainer;
  */
 public class Register extends WordContainer implements Drawable {
 
-    static private final int xPosition = 200;
-    static private final int yPosition = 300;
-    static private final int width = 22;
-    static private final int height = 20;
+    static protected final int xPosition = 200;
+    static protected final int yPosition = 300;
+    static protected final int width = 22;
+    static protected final int height = 20;
 
     public Register() {
         super(Word.ZERO_WORD);

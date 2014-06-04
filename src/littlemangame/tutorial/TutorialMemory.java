@@ -6,21 +6,21 @@
 package littlemangame.tutorial;
 
 import java.awt.Graphics;
-import littlemangame.computer.InstructionPointer;
+import littlemangame.computer.Memory;
 
 /**
  *
  * @author brian
  */
-public class TutorialInstructionPointer extends InstructionPointer {
+public class TutorialMemory extends Memory {
 
     static private final int arrowLength = 30;
     private boolean isArrowShown = true;
     private final IndicatorArrow indicatorArrow;
 
-    public TutorialInstructionPointer() {
+    public TutorialMemory() {
         super();
-        indicatorArrow = new IndicatorArrow(xPosition + width / 2 - 2, yPosition - arrowLength - 3, xPosition + width / 2 - 2, yPosition - 3);
+        indicatorArrow = new IndicatorArrow(xPosition - arrowLength, yPosition + 200, xPosition - 2, yPosition + 200);
     }
 
     @Override
