@@ -6,13 +6,14 @@ package littlemangame;
 
 import ListenerInputHandler.AbstractInputHandlerClient;
 import RealTimeGame.AbstractRealTimeGame;
-import littlemangame.notebookdeveloper.submissioncontrols.SubmissionControllerAdapter;
+import littlemangame.tutorial.gui.SubmissionControllerTutorialAdapter;
+import littlemangame.tutorial.gui.TutorialLittleManGui;
 
 /**
  *
  * @author brian
  */
-public class LittleManGame extends AbstractRealTimeGame<LittleManGui> {
+public class LittleManGame extends AbstractRealTimeGame<TutorialLittleManGui> {
 
     /**
      * @param args the command line arguments
@@ -22,15 +23,15 @@ public class LittleManGame extends AbstractRealTimeGame<LittleManGui> {
         littleMan.startGameLoopThread();
     }
 
-    private static LittleManGui makeGamePanel() {
-        return new LittleManGui();
+    private static TutorialLittleManGui makeGamePanel() {
+        return new TutorialLittleManGui();
     }
 
-    private final SubmissionControllerAdapter submissionControllerAdapter;
+    private final SubmissionControllerTutorialAdapter submissionControllerAdapter;
 
     public LittleManGame() {
         super(new AbstractInputHandlerClient(), makeGamePanel());
-        submissionControllerAdapter = new SubmissionControllerAdapter(getGameGui().getNotebookDeveloperGui());
+        submissionControllerAdapter = new SubmissionControllerTutorialAdapter(getGameGui().getNotebookDeveloperGui());
         init();
     }
 

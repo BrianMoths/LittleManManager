@@ -5,9 +5,10 @@
  */
 package littlemangame.notebookdeveloper.submissioncontrols;
 
+import littlemangame.genericGui.GenericNotebookDeveloperGui;
 import littlemangame.genericGui.GenericSubmissionControllerAdapter;
-import littlemangame.genericGui.NotebookDeveloperGui;
 import littlemangame.notebookdeveloper.NotebookDeveloper;
+import littlemangame.notebookdeveloper.gui.OfficeView;
 
 /**
  *
@@ -19,7 +20,7 @@ public class SubmissionControllerAdapter extends GenericSubmissionControllerAdap
         super(notebookDeveloper, submissionControlGui);
     }
 
-    public SubmissionControllerAdapter(NotebookDeveloperGui<? extends SubmissionControlGui> notebookDeveloperGui) {
+    public SubmissionControllerAdapter(GenericNotebookDeveloperGui<? extends SubmissionControlGui, ? extends OfficeView> notebookDeveloperGui) {
         super(new NotebookDeveloper(notebookDeveloperGui.getOfficeView()), notebookDeveloperGui.getSubmissionControlGui());
     }
 

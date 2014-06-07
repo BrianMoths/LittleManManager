@@ -6,6 +6,7 @@
 package littlemangame.tutorial;
 
 import littlemangame.genericLittleMan.GenericLittleManCommander;
+import littlemangame.tutorial.gui.TutorialOfficeView;
 
 /**
  *

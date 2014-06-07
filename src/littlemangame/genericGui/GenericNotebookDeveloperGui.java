@@ -7,31 +7,38 @@ package littlemangame.genericGui;
 
 import java.awt.GridLayout;
 import littlemangame.littlemancommands.LittleManCommander;
-import littlemangame.notebookdeveloper.gui.OfficeView;
+import littlemangame.notebookdeveloper.gui.GenericOfficeView;
 import littlemangame.notebookdeveloper.submissioncontrols.SubmissionControlGui;
 
 /**
  *
  * @author brian
  * @param <T>
+ * @param <U>
  */
-public class NotebookDeveloperGui<T extends SubmissionControlGui> extends javax.swing.JPanel {
+public class GenericNotebookDeveloperGui<T extends SubmissionControlGui, U extends GenericOfficeView<?, ?>>
+        extends javax.swing.JPanel {
 
     protected final T submissionControllerGui;
+    private final U officeView;
 
     /**
      * Creates new form NotebookDeveloperGui
      *
      * @param submissionControllerGui
+     * @param officeView
      */
-    public NotebookDeveloperGui(T submissionControllerGui) {
+    public GenericNotebookDeveloperGui(T submissionControllerGui, U officeView) {
         initComponents();
         this.submissionControllerGui = submissionControllerGui;
+        this.officeView = officeView;
         submissionControllerGuiHolder.setLayout(new GridLayout());
         submissionControllerGuiHolder.add(submissionControllerGui);
+        officeViewHolder.setLayout(new GridLayout());
+        officeViewHolder.add(officeView);
     }
 
-    public OfficeView getOfficeView() {
+    public U getOfficeView() {
         return officeView;
     }
 
@@ -53,8 +60,8 @@ public class NotebookDeveloperGui<T extends SubmissionControlGui> extends javax.
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        officeView = new littlemangame.notebookdeveloper.gui.OfficeView();
         submissionControllerGuiHolder = new javax.swing.JPanel();
+        officeViewHolder = new javax.swing.JPanel();
 
         javax.swing.GroupLayout submissionControllerGuiHolderLayout = new javax.swing.GroupLayout(submissionControllerGuiHolder);
         submissionControllerGuiHolder.setLayout(submissionControllerGuiHolderLayout);
@@ -67,30 +74,43 @@ public class NotebookDeveloperGui<T extends SubmissionControlGui> extends javax.
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
+        javax.swing.GroupLayout officeViewHolderLayout = new javax.swing.GroupLayout(officeViewHolder);
+        officeViewHolder.setLayout(officeViewHolderLayout);
+        officeViewHolderLayout.setHorizontalGroup(
+            officeViewHolderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        officeViewHolderLayout.setVerticalGroup(
+            officeViewHolderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 415, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(officeView, javax.swing.GroupLayout.PREFERRED_SIZE, 619, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 30, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(submissionControllerGuiHolder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(officeViewHolder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(submissionControllerGuiHolder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 58, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(officeView, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addContainerGap()
+                .addComponent(officeViewHolder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(submissionControllerGuiHolder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private littlemangame.notebookdeveloper.gui.OfficeView officeView;
+    private javax.swing.JPanel officeViewHolder;
     private javax.swing.JPanel submissionControllerGuiHolder;
     // End of variables declaration//GEN-END:variables
 }

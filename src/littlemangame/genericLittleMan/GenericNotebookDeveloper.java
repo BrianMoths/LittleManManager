@@ -6,8 +6,8 @@
 package littlemangame.genericLittleMan;
 
 import littlemangame.computer.Memory;
-import littlemangame.genericGui.GenericOfficeView;
 import littlemangame.notebookdeveloper.NotebookProblemSet;
+import littlemangame.notebookdeveloper.gui.GenericOfficeView;
 
 /**
  *

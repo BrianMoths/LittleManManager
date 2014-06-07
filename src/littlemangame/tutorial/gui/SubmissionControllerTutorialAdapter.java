@@ -8,6 +8,7 @@ package littlemangame.tutorial.gui;
 import littlemangame.genericGui.GenericSubmissionControllerAdapter;
 import littlemangame.genericLittleMan.GenericNotebookDeveloper;
 import littlemangame.tutorial.TutorialLittleManCommander;
+import littlemangame.tutorial.TutorialNotebookDeveloper;
 
 /**
  *
@@ -15,8 +16,12 @@ import littlemangame.tutorial.TutorialLittleManCommander;
  */
 public class SubmissionControllerTutorialAdapter extends GenericSubmissionControllerAdapter<SubmissionControllerTutorialGui, GenericNotebookDeveloper<TutorialLittleManCommander>> {
 
-    public SubmissionControllerTutorialAdapter(GenericNotebookDeveloper notebookDeveloper, SubmissionControllerTutorialGui submissionControlGui) {
+    public SubmissionControllerTutorialAdapter(TutorialNotebookDeveloper notebookDeveloper, SubmissionControllerTutorialGui submissionControlGui) {
         super(notebookDeveloper, submissionControlGui);
+    }
+
+    public SubmissionControllerTutorialAdapter(TutorialNotebookDeveloperGui notebookDeveloperGui) {
+        super(new TutorialNotebookDeveloper(notebookDeveloperGui.getOfficeView()), notebookDeveloperGui.getSubmissionControlGui());
     }
 
     public void printDialogue(String dialogue) {

@@ -5,19 +5,19 @@
  */
 package littlemangame.tutorial.gui;
 
-import littlemangame.genericGui.NotebookDeveloperGui;
+import littlemangame.genericGui.GenericNotebookDeveloperGui;
 
 /**
  *
  * @author brian
  */
-public class TutorialGui extends NotebookDeveloperGui<SubmissionControllerTutorialGui> {
+public class TutorialGui extends GenericNotebookDeveloperGui<SubmissionControllerTutorialGui, TutorialOfficeView> {
 
     /**
      * Creates new form TutorialGui
      */
     public TutorialGui() {
-        super(new SubmissionControllerTutorialGui());
+        super(new SubmissionControllerTutorialGui(), new TutorialOfficeView());
         initComponents();
     }
 
