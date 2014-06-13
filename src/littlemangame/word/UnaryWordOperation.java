@@ -5,8 +5,9 @@
 package littlemangame.word;
 
 /**
- * This enum enumerates all of the unary operations on words defined in the word
- * class. By this we mean all nullary instance methods that return a word.
+ * This enum enumerates all of the unary operations on word containers defined
+ * in the WordContainer
+ * class. By this we mean all void nullary instance methods
  *
  * @author brian
  */
@@ -109,7 +110,8 @@ public enum UnaryWordOperation {
 
     /**
      * operates on the word container so that the word in the word container is
-     * replaced by the result of this operation on that word.
+     * replaced by the result of this operation on that word. This operation
+     * typically alters the state of the given word container.
      *
      * @param destination the word container to be operated on
      */
