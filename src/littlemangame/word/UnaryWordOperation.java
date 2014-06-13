@@ -5,11 +5,18 @@
 package littlemangame.word;
 
 /**
+ * This enum enumerates all of the unary operations on words defined in the word
+ * class. By this we mean all nullary instance methods that return a word.
  *
  * @author brian
  */
 public enum UnaryWordOperation {
 
+    /**
+     * the operation of incrementing a word
+     *
+     * @see Word#incrementedWord()
+     */
     INCREMENT(new UnaryWordOperator() {
         @Override
         public void operate(WordContainer destination) {
@@ -17,6 +24,11 @@ public enum UnaryWordOperation {
         }
 
     }),
+    /**
+     * the operation of decrementing a word
+     *
+     * @see Word#decrementedWord()
+     */
     DECREMENT(new UnaryWordOperator() {
 
         @Override
@@ -25,6 +37,11 @@ public enum UnaryWordOperation {
         }
 
     }),
+    /**
+     * the operation of taking a complement of a word
+     *
+     * @see Word#getComplement()
+     */
     COMPLEMENT(new UnaryWordOperator() {
 
         @Override
@@ -33,13 +50,23 @@ public enum UnaryWordOperation {
         }
 
     }),
+    /**
+     * the operation of negating a word
+     *
+     * @see Word#getOpposite()
+     */
     NEGATE(new UnaryWordOperator() {
         @Override
         public void operate(WordContainer destination) {
-            destination.setWord(destination.getWord().getOpposite());
+            destination.invertSign();
         }
 
     }),
+    /**
+     * the operation of performing a left shift on a word
+     *
+     * @see Word#leftShift()
+     */
     LEFT_SHIFT(new UnaryWordOperator() {
 
         @Override
@@ -48,6 +75,11 @@ public enum UnaryWordOperation {
         }
 
     }),
+    /**
+     * the operation of performing an unsigned right shift on a word
+     *
+     * @see Word#rightShiftUnsigned()
+     */
     RIGHT_SHIFT_UNSIGNED(new UnaryWordOperator() {
 
         @Override
@@ -56,6 +88,11 @@ public enum UnaryWordOperation {
         }
 
     }),
+    /**
+     * the operation of performing a signed right shift on a word
+     *
+     * @see Word#rightShiftSigned()
+     */
     RIGHT_SHIFT_SIGNED(new UnaryWordOperator() {
 
         @Override
@@ -70,6 +107,12 @@ public enum UnaryWordOperation {
         this.unaryWordOperator = unaryWordOperator;
     }
 
+    /**
+     * operates on the word container so that the word in the word container is
+     * replaced by the result of this operation on that word.
+     *
+     * @param destination the word container to be operated on
+     */
     public void operate(WordContainer destination) {
         unaryWordOperator.operate(destination);
     }
