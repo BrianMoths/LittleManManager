@@ -29,7 +29,7 @@ public class TutorialOutputPanel extends OutputPanel implements Drawable {
     @Override
     public void draw(Graphics graphics) {
         if (isArrowShown) {
-            indicatorArrow.draw(graphics);
+            indicatorArrow.draw(getGraphics());
         }
     }
 

@@ -5,7 +5,7 @@
  */
 package littlemangame.genericLittleMan;
 
-import littlemangame.computer.Memory;
+import littlemangame.computer.Notebook;
 import littlemangame.notebookdeveloper.NotebookProblemSet;
 import littlemangame.notebookdeveloper.gui.GenericOfficeView;
 
@@ -17,13 +17,13 @@ import littlemangame.notebookdeveloper.gui.GenericOfficeView;
 public class GenericNotebookDeveloper<T extends GenericLittleManCommander<?>> {
 
     private final T littleManCommander;
-    private final Memory memory;
+    private final Notebook memory;
     private final NotebookProblemSet notebookVerifier;
 
     public GenericNotebookDeveloper(GenericOfficeView<?, ?> officeView, T littleManCommander) {
         this.littleManCommander = littleManCommander;
         officeView.registerLittleManCommander(littleManCommander);
-        memory = new Memory();
+        memory = new Notebook();
         notebookVerifier = NotebookProblemSet.makeDefaultNotebookProblemSet();
         notebookVerifier.beginNextProblem();
     }
@@ -63,11 +63,11 @@ public class GenericNotebookDeveloper<T extends GenericLittleManCommander<?>> {
         return notebookVerifier.getCurrentProblemDescription();
     }
 
-    public Memory getMemory() {
-        return new Memory(memory);
+    public Notebook getMemory() {
+        return new Notebook(memory);
     }
 
-    public void setMemory(Memory memory) {
+    public void setMemory(Notebook memory) {
         this.memory.loadCopyOfMemory(memory);
         littleManCommander.reset();
         littleManCommander.loadCopyOfMemory(memory);

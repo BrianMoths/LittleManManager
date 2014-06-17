@@ -7,7 +7,7 @@ package littlemangame.genericLittleMan;
 
 import Renderer.Drawable;
 import java.awt.Graphics;
-import littlemangame.computer.Memory;
+import littlemangame.computer.Notebook;
 import littlemangame.littlemancommands.LittleManCommands.LittleManAction;
 import littlemangame.littlemancommands.LittleManCommands.LittleManCommands;
 
@@ -40,7 +40,7 @@ public class GenericLittleManCommander<T extends GenericLittleMan<?>> implements
         littleMan.draw(graphics);
     }
 
-    public void loadCopyOfMemory(Memory memory) {
+    public void loadCopyOfMemory(Notebook memory) {
         littleMan.loadCopyOfMemory(memory);
     }
 

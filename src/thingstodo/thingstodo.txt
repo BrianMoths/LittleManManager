@@ -1,3 +1,5 @@
+clean up the notebook inputter interface. Think about the methods the interface itself needs and declare only those methods.
+
 add a cancel button for the memory editor.
 
 add a tutorial explaining how the little man works-

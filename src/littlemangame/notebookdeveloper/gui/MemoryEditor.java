@@ -15,7 +15,7 @@ import java.util.Iterator;
 import java.util.List;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
-import littlemangame.computer.Memory;
+import littlemangame.computer.Notebook;
 import littlemangame.instructions.InstructionFromSet;
 import littlemangame.word.Word;
 
@@ -121,21 +121,21 @@ public class MemoryEditor extends javax.swing.JFrame {
         return instructionNode;
     }
 
-    public Memory getMemory() {
-        Memory memory = new Memory();
+    public Notebook getMemory() {
+        Notebook memory = new Notebook();
         Iterator<Word> wordIterator = Word.getIterator();
         while (wordIterator.hasNext()) {
             final Word word = wordIterator.next();
-            memory.setMemoryAtAddress(word, memorySlotChoosers.get(word.getValue()).getSelectedWord());
+            memory.setMemoryAtPage(word, memorySlotChoosers.get(word.getUnsignedValue()).getSelectedWord());
         }
         return memory;
     }
 
-    public void setMemory(Memory memory) {
+    public void setMemory(Notebook memory) {
         Iterator<Word> wordIterator = Word.getIterator();
         while (wordIterator.hasNext()) {
             final Word word = wordIterator.next();
-            MemorySlotChooser memorySlotChooser = memorySlotChoosers.get(word.getValue());
+            MemorySlotChooser memorySlotChooser = memorySlotChoosers.get(word.getUnsignedValue());
             memorySlotChooser.setSelectedWord(memory.getMemory(word).getWord());
         }
     }

@@ -7,7 +7,7 @@ package littlemangame.genericLittleMan;
 
 import java.awt.Graphics;
 import java.awt.Point;
-import littlemangame.computer.Memory;
+import littlemangame.computer.Notebook;
 import littlemangame.instructions.InstructionFromSet;
 import littlemangame.instructions.interfaceandimplementations.Instruction;
 import littlemangame.littleman.PositionGetterAdapter;
@@ -55,11 +55,11 @@ public class GenericLittleManData<T extends GenericComputer<?, ?, ?, ?, ?>> {
     }
 
     public boolean memorizeDataFromInputPanel() {
-        if (!computer.inputPanel.isPanelEnabled()) {
-            computer.inputPanel.enablePanel();
+        if (!computer.inputPanel.isAwaitingInput()) {
+            computer.inputPanel.requestInput();
         }
-        if (computer.inputPanel.isValueSelected()) {
-            memorizeData(computer.inputPanel.getLastSelectedWord());
+        if (computer.inputPanel.isWordEntered()) {
+            memorizeData(computer.inputPanel.getEnteredWord());
             return true;
         } else {
             return false;
@@ -170,7 +170,7 @@ public class GenericLittleManData<T extends GenericComputer<?, ?, ?, ?, ?>> {
         };
     }
 
-    public void loadCopyOfMemory(Memory memory) {
+    public void loadCopyOfMemory(Notebook memory) {
         computer.loadCopyOfMemory(memory);
     }
 

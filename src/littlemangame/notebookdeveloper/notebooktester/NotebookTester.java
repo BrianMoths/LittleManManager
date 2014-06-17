@@ -5,7 +5,7 @@
  */
 package littlemangame.notebookdeveloper.notebooktester;
 
-import littlemangame.computer.Memory;
+import littlemangame.computer.Notebook;
 
 /**
  *
@@ -13,7 +13,7 @@ import littlemangame.computer.Memory;
  */
 public interface NotebookTester {
 
-    public boolean isNotebookCorrect(Memory memory);
+    public boolean isNotebookCorrect(Notebook memory);
 
     public String getMessageFromTest();
 

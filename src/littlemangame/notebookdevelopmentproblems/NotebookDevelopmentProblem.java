@@ -5,7 +5,7 @@
  */
 package littlemangame.notebookdevelopmentproblems;
 
-import littlemangame.computer.Memory;
+import littlemangame.computer.Notebook;
 import littlemangame.notebookdeveloper.notebooktester.NotebookTester;
 
 /**
@@ -23,7 +23,7 @@ public class NotebookDevelopmentProblem {
         this.problemDescription = problemDescription;
     }
 
-    public void testNotebook(Memory memory) {
+    public void testNotebook(Notebook memory) {
         wasLastTestCorrect = notebookTester.isNotebookCorrect(memory);
     }
 

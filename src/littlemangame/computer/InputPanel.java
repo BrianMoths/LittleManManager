@@ -14,8 +14,8 @@ import littlemangame.word.Word;
  */
 public class InputPanel extends javax.swing.JPanel implements ComputerInputter {
 
-    private boolean isValueSelected;
     private Word value;
+    private InputPanelState inputPanelState;
 
     /**
      * Creates new form InputPanel
@@ -23,36 +23,45 @@ public class InputPanel extends javax.swing.JPanel implements ComputerInputter {
     public InputPanel() {
         initComponents();
         wordSelector.setEditable(false);
-        disablePanel();
+        cancelInputRequest();
     }
 
     @Override
-    public final void disablePanel() {
+    public final void cancelInputRequest() {
         wordSelector.setEnabled(false);
         submitButton.setEnabled(false);
-        isValueSelected = false;
+        inputPanelState = InputPanelState.DISABLED;
     }
 
     @Override
-    public void enablePanel() {
+    public void requestInput() {
         wordSelector.setEnabled(true);
         submitButton.setEnabled(true);
+        inputPanelState = InputPanelState.AWAITING_INPUT;
     }
 
     @Override
-    public boolean isPanelEnabled() {
-        return wordSelector.isEnabled();
-    }
-
-    @Override
-    public Word getLastSelectedWord() {
-        disablePanel();
+    public Word getEnteredWord() {
+        if (inputPanelState != InputPanelState.HAS_INPUT) {
+            throw new IllegalStateException("getEnteredWordCalled before user entered input. Use isWordEntered to ensure the user has entered input before getEnteredWord is called.");
+        }
+        cancelInputRequest();
         return value;
     }
 
     @Override
-    public boolean isValueSelected() {
-        return isValueSelected;
+    public boolean isWordEntered() {
+        return inputPanelState == InputPanelState.HAS_INPUT;
+    }
+
+    @Override
+    public boolean isDisabled() {
+        return inputPanelState == InputPanelState.DISABLED;
+    }
+
+    @Override
+    public boolean isAwaitingInput() {
+        return inputPanelState == InputPanelState.AWAITING_INPUT;
     }
 
     @Override
@@ -105,8 +114,11 @@ public class InputPanel extends javax.swing.JPanel implements ComputerInputter {
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
+        if (inputPanelState != InputPanelState.AWAITING_INPUT) {
+            throw new AssertionError("User entered input when input was not being requested.");
+        }
         value = wordSelector.getLastSelectedWord();
-        isValueSelected = true;
+        inputPanelState = InputPanelState.HAS_INPUT;
     }//GEN-LAST:event_submitButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

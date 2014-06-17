@@ -9,7 +9,7 @@ import Renderer.Drawable;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
-import littlemangame.computer.Memory;
+import littlemangame.computer.Notebook;
 import littlemangame.instructions.interfaceandimplementations.Instruction;
 import littlemangame.littleman.PositionGetterAdapter;
 import littlemangame.littleman.littlemanutilities.location.ComputerLocation;
@@ -76,7 +76,7 @@ public class GenericLittleMan<T extends GenericLittleManData<?>> implements Draw
         littleManData.clearMemory();
     }
 
-    public void loadCopyOfMemory(Memory memory) {
+    public void loadCopyOfMemory(Notebook memory) {
         littleManData.loadCopyOfMemory(memory);
     }
 

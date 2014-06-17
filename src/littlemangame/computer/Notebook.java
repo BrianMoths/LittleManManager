@@ -16,10 +16,17 @@ import littlemangame.word.Word;
 import littlemangame.word.WordContainer;
 
 /**
+ * The notebook class essentially holds list of {@link WordContainer}s. Instead
+ * of being
+ * indexed by ints, a WordContainer is indexed by {@link Word}s. Thus the
+ * number of
+ * words a notebook can hold is {@link Word#NUM_WORDS}.
+ *
+ * A notebook is the analog of main memory in a real computer
  *
  * @author brian
  */
-public class Memory implements Drawable {
+public class Notebook implements Drawable {
 
     static protected final int xPosition = 400;
     static protected final int yPosition = 20;
@@ -108,15 +115,26 @@ public class Memory implements Drawable {
         memory.set(82, new WordContainer(InstructionFromSet.PRINT_UNSIGNED.getOpcode()));
         memory.set(83, new WordContainer(InstructionFromSet.HALT.getOpcode()));
 
-        setMemoryAtAddress(input, Word.valueOfLastDigitsOfInteger(8));
-        setMemoryAtAddress(oldValue, Word.valueOfLastDigitsOfInteger(1));
+        setMemoryAtPage(input, Word.valueOfLastDigitsOfInteger(8));
+        setMemoryAtPage(oldValue, Word.valueOfLastDigitsOfInteger(1));
     }
 
-    public Memory() {
+    /**
+     * Constructs a notebook. No guarantees are made about the initial contents
+     * of the notebook.
+     */
+    public Notebook() {
 
     }
 
-    public Memory(Memory memory) {
+    /**
+     * Copy constructor. Creates a notebook whose contents are identical to the
+     * given notebook. Subsequent changes in the given notebook will not affect
+     * this notebook.
+     *
+     * @param memory the notebook to be copied
+     */
+    public Notebook(Notebook memory) {
         loadCopyOfMemory(memory);
     }
 
@@ -133,31 +151,54 @@ public class Memory implements Drawable {
         graphics.setColor(color);
     }
 
-    public void setMemoryAtAddress(Word address, Word wordToBeStored) {
-        memory.get(address.getValue()).setWord(wordToBeStored);
-    }
-
-    public final void loadCopyOfMemory(Memory memory) {
-        Iterator<Word> wordIterator = Word.getIterator();
-        while (wordIterator.hasNext()) {
-            final Word word = wordIterator.next();
-            setMemoryAtAddress(word, memory.getMemory(word).getWord());
-        }
-    }
-
-    public WordContainer getMemory(Word address) {
-        return memory.get(address.getValue());
+    /**
+     * sets the memory at the page specified by the given word to the given
+     * word.
+     *
+     * @param page a word whose unsigned value gives the page to be written to
+     * @param wordToBeStored the word to be stored on the given page
+     */
+    public void setMemoryAtPage(Word page, Word wordToBeStored) {
+        memory.get(page.getUnsignedValue()).setWord(wordToBeStored);
     }
 
     /**
+     * modifies the contents of this notebook to be identical to the given
+     * notebook. This is a deep copy: subsequent changes to the given notebook
+     * will not affect this notebook.
      *
-     * @param word
-     *
-     * @return
+     * @param notebook the notebook to be copied
      */
-    public Point getAccessLocation(Word word) {
+    public final void loadCopyOfMemory(Notebook notebook) {
+        Iterator<Word> wordIterator = Word.getIterator();
+        while (wordIterator.hasNext()) {
+            final Word word = wordIterator.next();
+            setMemoryAtPage(word, notebook.getMemory(word).getWord());
+        }
+    }
+
+    /**
+     * returns the word stored on the page corresponding to the given word
+     *
+     * @param page the page whose word is to be retrieved
+     *
+     * @return the word stored on the given page
+     */
+    public WordContainer getMemory(Word page) {
+        return memory.get(page.getUnsignedValue());
+    }
+
+    /**
+     * gets the point where the little man has to go to access the given page
+     *
+     * @param page the pages whose location is to be returned
+     *
+     * @return the point the little man has to go to in order to access this
+     * page.
+     */
+    public Point getAccessLocation(Word page) {
         final int x = xPosition - 10;
-        final int y = yPosition + word.getValue() * height / numWords;
+        final int y = yPosition + page.getUnsignedValue() * height / numWords;
         return new Point(x, y);
     }
 

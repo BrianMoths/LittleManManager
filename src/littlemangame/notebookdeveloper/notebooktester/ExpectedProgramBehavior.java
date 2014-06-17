@@ -5,13 +5,13 @@
  */
 package littlemangame.notebookdeveloper.notebooktester;
 
-import littlemangame.notebookdeveloper.notebooktester.inputoutputevents.InputOutputEventType;
-import littlemangame.notebookdeveloper.notebooktester.inputoutputevents.InputEvent;
-import littlemangame.notebookdeveloper.notebooktester.inputoutputevents.InputOutputEvent;
-import littlemangame.notebookdeveloper.notebooktester.inputoutputevents.OutputEvent;
-import littlemangame.notebookdeveloper.notebooktester.inputoutputevents.HaltEvent;
 import java.util.ArrayDeque;
 import java.util.Queue;
+import littlemangame.notebookdeveloper.notebooktester.inputoutputevents.HaltEvent;
+import littlemangame.notebookdeveloper.notebooktester.inputoutputevents.InputEvent;
+import littlemangame.notebookdeveloper.notebooktester.inputoutputevents.InputOutputEvent;
+import littlemangame.notebookdeveloper.notebooktester.inputoutputevents.InputOutputEventType;
+import littlemangame.notebookdeveloper.notebooktester.inputoutputevents.OutputEvent;
 import littlemangame.word.Word;
 
 /**

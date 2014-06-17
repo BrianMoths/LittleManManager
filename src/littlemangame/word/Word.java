@@ -21,7 +21,7 @@ import java.util.Iterator;
  * between 0 and 49. The words corresponding to the unsigned numbers between 50
  * and 99 correspond to the signed words obtained by subtracting 100.
  *
- * This class has value semantics. Objects are immutable.
+ * This class has value semantics. Words are immutable.
  *
  * @author brian
  */

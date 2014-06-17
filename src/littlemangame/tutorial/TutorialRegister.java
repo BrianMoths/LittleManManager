@@ -6,13 +6,13 @@
 package littlemangame.tutorial;
 
 import java.awt.Graphics;
-import littlemangame.computer.Register;
+import littlemangame.computer.Worksheet;
 
 /**
  *
  * @author brian
  */
-public class TutorialRegister extends Register {
+public class TutorialRegister extends Worksheet {
 
     static private final int arrowLength = 30;
     private boolean isArrowShown = true;

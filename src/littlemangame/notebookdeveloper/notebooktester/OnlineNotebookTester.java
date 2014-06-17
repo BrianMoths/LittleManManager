@@ -6,7 +6,7 @@
 package littlemangame.notebookdeveloper.notebooktester;
 
 import littlemangame.computer.Computer;
-import littlemangame.computer.Memory;
+import littlemangame.computer.Notebook;
 import littlemangame.notebookdeveloper.notebooktester.inputoutputevents.HaltEvent;
 import littlemangame.notebookdeveloper.notebooktester.inputoutputevents.InputEvent;
 import littlemangame.notebookdeveloper.notebooktester.inputoutputevents.OutputEvent;
@@ -38,7 +38,7 @@ public class OnlineNotebookTester implements NotebookTester { //I should break t
     }
 
     @Override
-    public boolean isNotebookCorrect(Memory memory) {
+    public boolean isNotebookCorrect(Notebook memory) {
         LittleManCommanderMock littleManCommanderMock = initialize(memory);
         expectedProgramBehaviorCopy.copy(expectedProgramBehaviorOriginal);
         while (isCorrectSoFar && !isHalted) {
@@ -47,7 +47,7 @@ public class OnlineNotebookTester implements NotebookTester { //I should break t
         return isCorrectSoFar;
     }
 
-    private LittleManCommanderMock initialize(Memory memory) {
+    private LittleManCommanderMock initialize(Notebook memory) {
         LittleManMock littleManMock = new LittleManMock(makeComputerMock(), makeHaltListener());
         LittleManCommanderMock littleManCommanderMock = new LittleManCommanderMock(littleManMock);
         littleManCommanderMock.loadCopyOfMemory(memory);

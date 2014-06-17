@@ -43,6 +43,9 @@ public class OutputPanel extends javax.swing.JPanel implements ComputerOutputter
     public Point getAccessLocation() {
         final int x = getX() + getWidth() + 4;
         final int y = getY() + getHeight() / 2;
+//        final int x = getX() + getPreferredSize().width + 4 + 10;
+//        final int y = getY() + getPreferredSize().height / 3;
+//        return SwingUtilities.convertPoint(null, x, y, this);
         return new Point(x, y);
     }
 

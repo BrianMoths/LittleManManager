@@ -9,16 +9,16 @@ import Renderer.Drawable;
 import java.awt.Graphics;
 import littlemangame.computer.ComputerInputter;
 import littlemangame.computer.ComputerOutputter;
-import littlemangame.computer.InstructionPointer;
-import littlemangame.computer.Memory;
-import littlemangame.computer.Register;
+import littlemangame.computer.NotebookPageSheet;
+import littlemangame.computer.Notebook;
+import littlemangame.computer.Worksheet;
 import littlemangame.word.Word;
 
 /**
  *
  * @author brian
  */
-public class GenericComputer<T extends Register, U extends Memory, V extends InstructionPointer, W extends ComputerOutputter, X extends ComputerInputter>
+public class GenericComputer<T extends Worksheet, U extends Notebook, V extends NotebookPageSheet, W extends ComputerOutputter, X extends ComputerInputter>
         implements Drawable {
 
     public final T register;
@@ -43,11 +43,11 @@ public class GenericComputer<T extends Register, U extends Memory, V extends Ins
     }
 
     public void reset() {
-        instructionPointer.setInstructionPointer(Word.ZERO_WORD);
+        instructionPointer.setWord(Word.ZERO_WORD);
         outputPanel.clear();
     }
 
-    public void loadCopyOfMemory(Memory memory) {
+    public void loadCopyOfMemory(Notebook memory) {
         this.memory.loadCopyOfMemory(memory);
     }
 

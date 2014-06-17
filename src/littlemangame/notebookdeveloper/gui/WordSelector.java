@@ -48,7 +48,7 @@ public class WordSelector extends JComboBox<Word> {
     }
 
     public void setSelectedWord(Word word) {
-        setSelectedIndex(word.getValue());
+        setSelectedIndex(word.getUnsignedValue());
     }
 
 }

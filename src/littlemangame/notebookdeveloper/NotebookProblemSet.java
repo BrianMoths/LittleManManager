@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.ListIterator;
-import littlemangame.computer.Memory;
+import littlemangame.computer.Notebook;
 import littlemangame.notebookdevelopmentproblems.HaltProblem;
 import littlemangame.notebookdevelopmentproblems.NotebookDevelopmentProblem;
 import littlemangame.notebookdevelopmentproblems.Output42;
@@ -37,7 +37,7 @@ public class NotebookProblemSet {
         notebookDevelopmentProblemIterator = notebookDevelopmentProblemsCopy.listIterator();
     }
 
-    public boolean verifyNotebook(Memory memory) {
+    public boolean verifyNotebook(Notebook memory) {
         notebookDevelopmentProblem.testNotebook(memory);
         return notebookDevelopmentProblem.wasLastTestCorrect();
 

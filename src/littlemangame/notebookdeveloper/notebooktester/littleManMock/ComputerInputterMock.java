@@ -7,6 +7,7 @@ package littlemangame.notebookdeveloper.notebooktester.littleManMock;
 
 import java.awt.Point;
 import littlemangame.computer.ComputerInputter;
+import littlemangame.computer.InputPanelState;
 import littlemangame.word.Word;
 
 /**
@@ -16,21 +17,21 @@ import littlemangame.word.Word;
 public class ComputerInputterMock implements ComputerInputter {
 
     private final InputProducerMock inputProducerMock;
-    private Word lastWord;
-    private boolean isEnabled = false;
+    private InputPanelState inputPanelState;
 
     public ComputerInputterMock(InputProducerMock inputProducerMock) {
         this.inputProducerMock = inputProducerMock;
+        inputPanelState = InputPanelState.DISABLED;
     }
 
     @Override
-    public void disablePanel() {
-        isEnabled = false;
+    public void cancelInputRequest() {
+        inputPanelState = InputPanelState.DISABLED;
     }
 
     @Override
-    public void enablePanel() {
-        isEnabled = true;
+    public void requestInput() {
+        inputPanelState = InputPanelState.HAS_INPUT; //a mock object immediately knows what it wants to say next.
     }
 
     @Override
@@ -39,18 +40,26 @@ public class ComputerInputterMock implements ComputerInputter {
     }
 
     @Override
-    public Word getLastSelectedWord() {
+    public Word getEnteredWord() {
+        if (inputPanelState != InputPanelState.HAS_INPUT) {
+            throw new IllegalStateException("getEnteredWordCalled before user entered input. Use isWordEntered to ensure the user has entered input before getEnteredWord is called.");
+        }
         return inputProducerMock.getInputWord();
     }
 
     @Override
-    public boolean isPanelEnabled() {
-        return isEnabled; //may as well get rid of isEnabled and always return false
+    public boolean isAwaitingInput() {
+        return inputPanelState == InputPanelState.AWAITING_INPUT; //always false
     }
 
     @Override
-    public boolean isValueSelected() {
-        return true;
+    public boolean isWordEntered() {
+        return inputPanelState == InputPanelState.HAS_INPUT;
+    }
+
+    @Override
+    public boolean isDisabled() {
+        return inputPanelState == InputPanelState.DISABLED;
     }
 
 }

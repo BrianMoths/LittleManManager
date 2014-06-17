@@ -5,7 +5,7 @@
  */
 package littlemangame.notebookdeveloper.notebooktester;
 
-import littlemangame.computer.Memory;
+import littlemangame.computer.Notebook;
 
 /**
  *
@@ -23,7 +23,7 @@ public class RepeatingNotebookTester implements NotebookTester {
     }
 
     @Override
-    public boolean isNotebookCorrect(Memory memory) {
+    public boolean isNotebookCorrect(Notebook memory) {
         boolean isCorrect = true;
         int numTestsSoFar = 0;
         while (isCorrect && numTestsSoFar < numTests) {

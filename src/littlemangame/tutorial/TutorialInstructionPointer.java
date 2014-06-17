@@ -6,13 +6,13 @@
 package littlemangame.tutorial;
 
 import java.awt.Graphics;
-import littlemangame.computer.InstructionPointer;
+import littlemangame.computer.NotebookPageSheet;
 
 /**
  *
  * @author brian
  */
-public class TutorialInstructionPointer extends InstructionPointer {
+public class TutorialInstructionPointer extends NotebookPageSheet {
 
     static private final int arrowLength = 30;
     private boolean isArrowShown = true;

@@ -10,10 +10,10 @@ import littlemangame.genericLittleMan.GenericComputer;
  *
  * @author brian
  */
-public class Computer extends GenericComputer<Register, Memory, InstructionPointer, ComputerOutputter, ComputerInputter> {
+public class Computer extends GenericComputer<Worksheet, Notebook, NotebookPageSheet, ComputerOutputter, ComputerInputter> {
 
     public Computer(ComputerOutputter outputPanel, ComputerInputter inputPanel) {
-        super(new Register(), new Memory(), new InstructionPointer(), outputPanel, inputPanel);
+        super(new Worksheet(), new Notebook(), new NotebookPageSheet(), outputPanel, inputPanel);
     }
 
 }

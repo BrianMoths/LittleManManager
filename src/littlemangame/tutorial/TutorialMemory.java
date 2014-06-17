@@ -6,13 +6,13 @@
 package littlemangame.tutorial;
 
 import java.awt.Graphics;
-import littlemangame.computer.Memory;
+import littlemangame.computer.Notebook;
 
 /**
  *
  * @author brian
  */
-public class TutorialMemory extends Memory {
+public class TutorialMemory extends Notebook {
 
     static private final int arrowLength = 30;
     private boolean isArrowShown = true;
