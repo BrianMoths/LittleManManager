@@ -8,13 +8,15 @@ import java.awt.Point;
 import littlemangame.word.Word;
 
 /**
+ * Implementation of {@link ComputerOutputter} that uses a jTextArea to print
+ * the output.
  *
  * @author brian
  */
 public class OutputPanel extends javax.swing.JPanel implements ComputerOutputter {
 
     /**
-     * Creates new form OutputPanel
+     * Creates new form OutputPanel. The output panel is initially blank.
      */
     public OutputPanel() {
         initComponents();

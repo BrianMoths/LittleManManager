@@ -9,6 +9,8 @@ import java.awt.Point;
 import littlemangame.word.Word;
 
 /**
+ * This is an implementation of the ComputterInputter interface that allows a
+ * user to enter data through a JPanel.
  *
  * @author brian
  */
@@ -18,7 +20,8 @@ public class InputPanel extends javax.swing.JPanel implements ComputerInputter {
     private InputPanelState inputPanelState;
 
     /**
-     * Creates new form InputPanel
+     * Creates new InputPanel. The panel is initially in the disabled state as
+     * if cancelInputRequest has just been called.
      */
     public InputPanel() {
         initComponents();
