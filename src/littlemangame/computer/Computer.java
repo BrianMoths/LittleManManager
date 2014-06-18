@@ -4,7 +4,11 @@
  */
 package littlemangame.computer;
 
-import littlemangame.genericLittleMan.GenericComputer;
+import littlemangame.computer.computercomponents.Notebook;
+import littlemangame.computer.computercomponents.ComputerInputter;
+import littlemangame.computer.computercomponents.ComputerOutputter;
+import littlemangame.computer.computercomponents.NotebookPageSheet;
+import littlemangame.computer.computercomponents.Worksheet;
 
 /**
  *
