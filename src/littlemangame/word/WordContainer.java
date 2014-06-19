@@ -335,4 +335,27 @@ public class WordContainer {
         this.word = word;
     }
 
+    /**
+     * Performs the given unary word operation on this word container.
+     *
+     * @param unaryWordOperation The word operation to be performed on this word
+     * container
+     */
+    public void doUnaryOperation(UnaryWordOperation unaryWordOperation) {
+        unaryWordOperation.operate(this);
+    }
+
+    /**
+     * performs the given binary word operation on this word container. This
+     * word container is the first operand of the binary operation. The given
+     * word is the second operand.
+     *
+     * @param binaryWordOperation The word operation to be performed on this
+     * word
+     * @param operand the second operand of the binary word operation.
+     */
+    public void doBinaryOperation(BinaryWordOperation binaryWordOperation, Word operand) {
+        binaryWordOperation.operate(operand, this);
+    }
+
 }
