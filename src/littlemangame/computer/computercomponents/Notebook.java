@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import littlemangame.instructions.InstructionFromSet;
+import littlemangame.word.BinaryWordOperation;
+import littlemangame.word.UnaryWordOperation;
 import littlemangame.word.Word;
 import littlemangame.word.WordContainer;
 
@@ -178,14 +180,49 @@ public class Notebook implements Drawable {
     }
 
     /**
+     * returns the word container corresponding to the page corresponding to the
+     * given word
+     *
+     * @param page the page whose word is to be retrieved
+     *
+     * @return the given page as a word container
+     */
+    private WordContainer getMemory(Word page) {
+        return memory.get(page.getUnsignedValue());
+    }
+
+    /**
      * returns the word stored on the page corresponding to the given word
      *
      * @param page the page whose word is to be retrieved
      *
      * @return the word stored on the given page
      */
-    public WordContainer getMemory(Word page) {
-        return memory.get(page.getUnsignedValue());
+    public Word getWordOnPage(Word page) {
+        return getMemory(page).getWord();
+    }
+
+    /**
+     * performs the given unary operation to the word on the given page of this
+     * notebook
+     *
+     * @param page the page on which to do the unary operation
+     * @param unaryWordOperation the unary operation to perform
+     */
+    public void doUnaryOperationOnPage(Word page, UnaryWordOperation unaryWordOperation) {
+        getMemory(page).doUnaryOperation(unaryWordOperation);
+    }
+
+    /**
+     * performs the given binary operation to the word on the given page of this
+     * notebook.
+     *
+     * @param page the page on which to do the binary operation
+     * @param binaryWordOperation the binary operation to perform
+     * @param operand the second operand of the binary operation
+     */
+    public void doBinaryOperationOnPage(Word page, BinaryWordOperation binaryWordOperation, Word operand) {
+        getMemory(page).doBinaryOperation(binaryWordOperation, operand);
     }
 
     /**
