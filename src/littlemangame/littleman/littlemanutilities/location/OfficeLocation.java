@@ -17,7 +17,7 @@ public enum OfficeLocation {
     PAGE_NUMBER_SHEET(new PositionGetter() {
         @Override
         public boolean goTo(LittleManPosition littleManPosition) {
-            return littleManPosition.goToPoint(littleManPosition.getPositionGetterAdapter().getInstructionPointerPosition());
+            return littleManPosition.goToPoint(littleManPosition.getPositionGetterAdapter().getPageNumberSheetPosition());
         }
 
     }),
@@ -27,7 +27,7 @@ public enum OfficeLocation {
     WORKSHEET(new PositionGetter() {
         @Override
         public boolean goTo(LittleManPosition littleManPosition) {
-            return littleManPosition.goToPoint(littleManPosition.getPositionGetterAdapter().getRegisterPosition());
+            return littleManPosition.goToPoint(littleManPosition.getPositionGetterAdapter().getWorksheetPosition());
 
         }
 
@@ -38,7 +38,7 @@ public enum OfficeLocation {
     REMEMBERED_NOTEBOOK_PAGE(new PositionGetter() {
         @Override
         public boolean goTo(LittleManPosition littleManPosition) {
-            return littleManPosition.goToPoint(littleManPosition.getPositionGetterAdapter().getRememberedMemoryPosition());
+            return littleManPosition.goToPoint(littleManPosition.getPositionGetterAdapter().getRememberedPagePosition());
         }
 
     }),
