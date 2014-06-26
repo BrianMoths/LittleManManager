@@ -8,6 +8,7 @@ import java.awt.Point;
 import littlemangame.littleman.PositionGetterAdapter;
 
 /**
+ * This class is used to represent the position of the little man.
  *
  * @author brian
  */
@@ -19,6 +20,17 @@ public class LittleManPosition {
     private int x;
     private int y;
 
+    /**
+     * constructs the little man position with the given path values
+     *
+     * @param pathY the y coordinate that the little man will first attain when
+     * walking between locations with different x coordinates. This will ensure
+     * that he never bumps into anything in the office.
+     * @param stepSize how many pixels the little man will move in a frame
+     * @param initialPoint the initial position of the little man
+     * @param positionGetterAdapter a component responsible for telling the
+     * position of each {@link ComputerLocation}
+     */
     public LittleManPosition(int pathY, int stepSize, Point initialPoint, PositionGetterAdapter positionGetterAdapter) {
         this.pathY = pathY;
         this.stepSize = stepSize;
@@ -27,13 +39,16 @@ public class LittleManPosition {
         this.positionGetterAdapter = positionGetterAdapter;
     }
 
-//    public boolean goTo(AccessibleLocation accessibleLocation) {
-//        return goToPoint(accessibleLocation.getAccessLocation());
-//    }
-//
-//    public <T> boolean goTo(MultiplyAccessibleLocation<T> multiplyAccessibleLocation, T t) {
-//        return goToPoint(multiplyAccessibleLocation.getAccessLocation(t));
-//    }
+    /**
+     * moves the little man closer to the {@link ComputerLocation} by one step.
+     * Returns a boolean indicating whether or not the little man's journey is
+     * complete.
+     *
+     * @param computerLocation the location the little man is to move to
+     *
+     * @return whether or not the little man arrived at the given computer
+     * location after this call
+     */
     public boolean goTo(ComputerLocation computerLocation) {
         return computerLocation.goTo(this);
     }
@@ -106,10 +121,20 @@ public class LittleManPosition {
         return stepSize;
     }
 
+    /**
+     * returns the x position of this little man position
+     *
+     * @return the x position of this little man position
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     * returns the y position of this little man position
+     *
+     * @return the y position of this little man position
+     */
     public int getY() {
         return y;
     }
