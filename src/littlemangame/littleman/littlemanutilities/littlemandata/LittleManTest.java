@@ -5,7 +5,7 @@
  */
 package littlemangame.littleman.littlemanutilities.littlemandata;
 
-import littlemangame.littleman.littlemanutilities.location.ComputerLocation;
+import littlemangame.littleman.littlemanutilities.location.OfficeLocation;
 import littlemangame.word.Word;
 
 /**
@@ -20,7 +20,7 @@ public enum LittleManTest {
     /**
      * Tests the if the word written on the worksheet is zero.
      */
-    ZERO(ComputerLocation.WORKSHEET, new LittleManRegisterTester() {
+    ZERO(OfficeLocation.WORKSHEET, new LittleManRegisterTester() {
 
         @Override
         boolean testWord(Word word) {
@@ -31,7 +31,7 @@ public enum LittleManTest {
     /**
      * Tests the if the word written on the worksheet is not zero.
      */
-    NOT_ZERO(ComputerLocation.WORKSHEET, new LittleManRegisterTester() {
+    NOT_ZERO(OfficeLocation.WORKSHEET, new LittleManRegisterTester() {
 
         @Override
         boolean testWord(Word word) {
@@ -43,7 +43,7 @@ public enum LittleManTest {
      * Tests the if the word written on the worksheet has a signed value greater
      * than zero.
      */
-    GREATER_THAN_ZERO(ComputerLocation.WORKSHEET, new LittleManRegisterTester() {
+    GREATER_THAN_ZERO(OfficeLocation.WORKSHEET, new LittleManRegisterTester() {
 
         @Override
         boolean testWord(Word word) {
@@ -56,7 +56,7 @@ public enum LittleManTest {
      * greater
      * than or equal to zero
      */
-    GREATER_OR_EQUAL_TO_ZERO(ComputerLocation.WORKSHEET, new LittleManRegisterTester() {
+    GREATER_OR_EQUAL_TO_ZERO(OfficeLocation.WORKSHEET, new LittleManRegisterTester() {
 
         @Override
         boolean testWord(Word word) {
@@ -69,7 +69,7 @@ public enum LittleManTest {
      * than zero
      *
      */
-    LESS_THAN_ZERO(ComputerLocation.WORKSHEET, new LittleManRegisterTester() {
+    LESS_THAN_ZERO(OfficeLocation.WORKSHEET, new LittleManRegisterTester() {
 
         @Override
         boolean testWord(Word word) {
@@ -81,7 +81,7 @@ public enum LittleManTest {
      * Tests the if the word written on the worksheet has a signed value less
      * than or equal to zero
      */
-    LESS_OR_EQUAL_ZERO(ComputerLocation.WORKSHEET, new LittleManRegisterTester() {
+    LESS_OR_EQUAL_ZERO(OfficeLocation.WORKSHEET, new LittleManRegisterTester() {
 
         @Override
         boolean testWord(Word word) {
@@ -90,10 +90,10 @@ public enum LittleManTest {
 
     });
 
-    private final ComputerLocation computerLocation;
+    private final OfficeLocation computerLocation;
     private final LittleManTester littleManTester;
 
-    private LittleManTest(ComputerLocation computerLocation, LittleManTester littleManTester) {
+    private LittleManTest(OfficeLocation computerLocation, LittleManTester littleManTester) {
         this.computerLocation = computerLocation;
         this.littleManTester = littleManTester;
     }
@@ -103,7 +103,7 @@ public enum LittleManTest {
      *
      * @return the location where this test must occur.
      */
-    public ComputerLocation getComputerLocation() {
+    public OfficeLocation getComputerLocation() {
         return computerLocation;
     }
 
