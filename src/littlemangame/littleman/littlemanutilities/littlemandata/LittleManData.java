@@ -4,17 +4,16 @@
  */
 package littlemangame.littleman.littlemanutilities.littlemandata;
 
-import littlemangame.computer.Computer;
-import littlemangame.genericLittleMan.GenericLittleManData;
+import littlemangame.computer.Office;
 import littlemangame.littleman.PositionGetterAdapter;
 
 /**
  *
  * @author brian
  */
-public class LittleManData extends GenericLittleManData<Computer> {
+public class LittleManData extends GenericLittleManData<Office> {
 
-    public LittleManData(Computer computer, PositionGetterAdapter positionGetterAdapter) {
+    public LittleManData(Office computer, PositionGetterAdapter positionGetterAdapter) {
         super(computer, positionGetterAdapter);
     }
 
