@@ -29,7 +29,7 @@ public class LittleManPosition {
      * @param stepSize how many pixels the little man will move in a frame
      * @param initialPoint the initial position of the little man
      * @param positionGetterAdapter a component responsible for telling the
-     * position of each {@link ComputerLocation}
+     * position of each {@link OfficeLocation}
      */
     public LittleManPosition(int pathY, int stepSize, Point initialPoint, PositionGetterAdapter positionGetterAdapter) {
         this.pathY = pathY;
@@ -40,7 +40,7 @@ public class LittleManPosition {
     }
 
     /**
-     * moves the little man closer to the {@link ComputerLocation} by one step.
+     * moves the little man closer to the {@link OfficeLocation} by one step.
      * Returns a boolean indicating whether or not the little man's journey is
      * complete.
      *
@@ -49,7 +49,7 @@ public class LittleManPosition {
      * @return whether or not the little man arrived at the given computer
      * location after this call
      */
-    public boolean goTo(ComputerLocation computerLocation) {
+    public boolean goTo(OfficeLocation computerLocation) {
         return computerLocation.goTo(this);
     }
 
