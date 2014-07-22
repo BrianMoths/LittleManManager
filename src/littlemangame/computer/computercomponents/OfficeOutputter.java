@@ -18,7 +18,7 @@ import littlemangame.word.Word;
  *
  * @author brian
  */
-public interface ComputerOutputter {
+public interface OfficeOutputter {
 
     /**
      * Clears everything displayed on this outputter.

@@ -4,9 +4,9 @@
  */
 package littlemangame.computer;
 
+import littlemangame.computer.computercomponents.OfficeInputter;
+import littlemangame.computer.computercomponents.OfficeOutputter;
 import littlemangame.computer.computercomponents.Notebook;
-import littlemangame.computer.computercomponents.ComputerInputter;
-import littlemangame.computer.computercomponents.ComputerOutputter;
 import littlemangame.computer.computercomponents.NotebookPageSheet;
 import littlemangame.computer.computercomponents.Worksheet;
 
@@ -14,9 +14,9 @@ import littlemangame.computer.computercomponents.Worksheet;
  *
  * @author brian
  */
-public class Computer extends GenericComputer<Worksheet, Notebook, NotebookPageSheet, ComputerOutputter, ComputerInputter> {
+public class Office extends GenericOffice<Worksheet, Notebook, NotebookPageSheet, OfficeOutputter, OfficeInputter> {
 
-    public Computer(ComputerOutputter outputPanel, ComputerInputter inputPanel) {
+    public Office(OfficeOutputter outputPanel, OfficeInputter inputPanel) {
         super(new Worksheet(), new Notebook(), new NotebookPageSheet(), outputPanel, inputPanel);
     }
 

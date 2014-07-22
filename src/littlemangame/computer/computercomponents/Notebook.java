@@ -35,7 +35,7 @@ public class Notebook implements Drawable {
     static protected final int width = 50;
     static protected final int height = 400;
     static private final int numWords = 100;
-    private final List<WordContainer> memory = new ArrayList<>(numWords);
+    private final List<WordContainer> notebook = new ArrayList<>(numWords);
 
     {
         final Word input = Word.valueOfLastDigitsOfInteger(90);
@@ -46,79 +46,79 @@ public class Notebook implements Drawable {
         final Word printNew = Word.valueOfLastDigitsOfInteger(80);
         int i = 0;
         //get input
-        memory.add(new WordContainer(InstructionFromSet.INPUT.getOpcode()));
+        notebook.add(new WordContainer(InstructionFromSet.INPUT.getOpcode()));
         i++;
         //save input
-        memory.add(new WordContainer(InstructionFromSet.STORE_REGISTER_MEMORY.getOpcode()));
+        notebook.add(new WordContainer(InstructionFromSet.STORE_REGISTER_MEMORY.getOpcode()));
         i++;
-        memory.add(new WordContainer(input));
+        notebook.add(new WordContainer(input));
         i++;
         //jump if zero
-        memory.add(new WordContainer(InstructionFromSet.JUMP_IF_ZERO.getOpcode()));
+        notebook.add(new WordContainer(InstructionFromSet.JUMP_IF_ZERO.getOpcode()));
         i++;
-        memory.add(new WordContainer(printOld));
+        notebook.add(new WordContainer(printOld));
         i++;
         final Word loop = Word.valueOfLastDigitsOfInteger(i);
         //add oldValue to newValue
-        memory.add(new WordContainer(InstructionFromSet.LOAD_MEMORY.getOpcode()));
+        notebook.add(new WordContainer(InstructionFromSet.LOAD_MEMORY.getOpcode()));
         i++;
-        memory.add(new WordContainer(oldValue));
+        notebook.add(new WordContainer(oldValue));
         i++;
-        memory.add(new WordContainer(InstructionFromSet.ADD_REGISTER_TO_MEMORY.getOpcode()));
+        notebook.add(new WordContainer(InstructionFromSet.ADD_REGISTER_TO_MEMORY.getOpcode()));
         i++;
-        memory.add(new WordContainer(newValue));
+        notebook.add(new WordContainer(newValue));
         //move newCopy to oldValue
-        memory.add(new WordContainer(InstructionFromSet.LOAD_MEMORY.getOpcode()));
+        notebook.add(new WordContainer(InstructionFromSet.LOAD_MEMORY.getOpcode()));
         i++;
-        memory.add(new WordContainer(newCopy));
+        notebook.add(new WordContainer(newCopy));
         i++;
-        memory.add(new WordContainer(InstructionFromSet.STORE_REGISTER_MEMORY.getOpcode()));
+        notebook.add(new WordContainer(InstructionFromSet.STORE_REGISTER_MEMORY.getOpcode()));
         i++;
-        memory.add(new WordContainer(oldValue));
+        notebook.add(new WordContainer(oldValue));
         i++;
         //move newValue to newCopy
-        memory.add(new WordContainer(InstructionFromSet.LOAD_MEMORY.getOpcode()));
+        notebook.add(new WordContainer(InstructionFromSet.LOAD_MEMORY.getOpcode()));
         i++;
-        memory.add(new WordContainer(newValue));
+        notebook.add(new WordContainer(newValue));
         i++;
-        memory.add(new WordContainer(InstructionFromSet.STORE_REGISTER_MEMORY.getOpcode()));
+        notebook.add(new WordContainer(InstructionFromSet.STORE_REGISTER_MEMORY.getOpcode()));
         i++;
-        memory.add(new WordContainer(newCopy));
+        notebook.add(new WordContainer(newCopy));
         i++;
         //decrement input
-        memory.add(new WordContainer(InstructionFromSet.DECREMENT_MEMORY.getOpcode()));
+        notebook.add(new WordContainer(InstructionFromSet.DECREMENT_MEMORY.getOpcode()));
         i++;
-        memory.add(new WordContainer(input));
+        notebook.add(new WordContainer(input));
         i++;
         //load input
-        memory.add(new WordContainer(InstructionFromSet.LOAD_MEMORY.getOpcode()));
+        notebook.add(new WordContainer(InstructionFromSet.LOAD_MEMORY.getOpcode()));
         i++;
-        memory.add(new WordContainer(input));
+        notebook.add(new WordContainer(input));
         i++;
         //jump to return if zero
-        memory.add(new WordContainer(InstructionFromSet.JUMP_IF_ZERO.getOpcode()));
+        notebook.add(new WordContainer(InstructionFromSet.JUMP_IF_ZERO.getOpcode()));
         i++;
-        memory.add(new WordContainer(printNew));
+        notebook.add(new WordContainer(printNew));
         i++;
         //jump to loop
-        memory.add(new WordContainer(InstructionFromSet.UNCONDITIONAL_JUMP.getOpcode()));
+        notebook.add(new WordContainer(InstructionFromSet.UNCONDITIONAL_JUMP.getOpcode()));
         i++;
-        memory.add(new WordContainer(loop));
+        notebook.add(new WordContainer(loop));
         i++;
         for (; i < numWords; i++) {
-            memory.add(new WordContainer(Word.ZERO_WORD));
+            notebook.add(new WordContainer(Word.ZERO_WORD));
         }
-        memory.set(70, new WordContainer(InstructionFromSet.LOAD_MEMORY.getOpcode()));
-        memory.set(71, new WordContainer(oldValue));
-        memory.set(72, new WordContainer(InstructionFromSet.PRINT_UNSIGNED.getOpcode()));
-        memory.set(73, new WordContainer(InstructionFromSet.HALT.getOpcode()));
-        memory.set(80, new WordContainer(InstructionFromSet.LOAD_MEMORY.getOpcode()));
-        memory.set(81, new WordContainer(newValue));
-        memory.set(82, new WordContainer(InstructionFromSet.PRINT_UNSIGNED.getOpcode()));
-        memory.set(83, new WordContainer(InstructionFromSet.HALT.getOpcode()));
+        notebook.set(70, new WordContainer(InstructionFromSet.LOAD_MEMORY.getOpcode()));
+        notebook.set(71, new WordContainer(oldValue));
+        notebook.set(72, new WordContainer(InstructionFromSet.PRINT_UNSIGNED.getOpcode()));
+        notebook.set(73, new WordContainer(InstructionFromSet.HALT.getOpcode()));
+        notebook.set(80, new WordContainer(InstructionFromSet.LOAD_MEMORY.getOpcode()));
+        notebook.set(81, new WordContainer(newValue));
+        notebook.set(82, new WordContainer(InstructionFromSet.PRINT_UNSIGNED.getOpcode()));
+        notebook.set(83, new WordContainer(InstructionFromSet.HALT.getOpcode()));
 
-        setMemoryAtPage(input, Word.valueOfLastDigitsOfInteger(8));
-        setMemoryAtPage(oldValue, Word.valueOfLastDigitsOfInteger(1));
+        setWordAtPage(input, Word.valueOfLastDigitsOfInteger(8));
+        setWordAtPage(oldValue, Word.valueOfLastDigitsOfInteger(1));
     }
 
     /**
@@ -137,7 +137,7 @@ public class Notebook implements Drawable {
      * @param memory the notebook to be copied
      */
     public Notebook(Notebook memory) {
-        loadCopyOfMemory(memory);
+        loadCopyOfNotebook(memory);
     }
 
     @Override
@@ -160,8 +160,8 @@ public class Notebook implements Drawable {
      * @param page a word whose unsigned value gives the page to be written to
      * @param wordToBeStored the word to be stored on the given page
      */
-    public void setMemoryAtPage(Word page, Word wordToBeStored) {
-        memory.get(page.getUnsignedValue()).setWord(wordToBeStored);
+    public void setWordAtPage(Word page, Word wordToBeStored) {
+        notebook.get(page.getUnsignedValue()).setWord(wordToBeStored);
     }
 
     /**
@@ -171,11 +171,11 @@ public class Notebook implements Drawable {
      *
      * @param notebook the notebook to be copied
      */
-    public final void loadCopyOfMemory(Notebook notebook) {
+    public final void loadCopyOfNotebook(Notebook notebook) {
         Iterator<Word> wordIterator = Word.getIterator();
         while (wordIterator.hasNext()) {
             final Word word = wordIterator.next();
-            setMemoryAtPage(word, notebook.getMemory(word).getWord());
+            setWordAtPage(word, notebook.getNotebookPageValue(word).getWord());
         }
     }
 
@@ -187,8 +187,8 @@ public class Notebook implements Drawable {
      *
      * @return the given page as a word container
      */
-    private WordContainer getMemory(Word page) {
-        return memory.get(page.getUnsignedValue());
+    private WordContainer getNotebookPageValue(Word page) {
+        return notebook.get(page.getUnsignedValue());
     }
 
     /**
@@ -199,7 +199,7 @@ public class Notebook implements Drawable {
      * @return the word stored on the given page
      */
     public Word getWordOnPage(Word page) {
-        return getMemory(page).getWord();
+        return getNotebookPageValue(page).getWord();
     }
 
     /**
@@ -210,7 +210,7 @@ public class Notebook implements Drawable {
      * @param unaryWordOperation the unary operation to perform
      */
     public void doUnaryOperationOnPage(Word page, UnaryWordOperation unaryWordOperation) {
-        getMemory(page).doUnaryOperation(unaryWordOperation);
+        getNotebookPageValue(page).doUnaryOperation(unaryWordOperation);
     }
 
     /**
@@ -222,7 +222,7 @@ public class Notebook implements Drawable {
      * @param operand the second operand of the binary operation
      */
     public void doBinaryOperationOnPage(Word page, BinaryWordOperation binaryWordOperation, Word operand) {
-        getMemory(page).doBinaryOperation(binaryWordOperation, operand);
+        getNotebookPageValue(page).doBinaryOperation(binaryWordOperation, operand);
     }
 
     /**

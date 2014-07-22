@@ -14,7 +14,7 @@ import littlemangame.word.Word;
  *
  * @author brian
  */
-public class InputPanel extends javax.swing.JPanel implements ComputerInputter {
+public class InputPanel extends javax.swing.JPanel implements OfficeInputter {
 
     private Word value;
     private InputPanelState inputPanelState;

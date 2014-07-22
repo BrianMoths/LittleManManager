@@ -25,7 +25,7 @@ import littlemangame.word.Word;
  *
  * @author brian
  */
-public interface ComputerInputter {
+public interface OfficeInputter {
 
     /**
      * Removes the user's ability to edit his selection and finalize his
