@@ -4,6 +4,8 @@
  */
 package littlemangame.littleman.littlemanutilities.location;
 
+import java.awt.Point;
+
 /**
  * this class represents a location in the office.
  *
@@ -14,20 +16,21 @@ public enum OfficeLocation {
     /**
      * the location of the page number sheet
      */
-    PAGE_NUMBER_SHEET(new PositionGetter() {
+    PAGE_NUMBER_SHEET(new PointPositionGetter() {
+
         @Override
-        public boolean goTo(LittleManPosition littleManPosition) {
-            return littleManPosition.goToPoint(littleManPosition.getPositionGetterAdapter().getPageNumberSheetPosition());
+        Point getPoint(LittleManPosition littleManPosition) {
+            return littleManPosition.getPositionGetterAdapter().getPageNumberSheetPosition();
         }
 
     }),
     /**
      * the location of the worksheet
      */
-    WORKSHEET(new PositionGetter() {
+    WORKSHEET(new PointPositionGetter() {
         @Override
-        public boolean goTo(LittleManPosition littleManPosition) {
-            return littleManPosition.goToPoint(littleManPosition.getPositionGetterAdapter().getWorksheetPosition());
+        Point getPoint(LittleManPosition littleManPosition) {
+            return littleManPosition.getPositionGetterAdapter().getWorksheetPosition();
 
         }
 
@@ -35,20 +38,20 @@ public enum OfficeLocation {
     /**
      * the location of the remembered notebook page
      */
-    REMEMBERED_NOTEBOOK_PAGE(new PositionGetter() {
+    REMEMBERED_NOTEBOOK_PAGE(new PointPositionGetter() {
         @Override
-        public boolean goTo(LittleManPosition littleManPosition) {
-            return littleManPosition.goToPoint(littleManPosition.getPositionGetterAdapter().getRememberedPagePosition());
+        Point getPoint(LittleManPosition littleManPosition) {
+            return littleManPosition.getPositionGetterAdapter().getRememberedPagePosition();
         }
 
     }),
     /**
      * the location of the output panel
      */
-    OUTPUT_PANEL(new PositionGetter() {
+    OUTPUT_PANEL(new PointPositionGetter() {
         @Override
-        public boolean goTo(LittleManPosition littleManPosition) {
-            return littleManPosition.goToPoint(littleManPosition.getPositionGetterAdapter().getOutputPanelPosition());
+        Point getPoint(LittleManPosition littleManPosition) {
+            return littleManPosition.getPositionGetterAdapter().getOutputPanelPosition();
 
         }
 
@@ -56,11 +59,11 @@ public enum OfficeLocation {
     /**
      * the location of the input panel
      */
-    INPUT_PANEL(new PositionGetter() {
+    INPUT_PANEL(new PointPositionGetter() {
 
         @Override
-        public boolean goTo(LittleManPosition littleManPosition) {
-            return littleManPosition.goToPoint(littleManPosition.getPositionGetterAdapter().getInputPanelPosition());
+        Point getPoint(LittleManPosition littleManPosition) {
+            return littleManPosition.getPositionGetterAdapter().getInputPanelPosition();
         }
 
     }),
@@ -70,6 +73,11 @@ public enum OfficeLocation {
     CURRENT_LOCATION(new PositionGetter() {
         @Override
         public boolean goTo(LittleManPosition littleManPosition) {
+            return true;
+        }
+
+        @Override
+        public boolean isHere(LittleManPosition littleManPosition) {
             return true;
         }
 
@@ -85,9 +93,31 @@ public enum OfficeLocation {
 
     }
 
+    boolean isHere(LittleManPosition littleManPosition) {
+        return positionGetter.isHere(littleManPosition);
+    }
+
     private static interface PositionGetter {
 
         public boolean goTo(LittleManPosition littleManPosition);
+
+        boolean isHere(LittleManPosition littleManPosition);
+
+    }
+
+    private static abstract class PointPositionGetter implements PositionGetter {
+
+        abstract Point getPoint(LittleManPosition littleManPosition);
+
+        @Override
+        public boolean goTo(LittleManPosition littleManPosition) {
+            return littleManPosition.goToPoint(getPoint(littleManPosition));
+        }
+
+        @Override
+        public boolean isHere(LittleManPosition littleManPosition) {
+            return littleManPosition.isAtPoint(getPoint(littleManPosition));
+        }
 
     }
 
