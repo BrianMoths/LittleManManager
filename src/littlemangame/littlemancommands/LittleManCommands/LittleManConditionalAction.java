@@ -6,10 +6,11 @@
 package littlemangame.littlemancommands.LittleManCommands;
 
 import java.util.EnumMap;
-import littlemangame.genericLittleMan.GenericLittleMan;
-import littlemangame.genericLittleMan.LittleManTest;
+import littlemangame.littleman.GenericLittleMan;
+import littlemangame.littleman.littlemanutilities.littlemandata.LittleManTest;
 
 /**
+ * represents an action which is to be performed if a certain condition is met.
  *
  * @author brian
  */
@@ -40,17 +41,41 @@ public final class LittleManConditionalAction extends LittleManAction {
     private final LittleManAction littleManConditionalAction;
     private ConditionalActionStep conditionalActionStep;
 
+    /**
+     * constructs a conditional action corresponding to the given test and the
+     * given action
+     *
+     * @param littleManTest the test to control whether the little man does the
+     * action
+     * @param littleManConditionalAction the action to perform
+     */
     public LittleManConditionalAction(LittleManTest littleManTest, LittleManAction littleManConditionalAction) {
         this.littleManTest = littleManTest;
         this.littleManConditionalAction = littleManConditionalAction;
         this.conditionalActionStep = ConditionalActionStep.GO_TO_TEST;
     }
 
+    /**
+     * constructs a conditional action with the given test and where the action
+     * is the given parameters sequence of actions
+     *
+     * @param littleManTest the test to control whether the little man does the
+     * action
+     * @param littleManConditionalAction a sequence of actions to perform
+     */
     public LittleManConditionalAction(LittleManTest littleManTest, LittleManAction... littleManConditionalAction) {
         this(littleManTest, new LittleManActionSequence(littleManConditionalAction));
     }
 
     @Override
+    /**
+     * makes the given little man perform this conditional action. When the
+     * little man is done performing the action, the test resets itself.
+     *
+     * @return whether this conditional action is completed. The action is
+     * completed if the test has passed and the action has been completed, or
+     * the test has failed.
+     */
     public boolean doAction(GenericLittleMan<?> littleMan) {
         switch (conditionalActionStep) {
             case GO_TO_TEST:
