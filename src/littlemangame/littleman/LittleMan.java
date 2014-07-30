@@ -4,8 +4,7 @@
  */
 package littlemangame.littleman;
 
-import littlemangame.computer.Computer;
-import littlemangame.genericLittleMan.GenericLittleMan;
+import littlemangame.computer.Office;
 import littlemangame.littleman.littlemanutilities.littlemandata.LittleManData;
 
 /**
@@ -14,13 +13,12 @@ import littlemangame.littleman.littlemanutilities.littlemandata.LittleManData;
  */
 public class LittleMan extends GenericLittleMan<LittleManData> {
 
-    public LittleMan(Computer computer) {
-        this(computer, new PositionGetterAdapter());
-//                LittleManData littleManData = new LittleManData(computer, positionGetterAdapter);
+    public LittleMan(Office office) {
+        this(office, new PositionGetterAdapter());
     }
 
-    private LittleMan(Computer computer, PositionGetterAdapter positionGetterAdapter) {
-        super(new LittleManData(computer, positionGetterAdapter), positionGetterAdapter);
+    private LittleMan(Office office, PositionGetterAdapter positionGetterAdapter) {
+        super(new LittleManData(office, positionGetterAdapter), positionGetterAdapter);
     }
 
 }
