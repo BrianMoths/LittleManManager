@@ -44,13 +44,17 @@ public class LittleManPosition {
      * Returns a boolean indicating whether or not the little man's journey is
      * complete.
      *
-     * @param computerLocation the location the little man is to move to
+     * @param officeLocation the location the little man is to move to
      *
      * @return whether or not the little man arrived at the given computer
      * location after this call
      */
-    public boolean goTo(OfficeLocation computerLocation) {
-        return computerLocation.goTo(this);
+    public boolean goTo(OfficeLocation officeLocation) {
+        return officeLocation.goTo(this);
+    }
+
+    public boolean isAtLocation(OfficeLocation officeLocation) {
+        return officeLocation.isHere(this);
     }
 
     boolean goToPoint(Point point) {
@@ -109,7 +113,7 @@ public class LittleManPosition {
         return this.y == y;
     }
 
-    private boolean isAtPoint(Point point) {
+    boolean isAtPoint(Point point) {
         return isAtX(point.x) && isAtY(point.y);
     }
 
