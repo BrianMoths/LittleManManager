@@ -30,6 +30,8 @@ import static littlemangame.instructions.interfaceandimplementations.Instruction
 import static littlemangame.word.BinaryWordOperation.SET;
 
 /**
+ * This enum contains all the instructions for the little man. See the in game
+ * documentation for explanations of each instruction.
  *
  * @author brian
  */
@@ -197,6 +199,16 @@ public enum InstructionFromSet {
         return descriptionBuilder.toString();
     }
 
+    /**
+     * returns the instruction coded for by the given word. An unspecified
+     * instruction returned when given a word that does not code for an
+     * instruction
+     *
+     * @param word the word coding for an instruction
+     *
+     * @return an instruction coded for by the given word, or an unspecified
+     * instruction if the given word does not code for an instruction
+     */
     static public Instruction decodeInstruction(Word word) {
         final InstructionFromSet instructionFromSet = instructionMap.get(word);
         if (instructionFromSet == null) {
@@ -239,14 +251,31 @@ public enum InstructionFromSet {
     }
     //</editor-fold>
 
+    /**
+     * returns the opcode for this instruction
+     *
+     * @return the opcode for this instruction
+     */
     public Word getOpcode() {
         return opcode;
     }
 
+    /**
+     * returns a description of this instruction
+     *
+     * @return a description of this instruction
+     */
     public String getDescription() {
         return instructionDescriptions.get(this);
     }
 
+    /**
+     * return an html snippet that gives the description and also which operands
+     * this instruction takes.
+     *
+     * @return an html snippet that gives the description and also which
+     * operands this instruction takes.
+     */
     public String getDetails() {
         return instructionDetails.get(this);
     }
@@ -257,6 +286,11 @@ public enum InstructionFromSet {
         return lowerCaseString.substring(0, 1).toUpperCase() + lowerCaseString.substring(1);
     }
 
+    /**
+     * returns a reset copy of this instruction
+     *
+     * @return a reset copy of this instruction
+     */
     public Instruction getInstruction() {
         return instruction.getResetCopy();
     }
