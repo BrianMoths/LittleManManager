@@ -10,7 +10,7 @@ import java.util.Map;
 import littlemangame.instructions.interfaceandimplementations.Instruction;
 import littlemangame.instructions.interfaceandimplementations.InstructionOperandTypes;
 import littlemangame.instructions.interfaceandimplementations.ParselessInstruction;
-import littlemangame.genericLittleMan.LittleManTest;
+import littlemangame.littleman.littlemanutilities.littlemandata.LittleManTest;
 import littlemangame.littlemancommands.LittleManCommands.LittleManAction;
 import littlemangame.littlemancommands.LittleManCommands.LittleManActionSequence;
 import littlemangame.littlemancommands.LittleManCommands.LittleManCommands;
@@ -39,63 +39,63 @@ public enum InstructionFromSet {
     NO_OPERATION(0, NEITHER, LittleManCommands.nullAction),
     HALT(9, NEITHER, LittleManCommands.haltAction),
     //control
-    UNCONDITIONAL_JUMP(10, DATA_ONLY, SET, IMMEDIATE, DestinationOperand.INSTRUCTION_POINTER),
-    JUMP_IF_ZERO(11, DATA_ONLY, LittleManTest.ZERO, SET, IMMEDIATE, DestinationOperand.INSTRUCTION_POINTER),
-    JUMP_IF_NOT_ZERO(12, DATA_ONLY, LittleManTest.NOT_ZERO, SET, IMMEDIATE, DestinationOperand.INSTRUCTION_POINTER),
-    JUMP_IF_GREATER_THAN_ZERO(13, DATA_ONLY, LittleManTest.GREATER_THAN_ZERO, SET, IMMEDIATE, DestinationOperand.INSTRUCTION_POINTER),
-    JUMP_IF_GREATER_THAN_OR_EQUAL_TO_ZERO(14, DATA_ONLY, LittleManTest.GREATER_OR_EQUAL_TO_ZERO, SET, IMMEDIATE, DestinationOperand.INSTRUCTION_POINTER),
-    JUMP_IF_LESS_THAN_OR_EQUAL_TO_ZERO(15, DATA_ONLY, LittleManTest.LESS_OR_EQUAL_ZERO, SET, IMMEDIATE, DestinationOperand.INSTRUCTION_POINTER),
-    JUMP_IF_LESS_THAN_ZERO(16, DATA_ONLY, LittleManTest.LESS_THAN_ZERO, SET, IMMEDIATE, DestinationOperand.INSTRUCTION_POINTER),
+    UNCONDITIONAL_JUMP(10, DATA_ONLY, SET, IMMEDIATE, DestinationOperand.NOTEBOOK_PAGE_SHEET),
+    JUMP_IF_ZERO(11, DATA_ONLY, LittleManTest.ZERO, SET, IMMEDIATE, DestinationOperand.NOTEBOOK_PAGE_SHEET),
+    JUMP_IF_NOT_ZERO(12, DATA_ONLY, LittleManTest.NOT_ZERO, SET, IMMEDIATE, DestinationOperand.NOTEBOOK_PAGE_SHEET),
+    JUMP_IF_GREATER_THAN_ZERO(13, DATA_ONLY, LittleManTest.GREATER_THAN_ZERO, SET, IMMEDIATE, DestinationOperand.NOTEBOOK_PAGE_SHEET),
+    JUMP_IF_GREATER_THAN_OR_EQUAL_TO_ZERO(14, DATA_ONLY, LittleManTest.GREATER_OR_EQUAL_TO_ZERO, SET, IMMEDIATE, DestinationOperand.NOTEBOOK_PAGE_SHEET),
+    JUMP_IF_LESS_THAN_OR_EQUAL_TO_ZERO(15, DATA_ONLY, LittleManTest.LESS_OR_EQUAL_ZERO, SET, IMMEDIATE, DestinationOperand.NOTEBOOK_PAGE_SHEET),
+    JUMP_IF_LESS_THAN_ZERO(16, DATA_ONLY, LittleManTest.LESS_THAN_ZERO, SET, IMMEDIATE, DestinationOperand.NOTEBOOK_PAGE_SHEET),
     //Input/Output
-    PRINT_UNSIGNED(20, NEITHER, LittleManCommands.memorizeDataAtContainerAction(littlemangame.genericLittleMan.LittleManWordContainer.REGISTER), LittleManCommands.getPrintUnsignedToOutputPanelAction()),
-    INPUT(25, NEITHER, LittleManCommands.getGetDataFromInputPanelAction(), LittleManCommands.doBinaryOperationOnContainerAction(littlemangame.genericLittleMan.LittleManWordContainer.REGISTER, SET)),
+    PRINT_UNSIGNED(20, NEITHER, LittleManCommands.memorizeDataAtContainerAction(littlemangame.littleman.littlemanutilities.littlemandata.LittleManWordContainer.WORKSHEET), LittleManCommands.getPrintUnsignedToOutputPanelAction()),
+    INPUT(25, NEITHER, LittleManCommands.getGetDataFromInputPanelAction(), LittleManCommands.doBinaryOperationOnContainerAction(littlemangame.littleman.littlemanutilities.littlemandata.LittleManWordContainer.WORKSHEET, SET)),
     //data movement
-    LOAD_IMMEDIATE(30, DATA_ONLY, SET, IMMEDIATE, DestinationOperand.REGISTER),
-    LOAD_MEMORY(31, ADDRESS_ONLY, SET, MEMORY, DestinationOperand.REGISTER),
-    LOAD_INDIRECT(32, NEITHER, SET, REGISTER_INDIRECT, DestinationOperand.REGISTER),
-    STORE_IMMEDIATE_INDIRECT(35, DATA_ONLY, SET, REGISTER_INDIRECT, DestinationOperand.MEMORY),
-    STORE_REGISTER_MEMORY(36, ADDRESS_ONLY, SET, REGISTER, DestinationOperand.MEMORY),
-    STORE_IMMEDIATE_MEMORY(37, BOTH, SET, IMMEDIATE, DestinationOperand.MEMORY),
+    LOAD_IMMEDIATE(30, DATA_ONLY, SET, IMMEDIATE, DestinationOperand.WORKSHEET),
+    LOAD_MEMORY(31, ADDRESS_ONLY, SET, MEMORY, DestinationOperand.WORKSHEET),
+    LOAD_INDIRECT(32, NEITHER, SET, REGISTER_INDIRECT, DestinationOperand.WORKSHEET),
+    STORE_IMMEDIATE_INDIRECT(35, DATA_ONLY, SET, REGISTER_INDIRECT, DestinationOperand.NOTEBOOK),
+    STORE_REGISTER_MEMORY(36, ADDRESS_ONLY, SET, REGISTER, DestinationOperand.NOTEBOOK),
+    STORE_IMMEDIATE_MEMORY(37, BOTH, SET, IMMEDIATE, DestinationOperand.NOTEBOOK),
     //LOGIC
-    COMPLEMENT_WORKSHEET(40, NEITHER, UnaryWordOperation.COMPLEMENT, DestinationOperand.REGISTER),
-    COMPLEMENT_MEMORY(41, ADDRESS_ONLY, UnaryWordOperation.COMPLEMENT, DestinationOperand.MEMORY),
-    COMPLEMENT_INDIRECT(42, NEITHER, UnaryWordOperation.COMPLEMENT, DestinationOperand.REGISER_INDIRECT),
-    DIGITWISE_MAX_IMMEDIATE_REGISTER(50, DATA_ONLY, BinaryWordOperation.DIGITWISE_MAX, IMMEDIATE, DestinationOperand.REGISTER),
-    DIGITWISE_MAX_MEMORY_REGISTER(51, ADDRESS_ONLY, BinaryWordOperation.DIGITWISE_MAX, MEMORY, DestinationOperand.REGISTER),
-    DIGITWISE_MAX_IMMEDIATE_MEMORY(52, BOTH, BinaryWordOperation.DIGITWISE_MAX, IMMEDIATE, DestinationOperand.MEMORY),
-    DIGITWISE_MAX_REGISTER_MEMORY(53, ADDRESS_ONLY, BinaryWordOperation.DIGITWISE_MAX, REGISTER, DestinationOperand.MEMORY),
-    DIGITWISE_MIN_IMMEDIATE_REGISTER(55, DATA_ONLY, BinaryWordOperation.DIGITWISE_MIN, IMMEDIATE, DestinationOperand.REGISTER),
-    DIGITWISE_MIN_MEMORY_REGISTER(56, ADDRESS_ONLY, BinaryWordOperation.DIGITWISE_MIN, MEMORY, DestinationOperand.REGISTER),
-    DIGITWISE_MIN_IMMEDIATE_MEMORY(57, BOTH, BinaryWordOperation.DIGITWISE_MIN, IMMEDIATE, DestinationOperand.MEMORY),
-    DIGITWISE_MIN_REGISTER_MEMORY(58, ADDRESS_ONLY, BinaryWordOperation.DIGITWISE_MIN, REGISTER, DestinationOperand.MEMORY),
+    COMPLEMENT_WORKSHEET(40, NEITHER, UnaryWordOperation.COMPLEMENT, DestinationOperand.WORKSHEET),
+    COMPLEMENT_MEMORY(41, ADDRESS_ONLY, UnaryWordOperation.COMPLEMENT, DestinationOperand.NOTEBOOK),
+    COMPLEMENT_INDIRECT(42, NEITHER, UnaryWordOperation.COMPLEMENT, DestinationOperand.WORKSHEET_INDIRECT),
+    DIGITWISE_MAX_IMMEDIATE_REGISTER(50, DATA_ONLY, BinaryWordOperation.DIGITWISE_MAX, IMMEDIATE, DestinationOperand.WORKSHEET),
+    DIGITWISE_MAX_MEMORY_REGISTER(51, ADDRESS_ONLY, BinaryWordOperation.DIGITWISE_MAX, MEMORY, DestinationOperand.WORKSHEET),
+    DIGITWISE_MAX_IMMEDIATE_MEMORY(52, BOTH, BinaryWordOperation.DIGITWISE_MAX, IMMEDIATE, DestinationOperand.NOTEBOOK),
+    DIGITWISE_MAX_REGISTER_MEMORY(53, ADDRESS_ONLY, BinaryWordOperation.DIGITWISE_MAX, REGISTER, DestinationOperand.NOTEBOOK),
+    DIGITWISE_MIN_IMMEDIATE_REGISTER(55, DATA_ONLY, BinaryWordOperation.DIGITWISE_MIN, IMMEDIATE, DestinationOperand.WORKSHEET),
+    DIGITWISE_MIN_MEMORY_REGISTER(56, ADDRESS_ONLY, BinaryWordOperation.DIGITWISE_MIN, MEMORY, DestinationOperand.WORKSHEET),
+    DIGITWISE_MIN_IMMEDIATE_MEMORY(57, BOTH, BinaryWordOperation.DIGITWISE_MIN, IMMEDIATE, DestinationOperand.NOTEBOOK),
+    DIGITWISE_MIN_REGISTER_MEMORY(58, ADDRESS_ONLY, BinaryWordOperation.DIGITWISE_MIN, REGISTER, DestinationOperand.NOTEBOOK),
     //digit twiddling
-    LEFT_SHIFT_REGISTER(60, NEITHER, UnaryWordOperation.LEFT_SHIFT, DestinationOperand.REGISTER),
-    LEFT_SHIFT_MEMORY(61, ADDRESS_ONLY, UnaryWordOperation.LEFT_SHIFT, DestinationOperand.MEMORY),
-    LEFT_SHIFT_INDIRECT(62, NEITHER, UnaryWordOperation.LEFT_SHIFT, DestinationOperand.REGISER_INDIRECT),
-    RIGHT_SHIFT_UNSIGNED_REGISTER(63, NEITHER, UnaryWordOperation.RIGHT_SHIFT_UNSIGNED, DestinationOperand.REGISTER),
-    RIGHT_SHIFT_UNSIGNED_MEMORY(64, ADDRESS_ONLY, UnaryWordOperation.RIGHT_SHIFT_UNSIGNED, DestinationOperand.MEMORY),
-    RIGHT_SHIFT_UNSIGNED_INDIRECT(65, NEITHER, UnaryWordOperation.RIGHT_SHIFT_UNSIGNED, DestinationOperand.REGISER_INDIRECT),
-    RIGHT_SHIFT_SIGNED_REGISTER(66, NEITHER, UnaryWordOperation.RIGHT_SHIFT_SIGNED, DestinationOperand.REGISTER),
-    RIGHT_SHIFT_SIGNED_MEMORY(67, ADDRESS_ONLY, UnaryWordOperation.RIGHT_SHIFT_SIGNED, DestinationOperand.MEMORY),
-    RIGHT_SHIFT_SIGNED_INDIRECT(68, NEITHER, UnaryWordOperation.RIGHT_SHIFT_SIGNED, DestinationOperand.REGISER_INDIRECT),
+    LEFT_SHIFT_REGISTER(60, NEITHER, UnaryWordOperation.LEFT_SHIFT, DestinationOperand.WORKSHEET),
+    LEFT_SHIFT_MEMORY(61, ADDRESS_ONLY, UnaryWordOperation.LEFT_SHIFT, DestinationOperand.NOTEBOOK),
+    LEFT_SHIFT_INDIRECT(62, NEITHER, UnaryWordOperation.LEFT_SHIFT, DestinationOperand.WORKSHEET_INDIRECT),
+    RIGHT_SHIFT_UNSIGNED_REGISTER(63, NEITHER, UnaryWordOperation.RIGHT_SHIFT_UNSIGNED, DestinationOperand.WORKSHEET),
+    RIGHT_SHIFT_UNSIGNED_MEMORY(64, ADDRESS_ONLY, UnaryWordOperation.RIGHT_SHIFT_UNSIGNED, DestinationOperand.NOTEBOOK),
+    RIGHT_SHIFT_UNSIGNED_INDIRECT(65, NEITHER, UnaryWordOperation.RIGHT_SHIFT_UNSIGNED, DestinationOperand.WORKSHEET_INDIRECT),
+    RIGHT_SHIFT_SIGNED_REGISTER(66, NEITHER, UnaryWordOperation.RIGHT_SHIFT_SIGNED, DestinationOperand.WORKSHEET),
+    RIGHT_SHIFT_SIGNED_MEMORY(67, ADDRESS_ONLY, UnaryWordOperation.RIGHT_SHIFT_SIGNED, DestinationOperand.NOTEBOOK),
+    RIGHT_SHIFT_SIGNED_INDIRECT(68, NEITHER, UnaryWordOperation.RIGHT_SHIFT_SIGNED, DestinationOperand.WORKSHEET_INDIRECT),
     //arithmetic
-    INCREMENT_REGISTER(70, NEITHER, UnaryWordOperation.INCREMENT, DestinationOperand.REGISTER),
-    INCREMENT_MEMORY(71, ADDRESS_ONLY, UnaryWordOperation.INCREMENT, DestinationOperand.MEMORY),
-    INCREMENT_INDIRECT(72, NEITHER, UnaryWordOperation.INCREMENT, DestinationOperand.REGISER_INDIRECT),
-    DECREMENT_REGISTER(73, NEITHER, UnaryWordOperation.DECREMENT, DestinationOperand.REGISTER),
-    DECREMENT_MEMORY(74, ADDRESS_ONLY, UnaryWordOperation.DECREMENT, DestinationOperand.MEMORY),
-    DECREMENT_INDIRECT(75, NEITHER, UnaryWordOperation.DECREMENT, DestinationOperand.REGISER_INDIRECT),
-    NEGATE_REGISTER(76, NEITHER, UnaryWordOperation.NEGATE, DestinationOperand.REGISTER),
-    NEGATE_MEMORY(77, ADDRESS_ONLY, UnaryWordOperation.NEGATE, DestinationOperand.MEMORY),
-    NEGATE_INDIRECT(78, NEITHER, UnaryWordOperation.NEGATE, DestinationOperand.REGISER_INDIRECT),
-    ADD_IMMEDIATE_TO_REGISTER(80, NEITHER, BinaryWordOperation.ADD, IMMEDIATE, DestinationOperand.REGISTER),
-    ADD_MEMORY_TO_REGISTER(81, ADDRESS_ONLY, BinaryWordOperation.ADD, MEMORY, DestinationOperand.REGISTER),
-    ADD_IMMEDIATE_TO_MEMORY(82, ADDRESS_ONLY, BinaryWordOperation.ADD, IMMEDIATE, DestinationOperand.MEMORY),
-    ADD_REGISTER_TO_MEMORY(83, ADDRESS_ONLY, BinaryWordOperation.ADD, REGISTER, DestinationOperand.MEMORY),
-    SUBTRACT_IMMEDIATE_FROM_REGISTER(85, NEITHER, BinaryWordOperation.SUBTRACT, IMMEDIATE, DestinationOperand.REGISTER),
-    SUBTRACT_MEMORY_FROM_REGISTER(86, ADDRESS_ONLY, BinaryWordOperation.SUBTRACT, MEMORY, DestinationOperand.REGISTER),
-    SUBTRACT_IMMEDIATE_FROM_MEMORY(87, ADDRESS_ONLY, BinaryWordOperation.SUBTRACT, IMMEDIATE, DestinationOperand.MEMORY),
-    SUBTRACT_REGISTER_FROM_MEMORY(88, ADDRESS_ONLY, BinaryWordOperation.SUBTRACT, REGISTER, DestinationOperand.MEMORY);
+    INCREMENT_REGISTER(70, NEITHER, UnaryWordOperation.INCREMENT, DestinationOperand.WORKSHEET),
+    INCREMENT_MEMORY(71, ADDRESS_ONLY, UnaryWordOperation.INCREMENT, DestinationOperand.NOTEBOOK),
+    INCREMENT_INDIRECT(72, NEITHER, UnaryWordOperation.INCREMENT, DestinationOperand.WORKSHEET_INDIRECT),
+    DECREMENT_REGISTER(73, NEITHER, UnaryWordOperation.DECREMENT, DestinationOperand.WORKSHEET),
+    DECREMENT_MEMORY(74, ADDRESS_ONLY, UnaryWordOperation.DECREMENT, DestinationOperand.NOTEBOOK),
+    DECREMENT_INDIRECT(75, NEITHER, UnaryWordOperation.DECREMENT, DestinationOperand.WORKSHEET_INDIRECT),
+    NEGATE_REGISTER(76, NEITHER, UnaryWordOperation.NEGATE, DestinationOperand.WORKSHEET),
+    NEGATE_MEMORY(77, ADDRESS_ONLY, UnaryWordOperation.NEGATE, DestinationOperand.NOTEBOOK),
+    NEGATE_INDIRECT(78, NEITHER, UnaryWordOperation.NEGATE, DestinationOperand.WORKSHEET_INDIRECT),
+    ADD_IMMEDIATE_TO_REGISTER(80, NEITHER, BinaryWordOperation.ADD, IMMEDIATE, DestinationOperand.WORKSHEET),
+    ADD_MEMORY_TO_REGISTER(81, ADDRESS_ONLY, BinaryWordOperation.ADD, MEMORY, DestinationOperand.WORKSHEET),
+    ADD_IMMEDIATE_TO_MEMORY(82, ADDRESS_ONLY, BinaryWordOperation.ADD, IMMEDIATE, DestinationOperand.NOTEBOOK),
+    ADD_REGISTER_TO_MEMORY(83, ADDRESS_ONLY, BinaryWordOperation.ADD, REGISTER, DestinationOperand.NOTEBOOK),
+    SUBTRACT_IMMEDIATE_FROM_REGISTER(85, NEITHER, BinaryWordOperation.SUBTRACT, IMMEDIATE, DestinationOperand.WORKSHEET),
+    SUBTRACT_MEMORY_FROM_REGISTER(86, ADDRESS_ONLY, BinaryWordOperation.SUBTRACT, MEMORY, DestinationOperand.WORKSHEET),
+    SUBTRACT_IMMEDIATE_FROM_MEMORY(87, ADDRESS_ONLY, BinaryWordOperation.SUBTRACT, IMMEDIATE, DestinationOperand.NOTEBOOK),
+    SUBTRACT_REGISTER_FROM_MEMORY(88, ADDRESS_ONLY, BinaryWordOperation.SUBTRACT, REGISTER, DestinationOperand.NOTEBOOK);
     static private final Map<Word, InstructionFromSet> instructionMap = new HashMap<>();
     private static EnumMap<InstructionFromSet, String> instructionDescriptions;
     private static EnumMap<InstructionFromSet, String> instructionDetails;
@@ -191,7 +191,7 @@ public enum InstructionFromSet {
                 .append("<td>").append("Takes data operand: ").append("</td>").append("<td>").append(instructionFromSet.instruction.isDataOperandNeeded() ? "yes" : "no").append("</td>").append("\n")
                 .append("</tr>")
                 .append("<tr>")
-                .append("<td>").append("     Takes address operand: ").append("</td>").append("<td>").append(instructionFromSet.instruction.isAddressOperandNeeded() ? "yes" : "no").append("</td>").append("\n")
+                .append("<td>").append("     Takes address operand: ").append("</td>").append("<td>").append(instructionFromSet.instruction.isPageNumberOperandNeeded() ? "yes" : "no").append("</td>").append("\n")
                 .append("</tr>")
                 .append("</table></html>");
         return descriptionBuilder.toString();
