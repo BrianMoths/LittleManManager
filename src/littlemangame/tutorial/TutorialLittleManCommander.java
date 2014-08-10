@@ -5,7 +5,7 @@
  */
 package littlemangame.tutorial;
 
-import littlemangame.genericLittleMan.GenericLittleManCommander;
+import littlemangame.littlemancommands.GenericLittleManCommander;
 import littlemangame.tutorial.gui.TutorialOfficeView;
 
 /**
@@ -24,6 +24,26 @@ public class TutorialLittleManCommander extends GenericLittleManCommander<Tutori
 
     public TutorialLittleManCommander(TutorialComputer computer) {
         super(new TutorialLittleMan(computer));
+    }
+
+    public void setIsWorksheetArrowShown(boolean isArrowShown) {
+        getLittleMan().setIsWorksheetArrowShown(isArrowShown);
+    }
+
+    public void setIsNotebookArrowShown(boolean isArrowShown) {
+        getLittleMan().setIsNotebookArrowShown(isArrowShown);
+    }
+
+    public void setIsNotebookPageSheetArrowShown(boolean isArrowShown) {
+        getLittleMan().setIsNotebookPageSheetArrowShown(isArrowShown);
+    }
+
+    public void setIsInputPanelArrowShown(boolean isArrowShown) {
+        getLittleMan().setIsInputPanelArrowShown(isArrowShown);
+    }
+
+    public void setIsOutputPanelArrowShown(boolean isArrowShown) {
+        getLittleMan().setIsOutputPanelArrowShown(isArrowShown);
     }
 
 }

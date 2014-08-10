@@ -6,7 +6,7 @@
 package littlemangame.tutorial;
 
 import java.awt.Graphics;
-import littlemangame.computer.Notebook;
+import littlemangame.computer.computercomponents.Notebook;
 
 /**
  *

@@ -15,10 +15,10 @@ import java.awt.Graphics;
 public class IndicatorArrow implements Drawable {
 
     static private final int arrowheadSmallnesFactor = 3;
-    private final int tailX;
-    private final int tailY;
-    private final int headX;
-    private final int headY;
+    private int tailX;
+    private int tailY;
+    private int headX;
+    private int headY;
 
     public IndicatorArrow(int tailX, int tailY, int headX, int headY) {
         this.tailX = tailX;
@@ -58,6 +58,22 @@ public class IndicatorArrow implements Drawable {
         final int arrowHeadY = headY + displacementY - displacementX;
 
         graphics.drawLine(arrowHeadX, arrowHeadY, headX, headY);
+    }
+
+    public void setTailX(int tailX) {
+        this.tailX = tailX;
+    }
+
+    public void setTailY(int tailY) {
+        this.tailY = tailY;
+    }
+
+    public void setHeadX(int headX) {
+        this.headX = headX;
+    }
+
+    public void setHeadY(int headY) {
+        this.headY = headY;
     }
 
 }

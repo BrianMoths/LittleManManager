@@ -8,7 +8,7 @@ package littlemangame.tutorial;
 import Renderer.Drawable;
 import java.awt.Graphics;
 import java.awt.Point;
-import littlemangame.computer.InputPanel;
+import littlemangame.computer.computercomponents.InputPanel;
 
 /**
  *
@@ -22,13 +22,21 @@ public class TutorialInputPanel extends InputPanel implements Drawable {
 
     public TutorialInputPanel() {
         super();
+        indicatorArrow = new IndicatorArrow(0, 0, 0, 0);
+    }
+
+    private void resetArrowPosition() {
         Point accessPoint = getAccessLocation();
-        indicatorArrow = new IndicatorArrow(accessPoint.x + arrowLength, accessPoint.y, accessPoint.x, accessPoint.y);
+        indicatorArrow.setHeadX(accessPoint.x);
+        indicatorArrow.setHeadY(accessPoint.y);
+        indicatorArrow.setTailX(accessPoint.x + arrowLength);
+        indicatorArrow.setTailY(accessPoint.y);
     }
 
     @Override
     public void draw(Graphics graphics) {
         if (isArrowShown) {
+            resetArrowPosition();
             indicatorArrow.draw(graphics);
         }
     }

@@ -5,7 +5,7 @@
  */
 package littlemangame.tutorial.gui;
 
-import javax.swing.JTextArea;
+import java.awt.event.ActionListener;
 import littlemangame.notebookdeveloper.submissioncontrols.SubmissionControlGui;
 
 /**
@@ -14,20 +14,38 @@ import littlemangame.notebookdeveloper.submissioncontrols.SubmissionControlGui;
  */
 public class SubmissionControllerTutorialGui extends SubmissionControlGui {
 
-    private final JTextArea jTextArea;
+    private final TutorialDialogue tutorialDialogue;
 
     /**
      * Creates new form SubmissionControllerTutorialGui
      */
     public SubmissionControllerTutorialGui() {
         super();
-        jTextArea = new JTextArea();
-        getBaseLayeredPane().add(jTextArea);
-        //        initComponents();
+        tutorialDialogue = new TutorialDialogue();
+        replaceDummyPanel(tutorialDialogue);
+    }
+
+    @Override
+    protected void hidePanels() {
+        super.hidePanels();
+        tutorialDialogue.setVisible(false);
+    }
+
+    public void showDialoguePanel() {
+        hidePanels();
+        tutorialDialogue.setVisible(true);
     }
 
     public void printDialogue(String message) {
-        jTextArea.append(message);
+        tutorialDialogue.setText(message);
+    }
+
+    public void addActionListener(ActionListener l) {
+        tutorialDialogue.addActionListener(l);
+    }
+
+    public void removeActionListener(ActionListener l) {
+        tutorialDialogue.removeActionListener(l);
     }
 
     /**

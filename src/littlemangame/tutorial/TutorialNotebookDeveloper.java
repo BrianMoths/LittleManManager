@@ -18,4 +18,24 @@ public class TutorialNotebookDeveloper extends GenericNotebookDeveloper<Tutorial
         super(tutorialOfficeView, new TutorialLittleManCommander(tutorialOfficeView));
     }
 
+    public void setIsWorksheetArrowShown(boolean isArrowShown) {
+        getLittleManComander().setIsWorksheetArrowShown(isArrowShown);
+    }
+
+    public void setIsNotebookArrowShown(boolean isArrowShown) {
+        getLittleManComander().setIsNotebookArrowShown(isArrowShown);
+    }
+
+    public void setIsNotebookPageSheetArrowShown(boolean isArrowShown) {
+        getLittleManComander().setIsNotebookPageSheetArrowShown(isArrowShown);
+    }
+
+    public void setIsInputPanelArrowShown(boolean isArrowShown) {
+        getLittleManComander().setIsInputPanelArrowShown(isArrowShown);
+    }
+
+    public void setIsOutputPanelArrowShown(boolean isArrowShown) {
+        getLittleManComander().setIsOutputPanelArrowShown(isArrowShown);
+    }
+
 }

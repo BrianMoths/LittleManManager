@@ -5,7 +5,7 @@
  */
 package littlemangame.tutorial;
 
-import littlemangame.genericLittleMan.GenericLittleMan;
+import littlemangame.littleman.GenericLittleMan;
 import littlemangame.littleman.PositionGetterAdapter;
 
 /**
@@ -20,6 +20,26 @@ public class TutorialLittleMan extends GenericLittleMan<TutorialLittleManData> {
 
     private TutorialLittleMan(TutorialComputer computer, PositionGetterAdapter positionGetterAdapter) {
         super(new TutorialLittleManData(computer, positionGetterAdapter), positionGetterAdapter);
+    }
+
+    public void setIsWorksheetArrowShown(boolean isArrowShown) {
+        getLittleManData().setIsWorksheetArrowShown(isArrowShown);
+    }
+
+    public void setIsNotebookArrowShown(boolean isArrowShown) {
+        getLittleManData().setIsNotebookArrowShown(isArrowShown);
+    }
+
+    public void setIsNotebookPageSheetArrowShown(boolean isArrowShown) {
+        getLittleManData().setIsNotebookPageSheetArrowShown(isArrowShown);
+    }
+
+    public void setIsInputPanelArrowShown(boolean isArrowShown) {
+        getLittleManData().setIsInputPanelArrowShown(isArrowShown);
+    }
+
+    public void setIsOutputPanelArrowShown(boolean isArrowShown) {
+        getLittleManData().setIsOutputPanelArrowShown(isArrowShown);
     }
 
 }
