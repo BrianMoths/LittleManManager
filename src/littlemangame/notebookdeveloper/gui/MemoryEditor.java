@@ -15,7 +15,7 @@ import java.util.Iterator;
 import java.util.List;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
-import littlemangame.computer.Notebook;
+import littlemangame.computer.computercomponents.Notebook;
 import littlemangame.instructions.InstructionFromSet;
 import littlemangame.word.Word;
 
@@ -126,7 +126,7 @@ public class MemoryEditor extends javax.swing.JFrame {
         Iterator<Word> wordIterator = Word.getIterator();
         while (wordIterator.hasNext()) {
             final Word word = wordIterator.next();
-            memory.setMemoryAtPage(word, memorySlotChoosers.get(word.getUnsignedValue()).getSelectedWord());
+            memory.setWordAtPage(word, memorySlotChoosers.get(word.getUnsignedValue()).getSelectedWord());
         }
         return memory;
     }
@@ -136,7 +136,7 @@ public class MemoryEditor extends javax.swing.JFrame {
         while (wordIterator.hasNext()) {
             final Word word = wordIterator.next();
             MemorySlotChooser memorySlotChooser = memorySlotChoosers.get(word.getUnsignedValue());
-            memorySlotChooser.setSelectedWord(memory.getMemory(word).getWord());
+            memorySlotChooser.setSelectedWord(memory.getWordOnPage(word));
         }
     }
 
@@ -177,6 +177,10 @@ public class MemoryEditor extends javax.swing.JFrame {
         });
     }
 
+    public void setProblemDescription(String problemDescription) {
+        problemDescriptionTextArea.setText(problemDescription);
+    }
+
     /**
      * This method is called from within the constructor to
      * initialize the form.
@@ -193,6 +197,8 @@ public class MemoryEditor extends javax.swing.JFrame {
         saveButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         instructionDescriptionTree = new javax.swing.JTree();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        problemDescriptionTextArea = new javax.swing.JTextArea();
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -248,6 +254,13 @@ public class MemoryEditor extends javax.swing.JFrame {
         instructionDescriptionTree.setShowsRootHandles(true);
         jScrollPane2.setViewportView(instructionDescriptionTree);
 
+        problemDescriptionTextArea.setEditable(false);
+        problemDescriptionTextArea.setColumns(20);
+        problemDescriptionTextArea.setLineWrap(true);
+        problemDescriptionTextArea.setRows(5);
+        problemDescriptionTextArea.setWrapStyleWord(true);
+        jScrollPane3.setViewportView(problemDescriptionTextArea);
+
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
@@ -258,15 +271,20 @@ public class MemoryEditor extends javax.swing.JFrame {
                     .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainPanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(mainPanelLayout.createSequentialGroup()
+                        .addComponent(jScrollPane3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
@@ -331,7 +349,9 @@ public class MemoryEditor extends javax.swing.JFrame {
     private javax.swing.JTree instructionDescriptionTree;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JTextArea problemDescriptionTextArea;
     private javax.swing.JButton saveButton;
     private javax.swing.JPanel scrollPanePanel;
     // End of variables declaration//GEN-END:variables

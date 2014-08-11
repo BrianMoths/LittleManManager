@@ -6,13 +6,16 @@
 package littlemangame.notebookdeveloper.gui;
 
 import java.awt.GridLayout;
-import littlemangame.computer.InputPanel;
-import littlemangame.computer.OutputPanel;
-import littlemangame.genericLittleMan.GenericLittleManCommander;
+import java.awt.Point;
+import littlemangame.computer.computercomponents.InputPanel;
+import littlemangame.computer.computercomponents.OutputPanel;
+import littlemangame.littlemancommands.GenericLittleManCommander;
 
 /**
  *
  * @author brian
+ * @param <T>
+ * @param <U>
  */
 public class GenericOfficeView<T extends InputPanel, U extends OutputPanel>
         extends javax.swing.JPanel {
@@ -24,15 +27,22 @@ public class GenericOfficeView<T extends InputPanel, U extends OutputPanel>
      * Creates new form OfficeView
      *
      * @param inputPanel
+     * @param outputPanel
      */
     public GenericOfficeView(T inputPanel, U outputPanel) {
         initComponents();
+        gameCanvas.doLayout();
+        doLayout();
         this.inputPanel = inputPanel;
         inputPanelHolder.setLayout(new GridLayout());
         inputPanelHolder.add(inputPanel);
+        final Point inputPanelLocation = inputPanelHolder.getLocation();
+        inputPanel.setAnchorPoint(inputPanelLocation);
         this.outputPanel = outputPanel;
         outputPanelHolder.setLayout(new GridLayout());
         outputPanelHolder.add(outputPanel);
+        final Point outputPanelLocation = outputPanelHolder.getLocation();
+        outputPanel.setAnchorPoint(outputPanelLocation);
     }
 
     public T getInputPanel() {
@@ -101,7 +111,7 @@ public class GenericOfficeView<T extends InputPanel, U extends OutputPanel>
                 .addComponent(outputPanelHolder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(inputPanelHolder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(171, Short.MAX_VALUE))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -114,7 +124,7 @@ public class GenericOfficeView<T extends InputPanel, U extends OutputPanel>
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 510, Short.MAX_VALUE)
+            .addGap(0, 440, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(gameCanvas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );

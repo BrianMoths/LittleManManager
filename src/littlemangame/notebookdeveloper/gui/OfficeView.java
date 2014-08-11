@@ -5,8 +5,8 @@
  */
 package littlemangame.notebookdeveloper.gui;
 
-import littlemangame.computer.InputPanel;
-import littlemangame.computer.OutputPanel;
+import littlemangame.computer.computercomponents.InputPanel;
+import littlemangame.computer.computercomponents.OutputPanel;
 
 /**
  *
