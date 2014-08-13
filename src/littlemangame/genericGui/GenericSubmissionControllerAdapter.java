@@ -7,9 +7,8 @@ package littlemangame.genericGui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import littlemangame.genericLittleMan.GenericNotebookDeveloper;
+import littlemangame.notebookdeveloper.GenericNotebookDeveloper;
 import littlemangame.notebookdeveloper.gui.MemoryEditor;
-import littlemangame.notebookdeveloper.gui.ProblemDescriptionWindow;
 import littlemangame.notebookdeveloper.speedcontroller.SpeedController;
 import littlemangame.notebookdeveloper.submissioncontrols.SubmissionControlGui;
 
@@ -25,7 +24,6 @@ public class GenericSubmissionControllerAdapter<T extends SubmissionControlGui, 
     protected final T submissionControlGui;
     private final MemoryEditor memoryEditor;
     private final SpeedController speedController;
-    private final ProblemDescriptionWindow problemDescriptionWindow;
 
     public GenericSubmissionControllerAdapter(U notebookDeveloper, T submissionControlGui) {
         this.notebookDeveloper = notebookDeveloper;
@@ -33,20 +31,16 @@ public class GenericSubmissionControllerAdapter<T extends SubmissionControlGui, 
         speedController = new SpeedController(submissionControlGui.getSpeedControllerGui());
         memoryEditor = new MemoryEditor();
         memoryEditor.setVisible(false);
-        problemDescriptionWindow = new ProblemDescriptionWindow();
         hookIntoGui();
         hookIntoMemoryEditor();
-        hookIntoProblemDescriptionWindow();
     }
 
-//    public GenericSubmissionControllerAdapter(NotebookDeveloperGui<? extends T> notebookDeveloperGui) {
-//        this(new GenericNotebookDeveloper(notebookDeveloperGui.getOfficeView()), notebookDeveloperGui.getSubmissionControlGui());
-//    }
     private void hookIntoGui() {
-        submissionControlGui.setEditAction(new ActionListener() {
+        submissionControlGui.setEditMemoryAction(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                memoryEditor.setProblemDescription(notebookDeveloper.getCurrentProblemDescription());
                 openMemoryEditor();
                 respondToEditEvent(true);
             }
@@ -70,21 +64,12 @@ public class GenericSubmissionControllerAdapter<T extends SubmissionControlGui, 
             }
 
         });
-        submissionControlGui.setObjectiveAction(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                problemDescriptionWindow.setProblemDescription(notebookDeveloper.getCurrentProblemDescription());
-                problemDescriptionWindow.showProblemDescription();
-                respondToObjectiveEvent(true);
-            }
-
-        });
         speedController.setEndTestActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 submissionControlGui.showSubmissionPanel();
+                notebookDeveloper.endTest();
             }
 
         });
@@ -95,20 +80,8 @@ public class GenericSubmissionControllerAdapter<T extends SubmissionControlGui, 
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                notebookDeveloper.setMemory(memoryEditor.getMemory());
+                notebookDeveloper.setMemory(memoryEditor.getNotebook());
                 respondToEditEvent(false);
-            }
-
-        });
-    }
-
-    private void hookIntoProblemDescriptionWindow() {
-        problemDescriptionWindow.addOkButtonListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                problemDescriptionWindow.setVisible(false);
-                respondToObjectiveEvent(false);
             }
 
         });
@@ -118,10 +91,6 @@ public class GenericSubmissionControllerAdapter<T extends SubmissionControlGui, 
         submissionControlGui.setEditMemoryEnabled(!isEditing);
         submissionControlGui.setSubmitButtonEnabled(!isEditing);
         submissionControlGui.setTestButtonEnabled(!isEditing);
-    }
-
-    private void respondToObjectiveEvent(boolean isObjectiveShowing) {
-        submissionControlGui.setObjectiveButtonEnabled(!isObjectiveShowing);
     }
 
     private void openMemoryEditor() {
@@ -143,6 +112,10 @@ public class GenericSubmissionControllerAdapter<T extends SubmissionControlGui, 
 
     public void doFrames() {
         notebookDeveloper.doFrames(speedController.getCurrentSpeed());
+    }
+
+    protected final U getNotebookDeveloper() {
+        return notebookDeveloper;
     }
 
 }
