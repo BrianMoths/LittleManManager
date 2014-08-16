@@ -21,29 +21,54 @@ import littlemangame.notebookdeveloper.gui.GenericOfficeView;
 public class GenericNotebookDeveloper<T extends GenericLittleManCommander<?>> {
 
     private final T littleManCommander;
-    private final Notebook memory;
+    private final Notebook notebook;
     private final NotebookProblemSet notebookVerifier;
 
+    /**
+     * constructs a notebook developer to be shown in the given office view, and
+     * to command the given little man commnader.
+     *
+     * @param officeView the office view in which to show this notebook
+     * developer
+     * @param littleManCommander the little man commander used for testing
+     * pruposes by this little man commander
+     */
     public GenericNotebookDeveloper(GenericOfficeView<?, ?> officeView, T littleManCommander) {
         this.littleManCommander = littleManCommander;
         officeView.registerLittleManCommander(littleManCommander);
-        memory = new Notebook();
+        notebook = new Notebook();
         notebookVerifier = NotebookProblemSet.makeDefaultNotebookProblemSet();
         notebookVerifier.beginNextProblem();
     }
 
+    /**
+     * this notebook developer makes the little man commander to the given
+     * number of cycles.
+     *
+     * @param numFrames the number of cycles for the little man commander to do.
+     */
     public void doFrames(int numFrames) {
         for (int i = 0; i < numFrames; i++) {
             littleManCommander.doCycle();
         }
     }
 
+    /**
+     * ends the little man commnander's test of the notebook.
+     */
     public void endTest() {
         littleManCommander.reset();
     }
 
-    public String submitMemory() {
-        final boolean isCorrect = notebookVerifier.verifyNotebook(memory);
+    /**
+     * submits this notebook developer's notebook for verification. Returns a
+     * string explaining why the notebook is wrong or a message saying the
+     * notebook is correct.
+     *
+     * @return a string explaining if the notebook submitted was correct or not
+     */
+    public String submitNotebookSolutionAttempt() {
+        final boolean isCorrect = notebookVerifier.verifyNotebook(notebook);
         final StringBuilder resultStringBuilder = new StringBuilder();
         resultStringBuilder.append(notebookVerifier.getMessageFromLastTest());
         if (isCorrect) {
@@ -56,18 +81,36 @@ public class GenericNotebookDeveloper<T extends GenericLittleManCommander<?>> {
         return resultStringBuilder.toString();
     }
 
+    /**
+     * returns a description of the current notebook development problem
+     *
+     * @return a description of the current notebook development problem
+     */
     public String getCurrentProblemDescription() {
         return notebookVerifier.getCurrentProblemDescription();
     }
 
-    public Notebook getNotebook() {
-        return new Notebook(memory);
+    /**
+     * returns a copy of the notebook solution attempt currently held by this
+     * notebook developer
+     *
+     * @return a copy of the notebook solution attempt currently held by this
+     * notebook developer
+     */
+    public Notebook getNotebookSolutionAttempt() {
+        return new Notebook(notebook);
     }
 
-    public void setNotebook(Notebook memory) {
-        this.memory.loadCopyOfNotebook(memory);
+    /**
+     * set the notebook solution attempt for this notebook developer.
+     *
+     * @param notebook the notebook solution attempt for this notebook
+     * developer.
+     */
+    public void setNotebookSolutionAttempt(Notebook notebook) {
+        this.notebook.loadCopyOfNotebook(notebook);
         littleManCommander.reset();
-        littleManCommander.loadCopyOfMemory(memory);
+        littleManCommander.loadCopyOfNotebook(notebook);
     }
 
     protected final T getLittleManComander() {
