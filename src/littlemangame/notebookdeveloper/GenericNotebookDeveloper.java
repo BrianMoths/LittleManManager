@@ -15,6 +15,12 @@ import littlemangame.notebookdeveloper.gui.GenericOfficeView;
  * little man commander as he does the instructions in the notebook given as an
  * attempt to solve the problem.
  *
+ * This class has a method to accept a notebook. Once a notebook is accepted,
+ * that notebook can be tested by running the little man commander
+ * associated with the notebook developer through this classes doFrames method.
+ * In addition to testing to the notebook, it is possible to check if the
+ * notebook is a solution to the problem through the submitNotebook method.
+ *
  * @author brian
  * @param <T>
  */
