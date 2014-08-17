@@ -6,7 +6,7 @@
 package littlemangame.tutorial.gui;
 
 import java.awt.event.ActionListener;
-import littlemangame.genericGui.GenericNotebookDeveloperGui;
+import littlemangame.notebookdeveloper.gui.GenericNotebookDeveloperGui;
 import littlemangame.tutorial.tutorialnotebookdeveloper.TutorialNotebookDeveloper;
 
 /**

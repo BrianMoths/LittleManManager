@@ -5,7 +5,6 @@
  */
 package littlemangame.notebookdeveloper.gui;
 
-import littlemangame.genericGui.GenericNotebookDeveloperGui;
 import littlemangame.notebookdeveloper.NotebookDeveloper;
 import littlemangame.notebookdeveloper.submissioncontrols.SubmissionControlGui;
 
