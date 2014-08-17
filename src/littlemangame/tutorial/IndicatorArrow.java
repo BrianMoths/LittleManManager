@@ -19,6 +19,7 @@ public class IndicatorArrow implements Drawable {
     private int tailY;
     private int headX;
     private int headY;
+    private int animationCounter = 0;
 
     public IndicatorArrow(int tailX, int tailY, int headX, int headY) {
         this.tailX = tailX;
@@ -29,9 +30,12 @@ public class IndicatorArrow implements Drawable {
 
     @Override
     public void draw(Graphics graphics) {
-        drawShaft(graphics);
-        drawFirstArrowhead(graphics);
-        drawSecondArrowhead(graphics);
+        animationCounter++;
+        if (animationCounter / 30 % 2 == 0) {
+            drawShaft(graphics);
+            drawFirstArrowhead(graphics);
+            drawSecondArrowhead(graphics);
+        }
     }
 
     private void drawShaft(Graphics graphics) {
