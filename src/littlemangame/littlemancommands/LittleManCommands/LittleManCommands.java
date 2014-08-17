@@ -109,8 +109,7 @@ public class LittleManCommands {
     private static final LittleManAction printUnsignedToOutputPanelAction = new LittleManAction() {
         @Override
         public boolean doAction(GenericLittleMan<?> littleMan) {
-            littleMan.printUnsignedToOutputPanel();
-            return true;
+            return littleMan.printUnsignedToOutputPanel();
         }
 
     };
@@ -146,8 +145,7 @@ public class LittleManCommands {
         return new LittleManAction() {
             @Override
             public boolean doAction(GenericLittleMan<?> littleMan) {
-                littleMan.doBinaryOperationOnContainer(littleManWordContainer, binaryWordOperation);
-                return true;
+                return littleMan.doBinaryOperationOnContainer(littleManWordContainer, binaryWordOperation);
             }
 
         };
@@ -186,8 +184,7 @@ public class LittleManCommands {
         return new LittleManAction() {
             @Override
             public boolean doAction(GenericLittleMan<?> littleMan) {
-                littleMan.doUnaryOperationOnContainer(littleManWordContainer, unaryWordOperation);
-                return true;
+                return littleMan.doUnaryOperationOnContainer(littleManWordContainer, unaryWordOperation);
             }
 
         };
@@ -222,8 +219,7 @@ public class LittleManCommands {
         return new LittleManAction() {
             @Override
             public boolean doAction(GenericLittleMan<?> littleMan) {
-                littleMan.memorizePageNumberAtContainer(littleManWordContainer);
-                return true;
+                return littleMan.memorizePageNumberAtContainer(littleManWordContainer);
             }
 
         };
@@ -246,8 +242,7 @@ public class LittleManCommands {
         return new LittleManAction() {
             @Override
             public boolean doAction(GenericLittleMan<?> littleMan) {
-                littleMan.memorizeDataAtContainer(littleManWordContainer);
-                return true;
+                return littleMan.memorizeDataAtContainer(littleManWordContainer);
             }
 
         };

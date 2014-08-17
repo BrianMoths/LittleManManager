@@ -15,11 +15,18 @@ import littlemangame.word.Word;
  */
 public class OutputPanel extends javax.swing.JPanel implements OfficeOutputter {
 
+    private Point anchorPoint;
+
     /**
      * Creates new form OutputPanel. The output panel is initially blank.
      */
     public OutputPanel() {
         initComponents();
+        anchorPoint = new Point(0, 0);
+    }
+
+    public void setAnchorPoint(Point anchorPoint) {
+        this.anchorPoint = new Point(anchorPoint);
     }
 
     private void append(String str) {
@@ -43,8 +50,8 @@ public class OutputPanel extends javax.swing.JPanel implements OfficeOutputter {
 
     @Override
     public Point getAccessLocation() {
-        final int x = getX() + getWidth() + 4;
-        final int y = getY() + getHeight() / 2;
+        final int x = anchorPoint.x + getX() + getWidth() + 4;
+        final int y = anchorPoint.y + getY() + getHeight() / 2;
 //        final int x = getX() + getPreferredSize().width + 4 + 10;
 //        final int y = getY() + getPreferredSize().height / 3;
 //        return SwingUtilities.convertPoint(null, x, y, this);

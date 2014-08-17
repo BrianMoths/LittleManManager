@@ -6,8 +6,8 @@
 package littlemangame.tutorial.gui;
 
 import littlemangame.notebookdeveloper.gui.GenericOfficeView;
-import littlemangame.tutorial.TutorialInputPanel;
-import littlemangame.tutorial.TutorialOutputPanel;
+import littlemangame.tutorial.tutorialoffice.components.TutorialInputPanel;
+import littlemangame.tutorial.tutorialoffice.components.TutorialOutputPanel;
 
 /**
  *

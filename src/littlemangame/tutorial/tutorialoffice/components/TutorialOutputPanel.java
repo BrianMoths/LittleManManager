@@ -3,30 +3,40 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package littlemangame.tutorial;
+package littlemangame.tutorial.tutorialoffice.components;
 
+import Renderer.Drawable;
 import java.awt.Graphics;
-import littlemangame.computer.computercomponents.Worksheet;
+import java.awt.Point;
+import littlemangame.computer.computercomponents.OutputPanel;
 
 /**
  *
  * @author brian
  */
-public class TutorialRegister extends Worksheet {
+public class TutorialOutputPanel extends OutputPanel implements Drawable {
 
     static private final int arrowLength = 30;
     private boolean isArrowShown = false;
     private final IndicatorArrow indicatorArrow;
 
-    public TutorialRegister() {
+    public TutorialOutputPanel() {
         super();
-        indicatorArrow = new IndicatorArrow(xPosition + width / 2 - 2, yPosition - arrowLength - 3, xPosition + width / 2 - 2, yPosition - 3);
+        indicatorArrow = new IndicatorArrow(0, 0, 0, 0);
+    }
+
+    private void resetArrowPosition() {
+        Point accessPoint = getAccessLocation();
+        indicatorArrow.setHeadX(accessPoint.x);
+        indicatorArrow.setHeadY(accessPoint.y);
+        indicatorArrow.setTailX(accessPoint.x + arrowLength);
+        indicatorArrow.setTailY(accessPoint.y);
     }
 
     @Override
     public void draw(Graphics graphics) {
-        super.draw(graphics); //To change body of generated methods, choose Tools | Templates.
         if (isArrowShown) {
+            resetArrowPosition();
             indicatorArrow.draw(graphics);
         }
     }

@@ -3,22 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package littlemangame.tutorial;
+package littlemangame.tutorial.tutorialoffice.components;
 
 import java.awt.Graphics;
-import littlemangame.computer.computercomponents.NotebookPageSheet;
+import littlemangame.computer.computercomponents.Worksheet;
 
-/**
- *
- * @author brian
- */
-public class TutorialInstructionPointer extends NotebookPageSheet {
+public class TutorialRegister extends Worksheet {
 
     static private final int arrowLength = 30;
     private boolean isArrowShown = false;
     private final IndicatorArrow indicatorArrow;
 
-    public TutorialInstructionPointer() {
+    public TutorialRegister() {
         super();
         indicatorArrow = new IndicatorArrow(xPosition + width / 2 - 2, yPosition - arrowLength - 3, xPosition + width / 2 - 2, yPosition - 3);
     }

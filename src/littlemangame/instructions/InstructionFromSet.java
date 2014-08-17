@@ -90,13 +90,13 @@ public enum InstructionFromSet {
     NEGATE_REGISTER(76, NEITHER, UnaryWordOperation.NEGATE, DestinationOperand.WORKSHEET),
     NEGATE_MEMORY(77, PAGE_NUMBER_ONLY, UnaryWordOperation.NEGATE, DestinationOperand.NOTEBOOK),
     NEGATE_INDIRECT(78, NEITHER, UnaryWordOperation.NEGATE, DestinationOperand.WORKSHEET_INDIRECT),
-    ADD_IMMEDIATE_TO_REGISTER(80, NEITHER, BinaryWordOperation.ADD, IMMEDIATE, DestinationOperand.WORKSHEET),
+    ADD_IMMEDIATE_TO_REGISTER(80, DATA_ONLY, BinaryWordOperation.ADD, IMMEDIATE, DestinationOperand.WORKSHEET),
     ADD_MEMORY_TO_REGISTER(81, PAGE_NUMBER_ONLY, BinaryWordOperation.ADD, MEMORY, DestinationOperand.WORKSHEET),
-    ADD_IMMEDIATE_TO_MEMORY(82, PAGE_NUMBER_ONLY, BinaryWordOperation.ADD, IMMEDIATE, DestinationOperand.NOTEBOOK),
+    ADD_IMMEDIATE_TO_MEMORY(82, BOTH, BinaryWordOperation.ADD, IMMEDIATE, DestinationOperand.NOTEBOOK),
     ADD_REGISTER_TO_MEMORY(83, PAGE_NUMBER_ONLY, BinaryWordOperation.ADD, REGISTER, DestinationOperand.NOTEBOOK),
-    SUBTRACT_IMMEDIATE_FROM_REGISTER(85, NEITHER, BinaryWordOperation.SUBTRACT, IMMEDIATE, DestinationOperand.WORKSHEET),
+    SUBTRACT_IMMEDIATE_FROM_REGISTER(85, DATA_ONLY, BinaryWordOperation.SUBTRACT, IMMEDIATE, DestinationOperand.WORKSHEET),
     SUBTRACT_MEMORY_FROM_REGISTER(86, PAGE_NUMBER_ONLY, BinaryWordOperation.SUBTRACT, MEMORY, DestinationOperand.WORKSHEET),
-    SUBTRACT_IMMEDIATE_FROM_MEMORY(87, PAGE_NUMBER_ONLY, BinaryWordOperation.SUBTRACT, IMMEDIATE, DestinationOperand.NOTEBOOK),
+    SUBTRACT_IMMEDIATE_FROM_MEMORY(87, BOTH, BinaryWordOperation.SUBTRACT, IMMEDIATE, DestinationOperand.NOTEBOOK),
     SUBTRACT_REGISTER_FROM_MEMORY(88, PAGE_NUMBER_ONLY, BinaryWordOperation.SUBTRACT, REGISTER, DestinationOperand.NOTEBOOK);
     static private final Map<Word, InstructionFromSet> instructionMap = new HashMap<>();
     private static EnumMap<InstructionFromSet, String> instructionDescriptions;

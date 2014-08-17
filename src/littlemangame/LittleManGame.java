@@ -6,7 +6,9 @@ package littlemangame;
 
 import ListenerInputHandler.AbstractInputHandlerClient;
 import RealTimeGame.AbstractRealTimeGame;
-import littlemangame.tutorial.gui.SubmissionControllerTutorialAdapter;
+import littlemangame.notebookdeveloper.speedcontroller.SpeedController;
+import littlemangame.tutorial.tutorialnotebookdeveloper.TutorialNotebookDeveloper;
+import littlemangame.tutorial.TutorialDriver;
 import littlemangame.tutorial.gui.TutorialLittleManGui;
 
 /**
@@ -27,20 +29,43 @@ public class LittleManGame extends AbstractRealTimeGame<TutorialLittleManGui> {
         return new TutorialLittleManGui();
     }
 
-    private final SubmissionControllerTutorialAdapter submissionControllerAdapter;
+    private final TutorialDriver tutorialDriver;
+    private final TutorialNotebookDeveloper tutorialNotebookDeveloper;
+    private final SpeedController speedController;
 
     public LittleManGame() {
         super(new AbstractInputHandlerClient(), makeGamePanel());
-        submissionControllerAdapter = new SubmissionControllerTutorialAdapter(getGameGui().getNotebookDeveloperGui());
+        speedController = new SpeedController();
+        tutorialNotebookDeveloper = new TutorialNotebookDeveloper(getGameGui().getNotebookDeveloperGui().getOfficeView());
+        tutorialDriver = new TutorialDriver(tutorialNotebookDeveloper, getGameGui());
+//        submissionControllerAdapter = new SubmissionControllerTutorialAdapter(getGameGui().getNotebookDeveloperGui());
         init();
     }
 
     private void init() {
+        getGameGui().setNotebookDeveloper(tutorialNotebookDeveloper);
+        getGameGui().registerSpeedController(speedController);
+//        submissionControllerAdapter.setEditMemoryActionListener(new ActionListener() {
+//
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                getGameGui().setProblemDescription(submissionControllerAdapter.getProblemDescription());
+//            }
+//
+//        });
+//        getGameGui().setMemorySaveAction(new ActionListener() {
+//
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                submissionControllerAdapter.setNotebook(getGameGui().getNotebookEditorNotebook());
+//            }
+//
+//        });
     }
 
     @Override
     protected void doLogic() {
-        submissionControllerAdapter.doFrames();
+        tutorialDriver.doFrames(speedController.getCurrentSpeed());
     }
 
 }

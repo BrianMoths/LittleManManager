@@ -1,14 +1,12 @@
-clean up the notebook inputter interface. Think about the methods the interface itself needs and declare only those methods.
+think about office class and i/o
+remove getter from little man memory
+make most wordcontainer methods only package visible.
+make office word container not so ugly
+dry on little man data and io methods.
 
 add a cancel button for the memory editor.
 
 add a tutorial explaining how the little man works-
-
-explain notebook.
-explain output panel
-explain input panel
-explain page number sheet
-explain worksheet
 
 explain how little man works
 little man checks page number sheet
@@ -20,3 +18,5 @@ repeats
 explain how to actually write the notebook.
 
 add an introductory scene giving a story
+
+have memory editor and office view switch places instead of creating a new memory editor window

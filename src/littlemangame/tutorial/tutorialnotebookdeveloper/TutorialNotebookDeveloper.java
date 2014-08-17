@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package littlemangame.tutorial;
+package littlemangame.tutorial.tutorialnotebookdeveloper;
 
-import littlemangame.genericLittleMan.GenericNotebookDeveloper;
+import littlemangame.tutorial.tutoriallittlemancommands.TutorialLittleManCommander;
+import littlemangame.notebookdeveloper.GenericNotebookDeveloper;
 import littlemangame.tutorial.gui.TutorialOfficeView;
 
 /**
@@ -15,7 +16,7 @@ import littlemangame.tutorial.gui.TutorialOfficeView;
 public class TutorialNotebookDeveloper extends GenericNotebookDeveloper<TutorialLittleManCommander> {
 
     public TutorialNotebookDeveloper(TutorialOfficeView tutorialOfficeView) {
-        super(tutorialOfficeView, new TutorialLittleManCommander(tutorialOfficeView));
+        super(new TutorialLittleManCommander(tutorialOfficeView));
     }
 
     public void setIsWorksheetArrowShown(boolean isArrowShown) {

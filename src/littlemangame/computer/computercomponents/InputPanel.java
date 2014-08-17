@@ -18,6 +18,7 @@ public class InputPanel extends javax.swing.JPanel implements OfficeInputter {
 
     private Word value;
     private InputPanelState inputPanelState;
+    private Point anchorPoint;
 
     /**
      * Creates new InputPanel. The panel is initially in the disabled state as
@@ -27,6 +28,11 @@ public class InputPanel extends javax.swing.JPanel implements OfficeInputter {
         initComponents();
         wordSelector.setEditable(false);
         cancelInputRequest();
+        anchorPoint = new Point(0, 0);
+    }
+
+    public void setAnchorPoint(Point anchorPoint) {
+        this.anchorPoint = new Point(anchorPoint);
     }
 
     @Override
@@ -69,8 +75,8 @@ public class InputPanel extends javax.swing.JPanel implements OfficeInputter {
 
     @Override
     public Point getAccessLocation() {
-        final int x = getX() + getWidth() + 4;
-        final int y = getY() + getHeight() / 2;
+        final int x = anchorPoint.x + getX() + getWidth() + 4;
+        final int y = anchorPoint.y + getY() + getHeight() / 2;
         return new Point(x, y);
     }
 

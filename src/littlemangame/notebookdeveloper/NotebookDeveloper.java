@@ -5,9 +5,7 @@
  */
 package littlemangame.notebookdeveloper;
 
-import littlemangame.genericLittleMan.GenericNotebookDeveloper;
 import littlemangame.littlemancommands.LittleManCommander;
-import littlemangame.notebookdeveloper.gui.OfficeView;
 
 /**
  *
@@ -15,8 +13,8 @@ import littlemangame.notebookdeveloper.gui.OfficeView;
  */
 public class NotebookDeveloper extends GenericNotebookDeveloper<LittleManCommander> {
 
-    public NotebookDeveloper(OfficeView officeView) {
-        super(officeView, new LittleManCommander(officeView));
+    public NotebookDeveloper(LittleManCommander littleManCommander) {
+        super(littleManCommander);
     }
 
 }

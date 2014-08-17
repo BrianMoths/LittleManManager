@@ -6,19 +6,21 @@
 package littlemangame.notebookdeveloper.gui;
 
 import littlemangame.genericGui.GenericNotebookDeveloperGui;
+import littlemangame.notebookdeveloper.NotebookDeveloper;
 import littlemangame.notebookdeveloper.submissioncontrols.SubmissionControlGui;
 
 /**
  *
  * @author brian
  */
-public class BaseNotebookDeveloperGui extends GenericNotebookDeveloperGui<SubmissionControlGui, OfficeView> {
+public class BaseNotebookDeveloperGui extends GenericNotebookDeveloperGui<SubmissionControlGui<NotebookDeveloper>, OfficeView, NotebookDeveloper> {
 
     /**
      * Creates new form BaseNotebookDeveloperGui
+     *
      */
     public BaseNotebookDeveloperGui() {
-        super(new SubmissionControlGui(), new OfficeView());
+        super(new SubmissionControlGui<NotebookDeveloper>(), new OfficeView());
     }
 
     /**

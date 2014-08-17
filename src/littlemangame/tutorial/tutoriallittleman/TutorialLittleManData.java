@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package littlemangame.tutorial;
+package littlemangame.tutorial.tutoriallittleman;
 
+import littlemangame.tutorial.tutorialoffice.TutorialOffice;
 import littlemangame.littleman.PositionGetterAdapter;
 import littlemangame.littleman.littlemanutilities.littlemandata.GenericLittleManData;
 
@@ -12,9 +13,9 @@ import littlemangame.littleman.littlemanutilities.littlemandata.GenericLittleMan
  *
  * @author brian
  */
-public class TutorialLittleManData extends GenericLittleManData<TutorialComputer> {
+public class TutorialLittleManData extends GenericLittleManData<TutorialOffice> {
 
-    public TutorialLittleManData(TutorialComputer computer, PositionGetterAdapter positionGetterAdapter) {
+    public TutorialLittleManData(TutorialOffice computer, PositionGetterAdapter positionGetterAdapter) {
         super(computer, positionGetterAdapter);
     }
 

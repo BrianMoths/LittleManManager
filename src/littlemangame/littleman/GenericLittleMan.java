@@ -286,6 +286,10 @@ public class GenericLittleMan<T extends GenericLittleManData<?>> implements Draw
         return instruction != null && instruction.isPageNumberOperandNeeded();
     }
 
+    protected final T getLittleManData() {
+        return littleManData;
+    }
+
     /**
      * tests if the little man is halted
      *

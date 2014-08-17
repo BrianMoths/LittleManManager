@@ -5,8 +5,8 @@
  */
 package littlemangame.notebookdeveloper.notebooktester;
 
-import littlemangame.computer.Computer;
-import littlemangame.computer.Notebook;
+import littlemangame.computer.Office;
+import littlemangame.computer.computercomponents.Notebook;
 import littlemangame.notebookdeveloper.notebooktester.inputoutputevents.HaltEvent;
 import littlemangame.notebookdeveloper.notebooktester.inputoutputevents.InputEvent;
 import littlemangame.notebookdeveloper.notebooktester.inputoutputevents.OutputEvent;
@@ -50,15 +50,15 @@ public class OnlineNotebookTester implements NotebookTester { //I should break t
     private LittleManCommanderMock initialize(Notebook memory) {
         LittleManMock littleManMock = new LittleManMock(makeComputerMock(), makeHaltListener());
         LittleManCommanderMock littleManCommanderMock = new LittleManCommanderMock(littleManMock);
-        littleManCommanderMock.loadCopyOfMemory(memory);
+        littleManCommanderMock.loadCopyOfNotebook(memory);
         errorStringBuilder = new StringBuilder();
         isCorrectSoFar = true;
         isHalted = false;
         return littleManCommanderMock;
     }
 
-    private Computer makeComputerMock() {
-        return new Computer(new ComputerOutputterMock(makeOutputEventListener()), new ComputerInputterMock(makeInputProducerMock()));
+    private Office makeComputerMock() {
+        return new Office(new ComputerOutputterMock(makeOutputEventListener()), new ComputerInputterMock(makeInputProducerMock()));
     }
 
     private OutputEventListener makeOutputEventListener() {

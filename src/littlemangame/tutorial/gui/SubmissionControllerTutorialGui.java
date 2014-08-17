@@ -7,12 +7,13 @@ package littlemangame.tutorial.gui;
 
 import java.awt.event.ActionListener;
 import littlemangame.notebookdeveloper.submissioncontrols.SubmissionControlGui;
+import littlemangame.tutorial.tutorialnotebookdeveloper.TutorialNotebookDeveloper;
 
 /**
  *
  * @author brian
  */
-public class SubmissionControllerTutorialGui extends SubmissionControlGui {
+public class SubmissionControllerTutorialGui extends SubmissionControlGui<TutorialNotebookDeveloper> {
 
     private final TutorialDialogue tutorialDialogue;
 
@@ -40,11 +41,11 @@ public class SubmissionControllerTutorialGui extends SubmissionControlGui {
         tutorialDialogue.setText(message);
     }
 
-    public void addActionListener(ActionListener l) {
+    public void addDialogueActionListener(ActionListener l) {
         tutorialDialogue.addActionListener(l);
     }
 
-    public void removeActionListener(ActionListener l) {
+    public void removeDialogueActionListener(ActionListener l) {
         tutorialDialogue.removeActionListener(l);
     }
 

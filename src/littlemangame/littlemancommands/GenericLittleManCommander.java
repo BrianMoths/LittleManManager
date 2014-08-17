@@ -58,7 +58,7 @@ public class GenericLittleManCommander<T extends GenericLittleMan<?>> implements
      *
      * @param memory the notebook to be loaded
      */
-    public void loadCopyOfMemory(Notebook memory) {
+    public void loadCopyOfNotebook(Notebook memory) {
         littleMan.loadCopyOfMemory(memory);
     }
 
@@ -69,6 +69,10 @@ public class GenericLittleManCommander<T extends GenericLittleMan<?>> implements
      */
     public boolean isHalted() {
         return littleMan.isHalted();
+    }
+
+    protected final T getLittleMan() {
+        return littleMan;
     }
 
 }

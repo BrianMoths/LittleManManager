@@ -9,7 +9,7 @@ import java.awt.GridLayout;
 import java.awt.Point;
 import littlemangame.computer.computercomponents.InputPanel;
 import littlemangame.computer.computercomponents.OutputPanel;
-import littlemangame.littlemancommands.GenericLittleManCommander;
+import littlemangame.notebookdeveloper.GenericNotebookDeveloper;
 
 /**
  *
@@ -53,8 +53,15 @@ public class GenericOfficeView<T extends InputPanel, U extends OutputPanel>
         return outputPanel;
     }
 
-    public void registerLittleManCommander(GenericLittleManCommander<?> littleManCommander) {
-        gameCanvas.getRenderer().addDrawable(littleManCommander);
+    /**
+     * adds a notebook developer to be drawn on this office view. Beware that
+     * there is no way to
+     * remove a notebook developer once added.
+     *
+     * @param notebookDeveloper the notebook developer to be added.
+     */
+    public void registerNotebookDeveloper(GenericNotebookDeveloper<?> notebookDeveloper) {
+        gameCanvas.getRenderer().addDrawable(notebookDeveloper);
     }
 
     /**

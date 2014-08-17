@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package littlemangame.tutorial;
+package littlemangame.tutorial.tutoriallittlemancommands;
 
+import littlemangame.tutorial.tutoriallittleman.TutorialLittleMan;
 import littlemangame.littlemancommands.GenericLittleManCommander;
 import littlemangame.tutorial.gui.TutorialOfficeView;
+import littlemangame.tutorial.tutorialoffice.TutorialOffice;
 
 /**
  *
@@ -19,11 +21,11 @@ public class TutorialLittleManCommander extends GenericLittleManCommander<Tutori
     }
 
     public TutorialLittleManCommander(TutorialOfficeView officeView) {
-        this(new TutorialComputer(officeView.getOutputPanel(), officeView.getInputPanel()));
+        this(new TutorialLittleMan(new TutorialOffice(officeView.getOutputPanel(), officeView.getInputPanel())));
     }
 
-    public TutorialLittleManCommander(TutorialComputer computer) {
-        super(new TutorialLittleMan(computer));
+    public TutorialLittleManCommander(TutorialOffice office) {
+        super(new TutorialLittleMan(office));
     }
 
     public void setIsWorksheetArrowShown(boolean isArrowShown) {

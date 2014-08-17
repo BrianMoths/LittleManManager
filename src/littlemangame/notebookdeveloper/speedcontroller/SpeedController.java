@@ -38,15 +38,15 @@ public class SpeedController {
     private int bufferedSpeed;
     private boolean isRunning;
     private boolean bufferedIsRunning;
-    final private SpeedControllerAdapter speedControllerAdapter;
+//    final private SpeedControllerAdapter speedControllerAdapter;
 
-    public SpeedController(SpeedControllerGui speedControllerGui) {
+    public SpeedController() {
         speed = 1;
         bufferedSpeed = 1;
         isRunning = false;
         bufferedIsRunning = false;
-        speedControllerAdapter = new SpeedControllerAdapter(this, speedControllerGui);
-        disable();
+//        speedControllerAdapter = new SpeedControllerAdapter(this, speedControllerGui);
+        pause();
     }
 
     public int getCurrentSpeed() {
@@ -58,25 +58,24 @@ public class SpeedController {
         }
     }
 
-    public final void disable() {
-        pause();
-    }
-
-    public void enable() {
-        resume();
-        speedControllerAdapter.enableGui();
-    }
-
+//    public final void disable() {
+//        pause();
+//    }
+//
+//    public void enable() {
+//        resume();
+////        speedControllerAdapter.enableGui();
+//    }
     public void flushBuffer() {
         isRunning = bufferedIsRunning;
         speed = bufferedSpeed;
     }
 
     public void setEndTestActionListener(ActionListener actionListener) {
-        speedControllerAdapter.setEndTestActionListener(actionListener);
+//        speedControllerAdapter.setEndTestActionListener(actionListener);
     }
 
-    void pause() {
+    final void pause() {
         bufferedIsRunning = false;
     }
 
@@ -106,10 +105,6 @@ public class SpeedController {
 
     int getBufferedSpeedIndex() {
         return bufferedSpeed;
-    }
-
-    public SpeedControllerAdapter getSpeedControllerAdapter() {
-        return speedControllerAdapter;
     }
 
 }

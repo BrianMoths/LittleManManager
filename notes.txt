@@ -29,3 +29,5 @@ scope first iteration:
     interrupts
     
 art should look like boxhead?
+
+name - little man manager

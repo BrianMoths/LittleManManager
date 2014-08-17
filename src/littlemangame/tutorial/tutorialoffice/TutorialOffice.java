@@ -3,18 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package littlemangame.tutorial;
+package littlemangame.tutorial.tutorialoffice;
 
 import java.awt.Graphics;
 import littlemangame.computer.GenericOffice;
+import littlemangame.tutorial.tutorialoffice.components.TutorialInputPanel;
+import littlemangame.tutorial.tutorialoffice.components.TutorialInstructionPointer;
+import littlemangame.tutorial.tutorialoffice.components.TutorialMemory;
+import littlemangame.tutorial.tutorialoffice.components.TutorialOutputPanel;
+import littlemangame.tutorial.tutorialoffice.components.TutorialRegister;
 
 /**
  *
  * @author brian
  */
-public class TutorialComputer extends GenericOffice<TutorialRegister, TutorialMemory, TutorialInstructionPointer, TutorialOutputPanel, TutorialInputPanel> {
+public class TutorialOffice extends GenericOffice<TutorialRegister, TutorialMemory, TutorialInstructionPointer, TutorialOutputPanel, TutorialInputPanel> {
 
-    public TutorialComputer(TutorialOutputPanel tutorialOutputPanel, TutorialInputPanel tutorialInputPanel) {
+    public TutorialOffice(TutorialOutputPanel tutorialOutputPanel, TutorialInputPanel tutorialInputPanel) {
         super(new TutorialRegister(), new TutorialMemory(), new TutorialInstructionPointer(), tutorialOutputPanel, tutorialInputPanel);
     }
 

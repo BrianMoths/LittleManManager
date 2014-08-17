@@ -29,7 +29,12 @@ public class TutorialDialogue extends javax.swing.JPanel {
     }
 
     public void setText(String t) {
-        jTextArea1.setText(t);
+        dialogueTextArea.setText(t);
+        scrollToTop();
+    }
+
+    private void scrollToTop() {
+        dialogueTextArea.setCaretPosition(0);
     }
 
     /**
@@ -43,15 +48,15 @@ public class TutorialDialogue extends javax.swing.JPanel {
     private void initComponents() {
 
         dialogueScrollPane = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        dialogueTextArea = new javax.swing.JTextArea();
         okButton = new javax.swing.JButton();
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        jTextArea1.setWrapStyleWord(true);
-        dialogueScrollPane.setViewportView(jTextArea1);
+        dialogueTextArea.setEditable(false);
+        dialogueTextArea.setColumns(20);
+        dialogueTextArea.setLineWrap(true);
+        dialogueTextArea.setRows(5);
+        dialogueTextArea.setWrapStyleWord(true);
+        dialogueScrollPane.setViewportView(dialogueTextArea);
 
         okButton.setText("Ok");
 
@@ -79,7 +84,7 @@ public class TutorialDialogue extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane dialogueScrollPane;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea dialogueTextArea;
     private javax.swing.JButton okButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package littlemangame.tutorial;
+package littlemangame.tutorial.tutorialoffice.components;
 
 import java.awt.Graphics;
 import littlemangame.computer.computercomponents.Notebook;

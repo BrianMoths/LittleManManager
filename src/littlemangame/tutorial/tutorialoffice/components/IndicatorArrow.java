@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package littlemangame.tutorial;
+package littlemangame.tutorial.tutorialoffice.components;
 
 import Renderer.Drawable;
 import java.awt.Graphics;

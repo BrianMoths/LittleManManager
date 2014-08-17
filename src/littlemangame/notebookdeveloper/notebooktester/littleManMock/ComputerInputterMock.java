@@ -6,15 +6,15 @@
 package littlemangame.notebookdeveloper.notebooktester.littleManMock;
 
 import java.awt.Point;
-import littlemangame.computer.ComputerInputter;
-import littlemangame.computer.InputPanelState;
+import littlemangame.computer.computercomponents.OfficeInputter;
+import littlemangame.computer.computercomponents.InputPanelState;
 import littlemangame.word.Word;
 
 /**
  *
  * @author brian
  */
-public class ComputerInputterMock implements ComputerInputter {
+public class ComputerInputterMock implements OfficeInputter {
 
     private final InputProducerMock inputProducerMock;
     private InputPanelState inputPanelState;

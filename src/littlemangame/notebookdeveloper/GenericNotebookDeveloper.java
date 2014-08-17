@@ -5,9 +5,10 @@
  */
 package littlemangame.notebookdeveloper;
 
+import Renderer.Drawable;
+import java.awt.Graphics;
 import littlemangame.computer.computercomponents.Notebook;
 import littlemangame.littlemancommands.GenericLittleManCommander;
-import littlemangame.notebookdeveloper.gui.GenericOfficeView;
 
 /**
  * This class is responsible for keeping track of the notebook problems to be
@@ -24,11 +25,12 @@ import littlemangame.notebookdeveloper.gui.GenericOfficeView;
  * @author brian
  * @param <T>
  */
-public class GenericNotebookDeveloper<T extends GenericLittleManCommander<?>> {
+public class GenericNotebookDeveloper<T extends GenericLittleManCommander<?>>
+        implements Drawable {
 
     private final T littleManCommander;
     private final Notebook notebook;
-    private final NotebookProblemSet notebookVerifier;
+    private final NotebookProblemSet notebookProblemSet;
 
     /**
      * constructs a notebook developer to be shown in the given office view, and
@@ -39,12 +41,11 @@ public class GenericNotebookDeveloper<T extends GenericLittleManCommander<?>> {
      * @param littleManCommander the little man commander used for testing
      * pruposes by this little man commander
      */
-    public GenericNotebookDeveloper(GenericOfficeView<?, ?> officeView, T littleManCommander) {
+    public GenericNotebookDeveloper(T littleManCommander) {
         this.littleManCommander = littleManCommander;
-        officeView.registerLittleManCommander(littleManCommander);
         notebook = new Notebook();
-        notebookVerifier = NotebookProblemSet.makeDefaultNotebookProblemSet();
-        notebookVerifier.beginNextProblem();
+        notebookProblemSet = NotebookProblemSet.makeDefaultNotebookProblemSet();
+        notebookProblemSet.beginNextProblem();
     }
 
     /**
@@ -60,7 +61,7 @@ public class GenericNotebookDeveloper<T extends GenericLittleManCommander<?>> {
     }
 
     /**
-     * ends the little man commnander's test of the notebook.
+     * ends the little man commander's test of the notebook.
      */
     public void endTest() {
         littleManCommander.reset();
@@ -74,12 +75,11 @@ public class GenericNotebookDeveloper<T extends GenericLittleManCommander<?>> {
      * @return a string explaining if the notebook submitted was correct or not
      */
     public String submitNotebookSolutionAttempt() {
-        final boolean isCorrect = notebookVerifier.verifyNotebook(notebook);
-        final StringBuilder resultStringBuilder = new StringBuilder();
-        resultStringBuilder.append(notebookVerifier.getMessageFromLastTest());
+        final boolean isCorrect = notebookProblemSet.verifyNotebook(notebook);
+        final StringBuilder resultStringBuilder = new StringBuilder(notebookProblemSet.getMessageFromLastTest());
         if (isCorrect) {
-            if (notebookVerifier.hasNextProblem()) {
-                notebookVerifier.beginNextProblem();
+            if (notebookProblemSet.hasNextProblem()) {
+                notebookProblemSet.beginNextProblem();
             } else {
                 resultStringBuilder.append("You beat the game!");
             }
@@ -93,7 +93,7 @@ public class GenericNotebookDeveloper<T extends GenericLittleManCommander<?>> {
      * @return a description of the current notebook development problem
      */
     public String getCurrentProblemDescription() {
-        return notebookVerifier.getCurrentProblemDescription();
+        return notebookProblemSet.getCurrentProblemDescription();
     }
 
     /**
@@ -121,6 +121,11 @@ public class GenericNotebookDeveloper<T extends GenericLittleManCommander<?>> {
 
     protected final T getLittleManComander() {
         return littleManCommander;
+    }
+
+    @Override
+    public void draw(Graphics graphics) {
+        littleManCommander.draw(graphics);
     }
 
 }

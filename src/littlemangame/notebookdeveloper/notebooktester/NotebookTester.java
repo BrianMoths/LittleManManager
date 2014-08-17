@@ -5,7 +5,7 @@
  */
 package littlemangame.notebookdeveloper.notebooktester;
 
-import littlemangame.computer.Notebook;
+import littlemangame.computer.computercomponents.Notebook;
 
 /**
  *

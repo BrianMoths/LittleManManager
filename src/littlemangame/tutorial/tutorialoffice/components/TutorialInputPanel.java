@@ -3,24 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package littlemangame.tutorial;
+package littlemangame.tutorial.tutorialoffice.components;
 
 import Renderer.Drawable;
 import java.awt.Graphics;
 import java.awt.Point;
-import littlemangame.computer.computercomponents.OutputPanel;
+import littlemangame.computer.computercomponents.InputPanel;
 
 /**
  *
  * @author brian
  */
-public class TutorialOutputPanel extends OutputPanel implements Drawable {
+public class TutorialInputPanel extends InputPanel implements Drawable {
 
     static private final int arrowLength = 30;
     private boolean isArrowShown = false;
     private final IndicatorArrow indicatorArrow;
 
-    public TutorialOutputPanel() {
+    public TutorialInputPanel() {
         super();
         indicatorArrow = new IndicatorArrow(0, 0, 0, 0);
     }

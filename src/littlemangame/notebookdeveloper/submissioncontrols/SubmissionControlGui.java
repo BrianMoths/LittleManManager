@@ -5,78 +5,128 @@
  */
 package littlemangame.notebookdeveloper.submissioncontrols;
 
+import java.awt.Component;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.GroupLayout;
 import javax.swing.JLayeredPane;
-import littlemangame.notebookdeveloper.speedcontroller.SpeedControllerGui;
+import littlemangame.notebookdeveloper.GenericNotebookDeveloper;
+import littlemangame.notebookdeveloper.speedcontroller.SpeedController;
 
 /**
  *
  * @author brian
+ * @param <T>
  */
-public class SubmissionControlGui extends javax.swing.JPanel {
+public class SubmissionControlGui<T extends GenericNotebookDeveloper<?>>
+        extends javax.swing.JPanel {
+
+    private T notebookDeveloper;
 
     /**
      * Creates new form SubmissionControlGui
+     *
      */
     public SubmissionControlGui() {
         initComponents();
         baseLayeredPane.setLayer(speedPanel, JLayeredPane.DEFAULT_LAYER, 0);
         baseLayeredPane.setLayer(submissionPanel, JLayeredPane.DEFAULT_LAYER, 1);
-        showSubmissionPanel();
+        speedPanel.setVisible(false);
+        submissionPanel.setVisible(true);
+        testButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showSpeedPanel();
+                speedControllerGui.resume();
+            }
+
+        });
+        submitButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                final String resultString = SubmissionControlGui.this.notebookDeveloper.submitNotebookSolutionAttempt();
+                printResultMessage(resultString);
+            }
+
+        });
+        speedControllerGui.setEndTestAction(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showSubmissionPanel();
+                SubmissionControlGui.this.notebookDeveloper.endTest();
+            }
+
+        });
     }
 
-    public void setSubmitAction(ActionListener l) {
-        submitButton.addActionListener(l);
-    }
-
-    public void setObjectiveAction(ActionListener l) {
-        objectiveBtn.addActionListener(l);
-    }
-
-    public void setEditAction(ActionListener l) {
+//    public void setSubmitAction(ActionListener l) {
+//        submitButton.addActionListener(l);
+//    }
+    public void setEditMemoryAction(ActionListener l) {
         editMemoryButton.addActionListener(l);
     }
+//
+//    public void setTestAction(ActionListener l) {
+//        testButton.addActionListener(l);
+//    }
 
-    public void setTestAction(ActionListener l) {
-        testButton.addActionListener(l);
-    }
-
-    public void printMessage(String message) {
+    private void printResultMessage(String message) {
         consoleTextArea.append(message);
     }
 
     public final void showSpeedPanel() {
+        hidePanels();
         speedPanel.setVisible(true);
-        submissionPanel.setVisible(false);
+    }
+
+    public void registerSpeedController(SpeedController speedController) {
+        speedControllerGui.registerSpeedController(speedController);
+    }
+
+    public void registerNotebookDeveloper(T notebookDeveloper) {
+        this.notebookDeveloper = notebookDeveloper;
     }
 
     public final void showSubmissionPanel() {
-        speedPanel.setVisible(false);
+        hidePanels();
         submissionPanel.setVisible(true);
     }
 
-    public void setObjectiveButtonEnabled(boolean isEnabled) {
-        objectiveBtn.setEnabled(isEnabled);
+    protected void hidePanels() {
+        speedPanel.setVisible(false);
+        submissionPanel.setVisible(false);
     }
 
-    public void setEditMemoryEnabled(boolean isEnabled) {
-        editMemoryButton.setEnabled(isEnabled);
-    }
-
-    public void setSubmitButtonEnabled(boolean isEnabled) {
-        submitButton.setEnabled(isEnabled);
-    }
-
-    public void setTestButtonEnabled(boolean isEnabled) {
-        testButton.setEnabled(isEnabled);
-    }
-
-    public SpeedControllerGui getSpeedControllerGui() {
-        return speedControllerGui;
-    }
-
+//    public void setEditMemoryEnabled(boolean isEnabled) {
+//        editMemoryButton.setEnabled(isEnabled);
+//    }
+//
+//    public void setSubmitButtonEnabled(boolean isEnabled) {
+//        submitButton.setEnabled(isEnabled);
+//    }
+//
+//    public void setTestButtonEnabled(boolean isEnabled) {
+//        testButton.setEnabled(isEnabled);
+//    }
+//    public SpeedControllerGui getSpeedControllerGui() {
+//        return speedControllerGui;
+//    }
     final protected JLayeredPane getBaseLayeredPane() {
         return baseLayeredPane;
+    }
+
+    final protected void replaceDummyPanel(Component newComponent) {
+        final GroupLayout groupLayout = (GroupLayout) baseLayeredPane.getLayout();
+
+        try {
+            groupLayout.replace(dummyPanel, newComponent);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalStateException("dummy panel has already been replaced.");
+        }
+
     }
 
     /**
@@ -90,36 +140,17 @@ public class SubmissionControlGui extends javax.swing.JPanel {
     private void initComponents() {
 
         baseLayeredPane = new javax.swing.JLayeredPane();
-        speedPanel = new javax.swing.JPanel();
-        speedControllerGui = new littlemangame.notebookdeveloper.speedcontroller.SpeedControllerGui();
         submissionPanel = new javax.swing.JPanel();
         submitButton = new javax.swing.JButton();
-        objectiveBtn = new javax.swing.JButton();
         editMemoryButton = new javax.swing.JButton();
         testButton = new javax.swing.JButton();
         consoleTextScrollPane = new javax.swing.JScrollPane();
         consoleTextArea = new javax.swing.JTextArea();
-
-        javax.swing.GroupLayout speedPanelLayout = new javax.swing.GroupLayout(speedPanel);
-        speedPanel.setLayout(speedPanelLayout);
-        speedPanelLayout.setHorizontalGroup(
-            speedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(speedPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(speedControllerGui, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(542, Short.MAX_VALUE))
-        );
-        speedPanelLayout.setVerticalGroup(
-            speedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(speedPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(speedControllerGui, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        dummyPanel = new javax.swing.JPanel();
+        speedPanel = new javax.swing.JPanel();
+        speedControllerGui = new littlemangame.notebookdeveloper.speedcontroller.SpeedControllerGui();
 
         submitButton.setText("Submit");
-
-        objectiveBtn.setText("Objective");
 
         editMemoryButton.setText("Edit Memory");
 
@@ -135,40 +166,57 @@ public class SubmissionControlGui extends javax.swing.JPanel {
         submissionPanel.setLayout(submissionPanelLayout);
         submissionPanelLayout.setHorizontalGroup(
             submissionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 560, Short.MAX_VALUE)
-            .addGroup(submissionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(submissionPanelLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(submissionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(submissionPanelLayout.createSequentialGroup()
-                            .addComponent(editMemoryButton)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(submissionPanelLayout.createSequentialGroup()
-                            .addComponent(objectiveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(testButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(consoleTextScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(submissionPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(submissionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(submissionPanelLayout.createSequentialGroup()
+                        .addComponent(editMemoryButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(testButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(consoleTextScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         submissionPanelLayout.setVerticalGroup(
             submissionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 104, Short.MAX_VALUE)
-            .addGroup(submissionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(submissionPanelLayout.createSequentialGroup()
-                    .addGap(22, 22, 22)
-                    .addGroup(submissionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(consoleTextScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(submissionPanelLayout.createSequentialGroup()
-                            .addGroup(submissionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(testButton)
-                                .addComponent(objectiveBtn))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(submissionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(editMemoryButton)
-                                .addComponent(submitButton))))
-                    .addContainerGap(23, Short.MAX_VALUE)))
+            .addGroup(submissionPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(submissionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(consoleTextScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(submissionPanelLayout.createSequentialGroup()
+                        .addComponent(testButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(submissionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(editMemoryButton)
+                            .addComponent(submitButton))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout dummyPanelLayout = new javax.swing.GroupLayout(dummyPanel);
+        dummyPanel.setLayout(dummyPanelLayout);
+        dummyPanelLayout.setHorizontalGroup(
+            dummyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 521, Short.MAX_VALUE)
+        );
+        dummyPanelLayout.setVerticalGroup(
+            dummyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout speedPanelLayout = new javax.swing.GroupLayout(speedPanel);
+        speedPanel.setLayout(speedPanelLayout);
+        speedPanelLayout.setHorizontalGroup(
+            speedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(speedPanelLayout.createSequentialGroup()
+                .addComponent(speedControllerGui, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 24, Short.MAX_VALUE))
+        );
+        speedPanelLayout.setVerticalGroup(
+            speedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(speedPanelLayout.createSequentialGroup()
+                .addComponent(speedControllerGui, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout baseLayeredPaneLayout = new javax.swing.GroupLayout(baseLayeredPane);
@@ -176,31 +224,41 @@ public class SubmissionControlGui extends javax.swing.JPanel {
         baseLayeredPaneLayout.setHorizontalGroup(
             baseLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(baseLayeredPaneLayout.createSequentialGroup()
+                .addComponent(speedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(submissionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(baseLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(speedPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(dummyPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         baseLayeredPaneLayout.setVerticalGroup(
             baseLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(submissionPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(baseLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(speedPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(baseLayeredPaneLayout.createSequentialGroup()
+                .addGroup(baseLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(speedPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(submissionPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(baseLayeredPaneLayout.createSequentialGroup()
+                .addComponent(dummyPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
+        baseLayeredPane.setLayer(submissionPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        baseLayeredPane.setLayer(dummyPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
         baseLayeredPane.setLayer(speedPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         speedPanel.getAccessibleContext().setAccessibleName("");
-        baseLayeredPane.setLayer(submissionPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(baseLayeredPane, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(baseLayeredPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 12, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(baseLayeredPane, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(baseLayeredPane)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -208,8 +266,8 @@ public class SubmissionControlGui extends javax.swing.JPanel {
     private javax.swing.JLayeredPane baseLayeredPane;
     private javax.swing.JTextArea consoleTextArea;
     private javax.swing.JScrollPane consoleTextScrollPane;
+    private javax.swing.JPanel dummyPanel;
     private javax.swing.JButton editMemoryButton;
-    private javax.swing.JButton objectiveBtn;
     private littlemangame.notebookdeveloper.speedcontroller.SpeedControllerGui speedControllerGui;
     private javax.swing.JPanel speedPanel;
     private javax.swing.JPanel submissionPanel;

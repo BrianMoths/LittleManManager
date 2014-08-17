@@ -6,14 +6,14 @@
 package littlemangame.notebookdeveloper.notebooktester.littleManMock;
 
 import java.awt.Point;
-import littlemangame.computer.ComputerOutputter;
+import littlemangame.computer.computercomponents.OfficeOutputter;
 import littlemangame.word.Word;
 
 /**
  *
  * @author brian
  */
-public class ComputerOutputterMock implements ComputerOutputter {
+public class ComputerOutputterMock implements OfficeOutputter {
 
     final OutputEventListener outputEventListener;
 

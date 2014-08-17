@@ -5,9 +5,9 @@
  */
 package littlemangame.notebookdeveloper.notebooktester.littleManMock;
 
-import littlemangame.computer.Computer;
+import littlemangame.computer.Office;
 import littlemangame.littleman.LittleMan;
-import littlemangame.littleman.littlemanutilities.location.ComputerLocation;
+import littlemangame.littleman.littlemanutilities.location.OfficeLocation;
 
 /**
  *
@@ -17,13 +17,13 @@ public class LittleManMock extends LittleMan {
 
     private final HaltListener haltListener;
 
-    public LittleManMock(Computer computer, HaltListener haltListener) {
+    public LittleManMock(Office computer, HaltListener haltListener) {
         super(computer);
         this.haltListener = haltListener;
     }
 
     @Override
-    public boolean goToComputerLocation(ComputerLocation computerLocation) {
+    public boolean goToComputerLocation(OfficeLocation computerLocation) {
         return true;
     }
 

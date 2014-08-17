@@ -6,15 +6,16 @@
 package littlemangame.notebookdeveloper.gui;
 
 import littlemangame.GenericLittleManGui;
+import littlemangame.notebookdeveloper.NotebookDeveloper;
 
 /**
  *
  * @author brian
  */
-public class BaseLittleManGui extends GenericLittleManGui<BaseNotebookDeveloperGui> {
+public class BaseLittleManGui extends GenericLittleManGui<BaseNotebookDeveloperGui, NotebookEditorPanel, NotebookDeveloper> {
 
     public BaseLittleManGui() {
-        super(new BaseNotebookDeveloperGui());
+        super(new BaseNotebookDeveloperGui(), new NotebookEditorPanel());
     }
 
 }

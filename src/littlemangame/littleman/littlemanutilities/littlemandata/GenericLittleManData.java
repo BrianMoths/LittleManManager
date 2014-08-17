@@ -13,7 +13,6 @@ import littlemangame.instructions.InstructionFromSet;
 import littlemangame.instructions.interfaceandimplementations.Instruction;
 import littlemangame.littleman.PositionGetterAdapter;
 import littlemangame.littleman.PositionGetterAdapter.PositionGetter;
-import littlemangame.littleman.littlemanutilities.littlemandata.LittleManMemory;
 import littlemangame.word.BinaryWordOperation;
 import littlemangame.word.UnaryWordOperation;
 import littlemangame.word.Word;
@@ -82,7 +81,9 @@ public class GenericLittleManData<T extends GenericOffice<?, ?, ?, ?, ?>> {
 
     /**
      * performs the given binary operation on the given word container using
-     * his remembered data as the second operand.
+     * his remembered data as the second operand. Using the remembered data
+     * causes it to be forgotten, so the little man will not be remembering any
+     * data after this operation.
      *
      * @param littleManWordContainer the word container to be operated on
      * @param binaryWordOperation the operation to perform on the given word
@@ -93,7 +94,7 @@ public class GenericLittleManData<T extends GenericOffice<?, ?, ?, ?, ?>> {
     }
 
     /**
-     * performs the given unary operation on the given word container
+     * performs the given unary operation on the given word container.
      *
      * @param littleManWordContainer the word container to be operated on
      * @param unaryWordOperation the operation to perform
@@ -230,17 +231,17 @@ public class GenericLittleManData<T extends GenericOffice<?, ?, ?, ?, ?>> {
     private PositionGetter makePositionGetter(final GenericOffice<?, ?, ?, ?, ?> computer) {
         return new PositionGetter() {
             @Override
-            public Point getRegisterPosition() {
+            public Point getWorksheetPosition() {
                 return computer.worksheet.getAccessLocation();
             }
 
             @Override
-            public Point getRememberedMemoryPosition() {
+            public Point getRememberedPagePosition() {
                 return computer.notebook.getAccessLocation(getRememberedAddress());
             }
 
             @Override
-            public Point getInstructionPointerPosition() {
+            public Point getPageNumberSheetPosition() {
                 return computer.notebookPageSheet.getAccessLocation();
             }
 
@@ -258,7 +259,11 @@ public class GenericLittleManData<T extends GenericOffice<?, ?, ?, ?, ?>> {
     }
 
     public void loadCopyOfMemory(Notebook memory) {
-        computer.loadCopyOfMemory(memory);
+        computer.loadCopyOfNotebook(memory);
+    }
+
+    protected final T getComputer() {
+        return computer;
     }
 
 }

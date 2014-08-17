@@ -5,6 +5,7 @@
  */
 package littlemangame.notebookdeveloper.speedcontroller;
 
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
@@ -13,64 +14,101 @@ import java.awt.event.ActionListener;
  */
 public class SpeedControllerGui extends javax.swing.JPanel {
 
-//    private final SpeedController speedController;
+    private SpeedController speedController;
+
     /**
      * Creates new form SpeedControllerGui
      */
     public SpeedControllerGui() {
         initComponents();
-    }
+        slowerButton.addActionListener(new ActionListener() {
 
-    public void setResumeAction(ActionListener l) {
-        resumeButton.addActionListener(l);
-    }
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                speedController.decreaseSpeed();
+                syncSpeedButtons();
+            }
 
-    public void setFasterAction(ActionListener l) {
-        fasterButton.addActionListener(l);
-    }
+        });
+        fasterButton.addActionListener(new ActionListener() {
 
-    public void setSlowerAction(ActionListener l) {
-        slowerButton.addActionListener(l);
-    }
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                speedController.increaseSpeed();
+                syncSpeedButtons();
+            }
 
-    public void setPauseAction(ActionListener l) {
-        pauseButton.addActionListener(l);
+        });
+        pauseButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                speedController.pause();
+                syncPauseResumeButtons();
+            }
+
+        });
+        resumeButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                speedController.resume();
+                syncPauseResumeButtons();
+            }
+
+        });
+        endTestButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pause();
+            }
+
+        });
     }
 
     public void setEndTestAction(ActionListener l) {
         endTestButton.addActionListener(l);
     }
 
-    public void setText(String text) {
+    public void resume() {
+        speedController.resume();
+        syncButtons();
+    }
+
+    public void pause() {
+        speedController.pause();
+        syncButtons();
+    }
+
+    private void setText(String text) {
         speedLabel.setText(text);
     }
 
-    private void setEnabledButtons(boolean isEnabled) {
-        pauseButton.setEnabled(isEnabled);
-        slowerButton.setEnabled(isEnabled);
-        fasterButton.setEnabled(isEnabled);
-        resumeButton.setEnabled(isEnabled);
-        endTestButton.setEnabled(isEnabled);
+    private void syncButtons() {
+        syncSpeedButtons();
+        syncPauseResumeButtons();
     }
 
-    public void setEnabledFasterButton(boolean isEnabled) {
-        fasterButton.setEnabled(isEnabled);
+    private void syncSpeedButtons() {
+        fasterButton.setEnabled(speedController.getBufferedSpeedIndex() < SpeedController.maxSpeed);
+        slowerButton.setEnabled(speedController.getBufferedSpeedIndex() > SpeedController.minSpeed);
+        setText(getSpeedString());
     }
 
-    public void setEnabledSlowerButton(boolean isEnabled) {
-        slowerButton.setEnabled(isEnabled);
+    private void syncPauseResumeButtons() {
+        final boolean bufferedIsRunning = speedController.getBufferedIsRunning();
+        pauseButton.setEnabled(bufferedIsRunning);
+        resumeButton.setEnabled(!bufferedIsRunning);
     }
 
-    public void setEnabledPauseButton(boolean isEnabled) {
-        pauseButton.setEnabled(isEnabled);
+    private String getSpeedString() {
+        return Integer.toString(speedController.getBufferedSpeed()) + "x";
     }
 
-    public void setEnabledResumeButton(boolean isEnabled) {
-        resumeButton.setEnabled(isEnabled);
-    }
-
-    public void setEnabledEndTestButton(boolean isEnabled) {
-        endTestButton.setEnabled(isEnabled);
+    public void registerSpeedController(SpeedController speedController) {
+        this.speedController = speedController;
+        syncButtons();
     }
 
     /**

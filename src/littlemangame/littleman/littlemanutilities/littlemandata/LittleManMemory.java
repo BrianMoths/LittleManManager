@@ -137,7 +137,7 @@ public class LittleManMemory {
      */
     public Word useRememberedData() {
         if (!isRememberingData()) {
-            throw new IllegalStateException("use remember page number called when no page number was remembered.");
+            throw new IllegalStateException("use remembered data called when no data was remembered.");
         }
         final Word word = rememberedData;
         clearDataMemory();
