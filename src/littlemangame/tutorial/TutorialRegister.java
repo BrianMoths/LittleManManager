@@ -15,7 +15,7 @@ import littlemangame.computer.computercomponents.Worksheet;
 public class TutorialRegister extends Worksheet {
 
     static private final int arrowLength = 30;
-    private boolean isArrowShown = true;
+    private boolean isArrowShown = false;
     private final IndicatorArrow indicatorArrow;
 
     public TutorialRegister() {

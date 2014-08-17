@@ -17,7 +17,7 @@ import littlemangame.computer.computercomponents.OutputPanel;
 public class TutorialOutputPanel extends OutputPanel implements Drawable {
 
     static private final int arrowLength = 30;
-    private boolean isArrowShown = true;
+    private boolean isArrowShown = false;
     private final IndicatorArrow indicatorArrow;
 
     public TutorialOutputPanel() {

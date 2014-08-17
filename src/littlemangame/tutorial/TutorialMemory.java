@@ -15,7 +15,7 @@ import littlemangame.computer.computercomponents.Notebook;
 public class TutorialMemory extends Notebook {
 
     static private final int arrowLength = 30;
-    private boolean isArrowShown = true;
+    private boolean isArrowShown = false;
     private final IndicatorArrow indicatorArrow;
 
     public TutorialMemory() {
