@@ -28,7 +28,7 @@ import littlemangame.littlemancommands.GenericLittleManCommander;
 public class GenericNotebookDeveloper<T extends GenericLittleManCommander<?>>
         implements Drawable {
 
-    private final T littleManCommander;
+    protected final T littleManCommander;
     private final Notebook notebook;
     private final NotebookProblemSet notebookProblemSet;
 

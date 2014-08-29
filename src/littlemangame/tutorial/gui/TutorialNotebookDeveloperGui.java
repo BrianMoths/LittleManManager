@@ -5,7 +5,6 @@
  */
 package littlemangame.tutorial.gui;
 
-import java.awt.event.ActionListener;
 import littlemangame.notebookdeveloper.gui.GenericNotebookDeveloperGui;
 import littlemangame.tutorial.tutorialnotebookdeveloper.TutorialNotebookDeveloper;
 
@@ -19,24 +18,8 @@ public class TutorialNotebookDeveloperGui extends GenericNotebookDeveloperGui<Su
         super(submissionControllerGui, new TutorialOfficeView());
     }
 
-    public void printDialogue(String dialogue) {
-        submissionControllerGui.printDialogue(dialogue);
-    }
-
-    public void showDialoguePanel() {
-        submissionControllerGui.showDialoguePanel();
-    }
-
-    public void showSubmissionPanel() {
-        submissionControllerGui.showSubmissionPanel();
-    }
-
-    public void addDialogueActionListener(ActionListener actionListener) {
-        submissionControllerGui.addDialogueActionListener(actionListener);
-    }
-
-    public void removeDialogueActionListener(ActionListener actionListener) {
-        submissionControllerGui.removeDialogueActionListener(actionListener);
+    public SubmissionControllerTutorialGui getSubmissionControllerTutorialGui() {
+        return submissionControllerGui;
     }
 
 }

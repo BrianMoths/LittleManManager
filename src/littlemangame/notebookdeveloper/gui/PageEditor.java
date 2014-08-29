@@ -5,31 +5,26 @@
  */
 package littlemangame.notebookdeveloper.gui;
 
-import javax.swing.event.AncestorListener;
+import java.awt.event.ItemListener;
 import littlemangame.word.Word;
 
 /**
  *
  * @author brian
  */
-public class MemorySlotChooser extends javax.swing.JPanel {
+public class PageEditor extends javax.swing.JPanel {
 
     /**
      * Creates new form MemorySlotChooser
      *
-     * @param address
+     * @param pageNumber
      */
-    public MemorySlotChooser(Word address) {
+    public PageEditor(Word pageNumber) {
         initComponents();
-        addressLabel.setText(address.toString());
+        addressLabel.setText(pageNumber.toString());
     }
 
-    @Override
-    public void addAncestorListener(AncestorListener listener) {
-        super.addAncestorListener(listener); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public MemorySlotChooser() {
+    public PageEditor() {
         this(Word.ZERO_WORD);
     }
 
@@ -39,6 +34,19 @@ public class MemorySlotChooser extends javax.swing.JPanel {
 
     public void setSelectedWord(Word word) {
         wordSelector.setSelectedWord(word);
+    }
+
+    @Override
+    public void setEnabled(boolean isEnabled) {
+        wordSelector.setEnabled(isEnabled);
+    }
+
+    public void addItemListener(ItemListener itemListener) {
+        wordSelector.addItemListener(itemListener);
+    }
+
+    public void removeItemListener(ItemListener itemListener) {
+        wordSelector.removeItemListener(itemListener);
     }
 
     /**

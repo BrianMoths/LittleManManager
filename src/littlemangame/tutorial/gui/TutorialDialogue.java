@@ -28,6 +28,10 @@ public class TutorialDialogue extends javax.swing.JPanel {
         okButton.removeActionListener(l);
     }
 
+    public void setButtonIsEnabled(boolean isEnabled) {
+        okButton.setEnabled(isEnabled);
+    }
+
     public void setText(String t) {
         dialogueTextArea.setText(t);
         scrollToTop();

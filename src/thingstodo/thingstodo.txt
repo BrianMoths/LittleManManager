@@ -1,4 +1,3 @@
-think about office class and i/o
 remove getter from little man memory
 make most wordcontainer methods only package visible.
 make office word container not so ugly
@@ -6,17 +5,7 @@ dry on little man data and io methods.
 
 add a cancel button for the memory editor.
 
-add a tutorial explaining how the little man works-
-
-explain how little man works
-little man checks page number sheet
-gets instruction from notebook
-increments page number sheets and gets operands if necessary
-carries out instruction
-repeats
-
-explain how to actually write the notebook.
+add worksheet to worksheet binary instructions
+add notebook page sheet to register and memory direct/indirect instructions.
 
 add an introductory scene giving a story
-
-have memory editor and office view switch places instead of creating a new memory editor window

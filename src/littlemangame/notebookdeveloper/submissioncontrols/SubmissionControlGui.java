@@ -62,19 +62,24 @@ public class SubmissionControlGui<T extends GenericNotebookDeveloper<?>>
         });
     }
 
-//    public void setSubmitAction(ActionListener l) {
-//        submitButton.addActionListener(l);
-//    }
     public void setEditMemoryAction(ActionListener l) {
+        final ActionListener[] originalActionListeners = editMemoryButton.getActionListeners();
+        for (ActionListener actionListener : originalActionListeners) {
+            editMemoryButton.removeActionListener(actionListener);
+        }
         editMemoryButton.addActionListener(l);
+        for (ActionListener actionListener : originalActionListeners) {
+            editMemoryButton.addActionListener(actionListener);
+        }
     }
-//
-//    public void setTestAction(ActionListener l) {
-//        testButton.addActionListener(l);
-//    }
 
-    private void printResultMessage(String message) {
+    public void removeEditMemoryAction(ActionListener actionListener) {
+        editMemoryButton.removeActionListener(actionListener);
+    }
+
+    protected void printResultMessage(String message) {
         consoleTextArea.append(message);
+        consoleTextArea.setCaretPosition(0);
     }
 
     public final void showSpeedPanel() {
@@ -100,17 +105,6 @@ public class SubmissionControlGui<T extends GenericNotebookDeveloper<?>>
         submissionPanel.setVisible(false);
     }
 
-//    public void setEditMemoryEnabled(boolean isEnabled) {
-//        editMemoryButton.setEnabled(isEnabled);
-//    }
-//
-//    public void setSubmitButtonEnabled(boolean isEnabled) {
-//        submitButton.setEnabled(isEnabled);
-//    }
-//
-//    public void setTestButtonEnabled(boolean isEnabled) {
-//        testButton.setEnabled(isEnabled);
-//    }
 //    public SpeedControllerGui getSpeedControllerGui() {
 //        return speedControllerGui;
 //    }
@@ -141,9 +135,6 @@ public class SubmissionControlGui<T extends GenericNotebookDeveloper<?>>
 
         baseLayeredPane = new javax.swing.JLayeredPane();
         submissionPanel = new javax.swing.JPanel();
-        submitButton = new javax.swing.JButton();
-        editMemoryButton = new javax.swing.JButton();
-        testButton = new javax.swing.JButton();
         consoleTextScrollPane = new javax.swing.JScrollPane();
         consoleTextArea = new javax.swing.JTextArea();
         dummyPanel = new javax.swing.JPanel();
@@ -152,7 +143,7 @@ public class SubmissionControlGui<T extends GenericNotebookDeveloper<?>>
 
         submitButton.setText("Submit");
 
-        editMemoryButton.setText("Edit Memory");
+        editMemoryButton.setText("Edit Notebook");
 
         testButton.setText("Test");
 
@@ -160,6 +151,7 @@ public class SubmissionControlGui<T extends GenericNotebookDeveloper<?>>
         consoleTextArea.setColumns(20);
         consoleTextArea.setLineWrap(true);
         consoleTextArea.setRows(3);
+        consoleTextArea.setWrapStyleWord(true);
         consoleTextScrollPane.setViewportView(consoleTextArea);
 
         javax.swing.GroupLayout submissionPanelLayout = new javax.swing.GroupLayout(submissionPanel);
@@ -264,14 +256,14 @@ public class SubmissionControlGui<T extends GenericNotebookDeveloper<?>>
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLayeredPane baseLayeredPane;
-    private javax.swing.JTextArea consoleTextArea;
+    protected javax.swing.JTextArea consoleTextArea;
     private javax.swing.JScrollPane consoleTextScrollPane;
     private javax.swing.JPanel dummyPanel;
-    private javax.swing.JButton editMemoryButton;
+    protected final javax.swing.JButton editMemoryButton = new javax.swing.JButton();
     private littlemangame.notebookdeveloper.speedcontroller.SpeedControllerGui speedControllerGui;
     private javax.swing.JPanel speedPanel;
     private javax.swing.JPanel submissionPanel;
-    private javax.swing.JButton submitButton;
-    private javax.swing.JButton testButton;
+    protected final javax.swing.JButton submitButton = new javax.swing.JButton();
+    protected final javax.swing.JButton testButton = new javax.swing.JButton();
     // End of variables declaration//GEN-END:variables
 }

@@ -49,6 +49,51 @@ public class SubmissionControllerTutorialGui extends SubmissionControlGui<Tutori
         tutorialDialogue.removeActionListener(l);
     }
 
+    public void setDialogueButtonIsEnabled(boolean isEnabled) {
+        tutorialDialogue.setButtonIsEnabled(isEnabled);
+    }
+
+    public void setEditMemoryEnabled(boolean isEnabled) {
+        editMemoryButton.setEnabled(isEnabled);
+    }
+
+    public void setSubmitButtonEnabled(boolean isEnabled) {
+        submitButton.setEnabled(isEnabled);
+    }
+
+    public void setTestButtonEnabled(boolean isEnabled) {
+        testButton.setEnabled(isEnabled);
+    }
+
+    public void addTestButtonActionListener(ActionListener l) {
+        final ActionListener[] originalActionListeners = testButton.getActionListeners();
+        for (ActionListener actionListener : originalActionListeners) {
+            testButton.removeActionListener(actionListener);
+        }
+        testButton.addActionListener(l);
+        for (ActionListener actionListener : originalActionListeners) {
+            testButton.addActionListener(actionListener);
+        }
+    }
+
+    public void removeTestButtonActionListener(ActionListener l) {
+        testButton.removeActionListener(l);
+    }
+
+    public void addSubmitButtonActionListener(ActionListener l) {
+        submitButton.addActionListener(l);
+    }
+
+    public void removeSubmitButtonActionListener(ActionListener l) {
+        submitButton.removeActionListener(l);
+    }
+
+    @Override
+    public void printResultMessage(String message) {
+        consoleTextArea.setText("");
+        super.printResultMessage(message);
+    }
+
     /**
      * This method is called from within the constructor to
      * initialize the form.

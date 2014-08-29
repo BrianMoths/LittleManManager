@@ -5,9 +5,9 @@
  */
 package littlemangame.tutorial.tutoriallittlemancommands;
 
-import littlemangame.tutorial.tutoriallittleman.TutorialLittleMan;
 import littlemangame.littlemancommands.GenericLittleManCommander;
 import littlemangame.tutorial.gui.TutorialOfficeView;
+import littlemangame.tutorial.tutoriallittleman.TutorialLittleMan;
 import littlemangame.tutorial.tutorialoffice.TutorialOffice;
 
 /**
@@ -46,6 +46,10 @@ public class TutorialLittleManCommander extends GenericLittleManCommander<Tutori
 
     public void setIsOutputPanelArrowShown(boolean isArrowShown) {
         getLittleMan().setIsOutputPanelArrowShown(isArrowShown);
+    }
+
+    public TutorialLittleMan getTutorialLittleMan() {
+        return getLittleMan();
     }
 
 }

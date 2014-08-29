@@ -9,8 +9,8 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JLayeredPane;
-import littlemangame.notebookdeveloper.gui.GenericNotebookDeveloperGui;
 import littlemangame.notebookdeveloper.GenericNotebookDeveloper;
+import littlemangame.notebookdeveloper.gui.GenericNotebookDeveloperGui;
 import littlemangame.notebookdeveloper.gui.NotebookEditorPanel;
 import littlemangame.notebookdeveloper.speedcontroller.SpeedController;
 
@@ -25,7 +25,7 @@ public class GenericLittleManGui<T extends GenericNotebookDeveloperGui<?, ?, V>,
         extends BaseGameGui {
 
     protected final T genericNotebookDeveloperGui;
-    private final U notebookEditorPanel;
+    protected final U notebookEditorPanel;
     private V notebookDeveloper;
 
     /**
@@ -75,6 +75,10 @@ public class GenericLittleManGui<T extends GenericNotebookDeveloperGui<?, ?, V>,
 
     public T getNotebookDeveloperGui() {
         return genericNotebookDeveloperGui;
+    }
+
+    public U getNotebookEditorPanel() {
+        return notebookEditorPanel;
     }
 
     public void setNotebookDeveloper(V notebookDeveloper) {

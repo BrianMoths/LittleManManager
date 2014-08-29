@@ -39,7 +39,7 @@ public class WordSelector extends JComboBox<Word> {
     }
 
     private void initWordModel() {
-        setModel(new javax.swing.DefaultComboBoxModel(WORDS)); //perhaps model can be static? that way I won't need a different instance test this soon.
+        setModel(new javax.swing.DefaultComboBoxModel<>(WORDS)); //perhaps model can be static? that way I won't need a different instance test this soon.
         AutoCompleteDecorator.decorate(this);
     }
 
@@ -49,6 +49,13 @@ public class WordSelector extends JComboBox<Word> {
 
     public void setSelectedWord(Word word) {
         setSelectedIndex(word.getUnsignedValue());
+    }
+
+    @Override
+    public void setEnabled(boolean isEnabled) {
+        super.setEnabled(isEnabled);
+        super.isEditable = isEnabled;
+        hidePopup();
     }
 
 }

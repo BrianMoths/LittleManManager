@@ -22,7 +22,7 @@ import littlemangame.word.Word;
  */
 public class NotebookEditorPanel extends javax.swing.JPanel {
 
-    private final List<MemorySlotChooser> memorySlotChoosers;
+    protected final List<PageEditor> memorySlotChoosers;
 
     /**
      * Creates new form MemoryEditorPanel
@@ -38,7 +38,7 @@ public class NotebookEditorPanel extends javax.swing.JPanel {
         Iterator<Word> wordIterator = Word.getIterator();
         scrollPanePanel.setLayout(new GridLayout(Word.NUM_WORDS, 1, 0, 5));
         while (wordIterator.hasNext()) {
-            final MemorySlotChooser memorySlotChooser = new MemorySlotChooser(wordIterator.next());
+            final PageEditor memorySlotChooser = new PageEditor(wordIterator.next());
             scrollPanePanel.add(memorySlotChooser);
             memorySlotChoosers.add(memorySlotChooser);
             revalidate();
@@ -120,7 +120,7 @@ public class NotebookEditorPanel extends javax.swing.JPanel {
         Iterator<Word> wordIterator = Word.getIterator();
         while (wordIterator.hasNext()) {
             final Word word = wordIterator.next();
-            MemorySlotChooser memorySlotChooser = memorySlotChoosers.get(word.getUnsignedValue());
+            PageEditor memorySlotChooser = memorySlotChoosers.get(word.getUnsignedValue());
             memorySlotChooser.setSelectedWord(memory.getWordOnPage(word));
         }
     }
@@ -131,6 +131,7 @@ public class NotebookEditorPanel extends javax.swing.JPanel {
 
     public void setProblemDescription(String problemDescription) {
         problemDescriptionTextArea.setText(problemDescription);
+        problemDescriptionTextArea.setCaretPosition(0);
     }
 
     /**
@@ -145,7 +146,6 @@ public class NotebookEditorPanel extends javax.swing.JPanel {
 
         jScrollPane2 = new javax.swing.JScrollPane();
         instructionDescriptionTree = new javax.swing.JTree();
-        saveButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         scrollPanePanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -250,7 +250,7 @@ public class NotebookEditorPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea problemDescriptionTextArea;
-    private javax.swing.JButton saveButton;
+    protected final javax.swing.JButton saveButton = new javax.swing.JButton();
     private javax.swing.JPanel scrollPanePanel;
     // End of variables declaration//GEN-END:variables
 }

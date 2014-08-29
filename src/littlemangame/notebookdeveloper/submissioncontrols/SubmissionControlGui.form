@@ -107,16 +107,25 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Submit"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="20"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JButton" name="editMemoryButton">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Edit Memory"/>
+                <Property name="text" type="java.lang.String" value="Edit Notebook"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="20"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JButton" name="testButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Test"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="20"/>
+              </AuxValues>
             </Component>
             <Container class="javax.swing.JScrollPane" name="consoleTextScrollPane">
               <AuxValues>
@@ -131,7 +140,11 @@
                     <Property name="columns" type="int" value="20"/>
                     <Property name="lineWrap" type="boolean" value="true"/>
                     <Property name="rows" type="int" value="3"/>
+                    <Property name="wrapStyleWord" type="boolean" value="true"/>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>

@@ -5,7 +5,6 @@
  */
 package littlemangame.notebookdeveloper.speedcontroller;
 
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,52 +57,40 @@ public class SpeedController {
         }
     }
 
-//    public final void disable() {
-//        pause();
-//    }
-//
-//    public void enable() {
-//        resume();
-////        speedControllerAdapter.enableGui();
-//    }
     public void flushBuffer() {
         isRunning = bufferedIsRunning;
         speed = bufferedSpeed;
     }
 
-    public void setEndTestActionListener(ActionListener actionListener) {
-//        speedControllerAdapter.setEndTestActionListener(actionListener);
-    }
-
-    final void pause() {
+    public final void pause() {
         bufferedIsRunning = false;
     }
 
-    void resume() {
+    public void resume() {
         bufferedIsRunning = true;
     }
 
-    void increaseSpeed() {
+    public void increaseSpeed() {
         if (bufferedSpeed < maxSpeed) {
             bufferedSpeed++;
         }
     }
 
-    void decreaseSpeed() {
+    public void decreaseSpeed() {
         if (bufferedSpeed > minSpeed) {
             bufferedSpeed--;
         }
     }
 
-    int getBufferedSpeed() {
+    public int getBufferedSpeed() {
         return speeds.get(bufferedSpeed);
     }
 
-    boolean getBufferedIsRunning() {
+    public boolean getBufferedIsRunning() {
         return bufferedIsRunning;
     }
 
-    int getBufferedSpeedIndex() {
+    public int getBufferedSpeedIndex() {
         return bufferedSpeed;
     }
 
