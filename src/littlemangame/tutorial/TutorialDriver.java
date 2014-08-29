@@ -284,18 +284,27 @@ public class TutorialDriver {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
             submissionControllerTutorialGui.printDialogue(BEGINNING_OF_TEST_TEXT);
             submissionControllerTutorialGui.showDialoguePanel();
-            speedController.pause();
+            pauseToDisplayText();
             submissionControllerTutorialGui.addDialogueActionListener(resumeOnDialogueActionListener);
             tutorialNotebookDeveloper.getLittleMan().addMemorizePageActionListener(getFirstInstructionActionListener);
             submissionControllerTutorialGui.removeTestButtonActionListener(this);
         }
 
     };
+
+    private void pauseToDisplayText() {
+        final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
+        submissionControllerTutorialGui.setDialogueButtonIsEnabled(true);
+        speedController.pause();
+    }
+
     private final ActionListener resumeOnDialogueActionListener = new ActionListener() {
 
         @Override
         public void actionPerformed(ActionEvent e) {
             speedController.resume();
+            final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
+            submissionControllerTutorialGui.setDialogueButtonIsEnabled(false);
         }
 
     };
@@ -305,7 +314,7 @@ public class TutorialDriver {
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
             submissionControllerTutorialGui.printDialogue(READ_INSTRUCTION_TEXT);
-            speedController.pause();
+            pauseToDisplayText();
             tutorialNotebookDeveloper.getLittleMan().addMemorizeDataActionListener(incrementNotebookPageSheetActionListener);
             tutorialNotebookDeveloper.getLittleMan().removeMemorizePageActionListener(getFirstInstructionActionListener);
         }
@@ -317,7 +326,7 @@ public class TutorialDriver {
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
             submissionControllerTutorialGui.printDialogue(INCREMENT_NOTEBOOK_PAGE_SHEET_TEXT);
-            speedController.pause();
+            pauseToDisplayText();
             tutorialNotebookDeveloper.getLittleMan().addUnaryOperationActionListener(goToInputPanelActionListener);
             tutorialNotebookDeveloper.getLittleMan().removeMemorizeDataActionListener(this);
         }
@@ -329,7 +338,7 @@ public class TutorialDriver {
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
             submissionControllerTutorialGui.printDialogue(GO_TO_INPUT_PANEL_TEXT);
-            speedController.pause();
+            pauseToDisplayText();
             tutorialNotebookDeveloper.getLittleMan().addDataFromInputPanelActionListener(doInputActionListener);
             tutorialNotebookDeveloper.getLittleMan().removeUnaryOperationActionListener(this);
         }
@@ -341,7 +350,7 @@ public class TutorialDriver {
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
             submissionControllerTutorialGui.printDialogue(DO_INPUT_TEXT);
-            speedController.pause();
+            pauseToDisplayText();
             tutorialNotebookDeveloper.getLittleMan().addBinaryOperationActionListener(getSecondInstructionActionListener);
             tutorialNotebookDeveloper.getLittleMan().removeDataFromInputPanelActionListener(this);
         }
@@ -353,7 +362,7 @@ public class TutorialDriver {
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
             submissionControllerTutorialGui.printDialogue(READ_SECOND_INSTRUCTION_TEXT);
-            speedController.pause();
+            pauseToDisplayText();
             tutorialNotebookDeveloper.getLittleMan().addUnaryOperationActionListener(firstOutputActionListener);
             tutorialNotebookDeveloper.getLittleMan().removeBinaryOperationActionListener(this);
         }
@@ -365,7 +374,7 @@ public class TutorialDriver {
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
             submissionControllerTutorialGui.printDialogue(FIRST_OUTPUT_TEXT);
-            speedController.pause();
+            pauseToDisplayText();
             tutorialNotebookDeveloper.getLittleMan().addPrintUnsignedToOutputPanelActionListener(readThirdInstructionListener);
             tutorialNotebookDeveloper.getLittleMan().removeUnaryOperationActionListener(this);
         }
@@ -377,7 +386,7 @@ public class TutorialDriver {
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
             submissionControllerTutorialGui.printDialogue(READ_THIRD_INSTRUCTION_TEXT);
-            speedController.pause();
+            pauseToDisplayText();
             tutorialNotebookDeveloper.getLittleMan().addUnaryOperationActionListener(readAddressOperandListener);
             tutorialNotebookDeveloper.getLittleMan().removePrintUnsignedToOutputPanelActionListener(this);
         }
@@ -389,7 +398,7 @@ public class TutorialDriver {
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
             submissionControllerTutorialGui.printDialogue(READ_ADDRESS_OPERAND_TEXT);
-            speedController.pause();
+            pauseToDisplayText();
             tutorialNotebookDeveloper.getLittleMan().addUnaryOperationActionListener(doFirstMoveListener);
             tutorialNotebookDeveloper.getLittleMan().removeUnaryOperationActionListener(this);
         }
@@ -401,7 +410,7 @@ public class TutorialDriver {
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
             submissionControllerTutorialGui.printDialogue(DO_FIRST_MOVE_TEXT);
-            speedController.pause();
+            pauseToDisplayText();
             tutorialNotebookDeveloper.getLittleMan().addBinaryOperationActionListener(readFourthInstructionListener);
             tutorialNotebookDeveloper.getLittleMan().removeUnaryOperationActionListener(this);
         }
@@ -413,7 +422,7 @@ public class TutorialDriver {
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
             submissionControllerTutorialGui.printDialogue(READ_FOURTH_INSTRUCTION_TEXT);
-            speedController.pause();
+            pauseToDisplayText();
             tutorialNotebookDeveloper.getLittleMan().addUnaryOperationActionListener(readMoveDataOperandListener);
             tutorialNotebookDeveloper.getLittleMan().removeBinaryOperationActionListener(this);
         }
@@ -425,7 +434,7 @@ public class TutorialDriver {
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
             submissionControllerTutorialGui.printDialogue(READ_DATA_OPERAND_TEXT);
-            speedController.pause();
+            pauseToDisplayText();
             tutorialNotebookDeveloper.getLittleMan().addUnaryOperationActionListener(doSecondMoveListener);
             tutorialNotebookDeveloper.getLittleMan().removeUnaryOperationActionListener(this);
         }
@@ -437,7 +446,7 @@ public class TutorialDriver {
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
             submissionControllerTutorialGui.printDialogue(DO_SECOND_MOVE_TEXT);
-            speedController.pause();
+            pauseToDisplayText();
             tutorialNotebookDeveloper.getLittleMan().addBinaryOperationActionListener(doSecondOutputListener);
             tutorialNotebookDeveloper.getLittleMan().removeUnaryOperationActionListener(this);
         }
@@ -449,7 +458,7 @@ public class TutorialDriver {
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
             submissionControllerTutorialGui.printDialogue(DO_SECOND_OUTPUT_TEXT);
-            speedController.pause();
+            pauseToDisplayText();
             tutorialNotebookDeveloper.getLittleMan().addPrintUnsignedToOutputPanelActionListener(readAddInstructionListener);
             tutorialNotebookDeveloper.getLittleMan().removeBinaryOperationActionListener(this);
         }
@@ -461,7 +470,7 @@ public class TutorialDriver {
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
             submissionControllerTutorialGui.printDialogue(READ_ADD_INSTRUCTION_TEXT);
-            speedController.pause();
+            pauseToDisplayText();
             tutorialNotebookDeveloper.getLittleMan().addUnaryOperationActionListener(getAddDataOperandInstructionListener);
             tutorialNotebookDeveloper.getLittleMan().removePrintUnsignedToOutputPanelActionListener(this);
         }
@@ -473,7 +482,7 @@ public class TutorialDriver {
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
             submissionControllerTutorialGui.printDialogue(GET_ADD_DATA_OPERAND_TEXT);
-            speedController.pause();
+            pauseToDisplayText();
             tutorialNotebookDeveloper.getLittleMan().addUnaryOperationActionListener(getAddPageNumberOperandInstructionListener);
             tutorialNotebookDeveloper.getLittleMan().removeUnaryOperationActionListener(this);
         }
@@ -485,7 +494,7 @@ public class TutorialDriver {
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
             submissionControllerTutorialGui.printDialogue(GET_ADD_PAGE_NUMBER_OPERAND_TEXT);
-            speedController.pause();
+            pauseToDisplayText();
             tutorialNotebookDeveloper.getLittleMan().addUnaryOperationActionListener(doAdditionListener);
             tutorialNotebookDeveloper.getLittleMan().removeUnaryOperationActionListener(this);
         }
@@ -497,7 +506,7 @@ public class TutorialDriver {
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
             submissionControllerTutorialGui.printDialogue(DO_ADDITION_TEST_TEXT);
-            speedController.pause();
+            pauseToDisplayText();
             tutorialNotebookDeveloper.getLittleMan().addBinaryOperationActionListener(finalMoveListener);
             tutorialNotebookDeveloper.getLittleMan().removeUnaryOperationActionListener(this);
         }
@@ -509,7 +518,7 @@ public class TutorialDriver {
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
             submissionControllerTutorialGui.printDialogue(FINAL_MOVE_TEXT);
-            speedController.pause();
+            pauseToDisplayText();
             tutorialNotebookDeveloper.getLittleMan().addBinaryOperationActionListener(thirdOutputListener);
             tutorialNotebookDeveloper.getLittleMan().removeBinaryOperationActionListener(this);
         }
@@ -521,7 +530,7 @@ public class TutorialDriver {
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
             submissionControllerTutorialGui.printDialogue(THIRD_OUTPUT_TEXT);
-            speedController.pause();
+            pauseToDisplayText();
             tutorialNotebookDeveloper.getLittleMan().addPrintUnsignedToOutputPanelActionListener(haltListener);
             tutorialNotebookDeveloper.getLittleMan().removeUnaryOperationActionListener(this);
         }
@@ -533,8 +542,8 @@ public class TutorialDriver {
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
             submissionControllerTutorialGui.printDialogue(HALT_TEST_TEXT);
-            speedController.pause();
-            tutorialNotebookDeveloper.getLittleMan().addHaltActionListener(finishTest); //add halt listener
+            pauseToDisplayText();
+            tutorialNotebookDeveloper.getLittleMan().addHaltActionListener(finishTest);
             tutorialNotebookDeveloper.getLittleMan().removePrintUnsignedToOutputPanelActionListener(this);
         }
 
@@ -545,6 +554,7 @@ public class TutorialDriver {
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
             submissionControllerTutorialGui.printDialogue(FINISH_TEST_TEXT);
+            pauseToDisplayText();
             submissionControllerTutorialGui.addDialogueActionListener(showSubmissionPanelToSubmit);
             tutorialNotebookDeveloper.getLittleMan().removeHaltActionListener(this);
         }
@@ -574,6 +584,7 @@ public class TutorialDriver {
             submissionControllerTutorialGui.removeSubmitButtonActionListener(this);
             submissionControllerTutorialGui.addDialogueActionListener(endTutorialActionListener);
             submissionControllerTutorialGui.printDialogue(SUBMISSION_RESULT_TEXT);
+            submissionControllerTutorialGui.setDialogueButtonIsEnabled(true);
         }
 
     };
