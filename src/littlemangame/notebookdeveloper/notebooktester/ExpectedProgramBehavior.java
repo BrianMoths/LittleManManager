@@ -68,14 +68,14 @@ public class ExpectedProgramBehavior {
         inputOutputEventTypes.add(InputOutputEventType.HALT);
     }
 
-    public boolean testInputEvent(InputEvent actualOutputEvent) {
+    public boolean testInputEvent(InputEvent actualInputEvent) {
         final InputOutputEventType expectedInputOutputEventType = inputOutputEventTypes.poll();
         boolean isCorrectSoFar;
-        if (expectedInputOutputEventType != actualOutputEvent.getEventType()) {
-            errorStringBuilder.append(makeErrorLineStringBuilder(expectedInputOutputEventType, actualOutputEvent));
+        if (expectedInputOutputEventType != actualInputEvent.getEventType()) {
+            errorStringBuilder.append(makeErrorLineStringBuilder(expectedInputOutputEventType, actualInputEvent));
             isCorrectSoFar = false;
         } else {
-            errorStringBuilder.append(getActualActionStringBuilder(actualOutputEvent));
+            errorStringBuilder.append(getActualActionStringBuilder(actualInputEvent));
             isCorrectSoFar = true;
         }
         return isCorrectSoFar;
@@ -85,14 +85,14 @@ public class ExpectedProgramBehavior {
         return inputWords.poll();
     }
 
-    public boolean testHaltEvent(HaltEvent actualOutputEvent) {
+    public boolean testHaltEvent(HaltEvent actualHaltEvent) {
         final InputOutputEventType expectedInputOutputEventType = inputOutputEventTypes.poll();
         boolean isCorrectSoFar;
-        if (expectedInputOutputEventType != actualOutputEvent.getEventType()) {
-            errorStringBuilder.append(makeErrorLineStringBuilder(expectedInputOutputEventType, actualOutputEvent));
+        if (expectedInputOutputEventType != actualHaltEvent.getEventType()) {
+            errorStringBuilder.append(makeErrorLineStringBuilder(expectedInputOutputEventType, actualHaltEvent));
             isCorrectSoFar = false;
         } else {
-            errorStringBuilder.append(getActualActionStringBuilder(actualOutputEvent));
+            errorStringBuilder.append(getActualActionStringBuilder(actualHaltEvent));
             isCorrectSoFar = true;
         }
         return isCorrectSoFar;
@@ -100,7 +100,7 @@ public class ExpectedProgramBehavior {
 
     public boolean testOutputEvent(OutputEvent actualOutputEvent) {
         final InputOutputEventType expectedInputOutputEventType = inputOutputEventTypes.poll();
-        final WordPredicate wordPredicate = outputWordPredicates.poll();
+        final WordPredicate wordPredicate = outputWordPredicates.peek();
         boolean isCorrectSoFar;
         if (expectedInputOutputEventType != actualOutputEvent.getEventType() || !wordPredicate.isCorrect(actualOutputEvent.getWord())) {
             errorStringBuilder.append(makeErrorLineStringBuilder(expectedInputOutputEventType, actualOutputEvent));
@@ -109,6 +109,7 @@ public class ExpectedProgramBehavior {
             errorStringBuilder.append(getActualActionStringBuilder(actualOutputEvent));
             isCorrectSoFar = true;
         }
+        outputWordPredicates.poll();
         return isCorrectSoFar;
     }
 
