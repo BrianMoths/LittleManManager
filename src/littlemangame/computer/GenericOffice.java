@@ -98,7 +98,8 @@ public class GenericOffice<T extends Worksheet, U extends Notebook, V extends No
     }
 
     /**
-     * copies the contents of the given notebook in the notebook in this office
+     * copies the contents of the given notebook into the notebook of this
+     * office
      *
      * @param notebook the notebook to be copied
      */
