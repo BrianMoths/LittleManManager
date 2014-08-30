@@ -28,6 +28,11 @@ scope first iteration:
     stack
     interrupts
     
-art should look like boxhead?
+art should look like boxhead? see art. Little man may look like megabus guy
 
 name - little man manager
+
+need to add three call instructions.
+add signed i/o, worksheet to worksheet binary operations, think about xor definition
+eventually need graphics, menu with mission selector, unlockable/upgradable assembler?, saving, auto-updater, sound?, intro cutscene, story.
+
