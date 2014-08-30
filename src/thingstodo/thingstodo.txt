@@ -9,3 +9,6 @@ add worksheet to worksheet binary instructions
 add notebook page sheet to register and memory direct/indirect instructions.
 
 add an introductory scene giving a story
+make a menu and add an html help document
+add a menu bar
+make bottom panel bigger

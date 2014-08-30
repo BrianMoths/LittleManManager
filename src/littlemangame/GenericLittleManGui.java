@@ -143,7 +143,7 @@ public class GenericLittleManGui<T extends GenericNotebookDeveloperGui<?, ?, V>,
         );
         notebookDeveloperHolderLayout.setVerticalGroup(
             notebookDeveloperHolderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 586, Short.MAX_VALUE)
+            .addGap(0, 633, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);

@@ -8,7 +8,6 @@ package littlemangame.notebookdeveloper.gui;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import littlemangame.notebookdeveloper.GenericNotebookDeveloper;
-import littlemangame.notebookdeveloper.gui.GenericOfficeView;
 import littlemangame.notebookdeveloper.speedcontroller.SpeedController;
 import littlemangame.notebookdeveloper.submissioncontrols.SubmissionControlGui;
 
@@ -87,7 +86,7 @@ public class GenericNotebookDeveloperGui<T extends SubmissionControlGui<V>, U ex
         );
         submissionControllerGuiHolderLayout.setVerticalGroup(
             submissionControllerGuiHolderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 259, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout officeViewHolderLayout = new javax.swing.GroupLayout(officeViewHolder);
@@ -115,8 +114,8 @@ public class GenericNotebookDeveloperGui<T extends SubmissionControlGui<V>, U ex
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(officeViewHolder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(submissionControllerGuiHolder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addComponent(submissionControllerGuiHolder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
