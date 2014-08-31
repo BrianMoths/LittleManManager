@@ -11,7 +11,6 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import littlemangame.instructions.InstructionFromSet;
 import littlemangame.word.BinaryWordOperation;
 import littlemangame.word.UnaryWordOperation;
 import littlemangame.word.Word;
@@ -38,87 +37,90 @@ public class Notebook implements Drawable {
     private final List<WordContainer> notebook = new ArrayList<>(numWords);
 
     {
-        final Word input = Word.valueOfLastDigitsOfInteger(90);
-        final Word newValue = Word.valueOfLastDigitsOfInteger(91);
-        final Word oldValue = Word.valueOfLastDigitsOfInteger(92);
-        final Word newCopy = Word.valueOfLastDigitsOfInteger(93);
-        final Word printOld = Word.valueOfLastDigitsOfInteger(70);
-        final Word printNew = Word.valueOfLastDigitsOfInteger(80);
-        int i = 0;
-        //get input
-        notebook.add(new WordContainer(InstructionFromSet.INPUT.getOpcode()));
-        i++;
-        //save input
-        notebook.add(new WordContainer(InstructionFromSet.STORE_REGISTER_MEMORY.getOpcode()));
-        i++;
-        notebook.add(new WordContainer(input));
-        i++;
-        //jump if zero
-        notebook.add(new WordContainer(InstructionFromSet.JUMP_IF_ZERO.getOpcode()));
-        i++;
-        notebook.add(new WordContainer(printOld));
-        i++;
-        final Word loop = Word.valueOfLastDigitsOfInteger(i);
-        //add oldValue to newValue
-        notebook.add(new WordContainer(InstructionFromSet.LOAD_MEMORY.getOpcode()));
-        i++;
-        notebook.add(new WordContainer(oldValue));
-        i++;
-        notebook.add(new WordContainer(InstructionFromSet.ADD_REGISTER_TO_MEMORY.getOpcode()));
-        i++;
-        notebook.add(new WordContainer(newValue));
-        //move newCopy to oldValue
-        notebook.add(new WordContainer(InstructionFromSet.LOAD_MEMORY.getOpcode()));
-        i++;
-        notebook.add(new WordContainer(newCopy));
-        i++;
-        notebook.add(new WordContainer(InstructionFromSet.STORE_REGISTER_MEMORY.getOpcode()));
-        i++;
-        notebook.add(new WordContainer(oldValue));
-        i++;
-        //move newValue to newCopy
-        notebook.add(new WordContainer(InstructionFromSet.LOAD_MEMORY.getOpcode()));
-        i++;
-        notebook.add(new WordContainer(newValue));
-        i++;
-        notebook.add(new WordContainer(InstructionFromSet.STORE_REGISTER_MEMORY.getOpcode()));
-        i++;
-        notebook.add(new WordContainer(newCopy));
-        i++;
-        //decrement input
-        notebook.add(new WordContainer(InstructionFromSet.DECREMENT_MEMORY.getOpcode()));
-        i++;
-        notebook.add(new WordContainer(input));
-        i++;
-        //load input
-        notebook.add(new WordContainer(InstructionFromSet.LOAD_MEMORY.getOpcode()));
-        i++;
-        notebook.add(new WordContainer(input));
-        i++;
-        //jump to return if zero
-        notebook.add(new WordContainer(InstructionFromSet.JUMP_IF_ZERO.getOpcode()));
-        i++;
-        notebook.add(new WordContainer(printNew));
-        i++;
-        //jump to loop
-        notebook.add(new WordContainer(InstructionFromSet.UNCONDITIONAL_JUMP.getOpcode()));
-        i++;
-        notebook.add(new WordContainer(loop));
-        i++;
-        for (; i < numWords; i++) {
+//        final Word input = Word.valueOfLastDigitsOfInteger(90);
+//        final Word newValue = Word.valueOfLastDigitsOfInteger(91);
+//        final Word oldValue = Word.valueOfLastDigitsOfInteger(92);
+//        final Word newCopy = Word.valueOfLastDigitsOfInteger(93);
+//        final Word printOld = Word.valueOfLastDigitsOfInteger(70);
+//        final Word printNew = Word.valueOfLastDigitsOfInteger(80);
+//        int i = 0;
+//        //get input
+//        notebook.add(new WordContainer(InstructionFromSet.INPUT.getOpcode()));
+//        i++;
+//        //save input
+//        notebook.add(new WordContainer(InstructionFromSet.STORE_REGISTER_MEMORY.getOpcode()));
+//        i++;
+//        notebook.add(new WordContainer(input));
+//        i++;
+//        //jump if zero
+//        notebook.add(new WordContainer(InstructionFromSet.JUMP_IF_ZERO.getOpcode()));
+//        i++;
+//        notebook.add(new WordContainer(printOld));
+//        i++;
+//        final Word loop = Word.valueOfLastDigitsOfInteger(i);
+//        //add oldValue to newValue
+//        notebook.add(new WordContainer(InstructionFromSet.LOAD_MEMORY.getOpcode()));
+//        i++;
+//        notebook.add(new WordContainer(oldValue));
+//        i++;
+//        notebook.add(new WordContainer(InstructionFromSet.ADD_REGISTER_TO_MEMORY.getOpcode()));
+//        i++;
+//        notebook.add(new WordContainer(newValue));
+//        //move newCopy to oldValue
+//        notebook.add(new WordContainer(InstructionFromSet.LOAD_MEMORY.getOpcode()));
+//        i++;
+//        notebook.add(new WordContainer(newCopy));
+//        i++;
+//        notebook.add(new WordContainer(InstructionFromSet.STORE_REGISTER_MEMORY.getOpcode()));
+//        i++;
+//        notebook.add(new WordContainer(oldValue));
+//        i++;
+//        //move newValue to newCopy
+//        notebook.add(new WordContainer(InstructionFromSet.LOAD_MEMORY.getOpcode()));
+//        i++;
+//        notebook.add(new WordContainer(newValue));
+//        i++;
+//        notebook.add(new WordContainer(InstructionFromSet.STORE_REGISTER_MEMORY.getOpcode()));
+//        i++;
+//        notebook.add(new WordContainer(newCopy));
+//        i++;
+//        //decrement input
+//        notebook.add(new WordContainer(InstructionFromSet.DECREMENT_MEMORY.getOpcode()));
+//        i++;
+//        notebook.add(new WordContainer(input));
+//        i++;
+//        //load input
+//        notebook.add(new WordContainer(InstructionFromSet.LOAD_MEMORY.getOpcode()));
+//        i++;
+//        notebook.add(new WordContainer(input));
+//        i++;
+//        //jump to return if zero
+//        notebook.add(new WordContainer(InstructionFromSet.JUMP_IF_ZERO.getOpcode()));
+//        i++;
+//        notebook.add(new WordContainer(printNew));
+//        i++;
+//        //jump to loop
+//        notebook.add(new WordContainer(InstructionFromSet.UNCONDITIONAL_JUMP.getOpcode()));
+//        i++;
+//        notebook.add(new WordContainer(loop));
+//        i++;
+//        for (; i < numWords; i++) {
+//            notebook.add(new WordContainer(Word.ZERO_WORD));
+//        }
+//        notebook.set(70, new WordContainer(InstructionFromSet.LOAD_MEMORY.getOpcode()));
+//        notebook.set(71, new WordContainer(oldValue));
+//        notebook.set(72, new WordContainer(InstructionFromSet.PRINT_UNSIGNED.getOpcode()));
+//        notebook.set(73, new WordContainer(InstructionFromSet.HALT.getOpcode()));
+//        notebook.set(80, new WordContainer(InstructionFromSet.LOAD_MEMORY.getOpcode()));
+//        notebook.set(81, new WordContainer(newValue));
+//        notebook.set(82, new WordContainer(InstructionFromSet.PRINT_UNSIGNED.getOpcode()));
+//        notebook.set(83, new WordContainer(InstructionFromSet.HALT.getOpcode()));
+//
+//        setWordAtPage(input, Word.valueOfLastDigitsOfInteger(8));
+//        setWordAtPage(oldValue, Word.valueOfLastDigitsOfInteger(1));
+        for (int i = 0; i < numWords; i++) {
             notebook.add(new WordContainer(Word.ZERO_WORD));
         }
-        notebook.set(70, new WordContainer(InstructionFromSet.LOAD_MEMORY.getOpcode()));
-        notebook.set(71, new WordContainer(oldValue));
-        notebook.set(72, new WordContainer(InstructionFromSet.PRINT_UNSIGNED.getOpcode()));
-        notebook.set(73, new WordContainer(InstructionFromSet.HALT.getOpcode()));
-        notebook.set(80, new WordContainer(InstructionFromSet.LOAD_MEMORY.getOpcode()));
-        notebook.set(81, new WordContainer(newValue));
-        notebook.set(82, new WordContainer(InstructionFromSet.PRINT_UNSIGNED.getOpcode()));
-        notebook.set(83, new WordContainer(InstructionFromSet.HALT.getOpcode()));
-
-        setWordAtPage(input, Word.valueOfLastDigitsOfInteger(8));
-        setWordAtPage(oldValue, Word.valueOfLastDigitsOfInteger(1));
     }
 
     /**
