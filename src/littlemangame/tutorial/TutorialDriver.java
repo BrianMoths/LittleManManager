@@ -22,7 +22,7 @@ import littlemangame.word.Word;
  * @author brian
  */
 public class TutorialDriver {
-
+    
     static private final String INTRO_TEXT = "Welcome to your new job. We have recently hired a little man because he is very good at the work we need him to do, but we have quickly found that he is difficult to communicate with. He speaks a different language than we do. The words of his language are numbers from 0 to 99. That is where you come in. Your job will be to take our description of what we want the little man to do, and translate it into his strange language. You will write the commands of his language in a notebook. After you have finished the notebook, we will review it to confirm that the little man does what we wanted.\\n\\n You are now looking at the little man's office. Let me explain what is all in the little man's office.";
     static private final String NOTEBOOK_DESCRIPTION = "This is the little man's notebook. It has 100 pages, labelled 00 to 99 so that each word can be used to refer to a page. Each page can only fit one word on it. You will write all the instructions for the little man on this notebook. Once the little man starts his work for the day, he will begin reading the notebook from page 00 and do the instructions written in it. Another use for the notebook is as a place for the little man to write down words he needs to remember. Since the little man has a very bad memory, he can't just keep everything in his head.";
     static private final String NOTEBOOK_PAGE_SHEET_DESCRIPTION = "This is the notebook page sheet. This is where the little man keeps track of what notebook page he is on. It starts out at zero because that is the first page.";
@@ -68,13 +68,13 @@ public class TutorialDriver {
 
     //<editor-fold defaultstate="collapsed" desc="PageEditorItemListener">
     private class PageEditorItemListener implements ItemListener {
-
+        
         private final int pageNumber, targetWordValue;
         private final String newProblemDescription;
         private final boolean isProblemDescriptionChanged;
         private final ItemListener nextPageEditorItemListener;
         private final boolean isNextPageEditorItemListenerUsed;
-
+        
         PageEditorItemListener(int pageNumber, int targetWordValue) {
             this.pageNumber = pageNumber;
             this.targetWordValue = targetWordValue;
@@ -83,7 +83,7 @@ public class TutorialDriver {
             newProblemDescription = null;
             nextPageEditorItemListener = null;
         }
-
+        
         PageEditorItemListener(int pageNumber, int targetWordValue, ItemListener nextPageEditorItemListener) {
             this.pageNumber = pageNumber;
             this.targetWordValue = targetWordValue;
@@ -92,7 +92,7 @@ public class TutorialDriver {
             isProblemDescriptionChanged = false;
             newProblemDescription = null;
         }
-
+        
         PageEditorItemListener(int pageNumber, int targetWordValue, String newProblemDescription) {
             this.pageNumber = pageNumber;
             this.targetWordValue = targetWordValue;
@@ -101,7 +101,7 @@ public class TutorialDriver {
             isNextPageEditorItemListenerUsed = false;
             this.nextPageEditorItemListener = null;
         }
-
+        
         PageEditorItemListener(int pageNumber, int targetWordValue, String newProblemDescription, ItemListener nextPageEditorItemListener) {
             this.pageNumber = pageNumber;
             this.targetWordValue = targetWordValue;
@@ -110,7 +110,7 @@ public class TutorialDriver {
             isNextPageEditorItemListenerUsed = true;
             this.nextPageEditorItemListener = nextPageEditorItemListener;
         }
-
+        
         @Override
         public void itemStateChanged(ItemEvent itemEvent) {
             if (itemEvent.getStateChange() == ItemEvent.SELECTED && Word.valueOfLastDigitsOfInteger(targetWordValue).equals(itemEvent.getItem())) {
@@ -126,7 +126,7 @@ public class TutorialDriver {
                 }
             }
         }
-
+        
     }
     //</editor-fold>
 
@@ -135,7 +135,7 @@ public class TutorialDriver {
     private final SpeedController speedController;
     private final ActionListener endTutorialActionListener;
     private final ActionListener endIntroBeginNotebookNotebookListener = new ActionListener() {
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             tutorialNotebookDeveloper.setIsNotebookArrowShown(true);
@@ -144,10 +144,10 @@ public class TutorialDriver {
             submissionControllerTutorialGui.addDialogueActionListener(endNotebookBeginNotebookPageSheetListener);
             submissionControllerTutorialGui.removeDialogueActionListener(this);
         }
-
+        
     };
     private final ActionListener endNotebookBeginNotebookPageSheetListener = new ActionListener() {
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             tutorialNotebookDeveloper.setIsNotebookArrowShown(false);
@@ -157,10 +157,10 @@ public class TutorialDriver {
             submissionControllerTutorialGui.addDialogueActionListener(endNotebookPageSheetListenerBeginWorksheet);
             submissionControllerTutorialGui.removeDialogueActionListener(this);
         }
-
+        
     };
     private final ActionListener endNotebookPageSheetListenerBeginWorksheet = new ActionListener() {
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             tutorialNotebookDeveloper.setIsNotebookPageSheetArrowShown(false);
@@ -170,10 +170,10 @@ public class TutorialDriver {
             submissionControllerTutorialGui.addDialogueActionListener(endWorksheetBeginOutputPanel);
             submissionControllerTutorialGui.removeDialogueActionListener(this);
         }
-
+        
     };
     private final ActionListener endWorksheetBeginOutputPanel = new ActionListener() {
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             tutorialNotebookDeveloper.setIsWorksheetArrowShown(false);
@@ -183,10 +183,10 @@ public class TutorialDriver {
             submissionControllerTutorialGui.addDialogueActionListener(endOutputPanelBeginInputPanel);
             submissionControllerTutorialGui.removeDialogueActionListener(this);
         }
-
+        
     };
     private final ActionListener endOutputPanelBeginInputPanel = new ActionListener() {
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             tutorialNotebookDeveloper.setIsOutputPanelArrowShown(false);
@@ -196,10 +196,10 @@ public class TutorialDriver {
             submissionControllerTutorialGui.addDialogueActionListener(endInputPanel);
             submissionControllerTutorialGui.removeDialogueActionListener(this);
         }
-
+        
     };
     private final ActionListener endInputPanel = new ActionListener() {
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             tutorialNotebookDeveloper.setIsInputPanelArrowShown(false);
@@ -211,10 +211,10 @@ public class TutorialDriver {
             submissionControllerTutorialGui.removeDialogueActionListener(this);
             submissionControllerTutorialGui.setEditMemoryAction(promptEditMemory);
         }
-
+        
     };
     private final ActionListener promptEditMemory = new ActionListener() {
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             final TutorialNotebookEditorPanel notebookEditorPanel = tutorialLittleManGui.getNotebookEditorPanel();
@@ -226,10 +226,10 @@ public class TutorialDriver {
             tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui().removeEditMemoryAction(this);
             notebookEditorPanel.addPageEditorItemListener(0, pageZeroItemListener);
         }
-
+        
     };
     private final ItemListener pageThirteenItemListener = new ItemListener() {
-
+        
         @Override
         public void itemStateChanged(ItemEvent itemEvent) {
             if (itemEvent.getStateChange() == ItemEvent.SELECTED && Word.valueOfLastDigitsOfInteger(9).equals(itemEvent.getItem())) {
@@ -241,7 +241,7 @@ public class TutorialDriver {
                 notebookEditorPanel.setSaveButtonIsEnabled(true);
             }
         }
-
+        
     };
 
 //    private final ItemListener pageThirteenItemListener = new PageEditorItemListener(13, 9, STORE_ARGUMENT_TEXT);
@@ -258,9 +258,9 @@ public class TutorialDriver {
     private final ItemListener pageTwoItemListener = new PageEditorItemListener(2, 36, pageThreeItemListener);
     private final ItemListener pageOneItemListener = new PageEditorItemListener(1, 20, STORE_ARGUMENT_TEXT, pageTwoItemListener);
     private final ItemListener pageZeroItemListener = new PageEditorItemListener(0, 25, OUTPUT_ARGUMENT_TEXT, pageOneItemListener);
-
+    
     private final ActionListener saveNotebookActionListener = new ActionListener() {
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             final TutorialNotebookEditorPanel notebookEditorPanel = tutorialLittleManGui.getNotebookEditorPanel();
@@ -274,11 +274,11 @@ public class TutorialDriver {
             notebookEditorPanel.removeSaveButtonActionListener(this);
             submissionControllerTutorialGui.addTestButtonActionListener(startTestActionListener);
         }
-
+        
     };
-
+    
     private final ActionListener startTestActionListener = new ActionListener() {
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
@@ -289,27 +289,21 @@ public class TutorialDriver {
             tutorialNotebookDeveloper.getLittleMan().addMemorizePageActionListener(getFirstInstructionActionListener);
             submissionControllerTutorialGui.removeTestButtonActionListener(this);
         }
-
+        
     };
-
-    private void pauseToDisplayText() {
-        final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
-        submissionControllerTutorialGui.setDialogueButtonIsEnabled(true);
-        speedController.pause();
-    }
-
+    
     private final ActionListener resumeOnDialogueActionListener = new ActionListener() {
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             speedController.resume();
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
             submissionControllerTutorialGui.setDialogueButtonIsEnabled(false);
         }
-
+        
     };
     private final ActionListener getFirstInstructionActionListener = new ActionListener() {
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
@@ -318,10 +312,10 @@ public class TutorialDriver {
             tutorialNotebookDeveloper.getLittleMan().addMemorizeDataActionListener(incrementNotebookPageSheetActionListener);
             tutorialNotebookDeveloper.getLittleMan().removeMemorizePageActionListener(getFirstInstructionActionListener);
         }
-
+        
     };
     private final ActionListener incrementNotebookPageSheetActionListener = new ActionListener() {
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
@@ -330,10 +324,10 @@ public class TutorialDriver {
             tutorialNotebookDeveloper.getLittleMan().addUnaryOperationActionListener(goToInputPanelActionListener);
             tutorialNotebookDeveloper.getLittleMan().removeMemorizeDataActionListener(this);
         }
-
+        
     };
     private final ActionListener goToInputPanelActionListener = new ActionListener() {
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
@@ -342,10 +336,10 @@ public class TutorialDriver {
             tutorialNotebookDeveloper.getLittleMan().addDataFromInputPanelActionListener(doInputActionListener);
             tutorialNotebookDeveloper.getLittleMan().removeUnaryOperationActionListener(this);
         }
-
+        
     };
     private final ActionListener doInputActionListener = new ActionListener() {
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
@@ -354,10 +348,10 @@ public class TutorialDriver {
             tutorialNotebookDeveloper.getLittleMan().addBinaryOperationActionListener(getSecondInstructionActionListener);
             tutorialNotebookDeveloper.getLittleMan().removeDataFromInputPanelActionListener(this);
         }
-
+        
     };
     private final ActionListener getSecondInstructionActionListener = new ActionListener() {
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
@@ -366,10 +360,10 @@ public class TutorialDriver {
             tutorialNotebookDeveloper.getLittleMan().addUnaryOperationActionListener(firstOutputActionListener);
             tutorialNotebookDeveloper.getLittleMan().removeBinaryOperationActionListener(this);
         }
-
+        
     };
     private final ActionListener firstOutputActionListener = new ActionListener() {
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
@@ -378,10 +372,10 @@ public class TutorialDriver {
             tutorialNotebookDeveloper.getLittleMan().addPrintUnsignedToOutputPanelActionListener(readThirdInstructionListener);
             tutorialNotebookDeveloper.getLittleMan().removeUnaryOperationActionListener(this);
         }
-
+        
     };
     private final ActionListener readThirdInstructionListener = new ActionListener() {
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
@@ -390,10 +384,10 @@ public class TutorialDriver {
             tutorialNotebookDeveloper.getLittleMan().addUnaryOperationActionListener(readAddressOperandListener);
             tutorialNotebookDeveloper.getLittleMan().removePrintUnsignedToOutputPanelActionListener(this);
         }
-
+        
     };
     private final ActionListener readAddressOperandListener = new ActionListener() {
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
@@ -402,10 +396,10 @@ public class TutorialDriver {
             tutorialNotebookDeveloper.getLittleMan().addUnaryOperationActionListener(doFirstMoveListener);
             tutorialNotebookDeveloper.getLittleMan().removeUnaryOperationActionListener(this);
         }
-
+        
     };
     private final ActionListener doFirstMoveListener = new ActionListener() {
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
@@ -414,10 +408,10 @@ public class TutorialDriver {
             tutorialNotebookDeveloper.getLittleMan().addBinaryOperationActionListener(readFourthInstructionListener);
             tutorialNotebookDeveloper.getLittleMan().removeUnaryOperationActionListener(this);
         }
-
+        
     };
     private final ActionListener readFourthInstructionListener = new ActionListener() {
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
@@ -426,10 +420,10 @@ public class TutorialDriver {
             tutorialNotebookDeveloper.getLittleMan().addUnaryOperationActionListener(readMoveDataOperandListener);
             tutorialNotebookDeveloper.getLittleMan().removeBinaryOperationActionListener(this);
         }
-
+        
     };
     private final ActionListener readMoveDataOperandListener = new ActionListener() {
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
@@ -438,10 +432,10 @@ public class TutorialDriver {
             tutorialNotebookDeveloper.getLittleMan().addUnaryOperationActionListener(doSecondMoveListener);
             tutorialNotebookDeveloper.getLittleMan().removeUnaryOperationActionListener(this);
         }
-
+        
     };
     private final ActionListener doSecondMoveListener = new ActionListener() {
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
@@ -450,10 +444,10 @@ public class TutorialDriver {
             tutorialNotebookDeveloper.getLittleMan().addBinaryOperationActionListener(doSecondOutputListener);
             tutorialNotebookDeveloper.getLittleMan().removeUnaryOperationActionListener(this);
         }
-
+        
     };
     private final ActionListener doSecondOutputListener = new ActionListener() {
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
@@ -462,10 +456,10 @@ public class TutorialDriver {
             tutorialNotebookDeveloper.getLittleMan().addPrintUnsignedToOutputPanelActionListener(readAddInstructionListener);
             tutorialNotebookDeveloper.getLittleMan().removeBinaryOperationActionListener(this);
         }
-
+        
     };
     private final ActionListener readAddInstructionListener = new ActionListener() {
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
@@ -474,10 +468,10 @@ public class TutorialDriver {
             tutorialNotebookDeveloper.getLittleMan().addUnaryOperationActionListener(getAddDataOperandInstructionListener);
             tutorialNotebookDeveloper.getLittleMan().removePrintUnsignedToOutputPanelActionListener(this);
         }
-
+        
     };
     private final ActionListener getAddDataOperandInstructionListener = new ActionListener() {
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
@@ -486,10 +480,10 @@ public class TutorialDriver {
             tutorialNotebookDeveloper.getLittleMan().addUnaryOperationActionListener(getAddPageNumberOperandInstructionListener);
             tutorialNotebookDeveloper.getLittleMan().removeUnaryOperationActionListener(this);
         }
-
+        
     };
     private final ActionListener getAddPageNumberOperandInstructionListener = new ActionListener() {
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
@@ -498,10 +492,10 @@ public class TutorialDriver {
             tutorialNotebookDeveloper.getLittleMan().addUnaryOperationActionListener(doAdditionListener);
             tutorialNotebookDeveloper.getLittleMan().removeUnaryOperationActionListener(this);
         }
-
+        
     };
     private final ActionListener doAdditionListener = new ActionListener() {
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
@@ -510,10 +504,10 @@ public class TutorialDriver {
             tutorialNotebookDeveloper.getLittleMan().addBinaryOperationActionListener(finalMoveListener);
             tutorialNotebookDeveloper.getLittleMan().removeUnaryOperationActionListener(this);
         }
-
+        
     };
     private final ActionListener finalMoveListener = new ActionListener() {
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
@@ -522,10 +516,10 @@ public class TutorialDriver {
             tutorialNotebookDeveloper.getLittleMan().addBinaryOperationActionListener(thirdOutputListener);
             tutorialNotebookDeveloper.getLittleMan().removeBinaryOperationActionListener(this);
         }
-
+        
     };
     private final ActionListener thirdOutputListener = new ActionListener() {
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
@@ -534,10 +528,10 @@ public class TutorialDriver {
             tutorialNotebookDeveloper.getLittleMan().addPrintUnsignedToOutputPanelActionListener(haltListener);
             tutorialNotebookDeveloper.getLittleMan().removeUnaryOperationActionListener(this);
         }
-
+        
     };
     private final ActionListener haltListener = new ActionListener() {
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
@@ -546,10 +540,10 @@ public class TutorialDriver {
             tutorialNotebookDeveloper.getLittleMan().addHaltActionListener(finishTest);
             tutorialNotebookDeveloper.getLittleMan().removePrintUnsignedToOutputPanelActionListener(this);
         }
-
+        
     };
     private final ActionListener finishTest = new ActionListener() {
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
@@ -558,10 +552,10 @@ public class TutorialDriver {
             submissionControllerTutorialGui.addDialogueActionListener(showSubmissionPanelToSubmit);
             tutorialNotebookDeveloper.getLittleMan().removeHaltActionListener(this);
         }
-
+        
     };
     private final ActionListener showSubmissionPanelToSubmit = new ActionListener() {
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
@@ -572,11 +566,12 @@ public class TutorialDriver {
             submissionControllerTutorialGui.printResultMessage(SUBMIT_TEXT);
             submissionControllerTutorialGui.addSubmitButtonActionListener(submitActionListener);
             submissionControllerTutorialGui.removeDialogueActionListener(this);
+            submissionControllerTutorialGui.removeDialogueActionListener(resumeOnDialogueActionListener);
         }
-
+        
     };
     private final ActionListener submitActionListener = new ActionListener() {
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
@@ -586,32 +581,38 @@ public class TutorialDriver {
             submissionControllerTutorialGui.printDialogue(SUBMISSION_RESULT_TEXT);
             submissionControllerTutorialGui.setDialogueButtonIsEnabled(true);
         }
-
+        
     };
-
+    
     public TutorialDriver(TutorialNotebookDeveloper tutorialNotebookDeveloper, TutorialLittleManGui tutorialLittleManGui, SpeedController speedController, ActionListener endTutorialActionListener) {
         this.tutorialNotebookDeveloper = tutorialNotebookDeveloper;
         this.tutorialLittleManGui = tutorialLittleManGui;
         this.speedController = speedController;
         this.endTutorialActionListener = endTutorialActionListener;
     }
-
+    
+    private void pauseToDisplayText() {
+        final SubmissionControllerTutorialGui submissionControllerTutorialGui = tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui();
+        submissionControllerTutorialGui.setDialogueButtonIsEnabled(true);
+        speedController.pause();
+    }
+    
     public void printDialogue(String dialogue) {
         tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui().showDialoguePanel();
         tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui().printDialogue(dialogue);
     }
-
+    
     public void doFrames(int numFrames) {
         tutorialNotebookDeveloper.doFrames(numFrames);
     }
-
+    
     public void startTutorial() {
         hideArrows();
         tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui().showDialoguePanel();
         printDialogue(INTRO_TEXT);
         tutorialLittleManGui.getNotebookDeveloperGui().getSubmissionControllerTutorialGui().addDialogueActionListener(endIntroBeginNotebookNotebookListener);
     }
-
+    
     private void hideArrows() {
         tutorialNotebookDeveloper.setIsInputPanelArrowShown(false);
         tutorialNotebookDeveloper.setIsNotebookArrowShown(false);
@@ -619,5 +620,5 @@ public class TutorialDriver {
         tutorialNotebookDeveloper.setIsOutputPanelArrowShown(false);
         tutorialNotebookDeveloper.setIsWorksheetArrowShown(false);
     }
-
+    
 }
