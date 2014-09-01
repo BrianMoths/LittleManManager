@@ -21,3 +21,13 @@ This is supposed to be a simple program which gives a simple model of how a cpu 
 Status/future of project
 -----
 I have been working on this project on and off for about a year. It has now reached the point where it ready to be seen by other people, so I have uploaded it to github. If there is a positive response, and people like the game, I will continue working on it. If not then I won't invest any more time in it. I have never managed an open source project or made a game before, so this will be a learning experience for me. I intend to open source the project, but I do not know what license to choose at this point. If you are interested in contributing to the project, please contact me.
+
+Screenshots
+-----
+Finally, here are some screenshots of the game. First there is a screenshot of the office that the little man works in: 
+
+![Office Picture](/screenshots/littleManGameOffice.png)
+
+Here is a picture of where you fill out the little man's notebook: 
+
+![Notebook editor Picture](/screenshots/littleManGameNotebookEditor.png)
