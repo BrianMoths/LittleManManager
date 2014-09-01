@@ -76,6 +76,7 @@ public class LittleManGame extends AbstractRealTimeGame<GenericLittleManGui<?, ?
         notebookDeveloper = baseNotebookDeveloper;
         baseLittleManGui.setNotebookDeveloper(baseNotebookDeveloper);
         baseLittleManGui.registerSpeedController(speedController);
+        tutorialLittleManGui.setVisible(false);
         speedController.pause();
         setGameGui(baseLittleManGui);
     }
